@@ -6,7 +6,7 @@ function Nav() {
                     <a className="navbar-brand me-auto" href="/">
                         Homepage
                     </a>
-                    <a className="navbar-text mx-4 highlight-target">Login</a>
+                    <a className="navbar-text mx-4">Login</a>
                 </div>
             </nav>
         </>

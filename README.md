@@ -2,6 +2,11 @@
 
 Mock react app to try out various IAM libraries/providers with.
 
+## Tech Stack
+
+-   React.js with Vite & Typescript
+-   REST API with Express & Sequelize using Typescript
+
 ## Potential Methods/Providers:
 
 -   JSON Web Tokens, custom?

@@ -1,5 +1,3 @@
-import React from 'react'
-
 function UserPreview() {
     return (
         <div className="col col-3">

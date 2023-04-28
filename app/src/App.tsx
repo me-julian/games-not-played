@@ -1,5 +1,6 @@
 import Nav from './components/Nav'
 import UserPreview from './components/UserPreview'
+import Footer from './components/Footer'
 
 function App() {
     return (
@@ -20,17 +21,13 @@ function App() {
                                 you're logged in as it's private and connected
                                 to a user.
                             </p>
-                            <p>
-                                Click the link in the top right to{' '}
-                                <span className="highlight-hovered">
-                                    log in.
-                                </span>
-                            </p>
+                            <p>Click the link in the top right to log in.</p>
                         </div>
                     </div>
                     <UserPreview />
                 </div>
             </main>
+            <Footer />
         </>
     )
 }

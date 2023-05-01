@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd api
-npx nodemon index.ts
+cd server
+npx nodemon server.ts

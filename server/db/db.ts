@@ -1,16 +1,18 @@
 'use strict'
 
 import { Sequelize } from 'sequelize'
-import config from './config'
+import config from '../config'
+
+const env = config.server.env
 
 const sequelize = new Sequelize(
-    config.db.name,
-    config.db.username,
-    config.db.password,
+    config.database[env].database,
+    config.database[env].username,
+    config.database[env].password,
     {
-        host: config.db.host,
-        port: config.db.port,
-        dialect: config.db.dialect,
+        host: config.database[env].host,
+        port: config.database[env].port,
+        dialect: config.database[env].dialect,
         define: {
             underscored: true,
         },

@@ -15,7 +15,7 @@ declare module 'express-session' {
 }
 import SequelizeSession from 'connect-session-sequelize'
 const SequelizeStore = SequelizeSession(session.Store)
-import db from './db'
+import db from './db/db'
 
 import type { ErrorRequestHandler } from 'express'
 
@@ -75,9 +75,9 @@ app.use(function (err, req, res, next) {
     res.render('error')
 } as ErrorRequestHandler)
 
-app.listen(config.port, () => {
+app.listen(config.server.port, () => {
     console.log(
-        `⚡️[server]: Server is running at http://localhost:${config.port}`
+        `⚡️[server]: Server is running at http://localhost:${config.server.port}`
     )
 })
 

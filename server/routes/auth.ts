@@ -2,7 +2,7 @@ import express from 'express'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import crypto from 'crypto'
-import db from '../db'
+import db from '../db/db'
 
 declare global {
     namespace Express {

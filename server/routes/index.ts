@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express'
 import EnsureLogIn from 'connect-ensure-login'
 
-import db from '../db'
+import db from '../db/db'
 
 const ensureLoggedIn = EnsureLogIn.ensureLoggedIn()
 

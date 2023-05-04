@@ -1,9 +1,9 @@
 {
-    "name": "react-with-iam-api",
+    "name": "react-with-iam",
     "private": true,
     "version": "1.0.0",
     "type": "commonjs",
-    "main": "server.ts",
+    "main": "dist/server.js",
     "author": "Julian Edwards",
     "dependencies": {
         "connect-ensure-login": "^0.1.1",

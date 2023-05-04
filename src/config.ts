@@ -4,7 +4,7 @@ type serverConfig = {
     port: number
 }
 
-import dbConfig from 'dbConfig'
+// import dbConfig from 'dbConfig'
 
 const config = {
     server: {
@@ -12,7 +12,7 @@ const config = {
         env: process.env.NODE_ENV || 'development',
         port: parseInt(process.env.PORT || '') || 5000,
     } as serverConfig,
-    database: dbConfig,
+    // database: dbConfig,
 }
 
 export default config

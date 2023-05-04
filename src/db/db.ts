@@ -1,18 +1,18 @@
 'use strict'
 
-import { Sequelize } from 'sequelize'
-import config from '../config'
+import { Sequelize } from 'sequelize-typescript'
+import config from 'dbConfig'
 
-const env = config.server.env
+const env = process.env.NODE_ENV || 'development'
 
 const sequelize = new Sequelize(
-    config.database[env].database,
-    config.database[env].username,
-    config.database[env].password,
+    config[env].database,
+    config[env].username,
+    config[env].password,
     {
-        host: config.database[env].host,
-        port: config.database[env].port,
-        dialect: config.database[env].dialect,
+        host: config[env].host,
+        port: config[env].port,
+        dialect: config[env].dialect,
         define: {
             underscored: true,
         },
@@ -27,6 +27,8 @@ sequelize
     .catch(() => {
         console.error('Error connecting to database.')
     })
+
+sequelize.addModels(['./models'])
 
 // Connect all the models/tables in the database to a db object,
 // so everything is accessible via one object

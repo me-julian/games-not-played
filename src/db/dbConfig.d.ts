@@ -18,5 +18,6 @@ type dbConfig = {
 }
 
 declare module 'dbConfig' {
-    export default dbConfig as dbConfig
+    const dbConfig: dbConfig
+    export default dbConfig
 }

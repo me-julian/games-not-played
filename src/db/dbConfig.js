@@ -1,4 +1,4 @@
-module.exports = {
+const dbConfig = {
     development: {
         username: process.env.DATABASE_USERNAME || 'root',
         password: process.env.DATABASE_PASSWORD || 'password',
@@ -24,3 +24,5 @@ module.exports = {
         dialect: 'mysql',
     },
 }
+
+module.exports = dbConfig

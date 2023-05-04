@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd server
+cd src
 npx nodemon server.ts

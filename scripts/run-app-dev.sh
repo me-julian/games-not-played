@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd app
+cd src/app
 npx vite

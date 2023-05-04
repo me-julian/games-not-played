@@ -1,7 +1,8 @@
 'use strict'
 
 import { Sequelize } from 'sequelize-typescript'
-import config from 'dbConfig'
+
+import config from './dbConfig'
 
 const env = process.env.NODE_ENV || 'development'
 

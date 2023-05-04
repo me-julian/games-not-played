@@ -1,4 +1,4 @@
-type dbConfig = {
+type dbConfigParams = {
     [index: string]: {
         username: string
         password: string
@@ -17,7 +17,5 @@ type dbConfig = {
     }
 }
 
-declare module 'dbConfig' {
-    const dbConfig: dbConfig
-    export default dbConfig
-}
+declare const dbConfig: dbConfigParams
+export default dbConfig

@@ -6,29 +6,12 @@ import db from '../db/db'
 const ensureLoggedIn = EnsureLogIn.ensureLoggedIn()
 
 function fetchTodos(req: Request, res: Response, next: NextFunction) {
-    // db.all(
-    //     'SELECT * FROM todos WHERE owner_id = ?',
-    //     [req.user.id],
-    //     function (err, rows) {
-    //         if (err) {
-    //             return next(err)
-    //         }
-    //         var todos = rows.map(function (row) {
-    //             return {
-    //                 id: row.id,
-    //                 title: row.title,
-    //                 completed: row.completed == 1 ? true : false,
-    //                 url: '/' + row.id,
-    //             }
-    //         })
-    //         res.locals.todos = todos
-    //         res.locals.activeCount = todos.filter(function (todo) {
-    //             return !todo.completed
-    //         }).length
-    //         res.locals.completedCount = todos.length - res.locals.activeCount
-    //         next()
-    //     }
-    // )
+    // const getUser = db.users.findOne({
+    // where: {
+    // username: req.user.username,
+    // },
+    // })
+    next()
 }
 
 var router = express.Router()
@@ -45,7 +28,7 @@ router.get(
     fetchTodos,
     function (req, res, next) {
         res.locals.filter = null
-        res.render('index', { user: req.user })
+        res.sendFile('/app/index.html', { root: '.' })
     }
 )
 

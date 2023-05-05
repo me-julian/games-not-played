@@ -3,6 +3,7 @@ import createError from 'http-errors'
 import path from 'path'
 import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
+// import csrf from 'tiny-csrf'
 import passport from 'passport'
 import logger from 'morgan'
 
@@ -34,15 +35,25 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+const sessionStore = new SequelizeStore({ db: db.sequelize })
 app.use(
     session({
         secret: 'keyboard cat',
         resave: false, // don't save session if unmodified
         saveUninitialized: false, // don't create session until something stored
-        store: new SequelizeStore({ db: db.sequelize }),
+        store: sessionStore,
     })
 )
+// Create sessions table if it doesn't already exist.
+sessionStore.sync()
+
 app.use(csrf())
+// app.use(
+//     csrf(
+//         '123456789iamasecret987654321look' // secret -- must be 32 bits or chars in length
+//     )
+// )
 app.use(passport.authenticate('session'))
 app.use(function (req, res, next) {
     var msgs = req.session.messages || []

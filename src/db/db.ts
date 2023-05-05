@@ -14,9 +14,6 @@ const sequelize = new Sequelize(
         host: config[env].host,
         port: config[env].port,
         dialect: config[env].dialect,
-        define: {
-            underscored: true,
-        },
     }
 )
 
@@ -29,13 +26,16 @@ sequelize
         console.error('Error connecting to database.')
     })
 
-sequelize.addModels(['./models'])
+sequelize.addModels([__dirname + '/models'])
+
+import User from './models/User'
 
 // Connect all the models/tables in the database to a db object,
 // so everything is accessible via one object
 const db = {
     Sequelize: Sequelize,
     sequelize: sequelize,
+    users: User,
 }
 
 export default db

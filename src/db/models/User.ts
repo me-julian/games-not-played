@@ -2,9 +2,9 @@
 import { Table, Column, Model, Unique } from 'sequelize-typescript'
 
 @Table
-class User extends Model {
-    @Column
+export default class User extends Model {
     @Unique
+    @Column
     username: string
 
     @Column
@@ -13,5 +13,3 @@ class User extends Model {
     @Column
     salt: Buffer
 }
-
-export default User

@@ -78,14 +78,14 @@ app.use(function (err, req, res, next) {
 } as ErrorRequestHandler)
 
 ViteExpress.config({
-    mode: config.server.env === 'production' ? 'production' : 'development',
+    mode: config.env === 'production' ? 'production' : 'development',
 })
 
 import { cwd } from 'process'
-ViteExpress.listen(app, config.server.port, () => {
+ViteExpress.listen(app, config.port, () => {
     console.log(`Current directory: ${cwd()}`)
     console.log(
-        `⚡️[server]: Server is running at http://localhost:${config.server.port}`
+        `⚡️[server]: Server is running at http://localhost:${config.port}`
     )
 })
 

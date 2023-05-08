@@ -1,4 +1,5 @@
 {
+    "extends": "../../tsconfig.settings.json",
     "compilerOptions": {
         "target": "ESNext",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -19,6 +20,6 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["client/src", "client/src/components", "client/src/App.tsx"],
-    "references": [{ "path": "../tsconfig.vite.json" }, { "path": "./server" }]
+    "include": ["src", "src/components", "src/App.tsx"]
+    // "references": [{ "path": "../../tsconfig.vite.json" }]
 }

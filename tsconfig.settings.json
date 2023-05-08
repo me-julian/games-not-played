@@ -8,7 +8,7 @@
         /* Emit */
         "declaration": true,
         "outDir": "./dist" /* Specify an output folder for all emitted files. */,
-        "rootDir": "./src" /* Specify the root folder within your source files. */
+        "rootDir": "./" /* Specify the root folder within your source files. */
         // "declarationMap": true /* Create sourcemaps for d.ts files. */,
         // "sourceMap": true /* Create source map files for emitted JavaScript files. */
         // "sourceRoot": "" /* Specify the root path for debuggers to find the reference source code. */,

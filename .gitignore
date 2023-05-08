@@ -11,3 +11,5 @@ node_modules
 dist
 
 scripts/bash-test.sh
+
+.vscode

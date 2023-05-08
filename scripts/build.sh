@@ -1,5 +1,8 @@
 #!/bin/bash
 
-echo "Running bash build script."
+echo "Running build script."
+echo "Compiling typescript."
 npx tsc -b
-npx vite build
+echo "Typescript compilation finished."
+npx vite build --emptyOutDir
+echo "End build script."

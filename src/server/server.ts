@@ -1,9 +1,9 @@
 import express, { Express } from 'express'
-import createError from 'http-errors'
+import ViteExpress from 'vite-express'
+// import createError from 'http-errors'
 import path from 'path'
 import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
-// import csrf from 'tiny-csrf'
 import passport from 'passport'
 import logger from 'morgan'
 
@@ -49,11 +49,7 @@ app.use(
 sessionStore.sync()
 
 app.use(csrf())
-// app.use(
-//     csrf(
-//         '123456789iamasecret987654321look' // secret -- must be 32 bits or chars in length
-//     )
-// )
+
 app.use(passport.authenticate('session'))
 app.use(function (req, res, next) {
     var msgs = req.session.messages || []
@@ -67,13 +63,8 @@ app.use(function (req, res, next) {
     next()
 })
 
-app.use('/', indexRouter)
-app.use('/', authRouter)
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404))
-})
+app.use(authRouter)
+app.use(indexRouter)
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -86,7 +77,13 @@ app.use(function (err, req, res, next) {
     res.render('error')
 } as ErrorRequestHandler)
 
-app.listen(config.server.port, () => {
+ViteExpress.config({
+    mode: config.server.env === 'production' ? 'production' : 'development',
+})
+
+import { cwd } from 'process'
+ViteExpress.listen(app, config.server.port, () => {
+    console.log(`Current directory: ${cwd()}`)
     console.log(
         `⚡️[server]: Server is running at http://localhost:${config.server.port}`
     )

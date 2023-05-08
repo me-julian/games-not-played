@@ -18,7 +18,7 @@ var router = express.Router()
 
 /* GET home page. */
 router.get(
-    '/',
+    '/home',
     function (req: Request, res: Response, next: NextFunction) {
         if (!req.user) {
             return res.render('home')
@@ -28,7 +28,7 @@ router.get(
     fetchTodos,
     function (req, res, next) {
         res.locals.filter = null
-        res.sendFile('/app/index.html', { root: '.' })
+        res.redirect('/')
     }
 )
 
@@ -103,5 +103,8 @@ router.post(
         // )
     }
 )
+
+// Check auth anytime hitting serverside (non-login) urls.
+router.get('*', ensureLoggedIn)
 
 module.exports = router

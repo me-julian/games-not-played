@@ -3,6 +3,6 @@
 echo "Running build script."
 echo "Compiling typescript."
 npx tsc -b
-echo "Typescript compilation finished."
+echo "End typescription compilation."
 npx vite build --emptyOutDir
 echo "End build script."

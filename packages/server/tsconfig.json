@@ -6,6 +6,9 @@
         "experimentalDecorators": true /* Enable experimental support for legacy experimental decorators. */,
         "emitDecoratorMetadata": true /* Emit design-type metadata for decorated declarations in source files. */,
 
+        /* Emit */
+        "outDir": "./dist",
+
         /* Modules */
         "module": "commonjs" /* Specify what module code is generated. */,
 
@@ -21,5 +24,5 @@
         /* Type Checking */
         "strict": true /* Enable all strict type-checking options. */
     },
-    "exclude": ["client", "db/migrations", "db/seeders"]
+    "exclude": ["dist", "db/migrations", "db/seeders"]
 }

@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo "Running app in production mode."
-npx node dist/packages/server/server.ts
+npx node packages/server/dist/server.js

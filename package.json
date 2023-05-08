@@ -3,15 +3,23 @@
     "private": true,
     "version": "1.0.0",
     "type": "commonjs",
-    "main": "dist/server.js",
     "author": "Julian Edwards",
     "license": "ISC",
+    "scripts": {
+        "run-prod-test": "set NODE_ENV=production&& pnpm node packages/server/dist/server.js",
+        "create-prod-db": "set NODE_ENV=production&& npx sequelize db:create",
+        "migrate-prod-db": "set NODE_ENV=production&& npx sequelize db:migrate",
+        "create-dev-db": "set NODE_ENV=development&& npx sequelize db:create",
+        "migrate-dev-db": "set NODE_ENV=development&& npx sequelize db:migrate",
+        "start-prod-test": "set NODE_ENV=production&& npx node packages/server/dist/server.js"
+    },
     "dependencies": {
         "server": "workspace:*"
     },
     "devDependencies": {
         "@vitejs/plugin-react": "^4.0.0",
         "nodemon": "^2.0.22",
+        "sequelize-cli": "^6.6.0",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.4",
         "vite": "^4.3.5"

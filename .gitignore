@@ -13,3 +13,5 @@ dist
 scripts/bash-test.sh
 
 .vscode
+
+tsbuild

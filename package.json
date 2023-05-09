@@ -6,15 +6,14 @@
     "author": "Julian Edwards",
     "license": "ISC",
     "scripts": {
-        "run-prod-test": "set NODE_ENV=production&& pnpm node packages/server/dist/server.js",
         "create-prod-db": "set NODE_ENV=production&& npx sequelize db:create",
         "migrate-prod-db": "set NODE_ENV=production&& npx sequelize db:migrate",
         "create-dev-db": "set NODE_ENV=development&& npx sequelize db:create",
-        "migrate-dev-db": "set NODE_ENV=development&& npx sequelize db:migrate",
-        "start-prod-test": "set NODE_ENV=production&& npx node packages/server/dist/server.js"
+        "migrate-dev-db": "set NODE_ENV=development&& npx sequelize db:migrate"
     },
     "dependencies": {
-        "server": "workspace:*"
+        "server": "workspace:*",
+        "client": "workspace:*"
     },
     "devDependencies": {
         "@vitejs/plugin-react": "^4.0.0",

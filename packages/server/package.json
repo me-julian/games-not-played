@@ -2,12 +2,11 @@
     "name": "server",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "server.js",
     "keywords": [],
-    "author": "",
+    "author": "Julian Edwards",
     "license": "ISC",
     "dependencies": {
-        "client": "workspace:*",
         "connect-ensure-login": "^0.1.1",
         "connect-session-sequelize": "^7.1.6",
         "cookie-parser": "^1.4.6",
@@ -25,7 +24,6 @@
         "reflect-metadata": "^0.1.13",
         "sequelize": "^6.31.1",
         "sequelize-typescript": "^2.1.5",
-        "ts-node": "^10.9.1",
         "vite-express": "^0.6.0"
     },
     "devDependencies": {
@@ -42,6 +40,7 @@
         "@types/pluralize": "^0.0.29",
         "@types/validator": "^13.7.16",
         "nodemon": "^2.0.22",
+        "ts-node": "^10.9.1",
         "typescript": "^5.0.4"
     }
 }

@@ -1,36 +1,9 @@
-import express, { NextFunction, Request, Response } from 'express'
+import express from 'express'
 import EnsureLogIn from 'connect-ensure-login'
-
-import db from '../db/db'
 
 const ensureLoggedIn = EnsureLogIn.ensureLoggedIn()
 
-function fetchTodos(req: Request, res: Response, next: NextFunction) {
-    // const getUser = db.users.findOne({
-    // where: {
-    // username: req.user.username,
-    // },
-    // })
-    next()
-}
-
 var router = express.Router()
-
-/* GET home page. */
-router.get(
-    '/home',
-    function (req: Request, res: Response, next: NextFunction) {
-        if (!req.user) {
-            return res.render('home')
-        }
-        next()
-    },
-    fetchTodos,
-    function (req, res, next) {
-        res.locals.filter = null
-        res.redirect('/')
-    }
-)
 
 router.post(
     '/',

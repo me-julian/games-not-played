@@ -22,7 +22,6 @@ COPY server/package.json ./
 RUN npm install
 
 COPY server/dist ./
-COPY server/dist ./routes
 COPY server/bin ./bin
 COPY server/views ./views
 COPY server/public ./public

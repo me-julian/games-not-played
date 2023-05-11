@@ -19,10 +19,7 @@
         /* Interop Constraints */
         "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
         "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
-        "strictPropertyInitialization": false /* Check for class properties that are declared but not set in the constructor. */,
-
-        /* Type Checking */
-        "strict": true /* Enable all strict type-checking options. */
+        "strictPropertyInitialization": false /* Check for class properties that are declared but not set in the constructor. */
     },
     "exclude": ["dist", "db/migrations", "db/seeders"]
 }

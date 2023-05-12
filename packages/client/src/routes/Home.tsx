@@ -1,6 +1,6 @@
-import UserPreview from './UserPreview'
+import UserPreview from '../components/UserPreview'
 
-function Content() {
+function Home() {
     return (
         <main className="container text-center">
             <div className="row justify-content-around p-4">
@@ -26,4 +26,4 @@ function Content() {
     )
 }
 
-export default Content
+export default Home

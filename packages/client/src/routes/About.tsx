@@ -1,6 +1,6 @@
 function About() {
     return (
-        <div>
+        <main>
             <h1>About this project</h1>
             <p>
                 Here's some general information about the app, how it works and
@@ -21,7 +21,7 @@ function About() {
                     <p>Answer 3</p>
                 </li>
             </ul>
-        </div>
+        </main>
     )
 }
 

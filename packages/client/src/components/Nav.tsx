@@ -37,7 +37,7 @@ function Nav({ csrfToken }: Props) {
             <nav className="navbar navbar-expand-lg bg-light">
                 <div className="container-fluid">
                     <Link className="navbar-brand me-4" to={'/'}>
-                        Homepage
+                        Home
                     </Link>
                     <Link to={'about'} className="navbar-text me-auto">
                         About

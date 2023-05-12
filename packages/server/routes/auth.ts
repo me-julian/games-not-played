@@ -1,7 +1,9 @@
 import express from 'express'
+import { Router } from 'express'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import crypto from 'crypto'
+import { csrf } from '../csrf'
 import db from '../db/db'
 
 declare global {
@@ -104,7 +106,13 @@ passport.deserializeUser(function (
     })
 })
 
-var router = express.Router()
+const router: Router = express.Router()
+
+// Send CSRF token to view templates
+router.use(function (req, res, next) {
+    res.locals.csrfToken = csrf.generateToken(req)
+    next()
+})
 
 /** GET /login
  *
@@ -247,4 +255,4 @@ router.post('/signup', function (req, res, next) {
     )
 })
 
-module.exports = router
+export default router

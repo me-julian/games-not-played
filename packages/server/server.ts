@@ -5,9 +5,6 @@ import logger from 'morgan'
 
 const app: Express = express()
 
-var indexRouter = require('./routes/index')
-var authRouter = require('./routes/auth')
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -17,11 +14,28 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-import useSessionMiddleware from './sessions'
-useSessionMiddleware(app)
+import { sessionMiddleware } from './sessions'
+sessionMiddleware(app)
+
+import { csrf } from './csrf'
+app.use(csrf.csrfSynchronisedProtection)
+
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*'])
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.append('Access-Control-Allow-Headers', 'Content-Type')
+    next()
+})
+
+app.get('/csrf-token', (req, res) => {
+    res.json({ token: csrf.generateToken(req) })
+})
+
+import authRouter from './routes/auth'
+import apiRouter from './routes/api'
 
 app.use(authRouter)
-app.use(indexRouter)
+app.use('/api', apiRouter)
 
 import config from './config'
 
@@ -35,4 +49,4 @@ ViteExpress.listen(app, config.port, () => {
     )
 })
 
-module.exports = app
+export default app

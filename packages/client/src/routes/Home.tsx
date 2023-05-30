@@ -1,3 +1,4 @@
+// Components
 import UserPreview from '../components/UserPreview'
 
 function Home() {

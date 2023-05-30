@@ -1,5 +1,8 @@
+// React
 import { Outlet } from 'react-router-dom'
+// Utilities
 import Cookie from 'js-cookie'
+// Components
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 

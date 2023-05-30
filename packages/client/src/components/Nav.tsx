@@ -1,4 +1,3 @@
-import Cookie from 'js-cookie'
 import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom'
 import { RootLoaderData } from '../routes/Root'
 
@@ -15,7 +14,7 @@ function Nav() {
             },
         })
 
-        Cookie.remove('connect.sid')
+        rootLoaderData.Cookie.remove('connect.sid')
         navigate(window.location, { replace: true })
     }
 

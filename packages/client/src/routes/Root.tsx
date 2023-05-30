@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import Cookie from 'js-cookie'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -13,6 +14,7 @@ export type User = {
 export type RootLoaderData = {
     csrf: CSRFToken
     user?: User
+    Cookie: Cookies.CookiesStatic<string>
 }
 
 export async function rootLoader() {
@@ -31,7 +33,11 @@ export async function rootLoader() {
 
     const user = (await userRequest.json()) as User
 
-    return { csrf, user: user.username ? user : null } as RootLoaderData
+    return {
+        csrf,
+        user: user.username ? user : null,
+        Cookie,
+    } as RootLoaderData
 }
 
 function Root() {

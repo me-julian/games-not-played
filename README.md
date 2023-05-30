@@ -21,21 +21,27 @@ Make sure you've installed:
 -   [Docker Desktop](https://www.docker.com/products/docker-desktop/) or Docker Engine, Docker CLI & Docker Compose
 -   [MySQL](https://www.mysql.com/) (if not using Docker containers exclusively)
 
-## Running the app
+## Hosting the app
 
 Will eventually be set up to push images to docker hub for cloud hosting.
 
-As it is, [look below](#setting-up-the-repo-for-development) on installing with dev dependencies. Then make sure you've [created and migrated the production database](#working-with-the-database). Run `bash scripts/build.sh` to build the server and client files for production.
+As it is, [look below](#setting-up-the-repo-for-development) on installing with dev dependencies. Then make sure you've [created and migrated the production database](#initial-setup-and-updating-database-version).
 
-Run `bash scripts/start-prod.sh` to start the app locally in production mode using the built files.
+Run `bash scripts/build.sh` to build the server and client files for production.
+
+Then either:
+
+Run `bash scripts/start-prod.sh` to run the app locally in production mode.
 
 Run `docker compose build` and `docker compose up` in the root directory to build and run the app in Docker containers.
 
-## Setting up the repo for development
+## Setting up for development
 
 After cloning the repo, make sure you have PNPM installed. Run `pnpm install` in the root directory to install the dependencies for the whole project.
 
-[See below](#setting-up-the-repo-for-development) to get the database setup.
+[See below](#initial-setup-and-updating-database-version) to get the database setup.
+
+Run `bash scripts/start-dev.sh` to start the app using the source files with hot reloading.
 
 ## Working with the database
 

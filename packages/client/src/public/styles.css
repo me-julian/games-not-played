@@ -15,3 +15,12 @@ main {
 footer {
     flex-shrink: 0;
 }
+
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.link:hover {
+    color: #0a58ca;
+}

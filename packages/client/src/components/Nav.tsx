@@ -38,7 +38,7 @@ function Nav() {
                                 onClick={() => {
                                     handleLogout()
                                 }}
-                                className="navbar-text me-4"
+                                className="navbar-text link me-4"
                             >
                                 Logout
                             </div>

@@ -6,7 +6,7 @@ const ensureLoggedIn = EnsureLogIn.ensureLoggedIn()
 
 const router: Router = express.Router()
 
-router.get('/user', ensureLoggedIn, (req, res) => {
+router.get('/user', (req, res) => {
     res.send({ username: req.session.passport?.user.username })
 })
 

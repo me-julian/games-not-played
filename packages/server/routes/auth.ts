@@ -188,7 +188,8 @@ router.post('/logout', function (req, res, next) {
         if (err) {
             return next(err)
         }
-        res.redirect('/login')
+
+        res.send(204)
     })
 })
 

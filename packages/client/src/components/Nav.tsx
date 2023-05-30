@@ -1,36 +1,23 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Cookie from 'js-cookie'
+import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom'
+import { RootLoaderData } from '../routes/Root'
 
-interface Props {
-    csrfToken: string
-}
+function Nav() {
+    const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
 
-function Nav({ csrfToken }: Props) {
-    const [username, setUsername] = useState(null)
+    const navigate = useNavigate()
 
-    useEffect(() => {
-        const abortController = new AbortController()
+    async function handleLogout() {
+        await fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'x-csrf-token': rootLoaderData.csrf!.token,
+            },
+        })
 
-        async function getUser(abortController: AbortController) {
-            const request = await fetch('api/users/user', {
-                method: 'GET',
-                headers: {
-                    'x-csrf-token': csrfToken,
-                },
-                signal: abortController.signal,
-            })
-
-            const data = await request.json()
-
-            setUsername(data.username)
-        }
-
-        getUser(abortController)
-
-        return () => {
-            abortController.abort()
-        }
-    }, [csrfToken])
+        Cookie.remove('connect.sid')
+        navigate(window.location, { replace: true })
+    }
 
     return (
         <>
@@ -42,10 +29,21 @@ function Nav({ csrfToken }: Props) {
                     <Link to={'about'} className="navbar-text me-auto">
                         About
                     </Link>
-                    {username && (
-                        <p className="navbar-text m-0 me-3">{username}</p>
-                    )}
-                    {!username && (
+                    {rootLoaderData.user ? (
+                        <>
+                            <p className="navbar-text m-0 me-3">
+                                {rootLoaderData.user.username}
+                            </p>
+                            <div
+                                onClick={() => {
+                                    handleLogout()
+                                }}
+                                className="navbar-text me-4"
+                            >
+                                Logout
+                            </div>
+                        </>
+                    ) : (
                         <a className="navbar-text mx-4" href="/login">
                             Login
                         </a>

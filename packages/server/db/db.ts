@@ -1,5 +1,4 @@
 'use strict'
-
 import { Sequelize } from 'sequelize-typescript'
 
 import config from './dbConfig'

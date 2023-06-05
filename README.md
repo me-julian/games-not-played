@@ -25,7 +25,7 @@ Make sure you've installed:
 
 Will eventually be set up to push images to docker hub for cloud hosting.
 
-As it is, [look below](#setting-up-the-repo-for-development) on installing with dev dependencies. Then make sure you've [created and migrated the production database](#initial-setup-and-updating-database-version).
+As it is, [look below](#setting-up-for-development) on installing with dev dependencies. Then make sure you've [created and migrated the production database](#initial-database-setup).
 
 Run `bash scripts/build.sh` to build the server and client files for production.
 
@@ -39,27 +39,61 @@ Run `docker compose build` and `docker compose up` in the root directory to buil
 
 After cloning the repo, make sure you have PNPM installed. Run `pnpm install` in the root directory to install the dependencies for the whole project.
 
-[See below](#initial-setup-and-updating-database-version) to get the database setup.
+[See below](#initial-database-setup) to get the database set up.
 
-Run `bash scripts/start-dev.sh` to start the app using the source files with hot reloading.
+Run `bash scripts/start-dev.sh` to run the app using the source files with hot reloading.
 
 ## Working with the database
 
 This project uses database migrations and these must be run to get the database in a usable state.
 
-### Initial setup and updating database version
+### Initial database setup
 
-For first time initialization make sure you've installed dev dependencies as you need access to the Sequelize CLI and Typescript compiler. Run `bash scripts/create-dbs.sh` to create a production and development database.
+For first time initialization make sure you've installed dev dependencies as you need access to the Sequelize CLI and Typescript compiler.
 
-The development database will use your local machine's MySQL server.
-The production database is also currently just a local database used as a volume by Docker.
+You must **edit the LOCAL_DATABASE_PATH variable** in the root's .env file with your preferred location for MySQL data on your system. It's recommended that this is a dedicated, empty directory as Sequelize will generate a large number of files in the location.
 
-In order to run existing migrations you must use `bash scripts/build.sh` to build the typescript sequelize models to Javascript first.
+This directory will be used as a storage volume for Docker containers in development **and** production.
+
+Run `bash scripts/start-dev.sh` to build and start up a Docker dev container.
+
+You can CTRL+C to exit the server process in the container. Use `docker ps` to get the container id and re-enter its terminal with `docker exec -it <container id> /bin/sh`.
+
+Now run `sh scripts/create-dbs.sh` in the container to create the databases in the location you specified.
+
+Now you must run migrations.
+
+<!--
+    If running the docker compose up command with the bash scripts, without any existing containers for the images, it will hang on creating the db.
+    It works if running the same command manually in the terminal and then running the script after (containers have already been creating and started once).
+
+    But then the db was dying immediately. Apparently the data got corrupted?
+
+    I cleared the test database directory and started the docker compose project again. It rebuilt the database and seemed fine.
+
+    Then, after docker compose down-ing (not kill), I tried to start up again and it hung on creating the db once again.
+
+    I tried twice, having to CTRL+C both times. Used the command outside the bash script again, it worked. Then downed fully and upped with bash, it hung.
+
+    Conclusion: Bash script is unable to start up the containers. It only works if they're already up as daemon and the bash script just recreates them.
+
+    Earlier attempt also had weird issues with the app not running properly after migrating db.
+ -->
+
+### Migrating the database
+
+Always run migrations from within a Docker (development) container.
+
+If you've made any changes, make sure you've run `sh scripts/build.sh` to build your typescript sequelize models to Javascript first.
 
 Then, on running `pnpm run migrate-prod-db` or `pnpm run migrate-dev-db` you can apply the migrations to their respective databases separately.
 
 ### Creating new migrations
 
-You can use the Sequelize CLI to generate the migration scripts and models. Then you'll have to convert any new models generated to Typescript. Migration scripts must remain Javascript.
+You can use the Sequelize CLI to generate migration scripts and models.
+
+Any models should be manually converted to Typescript (and rebuilt to JS when you're ready to migrate!).
+
+Migration scripts must remain Javascript. CLI generated migrations will also often need manual tweaking to properly match your finalized models.
 
 To see exactly what files are going to be used by the CLI on running migrations you can look at the .sequelizerc file.

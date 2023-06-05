@@ -2,6 +2,9 @@ import express, { Express } from 'express'
 import ViteExpress from 'vite-express'
 import path from 'path'
 import logger from 'morgan'
+import {config as dotEnvConfig} from 'dotenv'
+
+dotEnvConfig({ path: './.env' })
 
 const app: Express = express()
 

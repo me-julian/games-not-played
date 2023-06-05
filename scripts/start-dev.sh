@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "Running app in dev mode."
+echo "Starting app."
 npx nodemon packages/server/server.ts

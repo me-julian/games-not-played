@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Database",
+            "type": "shell",
+            "command": "docker compose -f \"docker-compose.yaml\" up",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
+          },
+        {
+        "label": "Start Server",
+        "type": "shell",
+        "command": "./scripts/start-dev.sh",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "Dev",
+        "dependsOn": ["Start Database", "Start Server"]
+      },
+    ]
+}

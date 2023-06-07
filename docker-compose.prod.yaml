@@ -19,8 +19,20 @@ services:
         working_dir: /usr/src/app
         image: julianmedwards/react-iam-passport:prod
         ports:
-            - 3000:3000
+            - 80:3000
         networks:
             - localnetwork
     db:
-        image: julianmedwards/react-iam-passport-db:prod
+        build: 
+            args: 
+                - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        image: mysql:${MYSQL_VERSION}
+        ports:
+            - 3376:3306
+        volumes:
+            - ${LOCAL_DB_PATH}:/var/lib/mysql
+        networks:
+            - localnetwork
+
+networks:
+    localnetwork:

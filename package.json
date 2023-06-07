@@ -5,12 +5,6 @@
     "type": "commonjs",
     "author": "Julian Edwards",
     "license": "ISC",
-    "scripts": {
-        "create-prod-db": "set NODE_ENV=production&& npx sequelize db:create",
-        "migrate-prod-db": "set NODE_ENV=production&& npx sequelize db:migrate",
-        "create-dev-db": "set NODE_ENV=development&& npx sequelize db:create",
-        "migrate-dev-db": "set NODE_ENV=development&& npx sequelize db:migrate"
-    },
     "dependencies": {
         "server": "workspace:*",
         "client": "workspace:*"

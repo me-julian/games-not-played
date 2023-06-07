@@ -1,27 +1,46 @@
 {
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "Start Database",
-            "type": "shell",
-            "command": "docker compose -f \"docker-compose.yaml\" up",
-            "presentation": {
-              "reveal": "always",
-              "panel": "new"
-            }
-          },
-        {
+      {
+        "label": "Create Database",
+        "type": "shell",
+        "command": "./scripts/create-db.sh",
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "Migrate Database",
+        "type": "shell",
+        "command": "./scripts/migrate-db.sh",
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "Build",
+        "type": "shell",
+        "command": "./scripts/build.sh",
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "First Time Setup",
+        "dependsOrder": "sequence",
+        "dependsOn": ["Create Database", "Build", "Migrate Database"],
+      },
+      {
         "label": "Start Server",
         "type": "shell",
-        "command": "./scripts/start-dev.sh",
+        "command": "./scripts/start.sh",
         "presentation": {
           "reveal": "always",
           "panel": "new"
         }
-      },
-      {
-        "label": "Dev",
-        "dependsOn": ["Start Database", "Start Server"]
       },
     ]
 }

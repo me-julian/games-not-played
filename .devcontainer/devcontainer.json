@@ -29,7 +29,7 @@
 		},
 		"5173":{
 			// Same as 3000, don't forward
-			"label": "vite-dev",
+			"label": "vite-default",
 			"onAutoForward": "ignore"
 		}
 	},
@@ -38,7 +38,7 @@
 	"forwardPorts": [3000],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pnpm install && sudo chmod +x ./scripts/*.sh"
+	"postCreateCommand": "pnpm install && sudo chmod +x scripts/*.sh"
 
 	// Configure tool-specific properties.
 	// "customizations": {},

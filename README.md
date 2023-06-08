@@ -22,6 +22,7 @@ Linux users should install [Docker Engine, Docker CLI & Docker Compose](https://
 Windows and macOS users will need [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 Windows users should also ensure [WSL2](https://docs.docker.com/desktop/windows/wsl/) is enabled.
 
+More info on ensuring your Docker installation is compatible with VS Code dev containers can be found [here](https://code.visualstudio.com/docs/devcontainers/containers#_getting-started).
 
 ## Hosting the app
 
@@ -33,9 +34,9 @@ This project uses [VS Code development containers](https://code.visualstudio.com
 
 Make sure you've installed the Dev Containers extension by Microsoft in VS Code.
 
-Either clone the repository locally and use the `Dev Containers: Open Folder in Container` task
+Either: Clone the repository locally and use the `Dev Containers: Open Folder in Container` task.
 
-OR use `Dev Containers: Clone Repository in Named Container Volume`. Recommended for Windows users using WSL as it will run much faster.
+OR: Use `Dev Containers: Clone Repository in Named Container Volume`. Recommended for Windows or macOS users as it will run much faster.
 
 The database container will automatically start when opening the dev container. Run the `First Time Setup` task to create and migrate the database schemas. [See below](#initial-database-setup) for more info on working with the database.
 
@@ -49,8 +50,6 @@ This project uses database migrations and these must be run to get the database 
 
 ### Initial database setup
 
-**Needs a better solution --** You must **edit the LOCAL_DATABASE_PATH variable** in the .devcontainer folder's .env file with your preferred location for MySQL data on your system. This should be a dedicated, empty directory. Editing this variable will require you to rebuild the container.
-
 Run the `First Time Setup` task to create the database, build the Typescript models and migrate the database to the latest version. Separated tasks for these actions are also available if needed.
 
 ### Migrating the database
@@ -61,7 +60,7 @@ The `Migrate Database` task will apply your migrations.
 
 ### Creating new migrations
 
-You can use the Sequelize CLI to generate migration scripts and models.
+You can use the Sequelize CLI to [generate migration scripts and models](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration).
 
 Any models should be manually converted to Typescript (and rebuilt to JS when you're ready to migrate!).
 

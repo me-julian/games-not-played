@@ -27,7 +27,7 @@ export async function rootLoader() {
 
     const csrf = (await csrfResponse.json()) as CSRFToken
 
-    const userRequest = await fetch('api/users/user', {
+    const userRequest = await fetch(`${__API_URL__}/api/users/user`, {
         method: 'GET',
         headers: {
             'x-csrf-token': typeof csrf.token === 'string' ? csrf.token : '',

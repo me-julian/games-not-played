@@ -29,8 +29,8 @@
 		},
 		"5173":{
 			// Same as 3000, don't forward
-			"label": "vite-default",
-			"onAutoForward": "ignore"
+			"label": "vite-dev-server",
+			"onAutoForward": "silent"
 		}
 	},
 

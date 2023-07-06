@@ -1,46 +1,55 @@
 {
     "version": "2.0.0",
     "tasks": [
-      {
-        "label": "Create Database",
-        "type": "shell",
-        "command": "./scripts/create-db.sh",
-        "presentation": {
-          "reveal": "always",
-          "panel": "shared"
+        {
+            "label": "Create Database",
+            "type": "shell",
+            "command": "./scripts/create-db.sh",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Migrate Database",
+            "type": "shell",
+            "command": "./scripts/migrate-db.sh",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "./scripts/build.sh",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "First Time Setup",
+            "dependsOrder": "sequence",
+            "dependsOn": ["Create Database", "Build", "Migrate Database"]
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "command": "./scripts/test.sh",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Start Server",
+            "type": "shell",
+            "command": "./scripts/start.sh",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
         }
-      },
-      {
-        "label": "Migrate Database",
-        "type": "shell",
-        "command": "./scripts/migrate-db.sh",
-        "presentation": {
-          "reveal": "always",
-          "panel": "shared"
-        }
-      },
-      {
-        "label": "Build",
-        "type": "shell",
-        "command": "./scripts/build.sh",
-        "presentation": {
-          "reveal": "always",
-          "panel": "shared"
-        }
-      },
-      {
-        "label": "First Time Setup",
-        "dependsOrder": "sequence",
-        "dependsOn": ["Create Database", "Build", "Migrate Database"],
-      },
-      {
-        "label": "Start Server",
-        "type": "shell",
-        "command": "./scripts/start.sh",
-        "presentation": {
-          "reveal": "always",
-          "panel": "new"
-        }
-      },
-   ]
+    ]
 }

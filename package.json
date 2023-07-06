@@ -6,15 +6,21 @@
     "author": "Julian Edwards",
     "license": "ISC",
     "dependencies": {
-        "server": "workspace:*",
-        "client": "workspace:*"
+        "client": "workspace:*",
+        "server": "workspace:*"
     },
     "devDependencies": {
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^14.0.0",
         "@vitejs/plugin-react": "^4.0.0",
+        "@vitest/coverage-v8": "^0.32.4",
+        "jsdom": "^22.1.0",
+        "msw": "^1.2.2",
         "nodemon": "^2.0.22",
         "sequelize-cli": "^6.6.0",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.4",
-        "vite": "^4.3.5"
+        "vite": "^4.3.5",
+        "vitest": "^0.32.4"
     }
 }

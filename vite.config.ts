@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -5,8 +7,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
     plugins: [react()],
     base: './',
+    envDir: '../../',
     root: './packages/client',
-    define: {
-        __API_URL__: JSON.stringify(process.env.VITE_API_URL),
+    test: {
+        globals: true,
+        environment: 'jsdom',
+        setupFiles: ['./vitest-setup.ts'],
     },
 })

@@ -5,6 +5,7 @@
     "keywords": [],
     "author": "Julian Edwards",
     "dependencies": {
+        "@testing-library/user-event": "^14.4.3",
         "bootstrap": "^5.2.3",
         "js-cookie": "^3.0.5",
         "react": "^18.2.0",

@@ -21,18 +21,25 @@ export type RootLoaderData = {
 }
 
 export async function rootLoader() {
-    const csrfResponse = await fetch('/csrf-token', {
-        method: 'GET',
-    })
+    const csrfResponse = await fetch(
+        `${import.meta.env.VITE_API_URL}/csrf-token`,
+        {
+            method: 'GET',
+        }
+    )
 
     const csrf = (await csrfResponse.json()) as CSRFToken
 
-    const userRequest = await fetch(`${__API_URL__}/api/users/user`, {
-        method: 'GET',
-        headers: {
-            'x-csrf-token': typeof csrf.token === 'string' ? csrf.token : '',
-        },
-    })
+    const userRequest = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/user`,
+        {
+            method: 'GET',
+            headers: {
+                'x-csrf-token':
+                    typeof csrf.token === 'string' ? csrf.token : '',
+            },
+        }
+    )
 
     const user = (await userRequest.json()) as User
 

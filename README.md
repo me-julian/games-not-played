@@ -4,23 +4,25 @@ Mock react app to get a working tech stack set up with auth using Passport.
 
 ## Tech Stack
 
--   PNPM Monorepo
--   Docker and VS Code Dev Containers
--   VS Code Tasks & Bash scripts
--   Typescript
--   React.js & React Router with Vite
--   API & Distribution Server with Express
--   MySQL Database with Sequelize
+-   [PNPM](https://pnpm.io/) Monorepo
+-   [Docker](https://www.docker.com/) and [VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers)
+-   [VS Code Tasks](https://code.visualstudio.com/Docs/editor/tasks) & Bash scripts
+-   [Typescript](https://www.typescriptlang.org/)
+-   [ReactJS](https://react.dev/) & [React Router](https://reactrouter.com/) with [Vite](https://vitejs.dev/)
+-   [Express](https://expressjs.com/) API & Distribution Server
+-   MySQL Database with [Sequelize](https://sequelize.org/) using [sequelize-typescript](https://github.com/sequelize/sequelize-typescript)
 -   [Passport.js](https://www.passportjs.org/) for email & password authentication
+-   [Vitest](https://vitest.dev/) with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 
 ## Prerequisites
 
-- [Docker](https://www.docker.com/)
+-   [Docker](https://www.docker.com/)
 
 Linux users should install [Docker Engine, Docker CLI & Docker Compose](https://docs.docker.com/engine/install/).
 
 Windows and macOS users will need [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 Windows users should also ensure [WSL2](https://docs.docker.com/desktop/windows/wsl/) is enabled.
+[Setting up VcXsrv for Cypress](https://docs.cypress.io/guides/references/advanced-installation#Windows-Subsystem-for-Linux)
 
 More info on ensuring your Docker installation is compatible with VS Code dev containers can be found [here](https://code.visualstudio.com/docs/devcontainers/containers#_getting-started).
 
@@ -42,7 +44,7 @@ The database container will automatically start when opening the dev container. 
 
 Run the `Start Server` task in the command palette to start the app and start developing.
 
-Connect to the app on your host machine at *localhost:3000*.
+Connect to the app on your host machine at _localhost:3000_.
 
 ## Working with the database
 
@@ -67,3 +69,7 @@ Any models should be manually converted to Typescript (and rebuilt to JS when yo
 Migration scripts must remain Javascript. CLI generated migrations will also often need manual tweaking to properly match your finalized models.
 
 To see exactly what files are going to be used by the CLI on running migrations you can look at the .sequelizerc file.
+
+## Testing
+
+Use the `Test` task to run automated testing.

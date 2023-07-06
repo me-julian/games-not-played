@@ -19,7 +19,9 @@
         /* Linting */
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+
+        "types": ["vitest/globals"]
     },
     "exclude": ["dist"],
     "include": ["src", "src/components", "src/App.tsx"],

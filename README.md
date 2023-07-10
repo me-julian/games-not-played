@@ -22,7 +22,6 @@ Linux users should install [Docker Engine, Docker CLI & Docker Compose](https://
 
 Windows and macOS users will need [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 Windows users should also ensure [WSL2](https://docs.docker.com/desktop/windows/wsl/) is enabled.
-[Setting up VcXsrv for Cypress](https://docs.cypress.io/guides/references/advanced-installation#Windows-Subsystem-for-Linux)
 
 More info on ensuring your Docker installation is compatible with VS Code dev containers can be found [here](https://code.visualstudio.com/docs/devcontainers/containers#_getting-started).
 

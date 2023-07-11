@@ -37,7 +37,10 @@ function Signup() {
         })
 
         if (response.ok) {
+            // Reload rootData to get user.
             revalidator.revalidate()
+            // React Router will pause the revalidation to happen after
+            // navigation.
             navigate('/', { replace: true })
         } else if (response.status === 403) {
             setMessage('Username already in use.')
@@ -97,7 +100,10 @@ function Signup() {
                 </form>
                 <hr />
                 <p className="fst-italic">
-                    Already have an account? <Link to={'/login'}>Sign in</Link>
+                    Already have an account?{' '}
+                    <Link to={'/login'} replace={true}>
+                        Sign in
+                    </Link>
                 </p>
             </section>
         </main>

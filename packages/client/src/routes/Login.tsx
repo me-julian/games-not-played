@@ -40,6 +40,7 @@ function Login() {
         )
 
         if (response.ok) {
+            // Reload rootData to get user.
             revalidator.revalidate()
             // React Router will pause the revalidation to happen after
             // navigation.
@@ -100,7 +101,10 @@ function Login() {
                 </form>
                 <hr />
                 <p className="fst-italic">
-                    Don't have an account? <Link to={'/signup'}>Sign up</Link>
+                    Don't have an account?{' '}
+                    <Link to={'/signup'} replace={true}>
+                        Sign up
+                    </Link>
                 </p>
             </section>
         </main>

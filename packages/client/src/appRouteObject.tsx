@@ -2,6 +2,8 @@ import { RouteObject } from 'react-router-dom'
 import Root, { rootLoader } from './routes/Root'
 import ErrorPage from './ErrorPage'
 import Home from './routes/Home'
+import Login from './routes/Login'
+import Signup from './routes/Signup'
 import About from './routes/About'
 
 export const routeObject: RouteObject = {
@@ -14,6 +16,14 @@ export const routeObject: RouteObject = {
         {
             index: true,
             element: <Home />,
+        },
+        {
+            path: '/login',
+            element: <Login />,
+        },
+        {
+            path: '/signup',
+            element: <Signup />,
         },
         {
             path: '/about',

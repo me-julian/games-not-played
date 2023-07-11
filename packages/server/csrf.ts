@@ -2,15 +2,11 @@ import { csrfSync } from 'csrf-sync'
 
 const csrf = csrfSync({
     getTokenFromRequest: (req) => {
-        // If the incoming request is a urlencoded content type
-        // then get the token from the body. (Express views)
-        if (req.is('application/x-www-form-urlencoded')) {
-            console.warn('FORM REQUEST')
-            return req.body['_csrf']
+        if (Array.isArray(req.headers['x-csrf-token'])) {
+            return undefined
+        } else {
+            return req.headers['x-csrf-token']
         }
-        // Otherwise use the header for all other requests (React app)
-        console.warn('NOT FORM REQUEST USE')
-        return req.headers['x-csrf-token']
     },
 })
 const {

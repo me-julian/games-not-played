@@ -27,7 +27,7 @@ function Nav() {
                     <Link className="navbar-brand me-4" to={'/'}>
                         Home
                     </Link>
-                    <Link to={'about'} className="navbar-text me-auto">
+                    <Link to={'/about'} className="navbar-text me-auto">
                         About
                     </Link>
                     {rootLoaderData.user ? (
@@ -45,9 +45,9 @@ function Nav() {
                             </div>
                         </>
                     ) : (
-                        <a className="navbar-text mx-4" href="/login">
+                        <Link to={'/login'} className="navbar-text mx-4">
                             Login
-                        </a>
+                        </Link>
                     )}
                 </div>
             </nav>

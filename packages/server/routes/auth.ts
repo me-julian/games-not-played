@@ -3,7 +3,6 @@ import { Router } from 'express'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import crypto from 'crypto'
-import { csrf } from '../csrf'
 import db from '../db/db'
 
 declare global {
@@ -69,8 +68,8 @@ passport.use(
                     })
                 }
             },
-            (reason) => {
-                return cb(reason)
+            (error) => {
+                return cb(error)
             }
         )
     })
@@ -108,34 +107,6 @@ passport.deserializeUser(function (
 
 const router: Router = express.Router()
 
-// Send CSRF token to view templates
-router.use(function (req, res, next) {
-    res.locals.csrfToken = csrf.generateToken(req)
-    next()
-})
-
-/** GET /login
- *
- * This route prompts the user to log in.
- *
- * The 'login' view renders an HTML form, into which the user enters their
- * username and password.  When the user submits the form, a request will be
- * sent to the `POST /login/password` route.
- *
- * @openapi
- * /login:
- *   get:
- *     summary: Prompt the user to log in using a username and password
- *     responses:
- *       "200":
- *         description: Prompt.
- *         content:
- *           text/html:
- */
-router.get('/login', function (req, res, next) {
-    res.render('login')
-})
-
 /** POST /login/password
  *
  * This route authenticates the user by verifying a username and password.
@@ -168,14 +139,12 @@ router.get('/login', function (req, res, next) {
  *                 type: number
  *     responses:
  *       "302":
- *         description: Redirect.
+ *         description: Redirect. Unused.
  */
 router.post(
     '/login/password',
     passport.authenticate('local', {
-        successReturnToOrRedirect: '/',
-        failureRedirect: '/login',
-        failureMessage: true,
+        successRedirect: '/',
     })
 )
 
@@ -189,20 +158,8 @@ router.post('/logout', function (req, res, next) {
             return next(err)
         }
 
-        res.send(204)
+        res.sendStatus(204)
     })
-})
-
-/* GET /signup
- *
- * This route prompts the user to sign up.
- *
- * The 'signup' view renders an HTML form, into which the user enters their
- * desired username and password.  When the user submits the form, a request
- * will be sent to the `POST /signup` route.
- */
-router.get('/signup', function (req, res, next) {
-    res.render('signup')
 })
 
 /* POST /signup
@@ -214,7 +171,7 @@ router.get('/signup', function (req, res, next) {
  * then a new user record is inserted into the database.  If the record is
  * successfully created, the user is logged in.
  */
-router.post('/signup', function (req, res, next) {
+router.post('/signup', async function (req, res, next) {
     var salt = crypto.randomBytes(16)
     crypto.pbkdf2(
         req.body.password,
@@ -226,6 +183,7 @@ router.post('/signup', function (req, res, next) {
             if (err) {
                 return next(err)
             }
+
             const createUser = db.users.create({
                 username: req.body.username,
                 hashed_password: hashedPassword,
@@ -245,11 +203,16 @@ router.post('/signup', function (req, res, next) {
                             }
                         )
                     } else {
+                        console.log('HIT REJECTED')
                         return next(new Error('Failed to register new user.'))
                     }
                 },
-                (reason) => {
-                    return next(reason)
+                (error) => {
+                    if (error.name === 'SequelizeUniqueConstraintError') {
+                        res.sendStatus(403)
+                    } else {
+                        return next(error)
+                    }
                 }
             )
         }

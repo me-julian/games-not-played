@@ -33,12 +33,4 @@ export function sessionMiddleware(app: Express) {
     sessionStore.sync()
 
     app.use(passport.authenticate('session'))
-    // Add messages which can be passed from server to client/session.
-    app.use(function (req, res, next) {
-        var msgs = req.session.messages || []
-        res.locals.messages = msgs
-        res.locals.hasMessages = !!msgs.length
-        req.session.messages = []
-        next()
-    })
 }

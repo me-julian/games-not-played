@@ -1,5 +1,10 @@
 // React
-import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom'
+import {
+    Link,
+    useNavigate,
+    useRevalidator,
+    useRouteLoaderData,
+} from 'react-router-dom'
 // Types
 import { RootLoaderData } from '../routes/Root'
 import { useState } from 'react'
@@ -11,6 +16,7 @@ function Signup() {
     const [message, setMessage] = useState<null | string>(null)
 
     const navigate = useNavigate()
+    const revalidator = useRevalidator()
 
     async function handleSignup(e: React.BaseSyntheticEvent) {
         e.preventDefault()
@@ -31,6 +37,7 @@ function Signup() {
         })
 
         if (response.ok) {
+            revalidator.revalidate()
             navigate('/', { replace: true })
         } else if (response.status === 403) {
             setMessage('Username already in use.')

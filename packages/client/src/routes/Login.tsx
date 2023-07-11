@@ -1,5 +1,10 @@
 // React
-import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom'
+import {
+    Link,
+    useNavigate,
+    useRevalidator,
+    useRouteLoaderData,
+} from 'react-router-dom'
 // Types
 import { RootLoaderData } from '../routes/Root'
 import { useState } from 'react'
@@ -11,6 +16,7 @@ function Login() {
     const [message, setMessage] = useState<null | string>(null)
 
     const navigate = useNavigate()
+    const revalidator = useRevalidator()
 
     async function handleLogin(e: React.BaseSyntheticEvent) {
         e.preventDefault()
@@ -34,6 +40,9 @@ function Login() {
         )
 
         if (response.ok) {
+            revalidator.revalidate()
+            // React Router will pause the revalidation to happen after
+            // navigation.
             navigate('/', { replace: true })
         } else if (response.status === 401 || response.status === 403) {
             setMessage('Incorrect username or password.')

@@ -54,49 +54,56 @@ function Login() {
     }
 
     return (
-        <>
-            <section className="prompt">
+        <main className="container">
+            <section className="text-center">
                 <h3>Sample App</h3>
                 <h1>Sign in</h1>
                 {message && (
-                    <section className="messages">
+                    <section className="text-danger">
                         <p>{message}</p>
                     </section>
                 )}
-                <form onSubmit={(e) => handleLogin(e)}>
-                    <section>
-                        <label htmlFor="username">Username</label>
-                        <input
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            id="username"
-                            name="username"
-                            type="text"
-                            autoComplete="username"
-                            required
-                            autoFocus
-                        />
-                    </section>
-                    <section>
-                        <label htmlFor="current-password">Password</label>
-                        <input
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            id="current-password"
-                            name="password"
-                            type="password"
-                            autoComplete="current-password"
-                            required
-                        />
-                    </section>
-                    <button type="submit">Sign in</button>
+                <form
+                    onSubmit={(e) => handleLogin(e)}
+                    className="row row-cols-1 justify-content-center"
+                >
+                    <div className="col-3">
+                        <section className="m-2 d-flex justify-content-between">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                id="username"
+                                name="username"
+                                type="text"
+                                autoComplete="username"
+                                required
+                                autoFocus
+                            />
+                        </section>
+                        <section className="m-2 d-flex justify-content-between">
+                            <label htmlFor="current-password">Password</label>
+                            <input
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                id="current-password"
+                                name="password"
+                                type="password"
+                                autoComplete="current-password"
+                                required
+                            />
+                        </section>
+                        <button type="submit" className="m-2">
+                            Sign in
+                        </button>
+                    </div>
                 </form>
                 <hr />
-                <p className="help">
+                <p className="fst-italic">
                     Don't have an account? <Link to={'/signup'}>Sign up</Link>
                 </p>
             </section>
-        </>
+        </main>
     )
 }
 

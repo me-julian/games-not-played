@@ -51,49 +51,56 @@ function Signup() {
     }
 
     return (
-        <>
-            <section className="prompt">
+        <main className="container">
+            <section className="text-center">
                 <h3>Sample App</h3>
                 <h1>Sign up</h1>
                 {message && (
-                    <section className="messages">
-                        <p>{message}</p>
+                    <section>
+                        <p className="text-danger">{message}</p>
                     </section>
                 )}
-                <form onSubmit={(e) => handleSignup(e)}>
-                    <section>
-                        <label htmlFor="username">Username</label>
-                        <input
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            id="username"
-                            name="username"
-                            type="text"
-                            autoComplete="username"
-                            required
-                            autoFocus
-                        />
-                    </section>
-                    <section>
-                        <label htmlFor="new-password">Password</label>
-                        <input
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            id="new-password"
-                            name="password"
-                            type="password"
-                            autoComplete="new-password"
-                            required
-                        />
-                    </section>
-                    <button type="submit">Sign up</button>
+                <form
+                    onSubmit={(e) => handleSignup(e)}
+                    className="row row-cols-1 justify-content-center"
+                >
+                    <div className="col-3">
+                        <section className="m-2 d-flex justify-content-between">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                id="username"
+                                name="username"
+                                type="text"
+                                autoComplete="username"
+                                required
+                                autoFocus
+                            />
+                        </section>
+                        <section className="m-2 d-flex justify-content-between">
+                            <label htmlFor="new-password">Password</label>
+                            <input
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                id="new-password"
+                                name="password"
+                                type="password"
+                                autoComplete="new-password"
+                                required
+                            />
+                        </section>
+                        <button type="submit" className="m-2">
+                            Sign up
+                        </button>
+                    </div>
                 </form>
                 <hr />
-                <p className="help">
+                <p className="fst-italic">
                     Already have an account? <Link to={'/login'}>Sign in</Link>
                 </p>
             </section>
-        </>
+        </main>
     )
 }
 

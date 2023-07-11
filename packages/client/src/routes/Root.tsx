@@ -53,7 +53,6 @@ export async function rootLoader() {
 function Root() {
     return (
         <>
-            <Nav />
             <Outlet />
             <Footer />
         </>

@@ -1,70 +1,58 @@
-// React
+import { useState } from 'react'
 import {
+    ActionFunctionArgs,
+    Form,
     Link,
-    useNavigate,
-    useRevalidator,
+    Navigate,
+    redirect,
+    useActionData,
     useRouteLoaderData,
 } from 'react-router-dom'
-// Types
 import { RootLoaderData } from '../routes/Root'
-import { useState } from 'react'
+import { AuthResponse } from '../types/auth'
+
+export async function signupAction({
+    request,
+}: ActionFunctionArgs): Promise<Response | string | undefined> {
+    const formData = await request.formData()
+    const csrf = String(formData.get('_csrf'))
+    formData.delete('_csrf')
+
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
+        method: 'POST',
+        headers: {
+            content: 'application/x-www-form-urlencoded',
+            'x-csrf-token': csrf,
+        },
+        body: new URLSearchParams(formData as any),
+    })
+
+    if (response.ok) {
+        return redirect('/')
+    } else if (response.status === 403) {
+        return 'Username already in use.'
+    }
+}
 
 function Signup() {
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
+    const authResponse = useActionData() as AuthResponse
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [message, setMessage] = useState<null | string>(null)
 
-    const navigate = useNavigate()
-    const revalidator = useRevalidator()
-
-    async function handleSignup(e: React.BaseSyntheticEvent) {
-        e.preventDefault()
-
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
-            method: 'POST',
-            headers: {
-                content: 'application/x-www-form-urlencoded',
-                'x-csrf-token':
-                    typeof rootLoaderData.csrf.token === 'string'
-                        ? rootLoaderData.csrf.token
-                        : '',
-            },
-            body: new URLSearchParams({
-                username: username,
-                password: password,
-            }),
-        })
-
-        if (response.ok) {
-            // Reload rootData to get user.
-            revalidator.revalidate()
-            // React Router will pause the revalidation to happen after
-            // navigation.
-            navigate('/', { replace: true })
-        } else if (response.status === 403) {
-            setMessage('Username already in use.')
-            setUsername('')
-            setPassword('')
-        } else {
-            setMessage('Unexpected error signing up.')
-            setUsername('')
-            setPassword('')
-        }
-    }
-
-    return (
+    const signupScreen = (
         <main className="container">
             <section className="text-center">
                 <h3>Sample App</h3>
                 <h1>Sign up</h1>
-                {message && (
-                    <section>
-                        <p className="text-danger">{message}</p>
+                {typeof authResponse === 'string' && (
+                    <section className="text-danger">
+                        <p>{authResponse}</p>
                     </section>
                 )}
-                <form
-                    onSubmit={(e) => handleSignup(e)}
+                <Form
+                    method="post"
+                    action="/signup"
                     className="row row-cols-1 justify-content-center"
                 >
                     <div className="col-3">
@@ -86,7 +74,7 @@ function Signup() {
                             <input
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                id="new-password"
+                                id="current-password"
                                 name="password"
                                 type="password"
                                 autoComplete="new-password"
@@ -96,8 +84,13 @@ function Signup() {
                         <button type="submit" className="m-2">
                             Sign up
                         </button>
+                        <input
+                            type="hidden"
+                            name="_csrf"
+                            value={rootLoaderData.csrf.token}
+                        />
                     </div>
-                </form>
+                </Form>
                 <hr />
                 <p className="fst-italic">
                     Already have an account?{' '}
@@ -107,6 +100,12 @@ function Signup() {
                 </p>
             </section>
         </main>
+    )
+
+    return rootLoaderData.user ? (
+        <Navigate to="/" replace={true} />
+    ) : (
+        signupScreen
     )
 }
 

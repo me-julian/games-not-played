@@ -16,6 +16,17 @@ import { sessionMiddleware } from './sessions'
 sessionMiddleware(app)
 
 import { csrf } from './csrf'
+app.use((req, res, next) => {
+    console.log('session')
+    console.log(req.session)
+    console.log('body')
+    console.log(req.body)
+    console.log('headers')
+    console.log(req.headers)
+    console.log('end')
+    next()
+})
+
 app.use(csrf.csrfSynchronisedProtection)
 
 app.use((req, res, next) => {

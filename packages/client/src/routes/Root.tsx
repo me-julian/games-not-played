@@ -1,9 +1,5 @@
-// React
-import { Outlet } from 'react-router-dom'
-// Utilities
 import Cookie from 'js-cookie'
-// Components
-import Nav from '../components/Nav'
+import { Outlet } from 'react-router-dom'
 import Footer from '../components/Footer'
 
 export type CSRFToken = {

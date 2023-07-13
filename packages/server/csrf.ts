@@ -1,14 +1,6 @@
 import { csrfSync } from 'csrf-sync'
 
-const csrf = csrfSync({
-    getTokenFromRequest: (req) => {
-        if (Array.isArray(req.headers['x-csrf-token'])) {
-            return undefined
-        } else {
-            return req.headers['x-csrf-token']
-        }
-    },
-})
+const csrf = csrfSync()
 const {
     invalidCsrfTokenError, // This is just for convenience if you plan on making your own middleware.
     generateToken, // Use this in your routes to generate, store, and get a CSRF token.

@@ -1,10 +1,10 @@
 import { RouteObject } from 'react-router-dom'
-import Root, { rootLoader } from './routes/Root'
 import ErrorPage from './ErrorPage'
-import Home from './routes/Home'
-import Login from './routes/Login'
-import Signup from './routes/Signup'
 import About from './routes/About'
+import Home from './routes/Home'
+import Login, { loginAction } from './routes/Login'
+import Root, { rootLoader } from './routes/Root'
+import Signup, { signupAction } from './routes/Signup'
 
 export const routeObject: RouteObject = {
     path: '/',
@@ -24,10 +24,12 @@ export const routeObject: RouteObject = {
         {
             path: '/login',
             element: <Login />,
+            action: loginAction,
         },
         {
             path: '/signup',
             element: <Signup />,
+            action: signupAction,
         },
     ],
 }

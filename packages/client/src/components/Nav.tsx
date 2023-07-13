@@ -1,6 +1,4 @@
-// React
 import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom'
-// Types
 import { RootLoaderData } from '../routes/Root'
 
 function Nav() {

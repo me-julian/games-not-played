@@ -4,7 +4,7 @@
         {
             "label": "Create Database",
             "type": "shell",
-            "command": "./scripts/create-db.sh",
+            "command": "pnpm run create-db",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -13,7 +13,7 @@
         {
             "label": "Migrate Database",
             "type": "shell",
-            "command": "./scripts/migrate-db.sh",
+            "command": "pnpm run migrate-db",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -22,7 +22,7 @@
         {
             "label": "Build",
             "type": "shell",
-            "command": "./scripts/build.sh",
+            "command": "pnpm run build",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -36,20 +36,34 @@
         {
             "label": "Test",
             "type": "shell",
-            "command": "./scripts/test.sh",
+            "command": "pnpm run test",
             "presentation": {
                 "reveal": "always",
                 "panel": "dedicated"
             }
         },
         {
-            "label": "Start Server",
+            "label": "Start API",
             "type": "shell",
-            "command": "./scripts/start.sh",
+            "command": "pnpm run start-api:dev",
             "presentation": {
                 "reveal": "always",
                 "panel": "new"
             }
+        },
+        {
+            "label": "Start Client Dev",
+            "type": "shell",
+            "command": "pnpm run start-client:dev",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Dev",
+            "dependsOrder": "parallel",
+            "dependsOn": ["Start API", "Start Client Dev"]
         }
     ]
 }

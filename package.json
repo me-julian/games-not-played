@@ -5,6 +5,16 @@
     "type": "commonjs",
     "author": "Julian Edwards",
     "license": "ISC",
+    "scripts": {
+        "create-db": "sequelize db:create",
+        "migrate-db": "sequelize db:migrate",
+        "start-client:dev": "vite dev",
+        "start-api:dev": "nodemon packages/server/server.ts",
+        "test": "vitest run --coverage",
+        "compile-typescript": "tsc -b",
+        "build-client": "vite build --emptyOutDir",
+        "build": "compile-typescript && build-client"
+    },
     "dependencies": {
         "client": "workspace:*",
         "server": "workspace:*"

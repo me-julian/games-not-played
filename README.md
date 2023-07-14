@@ -2,6 +2,23 @@
 
 Mock react app to get a working tech stack set up with auth using Passport.
 
+This branch was my first attempt using Passport with session cookies and
+csrf token protection for auth on the client.
+
+This caused issues when trying to test the app due to the app not having
+been requested from the express server, initially setting the session
+cookie.
+
+This also caused fetch requests in E2E tests to be considered cross
+domain, and cookies either weren't being set by the server or weren't
+being sent by the client.
+
+As such I decided to abandon this method with the API and client
+served by the same Express server. After having also needed to remove
+server rendered views for auth pages because of testability issues and
+with no apparent easy way to get testing working it no longer had any
+advantages.
+
 ## Tech Stack
 
 -   [PNPM](https://pnpm.io/) Monorepo

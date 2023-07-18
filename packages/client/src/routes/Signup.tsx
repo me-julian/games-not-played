@@ -1,41 +1,10 @@
 import { useState } from 'react'
-import {
-    ActionFunctionArgs,
-    Form,
-    Link,
-    Navigate,
-    redirect,
-    useActionData,
-    useRouteLoaderData,
-} from 'react-router-dom'
-import { RootLoaderData } from '../routes/Root'
+import { Form, Link, Navigate, useActionData } from 'react-router-dom'
 import { AuthResponse } from '../types/auth'
-
-export async function signupAction({
-    request,
-}: ActionFunctionArgs): Promise<Response | string | undefined> {
-    const formData = await request.formData()
-    const csrf = String(formData.get('_csrf'))
-    formData.delete('_csrf')
-
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
-        method: 'POST',
-        headers: {
-            content: 'application/x-www-form-urlencoded',
-            'x-csrf-token': csrf,
-        },
-        body: new URLSearchParams(formData as any),
-    })
-
-    if (response.ok) {
-        return redirect('/')
-    } else if (response.status === 403) {
-        return 'Username already in use.'
-    }
-}
+import { useAuth } from '../AuthContext'
 
 function Signup() {
-    const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
+    const { auth } = useAuth()
     const authResponse = useActionData() as AuthResponse
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -84,11 +53,6 @@ function Signup() {
                         <button type="submit" className="m-2">
                             Sign up
                         </button>
-                        <input
-                            type="hidden"
-                            name="_csrf"
-                            value={rootLoaderData.csrf.token}
-                        />
                     </div>
                 </Form>
                 <hr />
@@ -102,11 +66,7 @@ function Signup() {
         </main>
     )
 
-    return rootLoaderData.user ? (
-        <Navigate to="/" replace={true} />
-    ) : (
-        signupScreen
-    )
+    return auth ? <Navigate to="/" replace={true} /> : signupScreen
 }
 
 export default Signup

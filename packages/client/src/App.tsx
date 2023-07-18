@@ -9,8 +9,8 @@ import About from './routes/About'
 import Home from './routes/Home'
 import Login from './routes/Login'
 import Root from './routes/Root'
-import Signup, { signupAction } from './routes/Signup'
-import { AuthContext, loginAction, useAuth } from './AuthContext'
+import Signup from './routes/Signup'
+import { AuthContext, loginAction, signupAction, useAuth } from './AuthContext'
 
 export const routeObject = (authContext: AuthContext): RouteObject => {
     return {
@@ -35,7 +35,7 @@ export const routeObject = (authContext: AuthContext): RouteObject => {
             {
                 path: '/signup',
                 element: <Signup />,
-                action: signupAction,
+                action: signupAction(authContext),
             },
         ],
     }

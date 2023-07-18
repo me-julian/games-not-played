@@ -1,15 +1,15 @@
 import { useAuth } from '../AuthContext'
 
 function UserPreview() {
-    const { user } = useAuth()
+    const { auth } = useAuth()
 
     return (
         <div className="col col-3">
             <h2>Private Information</h2>
-            {user ? (
+            {auth ? (
                 <ul className="list-group my-2">
                     <li className="list-group-item">
-                        Your username: {user.username}
+                        Your username: {auth.user.username}
                     </li>
                     <li className="list-group-item">A second item</li>
                     <li className="list-group-item">A third item</li>

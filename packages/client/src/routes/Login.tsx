@@ -4,7 +4,7 @@ import { useAuth } from '../AuthContext'
 import { AuthResponse } from '../types/auth'
 
 function Login() {
-    const { jwt } = useAuth()
+    const { auth } = useAuth()
     const authResponse = useActionData() as AuthResponse
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -66,7 +66,7 @@ function Login() {
         </main>
     )
 
-    return jwt ? <Navigate to="/" replace={true} /> : loginScreen
+    return auth ? <Navigate to="/" replace={true} /> : loginScreen
 }
 
 export default Login

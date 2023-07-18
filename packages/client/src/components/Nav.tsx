@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 
 function Nav() {
-    const { user, setUnauthed } = useAuth()
+    const { auth, setUnauthed } = useAuth()
 
     async function handleLogout() {
         setUnauthed()
@@ -18,10 +18,10 @@ function Nav() {
                     <Link to={'/about'} className="navbar-text me-auto">
                         About
                     </Link>
-                    {user ? (
+                    {auth ? (
                         <>
                             <p className="navbar-text m-0 me-3">
-                                {user.username}
+                                {auth.user.username}
                             </p>
                             <div
                                 onClick={() => {

@@ -1,38 +1,43 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
 
-export type jwt = string | undefined
+export type jwt = string
 
 export type user = {
     username: string
     id: string
 }
 
+export type auth =
+    | {
+          jwt: jwt
+          user: user
+      }
+    | undefined
+
 export type AuthContext = {
-    jwt: jwt | undefined
-    user: user | undefined
+    auth: auth
     setAuthed: (newJWT: jwt, newUser: user) => void
     setUnauthed: () => void
 }
 
 const AuthContext = createContext<AuthContext>({
-    jwt: undefined,
-    user: undefined,
+    auth: undefined,
     setAuthed: () => {},
     setUnauthed: () => {},
 })
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [jwt, setJWT] = useState<jwt | undefined>(undefined)
-    const [user, setUser] = useState<user | undefined>(undefined)
+    const [auth, setAuth] = useState<auth>(undefined)
 
     const setAuthed = (newJWT: jwt, newUser: user) => {
-        setJWT(newJWT)
-        setUser(newUser)
+        setAuth({
+            jwt: newJWT,
+            user: newUser,
+        })
     }
     const setUnauthed = () => {
-        setJWT(undefined)
-        setUser(undefined)
+        setAuth(undefined)
     }
 
     // useEffect(() => {
@@ -47,12 +52,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const contextValue = useMemo(
         () => ({
-            jwt,
-            user,
+            auth,
             setAuthed,
             setUnauthed,
         }),
-        [jwt, user]
+        [auth]
     )
 
     return (
@@ -85,6 +89,29 @@ export const loginAction = ({ setAuthed }: AuthContext) =>
             return redirect('/')
         } else if (response.status === 401 || response.status === 403) {
             return 'Incorrect username or password.'
+        }
+    }
+
+export const signupAction = ({ setAuthed }: AuthContext) =>
+    async function ({
+        request,
+    }: ActionFunctionArgs): Promise<Response | string | undefined> {
+        const formData = await request.formData()
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
+            method: 'POST',
+            headers: {
+                content: 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(formData as any),
+        })
+
+        if (response.ok) {
+            const returnData = await response.json()
+            setAuthed(returnData.jwt, returnData.user)
+            return redirect('/')
+        } else if (response.status === 403) {
+            return 'Username already in use.'
         }
     }
 

@@ -1,21 +1,11 @@
-import { Link, useNavigate, useRouteLoaderData } from 'react-router-dom'
-import { RootLoaderData } from '../routes/Root'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../AuthContext'
 
 function Nav() {
-    const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
-
-    const navigate = useNavigate()
+    const { user, setUnauthed } = useAuth()
 
     async function handleLogout() {
-        await fetch('/logout', {
-            method: 'POST',
-            headers: {
-                'x-csrf-token': rootLoaderData.csrf!.token,
-            },
-        })
-
-        rootLoaderData.Cookie.remove('connect.sid')
-        navigate(window.location, { replace: true })
+        setUnauthed()
     }
 
     return (
@@ -28,10 +18,10 @@ function Nav() {
                     <Link to={'/about'} className="navbar-text me-auto">
                         About
                     </Link>
-                    {rootLoaderData.user ? (
+                    {user ? (
                         <>
                             <p className="navbar-text m-0 me-3">
-                                {rootLoaderData.user.username}
+                                {user.username}
                             </p>
                             <div
                                 onClick={() => {

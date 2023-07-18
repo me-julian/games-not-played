@@ -1,44 +1,10 @@
 import { useState } from 'react'
-import {
-    ActionFunctionArgs,
-    Form,
-    Link,
-    Navigate,
-    redirect,
-    useActionData,
-    useRouteLoaderData,
-} from 'react-router-dom'
-import { RootLoaderData } from '../routes/Root'
+import { Form, Link, Navigate, useActionData } from 'react-router-dom'
+import { useAuth } from '../AuthContext'
 import { AuthResponse } from '../types/auth'
 
-export async function loginAction({
-    request,
-}: ActionFunctionArgs): Promise<Response | string | undefined> {
-    const formData = await request.formData()
-    const csrf = String(formData.get('_csrf'))
-    formData.delete('_csrf')
-
-    const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/login/password`,
-        {
-            method: 'POST',
-            headers: {
-                content: 'application/x-www-form-urlencoded',
-                'x-csrf-token': csrf,
-            },
-            body: new URLSearchParams(formData as any),
-        }
-    )
-
-    if (response.ok) {
-        return redirect('/')
-    } else if (response.status === 401 || response.status === 403) {
-        return 'Incorrect username or password.'
-    }
-}
-
 function Login() {
-    const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
+    const { jwt } = useAuth()
     const authResponse = useActionData() as AuthResponse
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -87,11 +53,6 @@ function Login() {
                         <button type="submit" className="m-2">
                             Sign in
                         </button>
-                        <input
-                            type="hidden"
-                            name="_csrf"
-                            value={rootLoaderData.csrf.token}
-                        />
                     </div>
                 </Form>
                 <hr />
@@ -105,11 +66,7 @@ function Login() {
         </main>
     )
 
-    return rootLoaderData.user ? (
-        <Navigate to="/" replace={true} />
-    ) : (
-        loginScreen
-    )
+    return jwt ? <Navigate to="/" replace={true} /> : loginScreen
 }
 
 export default Login

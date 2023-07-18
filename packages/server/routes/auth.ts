@@ -2,6 +2,8 @@ import express from 'express'
 import { Router } from 'express'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
+import jsonwebtoken from 'jsonwebtoken'
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import crypto from 'crypto'
 import db from '../db/db'
 
@@ -75,6 +77,41 @@ passport.use(
     })
 )
 
+// JWT
+passport.use(
+    new JwtStrategy(
+        {
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            secretOrKey: 'secret',
+            issuer: 'localhost',
+            audience: 'localhost',
+        },
+        function (jwt_payload, cb) {
+            const getUser = db.users.findOne({
+                where: {
+                    username: jwt_payload.username,
+                },
+            })
+
+            getUser.then(
+                (user) => {
+                    if (user) {
+                        return cb(null, {
+                            id: user.id,
+                            username: user.username,
+                        })
+                    } else {
+                        return cb(null, false)
+                    }
+                },
+                (error) => {
+                    return cb(error, false)
+                }
+            )
+        }
+    )
+)
+
 /* Configure session management.
  *
  * When a login session is established, information about the user will be
@@ -90,20 +127,20 @@ passport.use(
  * fetch todo records and render the user element in the navigation bar, that
  * information is stored in the session.
  */
-passport.serializeUser(function (user, cb) {
-    process.nextTick(function () {
-        cb(null, { id: user.id, username: user.username })
-    })
-})
+// passport.serializeUser(function (user, cb) {
+//     process.nextTick(function () {
+//         cb(null, { id: user.id, username: user.username })
+//     })
+// })
 
-passport.deserializeUser(function (
-    user: false | Express.User | null | undefined,
-    cb
-) {
-    process.nextTick(function () {
-        return cb(null, user)
-    })
-})
+// passport.deserializeUser(function (
+//     user: false | Express.User | null | undefined,
+//     cb
+// ) {
+//     process.nextTick(function () {
+//         return cb(null, user)
+//     })
+// })
 
 const router: Router = express.Router()
 
@@ -141,25 +178,27 @@ const router: Router = express.Router()
  *       "302":
  *         description: Redirect. Unused.
  */
-router.post(
-    '/login/password',
-    passport.authenticate('local', {
-        successRedirect: '/',
-    })
-)
-
-/* POST /logout
- *
- * This route logs the user out.
- */
-router.post('/logout', function (req, res, next) {
-    req.logout(function (err) {
-        if (err) {
-            return next(err)
+router.post('/login/password', (req, res, next) => {
+    passport.authenticate(
+        'local',
+        { session: false },
+        (err: Error, user: Express.User, info: string, status: number) => {
+            if (err || !user) {
+                return res.status(400).json({
+                    message: 'Something is not right',
+                    user: user,
+                })
+            }
+            req.login(user, { session: false }, (err) => {
+                if (err) {
+                    res.send(err)
+                }
+                // generate a signed son web token with the contents of user object and return it in the response
+                const jwt = jsonwebtoken.sign(user, 'your_jwt_secret')
+                return res.json({ jwt, user })
+            })
         }
-
-        res.sendStatus(204)
-    })
+    )(req, res, next)
 })
 
 /* POST /signup

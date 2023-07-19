@@ -42,9 +42,7 @@ passport.use(
                                     hashedPassword
                                 )
                             ) {
-                                return cb(null, false, {
-                                    message: 'Incorrect username or password.',
-                                })
+                                return cb(null, false)
                             }
                             return cb(null, {
                                 id: user.id,
@@ -55,9 +53,7 @@ passport.use(
                         }
                     )
                 } else {
-                    return cb(null, false, {
-                        message: 'Incorrect username or password.',
-                    })
+                    return cb(null, false)
                 }
             },
             (error) => {
@@ -113,13 +109,13 @@ router.post('/login/password', (req, res, next) => {
         { session: false },
         (err: Error, user: Express.User, info: string, status: number) => {
             if (err || !user) {
-                return res.status(400).json({
-                    message: 'Something is not right',
-                })
+                console.error(err)
+                return res.sendStatus(400)
             }
             req.login(user, { session: false }, (err) => {
                 if (err) {
-                    res.send(err)
+                    console.error(err)
+                    res.sendStatus(500)
                 }
                 // generate a signed json web token with the contents of user
                 // object and return it in the response
@@ -144,7 +140,8 @@ router.post('/signup', async function (req, res, next) {
         'sha256',
         function (err, hashedPassword) {
             if (err) {
-                return next(err)
+                console.error(err)
+                res.sendStatus(500)
             }
 
             const createUser = db.users.create({
@@ -157,7 +154,7 @@ router.post('/signup', async function (req, res, next) {
                 (user) => {
                     if (user) {
                         // Don't send hashed password or salt to client!
-                        const clientFacingUser = {
+                        const resUser: Express.User = {
                             username: user.username,
                             id: user.id,
                             createdAt: user.createdAt,
@@ -166,22 +163,23 @@ router.post('/signup', async function (req, res, next) {
                         // generate a signed json web token with the contents of
                         // user object and return it in the response
                         const jwt = jsonwebtoken.sign(
-                            clientFacingUser,
+                            resUser,
                             'your_jwt_secret'
                         )
                         return res.json({
                             jwt,
-                            user: clientFacingUser,
+                            user: resUser,
                         })
                     } else {
-                        return next(new Error('Failed to register new user.'))
+                        res.sendStatus(500)
                     }
                 },
-                (error) => {
-                    if (error.name === 'SequelizeUniqueConstraintError') {
+                (err) => {
+                    if (err.name === 'SequelizeUniqueConstraintError') {
                         res.sendStatus(403)
                     } else {
-                        return next(error)
+                        console.error(err)
+                        res.sendStatus(500)
                     }
                 }
             )

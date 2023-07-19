@@ -83,8 +83,10 @@ export const loginAction = ({ setAuthed }: AuthContext) =>
             const returnData = await response.json()
             setAuthed(returnData.jwt, returnData.user)
             return redirect('/')
-        } else if (response.status === 401 || response.status === 403) {
+        } else if (response.status === 400) {
             return 'Incorrect username or password.'
+        } else {
+            return 'There was an issue logging in.'
         }
     }
 
@@ -108,6 +110,8 @@ export const signupAction = ({ setAuthed }: AuthContext) =>
             return redirect('/')
         } else if (response.status === 403) {
             return 'Username already in use.'
+        } else {
+            return 'There was an issue with your sign up.'
         }
     }
 

@@ -16,7 +16,7 @@ function Login() {
                 <h1>Sign in</h1>
                 {typeof authResponse === 'string' && (
                     <section className="text-danger">
-                        <p>{authResponse}</p>
+                        <p className="m-0">{authResponse}</p>
                     </section>
                 )}
                 <Form

@@ -4,7 +4,7 @@ import { Router } from 'express'
 const router: Router = express.Router()
 
 router.get('/user', (req, res) => {
-    res.send({ username: req.user!.username })
+    // res.send({ username: req.user!.username })
 })
 
 router.post('/user', (req, res) => {

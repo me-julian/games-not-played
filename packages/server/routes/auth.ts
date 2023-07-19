@@ -1,32 +1,19 @@
-import express from 'express'
-import { Router } from 'express'
+import express, { Router } from 'express'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import jsonwebtoken from 'jsonwebtoken'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import crypto from 'crypto'
 import db from '../db/db'
+import { Client } from '@react-with-iam/types'
 
 declare global {
     namespace Express {
-        interface User {
-            id: string
-            username: string
-        }
+        interface User extends Client.User {}
     }
 }
 
-/* Configure password authentication strategy.
- *
- * The `LocalStrategy` authenticates users by verifying a username and password.
- * The strategy parses the username and password from the request and calls the
- * `verify` function.
- *
- * The `verify` function queries the database for the user record and verifies
- * the password by hashing the password supplied by the user and comparing it to
- * the hashed password stored in the database.  If the comparison succeeds, the
- * user is authenticated; otherwise, not.
- */
+// Passport authentication strategies
 passport.use(
     new LocalStrategy(function verify(username, password, cb) {
         const getUser = db.users.findOne({
@@ -38,6 +25,7 @@ passport.use(
         getUser.then(
             (user) => {
                 if (user) {
+                    // Get hash of req password and compare with hash in db.
                     crypto.pbkdf2(
                         password,
                         user.salt,
@@ -61,6 +49,8 @@ passport.use(
                             return cb(null, {
                                 id: user.id,
                                 username: user.username,
+                                createdAt: user.createdAt,
+                                updatedAt: user.updatedAt,
                             })
                         }
                     )
@@ -77,7 +67,6 @@ passport.use(
     })
 )
 
-// JWT
 passport.use(
     new JwtStrategy(
         {
@@ -99,6 +88,8 @@ passport.use(
                         return cb(null, {
                             id: user.id,
                             username: user.username,
+                            createdAt: user.createdAt,
+                            updatedAt: user.updatedAt,
                         })
                     } else {
                         return cb(null, false)
@@ -112,9 +103,11 @@ passport.use(
     )
 )
 
+// Auth route handlers
 const router: Router = express.Router()
 
 router.post('/login/password', (req, res, next) => {
+    // Use Passport local strategy to check username and password.
     passport.authenticate(
         'local',
         { session: false },
@@ -122,22 +115,26 @@ router.post('/login/password', (req, res, next) => {
             if (err || !user) {
                 return res.status(400).json({
                     message: 'Something is not right',
-                    user: user,
                 })
             }
             req.login(user, { session: false }, (err) => {
                 if (err) {
                     res.send(err)
                 }
-                // generate a signed son web token with the contents of user object and return it in the response
+                // generate a signed json web token with the contents of user
+                // object and return it in the response
                 const jwt = jsonwebtoken.sign(user, 'your_jwt_secret')
-                return res.json({ jwt, user })
+                return res.json({
+                    jwt,
+                    user: user,
+                })
             })
         }
     )(req, res, next)
 })
 
 router.post('/signup', async function (req, res, next) {
+    // Hash password
     var salt = crypto.randomBytes(16)
     crypto.pbkdf2(
         req.body.password,
@@ -159,18 +156,22 @@ router.post('/signup', async function (req, res, next) {
             createUser.then(
                 (user) => {
                     if (user) {
-                        const partialUser = {
+                        // Don't send hashed password or salt to client!
+                        const clientFacingUser = {
                             username: user.username,
                             id: user.id,
+                            createdAt: user.createdAt,
+                            updatedAt: user.updatedAt,
                         }
-                        // generate a signed son web token with the contents of user object and return it in the response
+                        // generate a signed json web token with the contents of
+                        // user object and return it in the response
                         const jwt = jsonwebtoken.sign(
-                            partialUser,
+                            clientFacingUser,
                             'your_jwt_secret'
                         )
                         return res.json({
                             jwt,
-                            user: partialUser,
+                            user: clientFacingUser,
                         })
                     } else {
                         return next(new Error('Failed to register new user.'))

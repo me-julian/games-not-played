@@ -43,9 +43,9 @@ OR: Use `Dev Containers: Clone Repository in Named Container Volume`. Recommende
 
 The database container will automatically start when opening the dev container. Run the `First Time Setup` task to create and migrate the database schemas. [See below](#initial-database-setup) for more info on working with the database.
 
-Run the `Start Server` task in the command palette to start the app and start developing.
+Run the `Dev` task in the command palette to start the client and api and start developing.
 
-Connect to the app on your host machine at _localhost:3000_.
+Connect to the app on your host machine at _localhost:5173_.
 
 ## Working with the database
 

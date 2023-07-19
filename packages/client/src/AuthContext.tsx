@@ -1,23 +1,19 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState } from 'react'
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
+import { Client } from '@react-with-iam/types'
 
 export type jwt = string
-
-export type user = {
-    username: string
-    id: string
-}
 
 export type auth =
     | {
           jwt: jwt
-          user: user
+          user: Client.User
       }
     | undefined
 
 export type AuthContext = {
     auth: auth
-    setAuthed: (newJWT: jwt, newUser: user) => void
+    setAuthed: (newJWT: jwt, newUser: Client.User) => void
     setUnauthed: () => void
 }
 
@@ -30,7 +26,7 @@ const AuthContext = createContext<AuthContext>({
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [auth, setAuth] = useState<auth>(undefined)
 
-    const setAuthed = (newJWT: jwt, newUser: user) => {
+    const setAuthed = (newJWT: jwt, newUser: Client.User) => {
         setAuth({
             jwt: newJWT,
             user: newUser,

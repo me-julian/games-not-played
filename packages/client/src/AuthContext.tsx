@@ -2,30 +2,21 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
 import { Client } from '@react-with-iam/types'
 
-export type jwt = string | null
-export type parsedJwt = Client.User & {
+export type Jwt = string | null
+export type ParsedJwt = Client.User & {
     iat: Date
 }
 
 export type AuthContext = {
-    jwt: jwt
-    setJwt: (newJwt: jwt) => void
-    parseJwt: (jwt: string) => parsedJwt
-    // setUnauthed: () => void
+    jwt: Jwt
+    setJwt: (newJwt: Jwt) => void
+    parseJwt: (jwt: string) => ParsedJwt | null
 }
 
 const AuthContext = createContext<AuthContext>({} as AuthContext)
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [jwt, setJwt] = useState<jwt>(localStorage.getItem('jwt'))
-
-    // const setJWT = (newJWT: jwt) => {
-    //     setJWT_(newJWT)
-    // }
-
-    // const setUnauthed = () => {
-    //     setJWT(null)
-    // }
+    const [jwt, setJwt] = useState<Jwt>(localStorage.getItem('jwt'))
 
     useEffect(() => {
         if (jwt) {
@@ -35,10 +26,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [jwt])
 
-    const parseJwt = function (jwt: string): parsedJwt {
-        var base64Url = jwt.split('.')[1]
-        var base64 = base64Url.replace('-', '+').replace('_', '/')
-        return JSON.parse(atob(base64))
+    const parseJwt = function (jwt: Jwt): ParsedJwt | null {
+        if (jwt) {
+            var base64Url = jwt.split('.')[1]
+            var base64 = base64Url.replace('-', '+').replace('_', '/')
+            return JSON.parse(atob(base64))
+        } else {
+            return null
+        }
     }
 
     const contextValue = useMemo(
@@ -46,8 +41,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             jwt,
             setJwt,
             parseJwt,
-            // setAuthed,
-            // setUnauthed,
         }),
         [jwt]
     )

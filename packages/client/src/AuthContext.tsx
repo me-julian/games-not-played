@@ -1,58 +1,55 @@
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
 import { Client } from '@react-with-iam/types'
 
-export type jwt = string
-
-export type auth =
-    | {
-          jwt: jwt
-          user: Client.User
-      }
-    | undefined
-
-export type AuthContext = {
-    auth: auth
-    setAuthed: (newJWT: jwt, newUser: Client.User) => void
-    setUnauthed: () => void
+export type jwt = string | null
+export type parsedJwt = Client.User & {
+    iat: Date
 }
 
-const AuthContext = createContext<AuthContext>({
-    auth: undefined,
-    setAuthed: () => {},
-    setUnauthed: () => {},
-})
+export type AuthContext = {
+    jwt: jwt
+    setJwt: (newJwt: jwt) => void
+    parseJwt: (jwt: string) => parsedJwt
+    // setUnauthed: () => void
+}
+
+const AuthContext = createContext<AuthContext>({} as AuthContext)
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [auth, setAuth] = useState<auth>(undefined)
+    const [jwt, setJwt] = useState<jwt>(localStorage.getItem('jwt'))
 
-    const setAuthed = (newJWT: jwt, newUser: Client.User) => {
-        setAuth({
-            jwt: newJWT,
-            user: newUser,
-        })
-    }
-    const setUnauthed = () => {
-        setAuth(undefined)
-    }
+    // const setJWT = (newJWT: jwt) => {
+    //     setJWT_(newJWT)
+    // }
 
-    // useEffect(() => {
-    //     if (token) {
-    //         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-    //         localStorage.setItem('token', token)
-    //     } else {
-    //         delete axios.defaults.headers.common['Authorization']
-    //         localStorage.removeItem('token')
-    //     }
-    // }, [token])
+    // const setUnauthed = () => {
+    //     setJWT(null)
+    // }
+
+    useEffect(() => {
+        if (jwt) {
+            localStorage.setItem('jwt', jwt)
+        } else {
+            localStorage.removeItem('jwt')
+        }
+    }, [jwt])
+
+    const parseJwt = function (jwt: string): parsedJwt {
+        var base64Url = jwt.split('.')[1]
+        var base64 = base64Url.replace('-', '+').replace('_', '/')
+        return JSON.parse(atob(base64))
+    }
 
     const contextValue = useMemo(
         () => ({
-            auth,
-            setAuthed,
-            setUnauthed,
+            jwt,
+            setJwt,
+            parseJwt,
+            // setAuthed,
+            // setUnauthed,
         }),
-        [auth]
+        [jwt]
     )
 
     return (
@@ -62,7 +59,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-export const loginAction = ({ setAuthed }: AuthContext) =>
+export const loginAction = ({ setJwt }: AuthContext) =>
     async function ({
         request,
     }: ActionFunctionArgs): Promise<Response | string | undefined> {
@@ -80,8 +77,8 @@ export const loginAction = ({ setAuthed }: AuthContext) =>
         )
 
         if (response.ok) {
-            const returnData = await response.json()
-            setAuthed(returnData.jwt, returnData.user)
+            const resData = await response.json()
+            setJwt(resData.jwt)
             return redirect('/')
         } else if (response.status === 400) {
             return 'Incorrect username or password.'
@@ -90,7 +87,7 @@ export const loginAction = ({ setAuthed }: AuthContext) =>
         }
     }
 
-export const signupAction = ({ setAuthed }: AuthContext) =>
+export const signupAction = ({ setJwt }: AuthContext) =>
     async function ({
         request,
     }: ActionFunctionArgs): Promise<Response | string | undefined> {
@@ -105,8 +102,8 @@ export const signupAction = ({ setAuthed }: AuthContext) =>
         })
 
         if (response.ok) {
-            const returnData = await response.json()
-            setAuthed(returnData.jwt, returnData.user)
+            const resData = await response.json()
+            setJwt(resData.jwt)
             return redirect('/')
         } else if (response.status === 403) {
             return 'Username already in use.'

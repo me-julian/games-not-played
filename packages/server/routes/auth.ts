@@ -122,7 +122,6 @@ router.post('/login/password', (req, res, next) => {
                 const jwt = jsonwebtoken.sign(user, 'your_jwt_secret')
                 return res.json({
                     jwt,
-                    user: user,
                 })
             })
         }
@@ -168,7 +167,6 @@ router.post('/signup', async function (req, res, next) {
                         )
                         return res.json({
                             jwt,
-                            user: resUser,
                         })
                     } else {
                         res.sendStatus(500)

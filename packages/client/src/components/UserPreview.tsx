@@ -1,15 +1,15 @@
 import { useAuth } from '../AuthContext'
 
 function UserPreview() {
-    const { auth } = useAuth()
+    const { jwt, parseJwt } = useAuth()
 
     return (
         <div className="col col-3">
             <h2>Private Information</h2>
-            {auth ? (
+            {jwt ? (
                 <ul className="list-group my-2">
                     <li className="list-group-item">
-                        Your username: {auth.user.username}
+                        Your username: {parseJwt(jwt).username}
                     </li>
                     <li className="list-group-item">A second item</li>
                     <li className="list-group-item">A third item</li>

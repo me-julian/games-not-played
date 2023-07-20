@@ -73,4 +73,6 @@ To see exactly what files are going to be used by the CLI on running migrations 
 
 ## Testing
 
+Make sure the API server is running with the `Start Server` or `Dev` tasks.
+
 Use the `Test` task to run automated testing.

@@ -34,15 +34,6 @@
             "dependsOn": ["Create Database", "Build", "Migrate Database"]
         },
         {
-            "label": "Test",
-            "type": "shell",
-            "command": "pnpm run test",
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated"
-            }
-        },
-        {
             "label": "Start API",
             "type": "shell",
             "command": "pnpm run start-api:dev",
@@ -64,6 +55,15 @@
             "label": "Dev",
             "dependsOrder": "parallel",
             "dependsOn": ["Start API", "Start Client Dev"]
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "command": "pnpm run test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
         }
     ]
 }

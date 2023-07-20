@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 
 function Nav() {
-    const { auth, setUnauthed } = useAuth()
+    const { jwt, setJwt, parseJwt } = useAuth()
 
     async function handleLogout() {
-        setUnauthed()
+        setJwt(null)
     }
 
     return (
@@ -18,10 +18,10 @@ function Nav() {
                     <Link to={'/about'} className="navbar-text me-auto">
                         About
                     </Link>
-                    {auth ? (
+                    {jwt ? (
                         <>
                             <p className="navbar-text m-0 me-3">
-                                {auth.user.username}
+                                {parseJwt(jwt).username}
                             </p>
                             <div
                                 onClick={() => {

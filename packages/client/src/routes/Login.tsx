@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Form, Link, Navigate, useActionData } from 'react-router-dom'
-import { useAuth } from '../AuthContext'
-import { AuthResponse } from '../types/auth'
+import { useAuth, type AuthResponse } from '../AuthContext'
 
 function Login() {
     const { jwt } = useAuth()

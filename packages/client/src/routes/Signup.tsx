@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Form, Link, Navigate, useActionData } from 'react-router-dom'
-import { AuthResponse } from '../types/auth'
-import { useAuth } from '../AuthContext'
+import { useAuth, type AuthResponse } from '../AuthContext'
 
 function Signup() {
     const { jwt } = useAuth()
@@ -43,7 +42,7 @@ function Signup() {
                             <input
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                id="current-password"
+                                id="new-password"
                                 name="password"
                                 type="password"
                                 autoComplete="new-password"

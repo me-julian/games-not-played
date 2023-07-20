@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { ActionFunctionArgs, redirect } from 'react-router-dom'
-import { Client } from '@react-with-iam/types'
+import { redirect, type ActionFunctionArgs } from 'react-router-dom'
+import { type Client } from '@react-with-iam/types'
 
 export type Jwt = string | null
 export type ParsedJwt = Client.User & {
     iat: Date
 }
+
+export type AuthResponse = Promise<Response | string | undefined>
 
 export type AuthContext = {
     jwt: Jwt
@@ -48,10 +50,16 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
+export const useAuth = () => {
+    const auth = useContext(AuthContext)
+    if (!auth) {
+        throw new Error('Cannot use `useAuth` outside of an AuthProvider')
+    }
+    return auth
+}
+
 export const loginAction = ({ setJwt }: AuthContext) =>
-    async function ({
-        request,
-    }: ActionFunctionArgs): Promise<Response | string | undefined> {
+    async function ({ request }: ActionFunctionArgs): AuthResponse {
         const formData = await request.formData()
 
         const response = await fetch(
@@ -77,9 +85,7 @@ export const loginAction = ({ setJwt }: AuthContext) =>
     }
 
 export const signupAction = ({ setJwt }: AuthContext) =>
-    async function ({
-        request,
-    }: ActionFunctionArgs): Promise<Response | string | undefined> {
+    async function ({ request }: ActionFunctionArgs): AuthResponse {
         const formData = await request.formData()
 
         const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
@@ -100,9 +106,5 @@ export const signupAction = ({ setJwt }: AuthContext) =>
             return 'There was an issue with your sign up.'
         }
     }
-
-export const useAuth = () => {
-    return useContext(AuthContext)
-}
 
 export default AuthProvider

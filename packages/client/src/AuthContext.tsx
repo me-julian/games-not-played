@@ -10,7 +10,7 @@ export type ParsedJwt = Client.User & {
 export type AuthContext = {
     jwt: Jwt
     setJwt: (newJwt: Jwt) => void
-    parseJwt: (jwt: string) => ParsedJwt | null
+    parseJwt: (jwt: string) => ParsedJwt
 }
 
 const AuthContext = createContext<AuthContext>({} as AuthContext)
@@ -26,14 +26,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [jwt])
 
-    const parseJwt = function (jwt: Jwt): ParsedJwt | null {
-        if (jwt) {
-            var base64Url = jwt.split('.')[1]
-            var base64 = base64Url.replace('-', '+').replace('_', '/')
-            return JSON.parse(atob(base64))
-        } else {
-            return null
-        }
+    const parseJwt = function (jwt: string): ParsedJwt {
+        var base64Url = jwt.split('.')[1]
+        var base64 = base64Url.replace('-', '+').replace('_', '/')
+        return JSON.parse(atob(base64))
     }
 
     const contextValue = useMemo(

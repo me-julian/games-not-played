@@ -38,7 +38,7 @@ passport.use(
                             }
                             if (
                                 !crypto.timingSafeEqual(
-                                    user.hashed_password,
+                                    user.hashedPassword,
                                     hashedPassword
                                 )
                             ) {
@@ -47,6 +47,7 @@ passport.use(
                             return cb(null, {
                                 id: user.id,
                                 username: user.username,
+                                tickerValue: user.tickerValue,
                                 createdAt: user.createdAt,
                                 updatedAt: user.updatedAt,
                             })
@@ -84,6 +85,7 @@ passport.use(
                         return cb(null, {
                             id: user.id,
                             username: user.username,
+                            tickerValue: user.tickerValue,
                             createdAt: user.createdAt,
                             updatedAt: user.updatedAt,
                         })
@@ -156,6 +158,7 @@ router.post('/signup', async function (req, res, next) {
                         const resUser: Express.User = {
                             username: user.username,
                             id: user.id,
+                            tickerValue: user.tickerValue,
                             createdAt: user.createdAt,
                             updatedAt: user.updatedAt,
                         }

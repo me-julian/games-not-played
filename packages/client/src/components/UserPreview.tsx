@@ -11,10 +11,9 @@ function UserPreview() {
                     <li className="list-group-item">
                         Your username: {parseJwt(jwt).username}
                     </li>
-                    <li className="list-group-item">A second item</li>
-                    <li className="list-group-item">A third item</li>
-                    <li className="list-group-item">A fourth item</li>
-                    <li className="list-group-item">And a fifth one</li>
+                    <li className="list-group-item">
+                        Ticker: {parseJwt(jwt).tickerValue}
+                    </li>
                 </ul>
             ) : (
                 <h4>Log in to view this info!</h4>

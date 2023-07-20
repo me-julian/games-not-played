@@ -1,5 +1,5 @@
 'use strict'
-import { Table, Column, Model, Unique } from 'sequelize-typescript'
+import { Table, Column, Model, Unique, Default } from 'sequelize-typescript'
 
 @Table
 export default class User extends Model {
@@ -8,8 +8,12 @@ export default class User extends Model {
     username: string
 
     @Column
-    hashed_password: Buffer
+    hashedPassword: Buffer
 
     @Column
     salt: Buffer
+
+    @Default(0)
+    @Column
+    tickerValue: number
 }

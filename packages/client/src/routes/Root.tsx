@@ -7,7 +7,7 @@ export type RootLoaderData = {
 } | null
 
 export const RootLoader = ({ jwt, parseJwt }: AuthContext) =>
-    async function (): Promise<RootLoaderData> {
+    async function () {
         if (jwt) {
             const response = await fetch(
                 `${import.meta.env.VITE_API_URL}/api/users/${
@@ -21,10 +21,8 @@ export const RootLoader = ({ jwt, parseJwt }: AuthContext) =>
                 }
             )
 
-            const resData = await response.json()
-
             if (response.ok) {
-                return { tickerValue: resData.tickerValue }
+                return response
             } else {
                 throw new Response(
                     'Issue getting data from the server.',
@@ -32,7 +30,7 @@ export const RootLoader = ({ jwt, parseJwt }: AuthContext) =>
                 )
             }
         } else {
-            return null
+            return new Response(null)
         }
     }
 

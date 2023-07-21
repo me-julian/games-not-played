@@ -34,13 +34,13 @@ function UserPreview() {
     return (
         <div className="col col-3">
             <h2>Private Information</h2>
-            {jwt ? (
+            {jwt && rootData ? (
                 <ul className="list-group my-2">
                     <li className="list-group-item">
                         Your username: {parseJwt(jwt).username}
                     </li>
                     <li className="list-group-item">
-                        Ticker: {rootData!.tickerValue}
+                        Ticker: {rootData.tickerValue}
                     </li>
                     <Form
                         method="patch"

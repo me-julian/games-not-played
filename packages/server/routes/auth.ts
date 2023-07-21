@@ -6,6 +6,7 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import crypto from 'crypto'
 import db from '../db/db'
 import { Client } from '@react-with-iam/types'
+import config from '../config'
 
 declare global {
     namespace Express {
@@ -65,12 +66,13 @@ passport.use(
 )
 
 passport.use(
+    'jwt',
     new JwtStrategy(
         {
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: 'secret',
-            issuer: 'localhost',
-            audience: 'localhost',
+            secretOrKey: 'your_jwt_secret',
+            issuer: config.jwtOptions.issuer,
+            audience: config.jwtOptions.audience,
         },
         function (jwt_payload, cb) {
             const getUser = db.users.findOne({
@@ -121,7 +123,11 @@ router.post('/login/password', (req, res, next) => {
                 }
                 // generate a signed json web token with the contents of user
                 // object and return it in the response
-                const jwt = jsonwebtoken.sign(user, 'your_jwt_secret')
+                const jwt = jsonwebtoken.sign(
+                    user,
+                    'your_jwt_secret',
+                    config.jwtOptions
+                )
                 return res.json({
                     jwt,
                 })
@@ -166,7 +172,8 @@ router.post('/signup', async function (req, res, next) {
                         // user object and return it in the response
                         const jwt = jsonwebtoken.sign(
                             resUser,
-                            'your_jwt_secret'
+                            'your_jwt_secret',
+                            config.jwtOptions
                         )
                         return res.json({
                             jwt,

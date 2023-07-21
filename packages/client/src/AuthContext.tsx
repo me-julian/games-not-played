@@ -51,7 +51,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 export const useAuth = () => {
     const auth = useContext(AuthContext)
     if (!auth) {
-        throw new Error('Cannot use `useAuth` outside of an AuthProvider')
+        throw new Error('Cannot use `useAuth` outside of an AuthProvider.')
     }
     return auth
 }
@@ -78,7 +78,7 @@ export const loginAction = ({ setJwt }: AuthContext) =>
             setJwt(resData.jwt)
             return redirect('/')
         } else if (response.status === 400) {
-            return new Response('Incorrect username or password', response)
+            return new Response('Incorrect username or password.', response)
         } else {
             return new Response('There was an issue logging in.', response)
         }
@@ -95,10 +95,7 @@ export const signupAction = ({ setJwt }: AuthContext) =>
         } else if (response.status === 403) {
             return new Response('Username already in use.', response)
         } else {
-            return new Response(
-                'There was an issue with your sign up.',
-                response
-            )
+            return new Response('There was an issue signing up.', response)
         }
     }
 

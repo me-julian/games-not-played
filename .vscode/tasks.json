@@ -20,6 +20,11 @@
             }
         },
         {
+            "label": "First Time DB Setup",
+            "dependsOrder": "sequence",
+            "dependsOn": ["Create Database", "Migrate Database"]
+        },
+        {
             "label": "Build",
             "type": "shell",
             "command": "pnpm run build",
@@ -27,11 +32,6 @@
                 "reveal": "always",
                 "panel": "shared"
             }
-        },
-        {
-            "label": "First Time Setup",
-            "dependsOrder": "sequence",
-            "dependsOn": ["Create Database", "Build", "Migrate Database"]
         },
         {
             "label": "Start API",

@@ -1,15 +1,15 @@
 import { Button } from 'react-bootstrap'
-import { useAuth, type AuthResponse, type AuthContext } from '../AuthContext'
+import { useAuth, type AuthContext } from '../AuthContext'
 import {
-    ActionFunctionArgs,
     Form,
     redirect,
     useRouteLoaderData,
+    type ActionFunctionArgs,
 } from 'react-router-dom'
-import { RootLoaderData } from '../routes/Root'
+import { type RootLoaderData } from '../routes/Root'
 
 export const increaseTickerAction = ({ jwt }: AuthContext) =>
-    async function ({ params }: ActionFunctionArgs): AuthResponse {
+    async function ({ params }: ActionFunctionArgs) {
         const response = await fetch(
             `${import.meta.env.VITE_API_URL}/api/users/${params.userId}/ticker`,
             {

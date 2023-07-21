@@ -7,8 +7,6 @@ export type ParsedJwt = Client.User & {
     iat: Date
 }
 
-export type AuthResponse = Promise<Response | string | undefined>
-
 export type AuthContext = {
     jwt: Jwt
     setJwt: (newJwt: Jwt) => void
@@ -58,19 +56,21 @@ export const useAuth = () => {
     return auth
 }
 
-export const loginAction = ({ setJwt }: AuthContext) =>
-    async function ({ request }: ActionFunctionArgs): AuthResponse {
-        const formData = await request.formData()
+function requestAuth(formData: FormData, urlEnding: string) {
+    return fetch(`${import.meta.env.VITE_API_URL}${urlEnding}`, {
+        method: 'POST',
+        headers: {
+            content: 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData as any),
+    })
+}
 
-        const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/login/password`,
-            {
-                method: 'POST',
-                headers: {
-                    content: 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams(formData as any),
-            }
+export const loginAction = ({ setJwt }: AuthContext) =>
+    async function ({ request }: ActionFunctionArgs) {
+        const response = await requestAuth(
+            await request.formData(),
+            '/login/password'
         )
 
         if (response.ok) {
@@ -78,32 +78,27 @@ export const loginAction = ({ setJwt }: AuthContext) =>
             setJwt(resData.jwt)
             return redirect('/')
         } else if (response.status === 400) {
-            return 'Incorrect username or password.'
+            return new Response('Incorrect username or password', response)
         } else {
-            return 'There was an issue logging in.'
+            return new Response('There was an issue logging in.', response)
         }
     }
 
 export const signupAction = ({ setJwt }: AuthContext) =>
-    async function ({ request }: ActionFunctionArgs): AuthResponse {
-        const formData = await request.formData()
-
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
-            method: 'POST',
-            headers: {
-                content: 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams(formData as any),
-        })
+    async function ({ request }: ActionFunctionArgs) {
+        const response = await requestAuth(await request.formData(), '/signup')
 
         if (response.ok) {
             const resData = await response.json()
             setJwt(resData.jwt)
             return redirect('/')
         } else if (response.status === 403) {
-            return 'Username already in use.'
+            return new Response('Username already in use.', response)
         } else {
-            return 'There was an issue with your sign up.'
+            return new Response(
+                'There was an issue with your sign up.',
+                response
+            )
         }
     }
 

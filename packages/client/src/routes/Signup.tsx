@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Form, Link, Navigate, useActionData } from 'react-router-dom'
-import { useAuth, type AuthResponse } from '../AuthContext'
+import { useAuth } from '../AuthContext'
 
 function Signup() {
     const { jwt } = useAuth()
-    const authResponse = useActionData() as AuthResponse
+    const authResponse = useActionData()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 

@@ -23,14 +23,14 @@
     },
 
     "portsAttributes": {
-        "3000": {
-            "label": "app",
-            "onAutoForward": "notify"
+        "5000": {
+            "label": "api",
+            "onAutoForward": "silent"
         },
         "5173": {
             // Same as 3000, don't forward
-            "label": "vite-dev-server",
-            "onAutoForward": "silent"
+            "label": "client",
+            "onAutoForward": "notify"
         }
     },
 

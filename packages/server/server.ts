@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Auth & CORS setup
 app.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin', ['*'])
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE')
     res.append('Access-Control-Allow-Headers', [
         'Content',
         'Content-Type',
@@ -25,10 +25,9 @@ app.use((req, res, next) => {
 // Routing & server initialization
 import authRouter from './routes/auth'
 import apiRouter from './routes/api'
-import passport from 'passport'
 
 app.use(authRouter)
-app.use('/api', passport.authenticate('jwt', { session: false }, apiRouter))
+app.use('/api', apiRouter)
 
 import config from './config'
 

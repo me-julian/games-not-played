@@ -1,14 +1,14 @@
-# React App with Identity Access & Management
+# Games Not Played
 
-Mock react app to get a working tech stack set up with auth using Passport.
+Games Not Played is a web app intended to help users decide what game to play next.
 
-This branch is my second attempt using Passport, this time using JWT tokens.
+This is my final project for Inventive Academy's [Full Stack Immersive](https://learn.inventiveacademy.io/p/full-stack-immersive-bootcamp-with-node) web development course.
 
 ## Tech Stack
 
 -   [PNPM](https://pnpm.io/) Monorepo
 -   [Docker](https://www.docker.com/) and [VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers)
--   [VS Code Tasks](https://code.visualstudio.com/Docs/editor/tasks) & Bash scripts
+-   [VS Code Tasks](https://code.visualstudio.com/Docs/editor/tasks)
 -   [Typescript](https://www.typescriptlang.org/)
 -   [ReactJS](https://react.dev/) & [React Router](https://reactrouter.com/) with [Vite](https://vitejs.dev/)
 -   [Express](https://expressjs.com/) API & Distribution Server
@@ -39,9 +39,9 @@ This project uses [VS Code development containers](https://code.visualstudio.com
 
 Make sure you've installed the Dev Containers extension by Microsoft in VS Code.
 
-Either: Clone the repository locally and use the `Dev Containers: Open Folder in Container` task.
+Either: Use `Dev Containers: Clone Repository in Named Container Volume`. Recommended for Windows or macOS users as it will run much faster.
 
-OR: Use `Dev Containers: Clone Repository in Named Container Volume`. Recommended for Windows or macOS users as it will run much faster.
+OR: Clone the repository locally and use the `Dev Containers: Open Folder in Container` task.
 
 The database container will automatically start when opening the dev container. Run the `First Time Setup` task to create and migrate the database schemas. [See below](#initial-database-setup) for more info on working with the database.
 

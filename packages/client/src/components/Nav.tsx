@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom'
-import { useAuth } from '../AuthContext'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { getJwt, parseJwt } from '../auth'
 
 function Nav() {
-    const { jwt, setJwt, parseJwt } = useAuth()
+    const jwt = getJwt()
+    const navigate = useNavigate()
+    const location = useLocation()
 
     async function handleLogout() {
-        setJwt(null)
+        localStorage.removeItem('jwt')
+        navigate(location.pathname, { replace: true })
     }
 
     return (

@@ -1,9 +1,30 @@
 import { useState } from 'react'
-import { Form, Link, Navigate, useActionData } from 'react-router-dom'
-import { useAuth } from '../AuthContext'
+import {
+    ActionFunctionArgs,
+    Form,
+    Link,
+    Navigate,
+    redirect,
+    useActionData,
+} from 'react-router-dom'
+import { getJwt, requestAuth } from '../auth'
+
+export async function signupAction({ request }: ActionFunctionArgs) {
+    const response = await requestAuth(await request.formData(), '/signup')
+
+    if (response.ok) {
+        const resData = await response.json()
+        localStorage.setItem('jwt', resData.jwt)
+        return redirect('/')
+    } else if (response.status === 403) {
+        return new Response('Username already in use.', response)
+    } else {
+        return new Response('There was an issue signing up.', response)
+    }
+}
 
 function Signup() {
-    const { jwt } = useAuth()
+    const jwt = getJwt()
     const authResponse = useActionData()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -20,7 +41,6 @@ function Signup() {
                 )}
                 <Form
                     method="post"
-                    action="/signup"
                     className="row row-cols-1 justify-content-center"
                 >
                     <div className="col-3">

@@ -39,7 +39,7 @@
 
     // Use 'postCreateCommand' to run commands after the container is created.
     // 1. Install pnpm dependencies, 2. Ensure permission to run bash scripts
-    "postCreateCommand": "pnpm install && sudo chmod +x scripts/*.sh",
+    "postCreateCommand": "pnpm install",
     "customizations": {
         "vscode": {
             "extensions": ["esbenp.prettier-vscode"]

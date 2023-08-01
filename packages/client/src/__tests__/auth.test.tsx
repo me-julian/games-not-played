@@ -1,6 +1,7 @@
+import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { render, screen } from './test-utils'
 import userEvent from '@testing-library/user-event'
-import { TestApp } from '../App'
+import { routeObject } from '../App'
 
 // Runs against local, dev database. Assumes the following users exist:
 // [
@@ -16,7 +17,7 @@ describe('Basic Auth Flow', () => {
         test('logs in with good credentials', async () => {
             const user = userEvent.setup()
 
-            render(<TestApp />)
+            render(<RouterProvider router={createMemoryRouter(routeObject)} />)
 
             expect(
                 await screen.findByText('Generic Information')
@@ -49,7 +50,7 @@ describe('Basic Auth Flow', () => {
         test("doesn't allow logging in with wrong password", async () => {
             const user = userEvent.setup()
 
-            render(<TestApp />)
+            render(<RouterProvider router={createMemoryRouter(routeObject)} />)
 
             expect(
                 await screen.findByText('Generic Information')
@@ -83,7 +84,7 @@ describe('Basic Auth Flow', () => {
         test("doesn't allow signing up with existing username", async () => {
             const user = userEvent.setup()
 
-            render(<TestApp />)
+            render(<RouterProvider router={createMemoryRouter(routeObject)} />)
 
             expect(
                 await screen.findByText('Generic Information')
@@ -96,6 +97,9 @@ describe('Basic Auth Flow', () => {
             await user.click(
                 await screen.findByRole('link', { name: /sign up/i })
             )
+
+            await expect(screen.findByRole('link', { name: /sign in/i }))
+                .toBeInTheDocument
 
             await user.type(await screen.findByLabelText(/username/i), 'julian')
             await user.type(

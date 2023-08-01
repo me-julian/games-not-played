@@ -1,34 +1,11 @@
 import { Button } from 'react-bootstrap'
-import { useAuth, type AuthContext } from '../AuthContext'
-import {
-    Form,
-    redirect,
-    useRouteLoaderData,
-    type ActionFunctionArgs,
-} from 'react-router-dom'
+import { useRouteLoaderData, useFetcher } from 'react-router-dom'
 import { type RootLoaderData } from '../routes/Root'
-
-export const increaseTickerAction = ({ jwt }: AuthContext) =>
-    async function ({ params }: ActionFunctionArgs) {
-        const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/api/users/${params.userId}/ticker`,
-            {
-                method: 'PATCH',
-                headers: {
-                    Authorization: `Bearer ${jwt}`,
-                },
-            }
-        )
-
-        if (response.ok) {
-            return redirect('/')
-        } else {
-            throw new Response('Issue increasing ticker value', response)
-        }
-    }
+import { getJwt, parseJwt } from '../auth'
 
 function UserPreview() {
-    const { jwt, parseJwt } = useAuth()
+    const fetcher = useFetcher()
+    const jwt = getJwt()
     const rootData = useRouteLoaderData('root') as RootLoaderData
 
     return (
@@ -42,8 +19,8 @@ function UserPreview() {
                     <li className="list-group-item">
                         Ticker: {rootData.tickerValue}
                     </li>
-                    <Form
-                        method="patch"
+                    <fetcher.Form
+                        method="post"
                         action={`/users/${parseJwt(jwt).id}/ticker`}
                     >
                         <Button
@@ -53,7 +30,7 @@ function UserPreview() {
                         >
                             Increase Ticker
                         </Button>
-                    </Form>
+                    </fetcher.Form>
                 </ul>
             ) : (
                 <h4>Log in to view this info!</h4>

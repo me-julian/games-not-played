@@ -1,9 +1,33 @@
 import { useState } from 'react'
-import { Form, Link, Navigate, useActionData } from 'react-router-dom'
-import { useAuth } from '../AuthContext'
+import {
+    Form,
+    Link,
+    Navigate,
+    useActionData,
+    ActionFunctionArgs,
+    redirect,
+} from 'react-router-dom'
+import { getJwt, requestAuth } from '../auth'
+
+export async function loginAction({ request }: ActionFunctionArgs) {
+    const response = await requestAuth(
+        await request.formData(),
+        '/login/password'
+    )
+
+    if (response.ok) {
+        const resData = await response.json()
+        localStorage.setItem('jwt', resData.jwt)
+        return redirect('/')
+    } else if (response.status === 400) {
+        return new Response('Incorrect username or password.', response)
+    } else {
+        return new Response('There was an issue logging in.', response)
+    }
+}
 
 function Login() {
-    const { jwt } = useAuth()
+    const jwt = getJwt()
     const authResponse = useActionData()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -20,7 +44,6 @@ function Login() {
                 )}
                 <Form
                     method="post"
-                    action="/login"
                     className="row row-cols-1 justify-content-center"
                 >
                     <div className="col-3">

@@ -1,24 +1,17 @@
-import {
-    RouteObject,
-    RouterProvider,
-    createBrowserRouter,
-    createMemoryRouter,
-} from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
 import About from './routes/About'
 import Home from './routes/Home'
-import Login from './routes/Login'
-import Root, { RootLoader } from './routes/Root'
-import Signup from './routes/Signup'
-import { AuthContext, loginAction, signupAction, useAuth } from './AuthContext'
-import { increaseTickerAction } from './components/UserPreview'
+import Login, { loginAction } from './routes/Login'
+import Root, { RootLoader, increaseTickerAction } from './routes/Root'
+import Signup, { signupAction } from './routes/Signup'
 
-export const routeObject = (authContext: AuthContext): RouteObject => {
-    return {
+export const routeObject = [
+    {
         path: '/',
         id: 'root',
         element: <Root />,
-        loader: RootLoader(authContext),
+        loader: RootLoader,
         errorElement: <ErrorPage />,
         children: [
             {
@@ -32,39 +25,23 @@ export const routeObject = (authContext: AuthContext): RouteObject => {
             {
                 path: '/login',
                 element: <Login />,
-                action: loginAction(authContext),
+                action: loginAction,
             },
             {
                 path: '/signup',
                 element: <Signup />,
-                action: signupAction(authContext),
+                action: signupAction,
             },
             {
                 path: '/users/:userId/ticker',
-                action: increaseTickerAction(authContext),
+                action: increaseTickerAction,
             },
         ],
-    }
-}
+    },
+]
 
 function App() {
-    const authContext = useAuth()
-
-    return (
-        <RouterProvider
-            router={createBrowserRouter([routeObject(authContext)])}
-        />
-    )
-}
-
-export function TestApp() {
-    const authContext = useAuth()
-
-    return (
-        <RouterProvider
-            router={createMemoryRouter([routeObject(authContext)])}
-        />
-    )
+    return <RouterProvider router={createBrowserRouter(routeObject)} />
 }
 
 export default App

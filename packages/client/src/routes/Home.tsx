@@ -1,4 +1,3 @@
-// Components
 import Nav from '../components/Nav'
 import UserPreview from '../components/UserPreview'
 

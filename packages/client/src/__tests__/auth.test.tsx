@@ -1,5 +1,5 @@
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
-import { render, screen } from './test-utils'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { routeObject } from '../App'
 
@@ -98,8 +98,9 @@ describe('Basic Auth Flow', () => {
                 await screen.findByRole('link', { name: /sign up/i })
             )
 
-            await expect(screen.findByRole('link', { name: /sign in/i }))
-                .toBeInTheDocument
+            expect(
+                await screen.findByRole('link', { name: /sign in/i })
+            ).toBeInTheDocument()
 
             await user.type(await screen.findByLabelText(/username/i), 'julian')
             await user.type(

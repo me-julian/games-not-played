@@ -20,9 +20,22 @@
             }
         },
         {
+            "label": "Seed Database",
+            "type": "shell",
+            "command": "pnpm run seed-db",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
             "label": "First Time DB Setup",
             "dependsOrder": "sequence",
-            "dependsOn": ["Create Database", "Migrate Database"]
+            "dependsOn": [
+                "Create Database",
+                "Migrate Database",
+                "Seed Database"
+            ]
         },
         {
             "label": "Build",

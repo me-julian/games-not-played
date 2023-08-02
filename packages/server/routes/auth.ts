@@ -5,7 +5,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import crypto from 'crypto'
 import db from '../db/db'
-import { Client } from '@react-with-iam/types'
+import { Client } from '@games-not-played/types'
 import config from '../config'
 
 declare global {
@@ -151,7 +151,7 @@ router.post('/signup', async function (req, res, next) {
 
             const createUser = db.users.create({
                 username: req.body.username,
-                hashed_password: hashedPassword,
+                hashedPassword: hashedPassword,
                 salt,
             })
 

@@ -13,7 +13,7 @@ module.exports = {
                 unique: true,
                 type: Sequelize.STRING,
             },
-            hashed_password: {
+            hashedPassword: {
                 type: Sequelize.BLOB,
             },
             salt: {

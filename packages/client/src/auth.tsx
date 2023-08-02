@@ -1,4 +1,4 @@
-import { type Client } from '@react-with-iam/types'
+import { type Client } from '@games-not-played/types'
 
 export type ParsedJwt = Client.User & {
     iat: Date

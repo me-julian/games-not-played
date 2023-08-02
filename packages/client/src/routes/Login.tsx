@@ -33,21 +33,18 @@ function Login() {
     const [password, setPassword] = useState('')
 
     const loginScreen = (
-        <main className="container">
-            <section className="text-center">
+        <main>
+            <section>
                 <h3>Sample App</h3>
                 <h1>Sign in</h1>
                 {typeof authResponse === 'string' && (
-                    <section className="text-danger">
-                        <p className="m-0">{authResponse}</p>
+                    <section>
+                        <p>{authResponse}</p>
                     </section>
                 )}
-                <Form
-                    method="post"
-                    className="row row-cols-1 justify-content-center"
-                >
-                    <div className="col-3">
-                        <section className="m-2 d-flex justify-content-between">
+                <Form method="post">
+                    <div>
+                        <section>
                             <label htmlFor="username">Username</label>
                             <input
                                 value={username}
@@ -60,7 +57,7 @@ function Login() {
                                 autoFocus
                             />
                         </section>
-                        <section className="m-2 d-flex justify-content-between">
+                        <section>
                             <label htmlFor="current-password">Password</label>
                             <input
                                 value={password}
@@ -72,13 +69,11 @@ function Login() {
                                 required
                             />
                         </section>
-                        <button type="submit" className="m-2">
-                            Sign in
-                        </button>
+                        <button type="submit">Sign in</button>
                     </div>
                 </Form>
                 <hr />
-                <p className="fst-italic">
+                <p>
                     Don't have an account?{' '}
                     <Link to={'/signup'} replace={true}>
                         Sign up

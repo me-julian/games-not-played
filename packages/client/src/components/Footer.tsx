@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <footer className="bg-dark p-5">
+        <footer>
             <a href="https://github.com/julianmedwards">Check out my github</a>
         </footer>
     )

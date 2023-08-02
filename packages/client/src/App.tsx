@@ -3,7 +3,7 @@ import ErrorPage from './ErrorPage'
 import About from './routes/About'
 import Home from './routes/Home'
 import Login, { loginAction } from './routes/Login'
-import Root, { RootLoader, increaseTickerAction } from './routes/Root'
+import Root, { RootLoader } from './routes/Root'
 import Signup, { signupAction } from './routes/Signup'
 
 export const routeObject = [
@@ -31,10 +31,6 @@ export const routeObject = [
                 path: '/signup',
                 element: <Signup />,
                 action: signupAction,
-            },
-            {
-                path: '/users/:userId/ticker',
-                action: increaseTickerAction,
             },
         ],
     },

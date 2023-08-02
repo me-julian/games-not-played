@@ -5,11 +5,11 @@ function Home() {
     return (
         <>
             <Nav />
-            <main className="container text-center">
-                <div className="row justify-content-around p-4">
-                    <div className="col col-5">
+            <main>
+                <div>
+                    <div>
                         <h1>Generic Information</h1>
-                        <div className="text-start">
+                        <div>
                             <p>
                                 This is a homepage. There's various information
                                 here and you'll always see this section of

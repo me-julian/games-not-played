@@ -30,21 +30,18 @@ function Signup() {
     const [password, setPassword] = useState('')
 
     const signupScreen = (
-        <main className="container">
-            <section className="text-center">
+        <main>
+            <section>
                 <h3>Sample App</h3>
                 <h1>Sign up</h1>
                 {typeof authResponse === 'string' && (
-                    <section className="text-danger">
+                    <section>
                         <p>{authResponse}</p>
                     </section>
                 )}
-                <Form
-                    method="post"
-                    className="row row-cols-1 justify-content-center"
-                >
-                    <div className="col-3">
-                        <section className="m-2 d-flex justify-content-between">
+                <Form method="post">
+                    <div>
+                        <section>
                             <label htmlFor="username">Username</label>
                             <input
                                 value={username}
@@ -57,7 +54,7 @@ function Signup() {
                                 autoFocus
                             />
                         </section>
-                        <section className="m-2 d-flex justify-content-between">
+                        <section>
                             <label htmlFor="new-password">Password</label>
                             <input
                                 value={password}
@@ -69,13 +66,11 @@ function Signup() {
                                 required
                             />
                         </section>
-                        <button type="submit" className="m-2">
-                            Sign up
-                        </button>
+                        <button type="submit">Sign up</button>
                     </div>
                 </Form>
                 <hr />
-                <p className="fst-italic">
+                <p>
                     Already have an account?{' '}
                     <Link to={'/login'} replace={true}>
                         Sign in

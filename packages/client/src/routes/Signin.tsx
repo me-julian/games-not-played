@@ -1,38 +1,41 @@
 import { useState } from 'react'
 import {
-    ActionFunctionArgs,
     Form,
     Link,
     Navigate,
-    redirect,
     useActionData,
+    ActionFunctionArgs,
+    redirect,
 } from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
 import { getJwt, requestAuth } from '../auth'
 
-export async function signupAction({ request }: ActionFunctionArgs) {
-    const response = await requestAuth(await request.formData(), '/signup')
+export async function signinAction({ request }: ActionFunctionArgs) {
+    const response = await requestAuth(
+        await request.formData(),
+        '/login/password'
+    )
 
     if (response.ok) {
         const resData = await response.json()
         localStorage.setItem('jwt', resData.jwt)
         return redirect('/')
-    } else if (response.status === 403) {
-        return new Response('Username already in use.', response)
+    } else if (response.status === 400) {
+        return new Response('Incorrect username or password.', response)
     } else {
-        return new Response('There was an issue signing up.', response)
+        return new Response('There was an issue signing in.', response)
     }
 }
 
-function Signup() {
+function Signin() {
     const jwt = getJwt()
     const authResponse = useActionData()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const signupScreen = (
+    const signinScreen = (
         <>
-            <ActionNav actionName={'Sign Up'} />
+            <ActionNav actionName={'Sign In'} />
             <main>
                 <section>
                     <h3>Games Not Played</h3>
@@ -59,27 +62,29 @@ function Signup() {
                                 />
                             </section>
                             <section>
-                                <label htmlFor="new-password">Password</label>
+                                <label htmlFor="current-password">
+                                    Password
+                                </label>
                                 <input
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)
                                     }
-                                    id="new-password"
+                                    id="current-password"
                                     name="password"
                                     type="password"
-                                    autoComplete="new-password"
+                                    autoComplete="current-password"
                                     required
                                 />
                             </section>
-                            <button type="submit">Sign up</button>
+                            <button type="submit">Sign in</button>
                         </div>
                     </Form>
                     <hr />
                     <p>
-                        Already have an account?{' '}
-                        <Link to={'/signin'} replace={true}>
-                            Sign in
+                        Don't have an account?{' '}
+                        <Link to={'/signup'} replace={true}>
+                            Sign up
                         </Link>
                     </p>
                 </section>
@@ -87,7 +92,7 @@ function Signup() {
         </>
     )
 
-    return jwt ? <Navigate to="/" replace={true} /> : signupScreen
+    return jwt ? <Navigate to="/" replace={true} /> : signinScreen
 }
 
-export default Signup
+export default Signin

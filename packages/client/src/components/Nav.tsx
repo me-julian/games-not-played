@@ -1,4 +1,7 @@
+import '../public/nav.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 import { getJwt, parseJwt } from '../auth'
 
 function Nav() {
@@ -6,41 +9,35 @@ function Nav() {
     const navigate = useNavigate()
     const location = useLocation()
 
-    async function handleLogout() {
+    async function handleSignout() {
         localStorage.removeItem('jwt')
         navigate(location.pathname, { replace: true })
     }
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-light">
-                <div className="container-fluid">
-                    <Link className="navbar-brand me-4" to={'/'}>
-                        Home
+            <nav>
+                <Link to={'/about'}>Games Not Played</Link>
+                {jwt ? (
+                    <>
+                        <span>{parseJwt(jwt).username}</span>
+                        <span
+                            className="action-text"
+                            tabIndex={0}
+                            role="link"
+                            onClick={() => {
+                                handleSignout()
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faSignOutAlt} />
+                        </span>
+                    </>
+                ) : (
+                    <Link to={'/signin'}>
+                        {' '}
+                        <FontAwesomeIcon icon={faSignInAlt} />
                     </Link>
-                    <Link to={'/about'} className="navbar-text me-auto">
-                        About
-                    </Link>
-                    {jwt ? (
-                        <>
-                            <p className="navbar-text m-0 me-3">
-                                {parseJwt(jwt).username}
-                            </p>
-                            <div
-                                onClick={() => {
-                                    handleLogout()
-                                }}
-                                className="navbar-text link me-4"
-                            >
-                                Logout
-                            </div>
-                        </>
-                    ) : (
-                        <Link to={'/login'} className="navbar-text mx-4">
-                            Login
-                        </Link>
-                    )}
-                </div>
+                )}
             </nav>
         </>
     )

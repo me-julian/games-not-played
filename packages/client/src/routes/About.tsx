@@ -1,30 +1,27 @@
-import Nav from '../components/Nav'
+import ActionNav from '../components/ActionNav'
 
 function About() {
     return (
         <>
-            <Nav />
+            <ActionNav actionName={'About'} />
             <main>
-                <h1>About this project</h1>
                 <p>
-                    Here's some general information about the app, how it works
-                    and why it was made.
+                    Games Not Played is a web app intended to help users decide
+                    what game to play next.
                 </p>
-                <h4>Maybe a FAQ</h4>
-                <ul>
-                    <li>
-                        <h5>Question 1:</h5>
-                        <p>Answer 1</p>
-                    </li>
-                    <li>
-                        <h5>Question 2:</h5>
-                        <p>Answer 2</p>
-                    </li>
-                    <li>
-                        <h5>Question 3:</h5>
-                        <p>Answer 3</p>
-                    </li>
-                </ul>
+                <p>
+                    This is my final project for Inventive Academy's{' '}
+                    <a href="https://learn.inventiveacademy.io/p/full-stack-immersive-bootcamp-with-node">
+                        Full Stack Immersive
+                    </a>{' '}
+                    web development course.
+                </p>
+                <p>
+                    Want to see the source code for this app?{' '}
+                    <a href="https://github.com/julianmedwards/final-project-games-not-played">
+                        View the github repo.
+                    </a>
+                </p>
             </main>
         </>
     )

@@ -1,30 +1,27 @@
+import { Link, useRouteLoaderData } from 'react-router-dom'
 import Nav from '../components/Nav'
-import UserPreview from '../components/UserPreview'
+import GameList from '../components/GameList'
+import { getJwt } from '../auth'
+import { RootLoaderData } from './Root'
 
 function Home() {
+    const jwt = getJwt()
+    const rootData = useRouteLoaderData('root') as RootLoaderData
+
     return (
         <>
             <Nav />
             <main>
-                <div>
-                    <div>
-                        <h1>Generic Information</h1>
-                        <div>
-                            <p>
-                                This is a homepage. There's various information
-                                here and you'll always see this section of
-                                public content.
-                            </p>
-                            <p>
-                                The next section will only show information if
-                                you're logged in as it's private and connected
-                                to a user.
-                            </p>
-                            <p>Click the link in the top right to log in.</p>
-                        </div>
-                    </div>
-                    <UserPreview />
-                </div>
+                {jwt && rootData ? (
+                    <GameList />
+                ) : (
+                    <>
+                        <h1>Welcome!</h1>
+                        <span>
+                            <Link to="/signin">Sign in</Link> to get started.
+                        </span>
+                    </>
+                )}
             </main>
         </>
     )

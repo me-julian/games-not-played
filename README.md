@@ -11,7 +11,7 @@ This is my final project for Inventive Academy's [Full Stack Immersive](https://
 -   [VS Code Tasks](https://code.visualstudio.com/Docs/editor/tasks)
 -   [Typescript](https://www.typescriptlang.org/)
 -   [ReactJS](https://react.dev/) & [React Router](https://reactrouter.com/) with [Vite](https://vitejs.dev/)
--   [Express](https://expressjs.com/) API & Distribution Server
+-   [Express](https://expressjs.com/) REST API
 -   MySQL Database with [Sequelize](https://sequelize.org/) using [sequelize-typescript](https://github.com/sequelize/sequelize-typescript)
 -   [Passport.js](https://www.passportjs.org/) for email & password authentication with JWT
 -   [Vitest](https://vitest.dev/) with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)

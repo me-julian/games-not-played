@@ -1,0 +1,12 @@
+nav {
+    a {
+        text-decoration: none;
+        margin: 0 1rem;
+        color: blue;
+    }
+    .action-text {
+        cursor: pointer;
+        color: blue;
+    }
+    border-bottom: 1px solid;
+}

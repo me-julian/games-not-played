@@ -34,7 +34,7 @@
     },
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    "forwardPorts": [],
+    "forwardPorts": [5173, 5000],
 
     // Use 'postCreateCommand' to run commands after the container is created.
     // 1. Install pnpm dependencies, 2. Ensure permission to run bash scripts

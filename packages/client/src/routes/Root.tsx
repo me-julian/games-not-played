@@ -1,5 +1,4 @@
 import { ActionFunctionArgs, Outlet, redirect } from 'react-router-dom'
-import Footer from '../components/Footer'
 import { getJwt } from '../auth'
 
 export type RootLoaderData = string | null
@@ -56,7 +55,6 @@ function Root() {
     return (
         <>
             <Outlet />
-            <Footer />
         </>
     )
 }

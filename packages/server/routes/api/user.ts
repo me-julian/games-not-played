@@ -6,7 +6,7 @@ import { Router } from 'express'
 const router: Router = express.Router()
 
 // router.get(
-//     '/:userId/ticker',
+//     '/:userId/list',
 //     passport.authenticate('jwt', { session: false }),
 //     async (req, res) => {
 //         const getUser = db.users.findOne({ where: { id: req.params.userId } })
@@ -14,7 +14,7 @@ const router: Router = express.Router()
 //         getUser.then(
 //             async (user) => {
 //                 if (user) {
-//                     res.send({ tickerValue: user.tickerValue })
+//                     res.send()
 //                 } else {
 //                     res.sendStatus(404)
 //                 }

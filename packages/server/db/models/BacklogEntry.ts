@@ -33,9 +33,6 @@ export default class BacklogEntry extends Model {
     @Column
     isPlaying: boolean
 
-    @Column
-    backgroundImage: string
-
     @ForeignKey(() => User)
     @Column
     userId: number

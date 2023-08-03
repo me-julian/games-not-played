@@ -14,9 +14,11 @@ module.exports = {
                 type: Sequelize.STRING,
             },
             hashedPassword: {
+                allowNull: false,
                 type: Sequelize.BLOB,
             },
             salt: {
+                allowNull: false,
                 type: Sequelize.BLOB,
             },
             createdAt: {

@@ -1,7 +1,10 @@
 'use strict'
-import { Table, Column, Model, Unique } from 'sequelize-typescript'
+import { Table, Column, Model, Unique, HasMany } from 'sequelize-typescript'
+import BacklogEntry from './BacklogEntry'
 
-@Table
+@Table({
+    timestamps: true,
+})
 export default class User extends Model {
     @Unique
     @Column
@@ -12,4 +15,7 @@ export default class User extends Model {
 
     @Column
     salt: Buffer
+
+    @HasMany(() => BacklogEntry)
+    BacklogEntries: BacklogEntry
 }

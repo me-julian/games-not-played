@@ -27,7 +27,7 @@ import authRouter from './routes/auth'
 import apiRouter from './routes/api'
 
 app.use(authRouter)
-app.use('/api', apiRouter)
+app.use(apiRouter)
 
 import config from './config'
 

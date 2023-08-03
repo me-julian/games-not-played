@@ -29,7 +29,7 @@ export async function RootLoader() {
 //     const jwt = getJwt()
 
 //     const response = await fetch(
-//         `${import.meta.env.VITE_API_URL}/api/users/${params.userId}/ticker`,
+//         `${import.meta.env.VITE_API_URL}/users/${params.userId}/ticker`,
 //         {
 //             method: 'PATCH',
 //             headers: {

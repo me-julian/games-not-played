@@ -39,7 +39,7 @@ const games = [
     },
 ]
 
-router.get('/games/:query', (req, res) => {
+router.get('/games', (req, res) => {
     res.send(games)
 })
 

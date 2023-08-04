@@ -14,9 +14,6 @@ import Game from './Game'
     paranoid: true,
 })
 export default class BacklogEntry extends Model {
-    @Column
-    playtime: number
-
     @AllowNull(false)
     @Column
     customOrder: number

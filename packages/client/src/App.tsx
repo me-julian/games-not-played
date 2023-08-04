@@ -1,10 +1,16 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {
+    RouterProvider,
+    createBrowserRouter,
+    type ActionFunctionArgs,
+} from 'react-router-dom'
 import ErrorPage from './ErrorPage'
 import About from './routes/About'
 import Home from './routes/Home'
 import Root, { RootLoader } from './routes/Root'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
+import Search, { search, loadSearch, addToList } from './routes/Search'
+// import {  } from './components/SearchResult'
 
 export const routeObject = [
     {
@@ -31,6 +37,19 @@ export const routeObject = [
                 path: '/signup',
                 element: <Signup />,
                 action: signupAction,
+            },
+            {
+                path: '/search',
+                element: <Search />,
+                loader: loadSearch,
+                action: async ({ request, params }: ActionFunctionArgs) => {
+                    switch (request.method) {
+                        case 'GET':
+                            return search({ request, params })
+                        case 'POST':
+                            return addToList({ request, params })
+                    }
+                },
             },
         ],
     },

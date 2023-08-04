@@ -10,3 +10,7 @@ declare module 'vitest' {
 }
 
 expect.extend(matchers)
+
+beforeAll(() => {
+    localStorage.clear
+})

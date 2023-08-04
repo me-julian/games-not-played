@@ -29,12 +29,17 @@ function Nav() {
                                 handleSignout()
                             }}
                         >
+                            <span className="sr-only sr-only-focusable">
+                                Sign Out Button
+                            </span>
                             <FontAwesomeIcon icon={faSignOutAlt} />
                         </span>
                     </>
                 ) : (
                     <Link to={'/signin'}>
-                        {' '}
+                        <span className="sr-only sr-only-focusable">
+                            Sign In Button
+                        </span>
                         <FontAwesomeIcon icon={faSignInAlt} />
                     </Link>
                 )}

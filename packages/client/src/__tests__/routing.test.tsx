@@ -7,32 +7,24 @@ test('the api url env var is set', async () => {
     expect(import.meta.env.VITE_API_URL).not.toBeUndefined()
 })
 
-afterEach(() => {
-    localStorage.removeItem('jwt')
-})
-
 describe('React Router Navigation', () => {
-    test('loads root page', async () => {
+    test('loads home page unauthed', async () => {
         render(<RouterProvider router={createMemoryRouter(routeObject)} />)
 
-        expect(
-            await screen.findByText('Log in to view this info!')
-        ).toBeInTheDocument()
+        expect(await screen.findByText('Welcome!')).toBeInTheDocument()
     })
 
-    test('navigates from root to about page', async () => {
+    test('navigates from home to about page', async () => {
         const user = userEvent.setup()
 
         render(<RouterProvider router={createMemoryRouter(routeObject)} />)
 
-        expect(
-            await screen.findByText('Generic Information')
-        ).toBeInTheDocument()
+        expect(await screen.findByText('Welcome!')).toBeInTheDocument()
 
-        user.click(await screen.findByText('About'))
+        user.click(
+            await screen.findByRole('link', { name: /games not played/i })
+        )
 
-        expect(
-            await screen.findByText('About this project')
-        ).toBeInTheDocument()
+        expect(await screen.findByText('About')).toBeInTheDocument()
     })
 })

@@ -1,19 +1,46 @@
-import { Link, useRouteLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import Nav from '../components/Nav'
 import GameList from '../components/GameList'
 import { getJwt } from '../auth'
-import { RootLoaderData } from './Root'
+import { Client } from '@games-not-played/types'
+
+export type HomeLoaderData = Client.BacklogEntry[] | null
+
+export async function homeLoader() {
+    const jwt = getJwt()
+
+    if (jwt) {
+        const urlEnding = '/users/list'
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}${urlEnding}`,
+            {
+                method: 'GET',
+                headers: {
+                    Authorization: 'Bearer ' + jwt,
+                },
+            }
+        )
+
+        if (response.ok) {
+            return response
+        } else {
+            throw new Response('Issue getting data from the server.', response)
+        }
+    } else {
+        return new Response(null)
+    }
+}
 
 function Home() {
     const jwt = getJwt()
-    const rootData = useRouteLoaderData('root') as RootLoaderData
+    const loaderData = useLoaderData() as HomeLoaderData
 
     return (
         <>
             <Nav />
             <main>
-                {jwt && rootData ? (
-                    <GameList />
+                {jwt && loaderData ? (
+                    <GameList entries={loaderData} />
                 ) : (
                     <>
                         <h1>Welcome!</h1>

@@ -1,3 +1,5 @@
+import { Game } from './Game'
+
 export type BacklogEntry = {
     id: number
     userId: number
@@ -9,4 +11,5 @@ export type BacklogEntry = {
     createdAt: Date
     updatedAt: Date
     deletedAt?: Date
+    game: Game
 }

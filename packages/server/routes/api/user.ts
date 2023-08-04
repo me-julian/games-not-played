@@ -2,31 +2,22 @@ import express from 'express'
 import { Router } from 'express'
 import db from '../../db/db'
 import passport from 'passport'
-import BacklogEntry from '../../db/models/BacklogEntry'
+import Game from '../../db/models/Game'
 
 const router: Router = express.Router()
 
-// router.get(
-//     '/list',
-//     passport.authenticate('jwt', { session: false }),
-//     async (req, res) => {
-//         const getUser = db.users.findOne({ where: { id: req.params.userId } })
+router.get(
+    '/list',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const entries = await db.backlogEntries.findAll({
+            where: { userId: req.user!.id },
+            include: Game,
+        })
 
-//         getUser.then(
-//             async (user) => {
-//                 if (user) {
-//                     res.send()
-//                 } else {
-//                     res.sendStatus(404)
-//                 }
-//             },
-//             (err: Error) => {
-//                 console.error(err)
-//                 res.sendStatus(500)
-//             }
-//         )
-//     }
-// )
+        res.send(entries)
+    }
+)
 
 router.post(
     '/list/add',
@@ -55,6 +46,9 @@ router.post(
                 userId: req.user!.id,
             },
         })
+
+        // Catch error if user clicks on a game that's
+        // already in their list.
         try {
             const entry = await db.backlogEntries.create({
                 userId: req.user!.id,
@@ -70,6 +64,7 @@ router.post(
                 res.sendStatus(200)
             }
         } catch (error) {
+            // Improve this
             if (error instanceof Error) {
                 console.error(error)
                 if (error.name === 'SequelizeUniqueConstraintError') {

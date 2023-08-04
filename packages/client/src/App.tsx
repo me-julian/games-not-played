@@ -5,24 +5,23 @@ import {
 } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
 import About from './routes/About'
-import Home from './routes/Home'
-import Root, { RootLoader } from './routes/Root'
+import Home, { homeLoader } from './routes/Home'
+import Root from './routes/Root'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
 import Search, { search, loadSearch, addToList } from './routes/Search'
-// import {  } from './components/SearchResult'
 
 export const routeObject = [
     {
         path: '/',
         id: 'root',
         element: <Root />,
-        loader: RootLoader,
         errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
                 element: <Home />,
+                loader: homeLoader,
             },
             {
                 path: '/about',

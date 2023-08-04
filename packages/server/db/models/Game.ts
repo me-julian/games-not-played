@@ -7,7 +7,7 @@ import {
     PrimaryKey,
     HasMany,
 } from 'sequelize-typescript'
-import BacklogEntry from './BacklogEntry'
+import Entry from './Entry'
 
 @Table({
     timestamps: true,
@@ -27,6 +27,6 @@ export default class Game extends Model {
     @Column
     backgroundImage: string
 
-    @HasMany(() => BacklogEntry)
-    BacklogEntries: BacklogEntry[]
+    @HasMany(() => Entry)
+    Entries: Entry[]
 }

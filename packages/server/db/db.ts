@@ -30,7 +30,7 @@ sequelize.addModels([__dirname + '/models'])
 
 import User from './models/User'
 import Game from './models/Game'
-import BacklogEntry from './models/BacklogEntry'
+import Entry from './models/Entry'
 
 // Connect all the models/tables in the database to a db object,
 // so everything is accessible via one object
@@ -39,7 +39,7 @@ const db = {
     sequelize: sequelize,
     users: User,
     games: Game,
-    backlogEntries: BacklogEntry,
+    entries: Entry,
 }
 
 export default db

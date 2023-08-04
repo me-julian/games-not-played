@@ -4,9 +4,9 @@ import {
     type ActionFunctionArgs,
 } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
-import About from './routes/About'
-import Home, { homeLoader } from './routes/Home'
 import Root from './routes/Root'
+import Home, { homeLoader } from './routes/Home'
+import About from './routes/About'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
 import Search, { search, loadSearch, addToList } from './routes/Search'

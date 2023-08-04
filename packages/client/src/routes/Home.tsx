@@ -4,7 +4,7 @@ import GameList from '../components/GameList'
 import { getJwt } from '../auth'
 import { Client } from '@games-not-played/types'
 
-export type HomeLoaderData = Client.BacklogEntry[] | null
+export type HomeLoaderData = Client.Entry[] | null
 
 export async function homeLoader() {
     const jwt = getJwt()

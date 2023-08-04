@@ -14,13 +14,9 @@ module.exports = {
         await queryInterface.bulkInsert('Games', testData.games, {
             validation: true,
         })
-        await queryInterface.bulkInsert(
-            'BacklogEntries',
-            testData.backlogEntries,
-            {
-                validation: true,
-            }
-        )
+        await queryInterface.bulkInsert('Entries', testData.entries, {
+            validation: true,
+        })
     },
 
     async down(queryInterface, Sequelize) {
@@ -34,7 +30,7 @@ module.exports = {
                 id: { [Sequelize.Op.in]: [1, 2, 3, 4, 5] },
             },
         ])
-        await queryInterface.bulkDelete('BacklogEntries', [
+        await queryInterface.bulkDelete('Entries', [
             {
                 id: { [Sequelize.Op.in]: [1, 2, 3, 4, 5] },
             },

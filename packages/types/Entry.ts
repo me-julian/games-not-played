@@ -1,6 +1,6 @@
 import { Game } from './Game'
 
-export type BacklogEntry = {
+export type Entry = {
     id: number
     userId: number
     gameId: number

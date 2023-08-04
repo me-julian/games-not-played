@@ -1,9 +1,9 @@
 import { Client } from '@games-not-played/types'
 import AddGame from './AddGame'
-import ListEntry from './ListEntry'
+import Entry from './Entry'
 
 type Props = {
-    entries: Client.BacklogEntry[] | null
+    entries: Client.Entry[] | null
 }
 
 function GameList({ entries }: Props) {
@@ -11,7 +11,7 @@ function GameList({ entries }: Props) {
         <>
             {entries &&
                 entries.map((entry) => (
-                    <ListEntry key={entry.id} entry={entry} />
+                    <Entry key={entry.id} entryData={entry} />
                 ))}
             <AddGame />
         </>

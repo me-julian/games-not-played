@@ -10,7 +10,7 @@ router.get(
     '/list',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const entries = await db.backlogEntries.findAll({
+        const entries = await db.entries.findAll({
             where: { userId: req.user!.id },
             include: Game,
         })
@@ -41,7 +41,7 @@ router.post(
             // Check if cached game in db needs to be refreshed
         }
 
-        let entryCount = await db.backlogEntries.count({
+        let entryCount = await db.entries.count({
             where: {
                 userId: req.user!.id,
             },
@@ -50,7 +50,7 @@ router.post(
         // Catch error if user clicks on a game that's
         // already in their list.
         try {
-            const entry = await db.backlogEntries.create({
+            const entry = await db.entries.create({
                 userId: req.user!.id,
                 gameId: game.id,
                 // Order is 0 indexed, count is not

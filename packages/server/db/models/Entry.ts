@@ -16,7 +16,7 @@ import Game from './Game'
     paranoid: true,
 })
 @Index({ name: 'entry-index', unique: true })
-export default class BacklogEntry extends Model {
+export default class Entry extends Model {
     @AllowNull(false)
     @Column
     customOrder: number

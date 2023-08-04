@@ -89,7 +89,7 @@ exports.games = [
         updatedAt: new Date(),
     },
 ]
-exports.backlogEntries = [
+exports.entries = [
     // Julian's Entries
     {
         userId: 1,

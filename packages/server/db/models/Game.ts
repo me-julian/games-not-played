@@ -28,5 +28,5 @@ export default class Game extends Model {
     backgroundImage: string
 
     @HasMany(() => BacklogEntry)
-    BacklogEntries: BacklogEntry
+    BacklogEntries: BacklogEntry[]
 }

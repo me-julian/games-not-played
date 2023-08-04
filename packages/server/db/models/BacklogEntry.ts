@@ -6,6 +6,7 @@ import {
     ForeignKey,
     AllowNull,
     Index,
+    BelongsTo,
 } from 'sequelize-typescript'
 import User from './User'
 import Game from './Game'
@@ -34,11 +35,15 @@ export default class BacklogEntry extends Model {
 
     @Index('entry-index')
     @ForeignKey(() => User)
-    @Column
     userId: number
+
+    @BelongsTo(() => User)
+    user: User
 
     @Index('entry-index')
     @ForeignKey(() => Game)
-    @Column
     gameId: number
+
+    @BelongsTo(() => Game)
+    game: Game
 }

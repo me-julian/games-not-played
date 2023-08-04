@@ -17,5 +17,5 @@ export default class User extends Model {
     salt: Buffer
 
     @HasMany(() => BacklogEntry)
-    BacklogEntries: BacklogEntry
+    BacklogEntries: BacklogEntry[]
 }

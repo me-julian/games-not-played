@@ -1,13 +1,13 @@
 import { Form } from 'react-router-dom'
 
-type props = {
+type Props = {
     id: number
     name: string
     playtime?: number
     backgroundImage?: string
 }
 
-function SearchResult({ id, name, playtime, backgroundImage }: props) {
+function SearchResult({ id, name, playtime, backgroundImage }: Props) {
     return (
         <Form method="POST">
             <div>

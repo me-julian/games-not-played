@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
-type props = {
+type Props = {
     actionName: string
 }
 
-function ActionNav({ actionName }: props) {
+function ActionNav({ actionName }: Props) {
     return (
         <nav>
             <p>{actionName}</p>

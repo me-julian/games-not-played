@@ -9,7 +9,10 @@ type Props = {
 function GameList({ entries }: Props) {
     return (
         <>
-            {entries && entries.map((entry) => <ListEntry entry={entry} />)}
+            {entries &&
+                entries.map((entry) => (
+                    <ListEntry key={entry.id} entry={entry} />
+                ))}
             <AddGame />
         </>
     )

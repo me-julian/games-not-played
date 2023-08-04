@@ -5,6 +5,7 @@ import {
     Model,
     ForeignKey,
     AllowNull,
+    Index,
 } from 'sequelize-typescript'
 import User from './User'
 import Game from './Game'
@@ -13,6 +14,7 @@ import Game from './Game'
     timestamps: true,
     paranoid: true,
 })
+@Index({ name: 'entry-index', unique: true })
 export default class BacklogEntry extends Model {
     @AllowNull(false)
     @Column
@@ -30,10 +32,12 @@ export default class BacklogEntry extends Model {
     @Column
     isPlaying: boolean
 
+    @Index('entry-index')
     @ForeignKey(() => User)
     @Column
     userId: number
 
+    @Index('entry-index')
     @ForeignKey(() => Game)
     @Column
     gameId: number

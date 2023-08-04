@@ -55,22 +55,31 @@ router.post(
                 userId: req.user!.id,
             },
         })
+        try {
+            const entry = await db.backlogEntries.create({
+                userId: req.user!.id,
+                gameId: game.id,
+                // Order is 0 indexed, count is not
+                customOrder: entryCount,
+                isStarred: false,
+                isOwned: false,
+                isPlaying: false,
+            })
 
-        const entry = await db.backlogEntries.create({
-            userId: req.user!.id,
-            gameId: game.id,
-            // Order is 0 indexed, count is not
-            customOrder: entryCount,
-            isStarred: false,
-            isOwned: false,
-            isPlaying: false,
-        })
-
-        if (entry) {
-            res.sendStatus(200)
-        } else {
-            console.log('in else')
-            res.sendStatus(500)
+            if (entry) {
+                res.sendStatus(200)
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error(error)
+                if (error.name === 'SequelizeUniqueConstraintError') {
+                    res.sendStatus(409)
+                } else {
+                    res.sendStatus(500)
+                }
+            } else {
+                res.sendStatus(500)
+            }
         }
     }
 )

@@ -74,6 +74,8 @@ export async function addToList({ request }: ActionFunctionArgs) {
 
     if (response.ok) {
         return redirect('/')
+    } else if (response.status === 409) {
+        return new Response('This game is already in your list.')
     } else {
         return new Response('There was an issue adding the game to your list.')
     }

@@ -5,11 +5,18 @@ type Props = {
     name: string
     playtime?: number
     backgroundImage?: string
+    handleSelect: (event: any) => void
 }
 
-function SearchResult({ id, name, playtime, backgroundImage }: Props) {
+function SearchResult({
+    id,
+    name,
+    playtime,
+    backgroundImage,
+    handleSelect,
+}: Props) {
     return (
-        <Form method="POST">
+        <Form method="POST" onClick={(event) => handleSelect(event)}>
             <div>
                 <h6>{name}</h6>
                 {playtime && <span>{playtime}</span>}
@@ -27,7 +34,6 @@ function SearchResult({ id, name, playtime, backgroundImage }: Props) {
                     name="backgroundImage"
                     value={backgroundImage}
                 />
-                <input type="submit" value="submit" />
                 <hr />
             </div>
         </Form>

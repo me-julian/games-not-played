@@ -30,7 +30,7 @@ function Nav() {
                             }}
                         >
                             <span className="sr-only sr-only-focusable">
-                                Sign Out Button
+                                Sign Out Icon
                             </span>
                             <FontAwesomeIcon icon={faSignOutAlt} />
                         </span>
@@ -38,7 +38,7 @@ function Nav() {
                 ) : (
                     <Link to={'/signin'}>
                         <span className="sr-only sr-only-focusable">
-                            Sign In Button
+                            Sign In Icon
                         </span>
                         <FontAwesomeIcon icon={faSignInAlt} />
                     </Link>

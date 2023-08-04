@@ -17,7 +17,7 @@ describe('Basic Auth Flow', () => {
             expect(await screen.findByText('Welcome!')).toBeInTheDocument()
 
             await user.click(
-                await screen.findByRole('link', { name: /sign in button/i })
+                await screen.findByRole('link', { name: /sign in icon/i })
             )
 
             expect(
@@ -48,7 +48,7 @@ describe('Basic Auth Flow', () => {
             expect(await screen.findByText('Welcome!')).toBeInTheDocument()
 
             await user.click(
-                await screen.findByRole('link', { name: /sign in button/i })
+                await screen.findByRole('link', { name: /sign in icon/i })
             )
 
             expect(
@@ -80,7 +80,7 @@ describe('Basic Auth Flow', () => {
             expect(await screen.findByText('Welcome!')).toBeInTheDocument()
 
             await user.click(
-                await screen.findByRole('link', { name: /sign in button/i })
+                await screen.findByRole('link', { name: /sign in icon/i })
             )
 
             await user.click(
@@ -116,7 +116,7 @@ describe('Basic Auth Flow', () => {
             expect(await screen.findByText('Welcome!')).toBeInTheDocument()
 
             await user.click(
-                await screen.findByRole('link', { name: /sign in button/i })
+                await screen.findByRole('link', { name: /sign in icon/i })
             )
 
             expect(
@@ -139,7 +139,7 @@ describe('Basic Auth Flow', () => {
             expect(await screen.findByText('julian')).toBeInTheDocument()
 
             await user.click(
-                await screen.findByRole('link', { name: /sign out button/i })
+                await screen.findByRole('link', { name: /sign out icon/i })
             )
 
             expect(await screen.findByText('Welcome!'))

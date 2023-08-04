@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
     Form,
     useActionData,
@@ -6,6 +6,7 @@ import {
     redirect,
     LoaderFunctionArgs,
     useLoaderData,
+    useSubmit,
 } from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
 import { getJwt } from '../auth'
@@ -82,9 +83,14 @@ export async function addToList({ request }: ActionFunctionArgs) {
 }
 
 function Search() {
+    const submit = useSubmit()
     const searchData = useLoaderData() as SearchLoaderData
     const authResponse = useActionData()
     const [searchQuery, setSearchQuery] = useState('')
+
+    function onSelect(event: any) {
+        submit(event.currentTarget)
+    }
 
     return (
         <>
@@ -122,6 +128,7 @@ function Search() {
                             name={result.name}
                             playtime={result.playtime}
                             backgroundImage={result.background_image}
+                            handleSelect={onSelect}
                         />
                     ))
                 ) : (

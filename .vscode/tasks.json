@@ -20,6 +20,11 @@
             }
         },
         {
+            "label": "First Time DB Setup",
+            "dependsOrder": "sequence",
+            "dependsOn": ["Create Database", "Migrate Database"]
+        },
+        {
             "label": "Seed Database",
             "type": "shell",
             "command": "pnpm run seed-db",
@@ -29,13 +34,13 @@
             }
         },
         {
-            "label": "First Time DB Setup",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "Create Database",
-                "Migrate Database",
-                "Seed Database"
-            ]
+            "label": "Undo Seed Database",
+            "type": "shell",
+            "command": "pnpm run undo-seed-db",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
         },
         {
             "label": "Build",
@@ -70,13 +75,18 @@
             "dependsOn": ["Start API", "Start Client Dev"]
         },
         {
-            "label": "Test",
+            "label": "Run Tests",
             "type": "shell",
             "command": "pnpm run test",
             "presentation": {
                 "reveal": "always",
                 "panel": "dedicated"
             }
+        },
+        {
+            "label": "Test",
+            "dependsOrder": "sequence",
+            "dependsOn": ["Undo Seed Database", "Seed Database", "Run Tests"]
         }
     ]
 }

@@ -55,7 +55,7 @@ This project uses database migrations and these must be run to get the database 
 
 ### Initial database setup
 
-Run the `First Time DB Setup` task to create the database, migrate the database to the latest version and seed it with data needed for testing. Separate tasks are also available.
+Run the `First Time DB Setup` task to create and migrate the database to the latest version. Separate tasks are also available.
 
 ### Creating new migrations
 
@@ -75,4 +75,4 @@ The `Migrate Database` task will apply any existing and new migrations.
 
 Make sure the database has been inititalized and the API server is running with the `Start Server` or `Dev` tasks.
 
-Use the `Test` task to run automated testing.
+Use the `Test` task to reset the database to initial test seed data and run automated testing.

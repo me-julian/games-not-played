@@ -2,6 +2,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { routeObject } from '../App'
+import { testLogin } from './util'
 
 afterEach(() => {
     localStorage.removeItem('jwt')
@@ -14,27 +15,11 @@ describe('Search', () => {
 
             render(<RouterProvider router={createMemoryRouter(routeObject)} />)
 
-            expect(await screen.findByText('Welcome!')).toBeInTheDocument()
-            expect(screen.queryByText(/dark souls/i)).not.toBeInTheDocument()
+            const username = 'julian',
+                password = 'password'
+            await testLogin(user, username, password)
 
-            await user.click(
-                await screen.findByRole('link', { name: /sign in icon/i })
-            )
-
-            let signInBtn = await screen.findByRole('button', {
-                name: /sign in/i,
-            })
-            expect(signInBtn).toBeInTheDocument()
-
-            await user.type(await screen.findByLabelText(/username/i), 'julian')
-            await user.type(
-                await screen.findByLabelText(/password/i),
-                'password'
-            )
-
-            await user.click(signInBtn)
-
-            expect(await screen.findByText('julian')).toBeInTheDocument()
+            expect(await screen.findByText(username)).toBeInTheDocument()
             expect(
                 await screen.findByText('Europa Universalis IV')
             ).toBeInTheDocument()

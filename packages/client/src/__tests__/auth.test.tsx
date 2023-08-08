@@ -2,6 +2,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { routeObject } from '../App'
+import { testLogin } from './util'
 
 afterEach(() => {
     localStorage.removeItem('jwt')
@@ -14,30 +15,9 @@ describe('Basic Auth Flow', () => {
 
             render(<RouterProvider router={createMemoryRouter(routeObject)} />)
 
-            expect(await screen.findByText('Welcome!')).toBeInTheDocument()
-
-            await user.click(
-                await screen.findByRole('link', { name: /sign in icon/i })
-            )
-
-            expect(
-                await screen.findByRole('button', { name: /sign in/i })
-            ).toBeInTheDocument()
-
-            await user.type(await screen.findByLabelText(/username/i), 'julian')
-            await user.type(
-                await screen.findByLabelText(/password/i),
-                'password'
-            )
-
-            await user.click(
-                await screen.findByRole('button', { name: /sign in/i })
-            )
-
-            expect(
-                await screen.findByRole('link', { name: /add game/i })
-            ).toBeInTheDocument()
-            expect(await screen.findByText('julian')).toBeInTheDocument()
+            const username = 'julian',
+                password = 'password'
+            await testLogin(user, username, password)
         })
 
         test("doesn't allow signing in with wrong password", async () => {
@@ -113,30 +93,9 @@ describe('Basic Auth Flow', () => {
 
             render(<RouterProvider router={createMemoryRouter(routeObject)} />)
 
-            expect(await screen.findByText('Welcome!')).toBeInTheDocument()
-
-            await user.click(
-                await screen.findByRole('link', { name: /sign in icon/i })
-            )
-
-            expect(
-                await screen.findByRole('button', { name: /sign in/i })
-            ).toBeInTheDocument()
-
-            await user.type(await screen.findByLabelText(/username/i), 'julian')
-            await user.type(
-                await screen.findByLabelText(/password/i),
-                'password'
-            )
-
-            await user.click(
-                await screen.findByRole('button', { name: /sign in/i })
-            )
-
-            expect(
-                await screen.findByRole('link', { name: /add game/i })
-            ).toBeInTheDocument()
-            expect(await screen.findByText('julian')).toBeInTheDocument()
+            const username = 'julian',
+                password = 'password'
+            await testLogin(user, username, password)
 
             await user.click(
                 await screen.findByRole('link', { name: /sign out icon/i })

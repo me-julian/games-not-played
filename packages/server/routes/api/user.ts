@@ -15,6 +15,7 @@ router.get(
             include: Game,
         })
 
+        console.log(entries)
         res.send(entries)
     }
 )
@@ -47,31 +48,32 @@ router.post(
             },
         })
 
-        // Catch error if user clicks on a game that's
-        // already in their list.
         try {
-            const entry = await db.entries.create({
-                userId: req.user!.id,
-                gameId: game.id,
-                // Order is 0 indexed, count is not
-                customOrder: entryCount,
-                isStarred: false,
-                isOwned: false,
-                isPlaying: false,
+            const [entry, entryCreated] = await db.entries.findOrCreate({
+                where: { userId: req.user!.id, gameId: game.id },
+                defaults: {
+                    // Order is 0 indexed, count is not
+                    customOrder: entryCount,
+                    isStarred: false,
+                    isOwned: false,
+                    isPlaying: false,
+                },
             })
+
+            if (!entryCreated) {
+                res.sendStatus(409)
+            }
 
             if (entry) {
                 res.sendStatus(200)
             }
-        } catch (error) {
-            // Improve this
-            if (error instanceof Error) {
-                console.error(error)
-                if (error.name === 'SequelizeUniqueConstraintError') {
-                    res.sendStatus(409)
-                } else {
-                    res.sendStatus(500)
-                }
+        } catch (error: unknown) {
+            let name
+            if (error instanceof Error) name = error.name
+
+            // This should be handled by using findOrCreate
+            if (name === 'SequelizeUniqueConstraintError') {
+                res.sendStatus(409)
             } else {
                 res.sendStatus(500)
             }

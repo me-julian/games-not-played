@@ -4,7 +4,7 @@ const testData = require('./data/testData')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.bulkInsert(
+        const firstId = await queryInterface.bulkInsert(
             'Users',
             await testData.getEncryptedUsers(),
             {
@@ -14,7 +14,14 @@ module.exports = {
         await queryInterface.bulkInsert('Games', testData.games, {
             validation: true,
         })
-        await queryInterface.bulkInsert('Entries', testData.entries, {
+
+        // Add auto-incremented userId to each set of user's entries
+        const entriesWithId = testData.entries.map((userEntries, userIndex) =>
+            userEntries.map((entry) => {
+                return { userId: firstId + userIndex, ...entry }
+            })
+        )
+        await queryInterface.bulkInsert('Entries', entriesWithId.flat(), {
             validation: true,
         })
     },

@@ -11,15 +11,10 @@ module.exports = {
             name: 'unique-order-index',
             unique: true,
         })
-        await queryInterface.addIndex('Entries', ['customOrder'], {
-            name: 'sort-order-index',
-            fields: { name: 'customOrder', order: 'ASC' },
-        })
     },
 
     async down(queryInterface, Sequelize) {
         await queryInterface.removeIndex('Entries', 'unique-entry-index')
         await queryInterface.removeIndex('Entries', 'unique-order-index')
-        await queryInterface.removeIndex('Entries', 'sort-order-index')
     },
 }

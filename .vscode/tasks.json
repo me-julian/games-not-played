@@ -86,7 +86,12 @@
         {
             "label": "Test",
             "dependsOrder": "sequence",
-            "dependsOn": ["Undo Seed Database", "Seed Database", "Run Tests"]
+            "dependsOn": [
+                "Undo Seed Database",
+                "Seed Database",
+                "Run Tests",
+                "Undo Seed Database"
+            ]
         }
     ]
 }

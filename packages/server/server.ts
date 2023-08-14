@@ -37,4 +37,9 @@ app.listen(config.port, () => {
     )
 })
 
+process.on('SIGINT', function () {
+    console.log('Shut down from SIGINT (Ctrl-C)')
+    process.exit(0)
+})
+
 export default app

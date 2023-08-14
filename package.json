@@ -11,7 +11,7 @@
         "seed-db": "sequelize db:seed:all",
         "undo-seed-db": "sequelize db:seed:undo:all",
         "start-client:dev": "vite dev",
-        "start-api:dev": "nodemon packages/server/server.ts",
+        "start-api:dev": "nodemon packages/server/server.ts --exitcrash",
         "test": "vitest run --coverage",
         "compile-typescript": "tsc -b",
         "build-client": "vite build --emptyOutDir",

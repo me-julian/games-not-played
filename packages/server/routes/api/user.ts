@@ -15,7 +15,6 @@ router.get(
             include: Game,
         })
 
-        console.log(entries)
         res.send(entries)
     }
 )
@@ -60,12 +59,15 @@ router.post(
                 },
             })
 
+            // Game already in user's list
             if (!entryCreated) {
                 res.sendStatus(409)
+                return
             }
 
             if (entry) {
                 res.sendStatus(200)
+                return
             }
         } catch (error: unknown) {
             let name
@@ -74,8 +76,10 @@ router.post(
             // This should be handled by using findOrCreate
             if (name === 'SequelizeUniqueConstraintError') {
                 res.sendStatus(409)
+                return
             } else {
                 res.sendStatus(500)
+                return
             }
         }
     }

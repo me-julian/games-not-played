@@ -10,9 +10,7 @@ function GameList({ entries }: Props) {
     return (
         <>
             {entries &&
-                entries.map((entry) => (
-                    <Entry key={entry.id} entryData={entry} />
-                ))}
+                entries.map((entry) => <Entry key={entry.id} entry={entry} />)}
             <AddGame />
         </>
     )

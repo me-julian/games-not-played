@@ -4,12 +4,13 @@ import {
     type ActionFunctionArgs,
 } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
-import Root from './routes/Root'
-import Home, { homeLoader } from './routes/Home'
+import Root, { rootLoader } from './routes/Root'
+import Home from './routes/Home'
 import About from './routes/About'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
 import Search, { search, loadSearch, addToList } from './routes/Search'
+import Details from './routes/Details'
 
 export const routeObject = [
     {
@@ -17,11 +18,15 @@ export const routeObject = [
         id: 'root',
         element: <Root />,
         errorElement: <ErrorPage />,
+        loader: rootLoader,
         children: [
             {
                 index: true,
                 element: <Home />,
-                loader: homeLoader,
+            },
+            {
+                path: '/details/:entryId',
+                element: <Details />,
             },
             {
                 path: '/about',

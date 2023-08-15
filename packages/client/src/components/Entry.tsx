@@ -1,14 +1,17 @@
+import { Link } from 'react-router-dom'
 import { Client } from '@games-not-played/types'
 
-type Props = { entryData: Client.Entry }
+type Props = { entry: Client.Entry }
 
-function Entry({ entryData }: Props) {
+function Entry({ entry }: Props) {
     return (
-        <div>
-            <h6>{entryData.game.name}</h6>
-            {entryData.game.playtime && <span>{entryData.game.playtime}</span>}
-            <hr />
-        </div>
+        <Link to={`/details/${entry.id}`}>
+            <div>
+                <h6>{entry.game.name}</h6>
+                {entry.game.playtime && <span>{entry.game.playtime}</span>}
+                <hr />
+            </div>
+        </Link>
     )
 }
 

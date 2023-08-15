@@ -1,6 +1,40 @@
-import { Form, Navigate, useParams, useRouteLoaderData } from 'react-router-dom'
+import {
+    ActionFunctionArgs,
+    Form,
+    Navigate,
+    redirect,
+    useParams,
+    useRouteLoaderData,
+} from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
 import { type RootLoaderData } from './Root'
+import { getJwt } from '../auth'
+
+function entryUrlRequest(method: string, urlEnding: string) {
+    const jwt = getJwt()
+
+    return fetch(`${import.meta.env.VITE_API_URL}${urlEnding}`, {
+        method: method,
+        headers: {
+            Authorization: 'bearer ' + jwt,
+        },
+    })
+}
+
+export async function deleteEntry({
+    params,
+}: ActionFunctionArgs): Promise<Response> {
+    let id = params.entryId
+
+    const response = await entryUrlRequest('DELETE', `/users/list/${id}`)
+
+    if (response.status === 204) {
+        return redirect('/')
+    } else {
+        // Throws this including on 404 - already deleted in another tab?
+        throw new Response('Unexpected error deleting entry.')
+    }
+}
 
 function Details() {
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
@@ -20,8 +54,10 @@ function Details() {
                 {<p>Playing: {entry.isPlaying ? 'true' : 'false'}</p>}
                 {<p>Owned: {entry.isOwned ? 'true' : 'false'}</p>}
                 {<p>Star: {entry.isStarred ? 'true' : 'false'}</p>}
-                <Form>
-                    <button name="delete">Delete</button>
+                <Form method="DELETE">
+                    <button name="delete" type="submit">
+                        Delete
+                    </button>
                 </Form>
             </main>
         </>

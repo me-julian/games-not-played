@@ -10,7 +10,7 @@ import About from './routes/About'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
 import Search, { search, loadSearch, addToList } from './routes/Search'
-import Details from './routes/Details'
+import Details, { deleteEntry } from './routes/Details'
 
 export const routeObject = [
     {
@@ -27,6 +27,12 @@ export const routeObject = [
             {
                 path: '/details/:entryId',
                 element: <Details />,
+                action: async ({ request, params }: ActionFunctionArgs) => {
+                    switch (request.method) {
+                        case 'DELETE':
+                            return deleteEntry({ request, params })
+                    }
+                },
             },
             {
                 path: '/about',

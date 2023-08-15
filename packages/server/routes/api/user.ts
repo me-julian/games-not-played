@@ -57,12 +57,18 @@ router.post(
                     isOwned: false,
                     isPlaying: false,
                 },
+                // Check for soft deleted entries to restore
+                paranoid: false,
             })
 
-            // Game already in user's list
-            if (!entryCreated) {
-                res.sendStatus(409)
-                return
+            if (entry.isSoftDeleted()) {
+                await entry.restore()
+            } else {
+                // Game already in user's list
+                if (!entryCreated) {
+                    res.sendStatus(409)
+                    return
+                }
             }
 
             if (entry) {
@@ -81,6 +87,29 @@ router.post(
                 res.sendStatus(500)
                 return
             }
+        }
+    }
+)
+
+router.delete(
+    '/list/:entryId',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        try {
+            // Soft deletion
+            const deleted = await db.entries.destroy({
+                where: { id: req.params.entryId },
+            })
+
+            if (deleted) {
+                res.sendStatus(204)
+                return
+            } else {
+                res.sendStatus(404)
+                return
+            }
+        } catch (error: unknown) {
+            console.error(error)
         }
     }
 )

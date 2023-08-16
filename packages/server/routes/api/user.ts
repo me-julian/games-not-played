@@ -97,12 +97,14 @@ router.patch(
     async (req, res) => {
         const entryId = req.params.entryId
         // Can be undefined or string: "true" | "false"
-        const owned =
-            req.body.owned /* "true" */ || req.body.unown /* "false" */
-        const starred = req.body.starred || req.body.unstar
+        const playing =
+            req.body.playing /* "true" */ || req.body.unplaying /* "false" */
+        const owned = req.body.owned || req.body.unowned
+        const starred = req.body.starred || req.body.unstarred
 
         // Add properties sent in request to be updated.
         const updates = {
+            ...(playing && { isPlaying: playing === 'true' }),
             ...(owned && { isOwned: owned === 'true' }),
             ...(starred && { isStarred: starred === 'true' }),
         }

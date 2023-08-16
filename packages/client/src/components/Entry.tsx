@@ -11,6 +11,7 @@ function Entry({ entry }: Props) {
                 {entry.game.playtime && (
                     <span>{entry.game.playtime} Hours</span>
                 )}
+                {entry.isPlaying && <div>Playing!</div>}
                 {entry.isOwned && <div>Owned!</div>}
                 {entry.isStarred && <div>Starred!</div>}
                 <hr />

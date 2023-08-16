@@ -79,14 +79,26 @@ function Details() {
                 <h4>{entry.game.name}</h4>
                 <p>{entry.game.playtime} Hours</p>
                 <p>Added {entry.game.updatedAt.toLocaleString()}</p>
-                {/* {<label htmlFor={'playing'}>Playing</label>}
+                <fetcher.Form
+                    onChange={(event) => {
+                        fetcher.submit(event.currentTarget, {
+                            method: 'PATCH',
+                        })
+                    }}
+                    method="PATCH"
+                >
+                    {<label htmlFor={'playing'}>Playing</label>}
                     <input
                         type="checkbox"
                         id="playing"
                         name="playing"
-                        value={(!entry.isPlaying).toString()}
+                        value={'true'}
                         defaultChecked={entry.isPlaying}
-                    /> */}
+                    />
+                    {/* This value is sent even if unchecking the checkbox.
+                    The API prioritizes 'playing' so it doesn't interfere. */}
+                    <input type="hidden" name="unplaying" value={'false'} />
+                </fetcher.Form>
                 <fetcher.Form
                     onChange={(event) => {
                         fetcher.submit(event.currentTarget, {
@@ -103,9 +115,7 @@ function Details() {
                         value={'true'}
                         defaultChecked={entry.isOwned}
                     />
-                    {/* If unchecked, this value is always sent.
-                    API will always use owned value over unown. */}
-                    <input type="hidden" name="unown" value={'false'} />
+                    <input type="hidden" name="unowned" value={'false'} />
                 </fetcher.Form>
                 <fetcher.Form
                     onChange={(event) => {
@@ -123,7 +133,7 @@ function Details() {
                         value={'true'}
                         defaultChecked={entry.isStarred}
                     />
-                    <input type="hidden" name="unstar" value={'false'} />
+                    <input type="hidden" name="unstarred" value={'false'} />
                 </fetcher.Form>
                 <Form method="DELETE">
                     <button name="delete" type="submit">

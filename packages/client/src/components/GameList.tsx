@@ -1,6 +1,7 @@
 import { Client } from '@games-not-played/types'
 import AddGame from './AddGame'
 import Entry from './Entry'
+import { Link } from 'react-router-dom'
 
 type Props = {
     entries: Client.Entry[] | null
@@ -37,6 +38,9 @@ function GameList({ entries }: Props) {
                 </>
             )}
             <AddGame />
+            <Link to={'/random'}>
+                <button>Random</button>
+            </Link>
         </>
     )
 }

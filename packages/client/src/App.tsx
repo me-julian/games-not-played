@@ -11,6 +11,7 @@ import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
 import Search, { search, loadSearch, addToList } from './routes/Search'
 import Details, { deleteEntry, editEntry } from './routes/Details'
+import Random from './routes/Random'
 
 export const routeObject = [
     {
@@ -37,18 +38,8 @@ export const routeObject = [
                 },
             },
             {
-                path: '/about',
-                element: <About />,
-            },
-            {
-                path: '/signin',
-                element: <Signin />,
-                action: signinAction,
-            },
-            {
-                path: '/signup',
-                element: <Signup />,
-                action: signupAction,
+                path: '/random',
+                element: <Random />,
             },
             {
                 path: '/search',
@@ -62,6 +53,20 @@ export const routeObject = [
                             return addToList({ request, params })
                     }
                 },
+            },
+            {
+                path: '/about',
+                element: <About />,
+            },
+            {
+                path: '/signin',
+                element: <Signin />,
+                action: signinAction,
+            },
+            {
+                path: '/signup',
+                element: <Signup />,
+                action: signupAction,
             },
         ],
     },

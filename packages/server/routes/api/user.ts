@@ -81,12 +81,13 @@ router.post(
 
             // This should be handled by using findOrCreate
             if (name === 'SequelizeUniqueConstraintError') {
-                res.sendStatus(409)
-                return
-            } else {
-                res.sendStatus(500)
-                return
+                console.error(error)
+                console.error(
+                    'Unexpected failure to gracefully handle pre-existing entry record.'
+                )
             }
+            res.sendStatus(500)
+            return
         }
     }
 )

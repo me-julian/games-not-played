@@ -91,6 +91,41 @@ router.post(
     }
 )
 
+router.patch(
+    '/list/:entryId',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const entryId = req.params.entryId
+        // Can be undefined or string: "true" | "false"
+        const owned =
+            req.body.owned /* "true" */ || req.body.unown /* "false" */
+        const starred = req.body.starred || req.body.unstar
+
+        // Add properties sent in request to be updated.
+        const updates = {
+            ...(owned && { isOwned: owned === 'true' }),
+            ...(starred && { isStarred: starred === 'true' }),
+        }
+        try {
+            const [updated] = await db.entries.update(updates, {
+                where: { id: entryId },
+            })
+
+            if (updated) {
+                res.sendStatus(204)
+                return
+            } else {
+                res.sendStatus(404)
+                return
+            }
+        } catch (error: unknown) {
+            console.error(error)
+            res.sendStatus(500)
+            return
+        }
+    }
+)
+
 router.delete(
     '/list/:entryId',
     passport.authenticate('jwt', { session: false }),
@@ -110,6 +145,8 @@ router.delete(
             }
         } catch (error: unknown) {
             console.error(error)
+            res.sendStatus(500)
+            return
         }
     }
 )

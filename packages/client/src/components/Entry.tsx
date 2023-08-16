@@ -8,7 +8,11 @@ function Entry({ entry }: Props) {
         <Link to={`/details/${entry.id}`}>
             <div>
                 <h6>{entry.game.name}</h6>
-                {entry.game.playtime && <span>{entry.game.playtime}</span>}
+                {entry.game.playtime && (
+                    <span>{entry.game.playtime} Hours</span>
+                )}
+                {entry.isOwned && <div>Owned!</div>}
+                {entry.isStarred && <div>Starred!</div>}
                 <hr />
             </div>
         </Link>

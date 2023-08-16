@@ -10,7 +10,7 @@ import About from './routes/About'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
 import Search, { search, loadSearch, addToList } from './routes/Search'
-import Details, { deleteEntry } from './routes/Details'
+import Details, { deleteEntry, editEntry } from './routes/Details'
 
 export const routeObject = [
     {
@@ -28,9 +28,14 @@ export const routeObject = [
                 path: '/details/:entryId',
                 element: <Details />,
                 action: async ({ request, params }: ActionFunctionArgs) => {
+                    console.log('switching action')
+                    console.log(request.method)
                     switch (request.method) {
                         case 'DELETE':
                             return deleteEntry({ request, params })
+                        case 'PATCH':
+                            console.log('switch says patch')
+                            return editEntry({ request, params })
                     }
                 },
             },

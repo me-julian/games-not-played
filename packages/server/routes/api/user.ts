@@ -13,9 +13,42 @@ router.get(
         const entries = await db.entries.findAll({
             where: { userId: req.user!.id },
             include: Game,
+            order: [['customOrder', 'ASC']],
         })
 
         res.send(entries)
+    }
+)
+
+router.patch(
+    '/list',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        let { startIndex, endIndex } = req.body
+
+        if (!startIndex || !endIndex) {
+            res.sendStatus(400)
+            return
+        }
+
+        const t = await db.sequelize.transaction()
+        try {
+            await db.entries.moveOne(
+                parseInt(req.user!.id),
+                parseInt(startIndex),
+                parseInt(endIndex),
+                t
+            )
+
+            await t.commit()
+            res.sendStatus(204)
+            return
+        } catch (error) {
+            await t.rollback()
+            console.error(error)
+            res.sendStatus(500)
+            return
+        }
     }
 )
 
@@ -109,19 +142,44 @@ router.patch(
             ...(owned && { isOwned: owned === 'true' }),
             ...(starred && { isStarred: starred === 'true' }),
         }
-        try {
-            const [updated] = await db.entries.update(updates, {
-                where: { id: entryId },
-            })
 
-            if (updated) {
+        const t = await db.sequelize.transaction()
+        try {
+            const entry = await db.entries.findOne({ where: { id: entryId } })
+
+            if (entry) {
+                if (playing && playing !== entry.isPlaying.toString()) {
+                    let playingCount = await db.entries.count({
+                        where: {
+                            userId: req.user!.id,
+                            isPlaying: true,
+                        },
+                    })
+
+                    if (playing === 'false') playingCount -= 1
+
+                    await db.entries.moveOne(
+                        parseInt(req.user!.id),
+                        entry.customOrder,
+                        playingCount,
+                        t
+                    )
+                }
+
+                await entry.update(updates, {
+                    transaction: t,
+                })
+
+                await t.commit()
                 res.sendStatus(204)
                 return
             } else {
+                await t.rollback()
                 res.sendStatus(404)
                 return
             }
         } catch (error: unknown) {
+            await t.rollback()
             console.error(error)
             res.sendStatus(500)
             return

@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
 import Root, { rootLoader } from './routes/Root'
-import Home from './routes/Home'
+import Home, { reorderList } from './routes/Home'
 import About from './routes/About'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
@@ -20,6 +20,7 @@ export const routeObject = [
         element: <Root />,
         errorElement: <ErrorPage />,
         loader: rootLoader,
+        action: reorderList,
         children: [
             {
                 index: true,

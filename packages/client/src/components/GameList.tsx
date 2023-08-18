@@ -1,7 +1,8 @@
-import { Client } from '@games-not-played/types'
-import AddGame from './AddGame'
-import Entry from './Entry'
 import { Link } from 'react-router-dom'
+import { Droppable } from '@hello-pangea/dnd'
+import { type Client } from '@games-not-played/types'
+import Entry from './Entry'
+import AddGame from './AddGame'
 
 type Props = {
     entries: Client.Entry[] | null
@@ -21,20 +22,65 @@ function GameList({ entries }: Props) {
         { playing: [], other: [] }
     )
 
+    // Apply the offset to the 'other' entries' index so that the separated
+    // sets of entries have one contiguous set of indexes on the backend.
+    const playingIndexOffset = categorizedEntries?.playing.length || 0
+
     return (
         <>
             {categorizedEntries && (
                 <>
-                    {categorizedEntries.playing.length > 0 &&
-                        categorizedEntries.playing.map((entry) => (
-                            <Entry key={entry.id} entry={entry} />
-                        ))}
-                    {categorizedEntries.playing.length > 0 && <hr />}
+                    {categorizedEntries.playing.length > 0 && (
+                        <>
+                            <Droppable
+                                droppableId="playing-list"
+                                type="PLAYING"
+                            >
+                                {(provided) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                    >
+                                        {categorizedEntries.playing.map(
+                                            (entry, index) => (
+                                                <Entry
+                                                    key={entry.id}
+                                                    index={index}
+                                                    entry={entry}
+                                                />
+                                            )
+                                        )}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                            {categorizedEntries.playing.length > 0 && <hr />}
+                        </>
+                    )}
 
-                    {categorizedEntries.other.length > 0 &&
-                        categorizedEntries.other.map((entry) => (
-                            <Entry key={entry.id} entry={entry} />
-                        ))}
+                    {categorizedEntries.other.length > 0 && (
+                        <Droppable droppableId="other-list" type="OTHER">
+                            {(provided) => (
+                                <div
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {categorizedEntries.other.map(
+                                        (entry, index) => (
+                                            <Entry
+                                                key={entry.id}
+                                                index={
+                                                    index + playingIndexOffset
+                                                }
+                                                entry={entry}
+                                            />
+                                        )
+                                    )}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    )}
                 </>
             )}
             <AddGame />

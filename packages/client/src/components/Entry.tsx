@@ -1,22 +1,51 @@
 import { Link } from 'react-router-dom'
-import { Client } from '@games-not-played/types'
+import { Draggable } from '@hello-pangea/dnd'
+import { type Client } from '@games-not-played/types'
 
-type Props = { entry: Client.Entry }
+type Props = {
+    entry: Client.Entry
+    index: number
+}
 
-function Entry({ entry }: Props) {
+function Entry({ index, entry }: Props) {
     return (
-        <Link to={`/details/${entry.id}`}>
-            <div>
-                <h6>{entry.game.name}</h6>
-                {entry.game.playtime && (
-                    <span>{entry.game.playtime} Hours</span>
-                )}
-                {entry.isPlaying && <div>Playing!</div>}
-                {entry.isOwned && <div>Owned!</div>}
-                {entry.isStarred && <div>Starred!</div>}
-                <hr />
-            </div>
-        </Link>
+        <Draggable
+            key={entry.id}
+            draggableId={entry.id.toString()}
+            index={index}
+        >
+            {(provided) => (
+                <Link to={`/details/${entry.id}`}>
+                    <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                    >
+                        <h6
+                            style={{
+                                margin: 0,
+                                paddingTop: 2 + 'rem',
+                                paddingBottom: 1 + 'rem',
+                            }}
+                        >
+                            {entry.game.name}
+                        </h6>
+                        {entry.game.playtime && (
+                            <span>{entry.game.playtime} Hours</span>
+                        )}
+                        {entry.isPlaying && <div>Playing!</div>}
+                        {entry.isOwned && <div>Owned!</div>}
+                        {entry.isStarred && <div>Starred!</div>}
+                        <hr
+                            style={{
+                                margin: 0,
+                                marginTop: 1 + 'rem',
+                            }}
+                        />
+                    </div>
+                </Link>
+            )}
+        </Draggable>
     )
 }
 

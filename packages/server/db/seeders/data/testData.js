@@ -19,10 +19,15 @@ exports.getEncryptedUsers = async () => {
             )
         })
     }
-    const users = [
+    const userData = [
         {
             username: 'julian',
             password: 'password',
+            salt: crypto.randomBytes(16),
+        },
+        {
+            username: 'lodewijk',
+            password: 'bonaparte',
             salt: crypto.randomBytes(16),
         },
         {
@@ -31,28 +36,19 @@ exports.getEncryptedUsers = async () => {
             salt: crypto.randomBytes(16),
         },
     ]
-    return [
-        {
-            username: users[0].username,
-            salt: users[0].salt,
-            hashedPassword: await hashPassword(
-                users[0].password,
-                users[0].salt
-            ),
+
+    const users = []
+    for (let user of userData) {
+        users.push({
+            username: user.username,
+            salt: user.salt,
+            hashedPassword: await hashPassword(user.password, user.salt),
             createdAt: new Date(),
             updatedAt: new Date(),
-        },
-        {
-            username: users[1].username,
-            salt: users[1].salt,
-            hashedPassword: await hashPassword(
-                users[1].password,
-                users[1].salt
-            ),
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        },
-    ]
+        })
+    }
+
+    return users
 }
 exports.games = [
     {
@@ -115,6 +111,59 @@ exports.entries = [
         {
             gameId: 3,
             customOrder: 2,
+            isStarred: false,
+            isOwned: false,
+            isPlaying: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            deletedAt: null,
+        },
+    ],
+    // Lodewijk's Entries
+    [
+        {
+            gameId: 1,
+            customOrder: 0,
+            isStarred: false,
+            isOwned: false,
+            isPlaying: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            deletedAt: null,
+        },
+        {
+            gameId: 2,
+            customOrder: 1,
+            isStarred: false,
+            isOwned: false,
+            isPlaying: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            deletedAt: null,
+        },
+        {
+            gameId: 3,
+            customOrder: 2,
+            isStarred: false,
+            isOwned: false,
+            isPlaying: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            deletedAt: null,
+        },
+        {
+            gameId: 4,
+            customOrder: 3,
+            isStarred: false,
+            isOwned: false,
+            isPlaying: false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            deletedAt: null,
+        },
+        {
+            gameId: 5,
+            customOrder: 4,
             isStarred: false,
             isOwned: false,
             isPlaying: false,

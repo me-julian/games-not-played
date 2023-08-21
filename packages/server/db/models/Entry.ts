@@ -53,7 +53,7 @@ export default class Entry extends Model {
     game: Game
 
     @BeforeDestroy
-    // Likely not playing if removed.
+    // Likely not playing anymore if it was removed.
     // Simplifies resetting order on restoration.
     static async unsetPlaying(instance: Entry) {
         try {
@@ -95,6 +95,33 @@ export default class Entry extends Model {
         } catch (error) {
             throw error
         }
+    }
+
+    // When changing isPlaying, call this to keep them grouped at the
+    // beginning of the custom order or to properly ungroup an entry.
+    static async moveBetweenPlaying(
+        userId: number,
+        entry: Entry,
+        newIsPlayingValue: boolean,
+        transaction: Transaction
+    ) {
+        let playingCount = await Entry.count({
+            where: {
+                userId: userId,
+                isPlaying: true,
+            },
+        })
+
+        // If we're setting isPlaying to false, we need to account for
+        // for playingCount including the entry we're moving.
+        if (newIsPlayingValue === false) playingCount -= 1
+
+        await Entry.moveOne(
+            userId,
+            entry.customOrder,
+            playingCount,
+            transaction
+        )
     }
 
     // Change the position of one entry in custom order.

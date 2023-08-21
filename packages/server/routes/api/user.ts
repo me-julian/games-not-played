@@ -149,19 +149,10 @@ router.patch(
 
             if (entry) {
                 if (playing && playing !== entry.isPlaying.toString()) {
-                    let playingCount = await db.entries.count({
-                        where: {
-                            userId: req.user!.id,
-                            isPlaying: true,
-                        },
-                    })
-
-                    if (playing === 'false') playingCount -= 1
-
-                    await db.entries.moveOne(
+                    await db.entries.moveBetweenPlaying(
                         parseInt(req.user!.id),
-                        entry.customOrder,
-                        playingCount,
+                        entry,
+                        playing === 'true',
                         t
                     )
                 }

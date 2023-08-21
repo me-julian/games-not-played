@@ -28,7 +28,7 @@ module.exports = {
                 },
                 onDelete: 'CASCADE',
             },
-            customOrder: {
+            order: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
             },

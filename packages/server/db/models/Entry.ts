@@ -24,7 +24,7 @@ import { Transaction } from 'sequelize'
 export default class Entry extends Model {
     @AllowNull(false)
     @Column
-    customOrder: number
+    order: number
 
     @AllowNull(false)
     @Column
@@ -64,7 +64,7 @@ export default class Entry extends Model {
     }
     @AfterDestroy
     static async fillOrderGap(instance: Entry) {
-        const startIndex = instance.customOrder
+        const startIndex = instance.order
 
         const entries = await Entry.findAll({ where: { id: instance.userId } })
         if (entries.length < 1 || startIndex === entries.length - 1) {
@@ -91,14 +91,14 @@ export default class Entry extends Model {
         })
 
         try {
-            await instance.update('customOrder', entryCount)
+            await instance.update('order', entryCount)
         } catch (error) {
             throw error
         }
     }
 
     // When changing isPlaying, call this to keep them grouped at the
-    // beginning of the custom order or to properly ungroup an entry.
+    // beginning of the order or to properly ungroup an entry.
     static async moveBetweenPlaying(
         userId: number,
         entry: Entry,
@@ -116,15 +116,10 @@ export default class Entry extends Model {
         // for playingCount including the entry we're moving.
         if (newIsPlayingValue === false) playingCount -= 1
 
-        await Entry.moveOne(
-            userId,
-            entry.customOrder,
-            playingCount,
-            transaction
-        )
+        await Entry.moveOne(userId, entry.order, playingCount, transaction)
     }
 
-    // Change the position of one entry in custom order.
+    // Change the position of one entry in the order.
     static async moveOne(
         userId: number,
         startIndex: number,
@@ -137,7 +132,7 @@ export default class Entry extends Model {
 
         const entries = await Entry.findAll({
             where: { userId: userId },
-            order: [['customOrder', 'ASC']],
+            order: [['order', 'ASC']],
         })
 
         const moved = entries.splice(startIndex, 1)
@@ -156,7 +151,7 @@ export default class Entry extends Model {
     }
 
     // Given a pair of indexes, iterate over a range between the two,
-    // setting customOrder to each entries' index.
+    // setting order to each entries' index.
     static async reorder(
         entries: Entry[],
         startIndex: number,
@@ -173,7 +168,7 @@ export default class Entry extends Model {
         const higherIndex = startIndex < endIndex ? endIndex : startIndex
         let changed = []
         for (let i = lowerIndex; i <= higherIndex; i++) {
-            entries[i].set({ customOrder: i })
+            entries[i].set({ order: i })
             changed.push(entries[i])
         }
 

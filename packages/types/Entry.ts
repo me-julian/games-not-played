@@ -4,7 +4,7 @@ export type Entry = {
     id: number
     userId: number
     gameId: number
-    customOrder: number
+    order: number
     isStarred: boolean
     isOwned: boolean
     isPlaying: boolean

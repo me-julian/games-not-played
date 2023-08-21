@@ -90,7 +90,7 @@ exports.entries = [
         // Julian's Entries
         {
             gameId: 1,
-            customOrder: 0,
+            order: 0,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -100,7 +100,7 @@ exports.entries = [
         },
         {
             gameId: 2,
-            customOrder: 1,
+            order: 1,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -110,7 +110,7 @@ exports.entries = [
         },
         {
             gameId: 3,
-            customOrder: 2,
+            order: 2,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -123,7 +123,7 @@ exports.entries = [
     [
         {
             gameId: 1,
-            customOrder: 0,
+            order: 0,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -133,7 +133,7 @@ exports.entries = [
         },
         {
             gameId: 2,
-            customOrder: 1,
+            order: 1,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -143,7 +143,7 @@ exports.entries = [
         },
         {
             gameId: 3,
-            customOrder: 2,
+            order: 2,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -153,7 +153,7 @@ exports.entries = [
         },
         {
             gameId: 4,
-            customOrder: 3,
+            order: 3,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -163,7 +163,7 @@ exports.entries = [
         },
         {
             gameId: 5,
-            customOrder: 4,
+            order: 4,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -176,7 +176,7 @@ exports.entries = [
     [
         {
             gameId: 5,
-            customOrder: 0,
+            order: 0,
             isStarred: false,
             isOwned: false,
             isPlaying: false,
@@ -186,7 +186,7 @@ exports.entries = [
         },
         {
             gameId: 3,
-            customOrder: 1,
+            order: 1,
             isStarred: false,
             isOwned: false,
             isPlaying: false,

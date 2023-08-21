@@ -13,7 +13,7 @@ router.get(
         const entries = await db.entries.findAll({
             where: { userId: req.user!.id },
             include: Game,
-            order: [['customOrder', 'ASC']],
+            order: [['order', 'ASC']],
         })
 
         res.send(entries)
@@ -85,7 +85,7 @@ router.post(
                 where: { userId: req.user!.id, gameId: game.id },
                 defaults: {
                     // Order is 0 indexed, count is not
-                    customOrder: entryCount,
+                    order: entryCount,
                     isStarred: false,
                     isOwned: false,
                     isPlaying: false,

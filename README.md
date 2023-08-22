@@ -76,4 +76,4 @@ The `Migrate Database` task will apply any existing and new migrations.
 Make sure the database has been inititalized and the API server is running with the `Start Server` or `Dev` tasks.
 
 Use the `Test` task to run automated testing.
-This will seed the database with test data and then empty the database when it's done.
+This will seed the database with test data.

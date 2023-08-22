@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Outlet, redirect } from 'react-router-dom'
 import { getJwt } from '../auth'
 import { Client } from '@games-not-played/types'
@@ -34,10 +35,37 @@ export async function rootLoader() {
     }
 }
 
+export type RootOutletContext = {
+    currentFilter: {
+        state: string
+        setter: React.Dispatch<React.SetStateAction<string>>
+    }
+    filterDirection: {
+        state: 'asc' | 'desc'
+        setter: React.Dispatch<React.SetStateAction<'asc' | 'desc'>>
+    }
+}
+
 function Root() {
+    const [currentFilter, setCurrentFilter] = useState('custom')
+    const [filterDirection, setFilterDirection] = useState<'asc' | 'desc'>(
+        'asc'
+    )
+
     return (
         <>
-            <Outlet />
+            <Outlet
+                context={{
+                    currentFilter: {
+                        state: currentFilter,
+                        setter: setCurrentFilter,
+                    },
+                    filterDirection: {
+                        state: filterDirection,
+                        setter: setFilterDirection,
+                    },
+                }}
+            />
         </>
     )
 }

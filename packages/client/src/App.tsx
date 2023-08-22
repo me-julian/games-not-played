@@ -12,6 +12,7 @@ import Signup, { signupAction } from './routes/Signup'
 import Search, { search, loadSearch, addToList } from './routes/Search'
 import Details, { deleteEntry, editEntry } from './routes/Details'
 import Random from './routes/Random'
+import Filter from './routes/Filter'
 
 export const routeObject = [
     {
@@ -41,6 +42,10 @@ export const routeObject = [
             {
                 path: '/random',
                 element: <Random />,
+            },
+            {
+                path: '/filter',
+                element: <Filter />,
             },
             {
                 path: '/search',

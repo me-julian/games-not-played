@@ -1,0 +1,23 @@
+.list {
+    position: relative;
+}
+
+.playing-section-enter {
+    max-height: 0dvh;
+}
+.playing-section-enter-active {
+    max-height: 100dvh;
+    transition: all 300ms;
+}
+
+.playing-section-exit {
+    max-height: 100dvh;
+}
+.playing-section-exit-active {
+    max-height: 0px;
+    transition: all 200ms;
+}
+.playing-section-exit-done {
+    display: none;
+    max-height: 0px;
+}

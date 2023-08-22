@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import { Droppable } from '@hello-pangea/dnd'
 import Entry from './Entry'
 import AddGame from './AddGame'
 import { type RootOutletContext } from '../routes/Root'
 import { type Client } from '@games-not-played/types'
+import { CSSTransition } from 'react-transition-group'
+import '../public/list.css'
 
 type Props = {
     entries: Client.Entry[] | null
@@ -61,28 +63,49 @@ function GameList({ entries }: Props) {
     // sets of entries have one contiguous set of indexes on the backend.
     const playingIndexOffset = playingEntries?.length || 0
 
+    const [showPlaying, setShowPlaying] = useState(true)
+    const nodeRef = useRef(null)
+
     return (
         <>
             {playingEntries && playingEntries.length > 0 && (
                 <>
-                    <Droppable droppableId="playing-list" type="PLAYING">
-                        {(provided) => (
-                            <div
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
+                    <button
+                        type="button"
+                        onClick={() => setShowPlaying(!showPlaying)}
+                    >
+                        Show Playing
+                    </button>
+                    <CSSTransition
+                        nodeRef={nodeRef}
+                        in={showPlaying}
+                        timeout={{ enter: 300, exit: 200 }}
+                        classNames="playing-section"
+                    >
+                        <div ref={nodeRef}>
+                            <Droppable
+                                droppableId="playing-list"
+                                type="PLAYING"
                             >
-                                {playingEntries.map((entry, index) => (
-                                    <Entry
-                                        key={entry.id}
-                                        index={index}
-                                        entry={entry}
-                                    />
-                                ))}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                    {playingEntries.length > 0 && <hr />}
+                                {(provided) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                    >
+                                        {playingEntries.map((entry, index) => (
+                                            <Entry
+                                                key={entry.id}
+                                                index={index}
+                                                entry={entry}
+                                            />
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                            {playingEntries.length > 0 && <hr />}
+                        </div>
+                    </CSSTransition>
                 </>
             )}
 
@@ -96,6 +119,7 @@ function GameList({ entries }: Props) {
                         <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}
+                            className="list"
                         >
                             {otherEntries.map((entry, index) => (
                                 <Entry

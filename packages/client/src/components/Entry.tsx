@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Draggable } from '@hello-pangea/dnd'
 import { type Client } from '@games-not-played/types'
+import '../public/entry.css'
 
 type Props = {
     entry: Client.Entry
@@ -21,27 +22,29 @@ function Entry({ index, entry }: Props) {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                     >
-                        <h6
-                            style={{
-                                margin: 0,
-                                paddingTop: 2 + 'rem',
-                                paddingBottom: 1 + 'rem',
-                            }}
-                        >
-                            {entry.game.name}
-                        </h6>
-                        {entry.game.playtime && (
-                            <span>{entry.game.playtime} Hours</span>
-                        )}
-                        {entry.isPlaying && <div>Playing!</div>}
-                        {entry.isOwned && <div>Owned!</div>}
-                        {entry.isStarred && <div>Starred!</div>}
-                        <hr
-                            style={{
-                                margin: 0,
-                                marginTop: 1 + 'rem',
-                            }}
-                        />
+                        <div className="entry">
+                            <h6
+                                style={{
+                                    margin: 0,
+                                    paddingTop: 2 + 'rem',
+                                    paddingBottom: 1 + 'rem',
+                                }}
+                            >
+                                {entry.game.name}
+                            </h6>
+                            {entry.game.playtime && (
+                                <span>{entry.game.playtime} Hours</span>
+                            )}
+                            {entry.isPlaying && <div>Playing!</div>}
+                            {entry.isOwned && <div>Owned!</div>}
+                            {entry.isStarred && <div>Starred!</div>}
+                            <hr
+                                style={{
+                                    margin: 0,
+                                    marginTop: 1 + 'rem',
+                                }}
+                            />
+                        </div>
                     </div>
                 </Link>
             )}

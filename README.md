@@ -49,6 +49,11 @@ Run the `Dev` task in the command palette to start the client and api and start 
 
 Connect to the app on your host machine at _localhost:5173_.
 
+## Connecting to external APIs
+
+You will need to rename the _.env.empty_ file to _.env_ and provide it with correct
+urls to the RAWG video game database as well as the API token.
+
 ## Working with the database
 
 This project uses database migrations and these must be run to get the database into a usable state.

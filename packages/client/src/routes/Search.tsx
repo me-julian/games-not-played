@@ -7,6 +7,7 @@ import {
     LoaderFunctionArgs,
     useLoaderData,
     useSubmit,
+    useSearchParams,
 } from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
 import { getJwt } from '../auth'
@@ -31,27 +32,25 @@ export async function loadSearch({
 }: LoaderFunctionArgs): Promise<SearchLoaderData> {
     let url = new URL(request.url)
     let searchTerm = url.searchParams.get('search')
+    let page = url.searchParams.get('page')
 
     if (searchTerm) {
-        const response = await requestSearch(`/search?search=${searchTerm}`)
+        if (Number(page) === 0 || Number.isNaN(page)) {
+            return redirect(`/search?search=${searchTerm}&page=${1}`)
+        }
+
+        const response = await requestSearch(
+            `/search?search=${searchTerm}&page=${page}`
+        )
 
         if (response.ok) {
             return response
         } else {
-            throw new Response(
-                'There was an issue getting data from the server.',
-                { status: 500 }
-            )
+            throw new Response('Something went wrong with your search.')
         }
     } else {
         return null
     }
-}
-
-export async function search({ params }: ActionFunctionArgs) {
-    const search = params.search
-
-    return redirect('?search=' + search)
 }
 
 export async function addToList({ request }: ActionFunctionArgs) {
@@ -89,12 +88,17 @@ function isResults(
 }
 
 function Search() {
-    const submit = useSubmit()
     const searchData = useLoaderData() as SearchLoaderData
-    const authResponse = useActionData()
-    const [searchQuery, setSearchQuery] = useState('')
+    const actionResponse = useActionData()
 
-    function onSelect(event: any) {
+    const submit = useSubmit()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchQuery, setSearchQuery] = useState(
+        searchParams.get('search') || ''
+    )
+    const page = searchParams.has('page') ? Number(searchParams.get('page')) : 1
+
+    function handleSelect(event: any) {
         submit(event.currentTarget)
     }
 
@@ -116,14 +120,20 @@ function Search() {
                                 required
                                 autoFocus
                             />
+                            <input
+                                type="hidden"
+                                value={1}
+                                id="page"
+                                name="page"
+                            />
                             <button type="submit">Search</button>
                         </div>
                     </Form>
                     <hr />
                 </section>
-                {typeof authResponse === 'string' && (
+                {typeof actionResponse === 'string' && (
                     <section>
-                        <p>{authResponse}</p>
+                        <p>{actionResponse}</p>
                     </section>
                 )}
                 {searchData &&
@@ -136,19 +146,45 @@ function Search() {
                                     name={result.name}
                                     playtime={result.playtime}
                                     backgroundImage={result.background_image}
-                                    handleSelect={onSelect}
+                                    onSelect={handleSelect}
                                 />
                             ))}
-                            <button disabled={!searchData.previous}>
-                                Previous Page
-                            </button>
-                            <button disabled={!searchData.next}>
-                                Next Page
-                            </button>
+                            {(searchData.previous || searchData.next) && (
+                                <>
+                                    <div>Page: {page}</div>
+                                    <button
+                                        disabled={!searchData.previous}
+                                        onClick={() => {
+                                            searchParams.set(
+                                                'page',
+                                                (page - 1).toString()
+                                            )
+                                            setSearchParams(searchParams)
+                                        }}
+                                    >
+                                        Previous Page
+                                    </button>
+                                    <button
+                                        disabled={!searchData.next}
+                                        onClick={() => {
+                                            searchParams.set(
+                                                'page',
+                                                (page + 1).toString()
+                                            )
+                                            setSearchParams(searchParams)
+                                        }}
+                                    >
+                                        Next Page
+                                    </button>
+                                </>
+                            )}
                             <sub>{searchData.count} results found.</sub>
                         </>
                     ) : (
-                        <p>No games found</p>
+                        <p>
+                            There was an issue finding any results for your
+                            search.
+                        </p>
                     ))}
             </main>
         </>

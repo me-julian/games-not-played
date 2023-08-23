@@ -9,7 +9,7 @@ import Home, { reorderList } from './routes/Home'
 import About from './routes/About'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
-import Search, { search, loadSearch, addToList } from './routes/Search'
+import Search, { loadSearch, addToList } from './routes/Search'
 import Details, { deleteEntry, editEntry } from './routes/Details'
 import Random from './routes/Random'
 import Filter from './routes/Filter'
@@ -53,8 +53,6 @@ export const routeObject = [
                 loader: loadSearch,
                 action: async ({ request, params }: ActionFunctionArgs) => {
                     switch (request.method) {
-                        case 'GET':
-                            return search({ request, params })
                         case 'POST':
                             return addToList({ request, params })
                     }

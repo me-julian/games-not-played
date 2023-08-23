@@ -2,17 +2,6 @@ import express from 'express'
 import { Router } from 'express'
 import { RAWG } from '@games-not-played/types'
 
-async function requestRawgGameSearch(url: string) {
-    const response = await fetch(url, {
-        method: 'get',
-    })
-    if (response.ok) {
-        return (await response.json()) as RAWG.SearchResults
-    } else {
-        throw new Error(response.status.toString())
-    }
-}
-
 const router: Router = express.Router()
 
 router.get('/search', async (req, res) => {
@@ -30,13 +19,18 @@ router.get('/search', async (req, res) => {
 
     const url = urlSections.flat().join('')
 
-    try {
-        const responseData = await requestRawgGameSearch(url)
+    const response = await fetch(url, {
+        method: 'get',
+    })
 
-        res.send(responseData)
-    } catch (error) {
+    if (response.ok) {
+        const data = (await response.json()) as RAWG.SearchResults
+        res.send(data)
+    } else if (response.status === 404) {
+        res.sendStatus(404)
+    } else {
         console.error(
-            `\nError: RAWG request to ${url} returned status code ${error}\n`
+            `\nError: RAWG request to ${url} returned status code ${response.status}\n`
         )
         res.sendStatus(500)
     }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
     Form,
     useActionData,
@@ -8,6 +8,7 @@ import {
     useLoaderData,
     useSubmit,
     useSearchParams,
+    useNavigation,
 } from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
 import { getJwt } from '../auth'
@@ -102,12 +103,23 @@ function Search() {
         submit(event.currentTarget)
     }
 
+    const searchForm = useRef<HTMLFormElement>(null)
+    useEffect(() => {
+        const search = setTimeout(() => {
+            submit(searchForm.current)
+        }, 500)
+
+        return () => clearTimeout(search)
+    }, [searchQuery])
+
+    const navigation = useNavigation()
+
     return (
         <>
             <ActionNav actionName={'Search'} />
             <main>
                 <section>
-                    <Form method="GET">
+                    <Form method="GET" ref={searchForm}>
                         <div>
                             <label htmlFor="search">Search</label>
                             <input
@@ -131,61 +143,74 @@ function Search() {
                     </Form>
                     <hr />
                 </section>
-                {typeof actionResponse === 'string' && (
-                    <section>
-                        <p>{actionResponse}</p>
-                    </section>
-                )}
-                {searchData &&
-                    (isResults(searchData) ? (
-                        <>
-                            {searchData.results.map((result) => (
-                                <SearchResult
-                                    key={result.id}
-                                    id={result.id}
-                                    name={result.name}
-                                    playtime={result.playtime}
-                                    backgroundImage={result.background_image}
-                                    onSelect={handleSelect}
-                                />
-                            ))}
-                            {(searchData.previous || searchData.next) && (
+                {navigation.state !== 'idle' ? (
+                    <p>Loading...</p>
+                ) : (
+                    <>
+                        {typeof actionResponse === 'string' && (
+                            <section>
+                                <p>{actionResponse}</p>
+                            </section>
+                        )}
+                        {searchData &&
+                            (isResults(searchData) ? (
                                 <>
-                                    <div>Page: {page}</div>
-                                    <button
-                                        disabled={!searchData.previous}
-                                        onClick={() => {
-                                            searchParams.set(
-                                                'page',
-                                                (page - 1).toString()
-                                            )
-                                            setSearchParams(searchParams)
-                                        }}
-                                    >
-                                        Previous Page
-                                    </button>
-                                    <button
-                                        disabled={!searchData.next}
-                                        onClick={() => {
-                                            searchParams.set(
-                                                'page',
-                                                (page + 1).toString()
-                                            )
-                                            setSearchParams(searchParams)
-                                        }}
-                                    >
-                                        Next Page
-                                    </button>
+                                    {searchData.results.map((result) => (
+                                        <SearchResult
+                                            key={result.id}
+                                            id={result.id}
+                                            name={result.name}
+                                            playtime={result.playtime}
+                                            backgroundImage={
+                                                result.background_image
+                                            }
+                                            onSelect={handleSelect}
+                                        />
+                                    ))}
+                                    {(searchData.previous ||
+                                        searchData.next) && (
+                                        <>
+                                            <div>Page: {page}</div>
+                                            <button
+                                                disabled={!searchData.previous}
+                                                onClick={() => {
+                                                    searchParams.set(
+                                                        'page',
+                                                        (page - 1).toString()
+                                                    )
+                                                    setSearchParams(
+                                                        searchParams
+                                                    )
+                                                }}
+                                            >
+                                                Previous Page
+                                            </button>
+                                            <button
+                                                disabled={!searchData.next}
+                                                onClick={() => {
+                                                    searchParams.set(
+                                                        'page',
+                                                        (page + 1).toString()
+                                                    )
+                                                    setSearchParams(
+                                                        searchParams
+                                                    )
+                                                }}
+                                            >
+                                                Next Page
+                                            </button>
+                                        </>
+                                    )}
+                                    <sub>{searchData.count} results found.</sub>
                                 </>
-                            )}
-                            <sub>{searchData.count} results found.</sub>
-                        </>
-                    ) : (
-                        <p>
-                            There was an issue finding any results for your
-                            search.
-                        </p>
-                    ))}
+                            ) : (
+                                <p>
+                                    There was an issue finding any results for
+                                    your search.
+                                </p>
+                            ))}
+                    </>
+                )}
             </main>
         </>
     )

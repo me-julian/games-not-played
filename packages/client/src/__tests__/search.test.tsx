@@ -38,12 +38,12 @@ describe('Search', () => {
                 await screen.findByRole('button', { name: /search/i })
             )
 
-            await user.click(await screen.findByText(/dark souls/i))
+            await user.click(await screen.findByText(/^dark souls$/i))
 
             expect(
                 await screen.findByRole('link', { name: /add game/i })
             ).toBeInTheDocument()
-            expect(await screen.findByText(/dark souls/i)).toBeInTheDocument()
+            expect(await screen.findByText(/^dark souls$/i)).toBeInTheDocument()
         })
     })
 })

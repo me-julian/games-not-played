@@ -38,16 +38,16 @@ describe('Entry details', () => {
                 await screen.findByRole('button', { name: /search/i })
             )
 
-            await user.click(await screen.findByText(/factorio/i))
+            await user.click(await screen.findByText(/^factorio$/i))
 
             expect(
                 await screen.findByRole('link', { name: /add game/i })
             ).toBeInTheDocument()
-            expect(await screen.findByText(/factorio/i)).toBeInTheDocument()
+            expect(await screen.findByText(/^factorio$/i)).toBeInTheDocument()
 
-            await user.click(await screen.findByText(/factorio/i))
+            await user.click(await screen.findByText(/^factorio$/i))
 
-            expect(await screen.findByText(/factorio/i)).toBeInTheDocument()
+            expect(await screen.findByText(/^factorio$/i)).toBeInTheDocument()
             await user.click(
                 await screen.findByRole('button', { name: /delete/i })
             )
@@ -56,7 +56,9 @@ describe('Entry details', () => {
                 await screen.findByRole('link', { name: /add game/i })
             ).toBeInTheDocument()
             waitFor(() => {
-                expect(screen.queryByText(/factorio/i)).not.toBeInTheDocument()
+                expect(
+                    screen.queryByText(/^factorio$/i)
+                ).not.toBeInTheDocument()
             })
         })
     })

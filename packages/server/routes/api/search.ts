@@ -1,30 +1,13 @@
 import express from 'express'
 import { Router } from 'express'
-
-// Not exhaustive of everything actually sent by RAWG.
-type RawgGame = {
-    id: number
-    name: string
-    background_image: string
-    playtime: number
-    updated: string
-    saturated_color: string
-    dominant_color: string
-}
-
-type RawgSearchResults = {
-    count: number
-    next: string | null
-    previous: string | null
-    results: RawgGame[]
-}
+import { RAWG } from '@games-not-played/types'
 
 async function requestRawgGameSearch(url: string) {
     const response = await fetch(url, {
         method: 'get',
     })
     if (response.ok) {
-        return (await response.json()) as RawgSearchResults
+        return (await response.json()) as RAWG.SearchResults
     } else {
         throw new Error(response.status.toString())
     }
@@ -36,26 +19,24 @@ router.get('/search', async (req, res) => {
     const query = req.query.search
     const page = req.query.page
 
-    const baseUrl = `${process.env.RAWG_URL}/games?key=${process.env.RAWG_API_TOKEN}`
-    const dynamicQueries = `&page=${
-        page ? page : 1
-    }&page_size=10&search=${query}`
+    const pageSize = 10
+
+    const urlSections = [
+        `${process.env.RAWG_URL}/games?key=${process.env.RAWG_API_TOKEN}`,
+        `&page=${page ? page : 1}&page_size=${pageSize}`,
+        `&search=${query}`,
+        '&search_precise=true',
+    ]
+
+    const url = urlSections.flat().join('')
 
     try {
-        const responseData = await requestRawgGameSearch(
-            baseUrl + dynamicQueries
-        )
+        const responseData = await requestRawgGameSearch(url)
 
-        if (responseData.count === 0) {
-            res.send(404)
-        }
-
-        res.send(responseData.results.slice(0, 10))
+        res.send(responseData)
     } catch (error) {
         console.error(
-            `\nError: RAWG request to ${
-                baseUrl + dynamicQueries
-            } returned status code ${error}\n`
+            `\nError: RAWG request to ${url} returned status code ${error}\n`
         )
         res.sendStatus(500)
     }

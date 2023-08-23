@@ -11,16 +11,9 @@ import {
 import ActionNav from '../components/ActionNav'
 import { getJwt } from '../auth'
 import SearchResult from '../components/SearchResult'
+import { RAWG } from '@games-not-played/types'
 
-type SearchLoaderData =
-    | {
-          id: number
-          name: string
-          playtime?: number
-          background_image?: string
-      }[]
-    | Response
-    | null
+type SearchLoaderData = RAWG.SearchResults | Response | null
 
 function requestSearch(urlEnding: string) {
     const jwt = getJwt()
@@ -45,7 +38,10 @@ export async function loadSearch({
         if (response.ok) {
             return response
         } else {
-            return new Response('No games found.', { status: 404 })
+            throw new Response(
+                'There was an issue getting data from the server.',
+                { status: 500 }
+            )
         }
     } else {
         return null
@@ -79,6 +75,16 @@ export async function addToList({ request }: ActionFunctionArgs) {
         return new Response('This game is already in your list.')
     } else {
         return new Response('There was an issue adding the game to your list.')
+    }
+}
+
+function isResults(
+    data: SearchLoaderData | Response | null
+): data is RAWG.SearchResults {
+    if (data) {
+        return (data as RAWG.SearchResults).results !== undefined
+    } else {
+        return false
     }
 }
 
@@ -120,20 +126,30 @@ function Search() {
                         <p>{authResponse}</p>
                     </section>
                 )}
-                {Array.isArray(searchData) ? (
-                    searchData.map((result) => (
-                        <SearchResult
-                            key={result.id}
-                            id={result.id}
-                            name={result.name}
-                            playtime={result.playtime}
-                            backgroundImage={result.background_image}
-                            handleSelect={onSelect}
-                        />
-                    ))
-                ) : (
-                    <p>No games found</p>
-                )}
+                {searchData &&
+                    (isResults(searchData) ? (
+                        <>
+                            {searchData.results.map((result) => (
+                                <SearchResult
+                                    key={result.id}
+                                    id={result.id}
+                                    name={result.name}
+                                    playtime={result.playtime}
+                                    backgroundImage={result.background_image}
+                                    handleSelect={onSelect}
+                                />
+                            ))}
+                            <button disabled={!searchData.previous}>
+                                Previous Page
+                            </button>
+                            <button disabled={!searchData.next}>
+                                Next Page
+                            </button>
+                            <sub>{searchData.count} results found.</sub>
+                        </>
+                    ) : (
+                        <p>No games found</p>
+                    ))}
             </main>
         </>
     )

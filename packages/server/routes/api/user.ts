@@ -155,7 +155,9 @@ router.patch(
 
         const t = await db.sequelize.transaction()
         try {
-            const entry = await db.entries.findOne({ where: { id: entryId } })
+            const entry = await db.entries.findOne({
+                where: { id: entryId, userId: req.user!.id },
+            })
 
             if (entry) {
                 if (playing && playing !== entry.isPlaying.toString()) {
@@ -195,7 +197,7 @@ router.delete(
         try {
             // Soft deletion
             const deleted = await db.entries.destroy({
-                where: { id: req.params.entryId },
+                where: { id: req.params.entryId, userId: req.user!.id },
             })
 
             if (deleted) {

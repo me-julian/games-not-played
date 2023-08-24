@@ -10,8 +10,8 @@ type Props = {
 function ActionNav({ actionName }: Props) {
     return (
         <nav>
-            <p>{actionName}</p>
-            <Link to={'..'}>
+            <h1 className="title">{actionName}</h1>
+            <Link className="link-icon" to={'..'}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </Link>
         </nav>

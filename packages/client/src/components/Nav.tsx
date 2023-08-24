@@ -17,12 +17,16 @@ function Nav() {
     return (
         <>
             <nav>
-                <Link to={'/about'}>Games Not Played</Link>
+                <Link className="brand title" to={'/about'}>
+                    Games Not Played
+                </Link>
                 {jwt ? (
                     <>
-                        <span>{parseJwt(jwt).username}</span>
+                        <span className="username">
+                            {parseJwt(jwt).username}
+                        </span>
                         <span
-                            className="action-text"
+                            className="link-icon"
                             tabIndex={0}
                             role="link"
                             onClick={() => {
@@ -36,7 +40,7 @@ function Nav() {
                         </span>
                     </>
                 ) : (
-                    <Link to={'/signin'}>
+                    <Link className="link-icon" to={'/signin'}>
                         <span className="sr-only sr-only-focusable">
                             Sign In Icon
                         </span>

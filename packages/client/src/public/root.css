@@ -17,3 +17,7 @@ a {
     text-decoration: none;
     color: var(--accent);
 }
+
+.svg-inline--fa {
+    vertical-align: middle;
+}

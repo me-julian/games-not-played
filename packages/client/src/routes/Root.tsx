@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet, redirect } from 'react-router-dom'
 import { getJwt } from '../auth'
 import { Client } from '@games-not-played/types'
@@ -47,10 +47,17 @@ export type RootOutletContext = {
 }
 
 function Root() {
-    const [currentFilter, setCurrentFilter] = useState('custom')
-    const [filterDirection, setFilterDirection] = useState<'asc' | 'desc'>(
-        'asc'
+    const [currentFilter, setCurrentFilter] = useState(
+        localStorage.getItem('lastFilter') || 'custom'
     )
+    const [filterDirection, setFilterDirection] = useState(
+        localStorage.getItem('lastFilterDirection') || 'asc'
+    )
+
+    useEffect(() => {
+        localStorage.setItem('lastFilter', currentFilter)
+        localStorage.setItem('lastFilterDirection', filterDirection)
+    }, [currentFilter, filterDirection])
 
     return (
         <>

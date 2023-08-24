@@ -186,7 +186,8 @@ function filterByPlaytime(entries: Client.Entry[], direction: 'asc' | 'desc') {
                 ? a.game.playtime - b.game.playtime
                 : b.game.playtime - a.game.playtime
         } else if (a.game.playtime && !b.game.playtime) {
-            return direction === 'asc' ? -1 : 1
+            // Always move null playtime to end.
+            return -1
         } else {
             return 0
         }

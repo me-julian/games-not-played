@@ -107,7 +107,7 @@ function Search() {
     const searchForm = useRef<HTMLFormElement>(null)
     useEffect(() => {
         const search = setTimeout(() => {
-            submit(searchForm.current)
+            if (searchQuery !== '') submit(searchForm.current)
         }, 500)
 
         return () => clearTimeout(search)

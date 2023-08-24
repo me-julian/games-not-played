@@ -5,6 +5,7 @@ type Props = {
     name: string
     playtime: number
     backgroundImage: string | null
+    updated: string
     onSelect: (event: any) => void
 }
 
@@ -13,6 +14,7 @@ function SearchResult({
     name,
     playtime,
     backgroundImage,
+    updated,
     onSelect,
 }: Props) {
     return (
@@ -38,6 +40,12 @@ function SearchResult({
                         value={backgroundImage}
                     />
                 )}
+                <input
+                    type="hidden"
+                    id="updated"
+                    name="updated"
+                    value={updated}
+                />
                 <hr />
             </div>
         </Form>

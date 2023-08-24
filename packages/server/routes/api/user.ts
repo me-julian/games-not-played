@@ -3,6 +3,7 @@ import { Router } from 'express'
 import db from '../../db/db'
 import passport from 'passport'
 import Game from '../../db/models/Game'
+import config from '../../config'
 
 const router: Router = express.Router()
 
@@ -53,7 +54,7 @@ router.patch(
 )
 
 router.post(
-    '/list/add',
+    '/list',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
         const playtime = req.body.playtime
@@ -72,6 +73,19 @@ router.post(
 
         if (!gameCreated) {
             // Check if cached game in db needs to be refreshed
+            const dayMs = 1000 * 60 * 60 * 24
+            const rawgUpdatedAt = new Date(req.body.updated)
+            if (
+                rawgUpdatedAt.getTime() - game.updatedAt.getTime() >
+                config.refreshInterval * dayMs
+            ) {
+                await game.update({
+                    name: req.body.name,
+                    playtime: playtime,
+                    backgroundImage: backgroundImage,
+                    updatedAt: new Date(),
+                })
+            }
         }
 
         let entryCount = await db.entries.count({
@@ -80,6 +94,7 @@ router.post(
             },
         })
 
+        const t = await db.sequelize.transaction()
         try {
             const [entry, entryCreated] = await db.entries.findOrCreate({
                 where: { userId: req.user!.id, gameId: game.id },
@@ -92,33 +107,28 @@ router.post(
                 },
                 // Check for soft deleted entries to restore
                 paranoid: false,
+                transaction: t,
             })
 
             if (entry.isSoftDeleted()) {
-                await entry.restore()
+                await entry.restore({ transaction: t })
             } else {
                 // Game already in user's list
                 if (!entryCreated) {
+                    await t.commit()
                     res.sendStatus(409)
                     return
                 }
             }
 
             if (entry) {
+                await t.commit()
                 res.sendStatus(200)
                 return
             }
         } catch (error: unknown) {
-            let name
-            if (error instanceof Error) name = error.name
-
-            // This should be handled by using findOrCreate
-            if (name === 'SequelizeUniqueConstraintError') {
-                console.error(error)
-                console.error(
-                    'Unexpected failure to gracefully handle pre-existing entry record.'
-                )
-            }
+            await t.rollback()
+            console.error(error)
             res.sendStatus(500)
             return
         }

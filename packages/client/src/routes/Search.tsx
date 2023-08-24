@@ -56,7 +56,7 @@ export async function loadSearch({
 
 export async function addToList({ request }: ActionFunctionArgs) {
     const jwt = getJwt()
-    const urlEnding = '/users/list/add'
+    const urlEnding = `/users/list`
     const response = await fetch(
         `${import.meta.env.VITE_API_URL}${urlEnding}`,
         {
@@ -164,6 +164,7 @@ function Search() {
                                             backgroundImage={
                                                 result.background_image
                                             }
+                                            updated={result.updated}
                                             onSelect={handleSelect}
                                         />
                                     ))}

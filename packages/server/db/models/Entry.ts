@@ -91,7 +91,7 @@ export default class Entry extends Model {
         })
 
         try {
-            await instance.update('order', entryCount)
+            await instance.update({ order: entryCount })
         } catch (error) {
             throw error
         }

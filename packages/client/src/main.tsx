@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './public/reset.css'
+import './public/theme.css'
 import './public/root.css'
 import './public/sr-only.css'
 import App from './App'

@@ -1,3 +1,4 @@
 .entry {
-    background-color: white;
+    background-color: var(--bg-1);
+    color: var(--light-text);
 }

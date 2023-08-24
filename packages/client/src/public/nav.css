@@ -2,11 +2,11 @@ nav {
     a {
         text-decoration: none;
         margin: 0 1rem;
-        color: blue;
+        color: var(--light-text);
     }
     .action-text {
         cursor: pointer;
-        color: blue;
+        color: var(--light-text);
     }
     border-bottom: 1px solid;
 }

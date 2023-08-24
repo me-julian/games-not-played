@@ -16,34 +16,22 @@ function Entry({ index, entry }: Props) {
             index={index}
         >
             {(provided) => (
-                <Link to={`/details/${entry.id}`}>
+                <Link className="entry" to={`/details/${entry.id}`}>
                     <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                     >
-                        <div className="entry">
-                            <h6
-                                style={{
-                                    margin: 0,
-                                    paddingTop: 2 + 'rem',
-                                    paddingBottom: 1 + 'rem',
-                                }}
-                            >
-                                {entry.game.name}
-                            </h6>
-                            {entry.game.playtime && (
-                                <span>{entry.game.playtime} Hours</span>
-                            )}
-                            {entry.isPlaying && <div>Playing!</div>}
-                            {entry.isOwned && <div>Owned!</div>}
-                            {entry.isStarred && <div>Starred!</div>}
-                            <hr
-                                style={{
-                                    margin: 0,
-                                    marginTop: 1 + 'rem',
-                                }}
-                            />
+                        <div className="wrapper">
+                            <div className="card">
+                                <h2 className="name">{entry.game.name}</h2>
+                                {entry.game.playtime && (
+                                    <span>{entry.game.playtime} Hours</span>
+                                )}
+                                {entry.isPlaying && <div>Playing!</div>}
+                                {entry.isOwned && <div>Owned!</div>}
+                                {entry.isStarred && <div>Starred!</div>}
+                            </div>
                         </div>
                     </div>
                 </Link>

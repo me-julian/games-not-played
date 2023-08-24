@@ -15,11 +15,6 @@ nav {
         font-weight: 600;
         margin-right: auto;
     }
-    .brand {
-        letter-spacing: -0.07em;
-        word-spacing: -0.07em;
-        white-space: nowrap;
-    }
     .username {
         text-overflow: ellipsis;
         white-space: nowrap;

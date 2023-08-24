@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import {
-    Form,
     Link,
     Navigate,
     useActionData,
@@ -8,6 +6,7 @@ import {
     redirect,
 } from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
+import CredentialsForm from '../components/CredentialsForm'
 import { getJwt, requestAuth } from '../auth'
 
 export async function signinAction({ request }: ActionFunctionArgs) {
@@ -30,63 +29,25 @@ export async function signinAction({ request }: ActionFunctionArgs) {
 function Signin() {
     const jwt = getJwt()
     const authResponse = useActionData()
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
 
     const signinScreen = (
         <>
             <ActionNav actionName={'Sign In'} />
             <main>
-                <section>
-                    <h3>Games Not Played</h3>
+                <section className="auth">
+                    <h3 className="brand">Games Not Played</h3>
                     {typeof authResponse === 'string' && (
                         <section>
                             <p>{authResponse}</p>
                         </section>
                     )}
-                    <Form method="post">
-                        <div>
-                            <section>
-                                <label htmlFor="username">Username</label>
-                                <input
-                                    value={username}
-                                    onChange={(e) =>
-                                        setUsername(e.target.value)
-                                    }
-                                    id="username"
-                                    name="username"
-                                    type="text"
-                                    autoComplete="username"
-                                    required
-                                    autoFocus
-                                />
-                            </section>
-                            <section>
-                                <label htmlFor="current-password">
-                                    Password
-                                </label>
-                                <input
-                                    value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    id="current-password"
-                                    name="password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                    required
-                                />
-                            </section>
-                            <button type="submit">Sign in</button>
-                        </div>
-                    </Form>
-                    <hr />
-                    <p>
-                        Don't have an account?{' '}
+                    <CredentialsForm />
+                    <div>
+                        <p>Don't have an account? </p>
                         <Link to={'/signup'} replace={true}>
                             Sign up
                         </Link>
-                    </p>
+                    </div>
                 </section>
             </main>
         </>

@@ -94,13 +94,13 @@ function Home() {
                     {jwt && rootLoaderData ? (
                         <GameList entries={optimisticEntries} />
                     ) : (
-                        <>
+                        <div className="welcome">
                             <h1>Welcome!</h1>
-                            <span>
+                            <p>
                                 <Link to="/signin">Sign in</Link> to get
                                 started.
-                            </span>
-                        </>
+                            </p>
+                        </div>
                     )}
                 </main>
             </DragDropContext>

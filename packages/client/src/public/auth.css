@@ -1,0 +1,26 @@
+.auth {
+    text-align: center;
+
+    .brand {
+        margin: 0.5em;
+    }
+    form {
+        text-align: center;
+
+        section {
+            margin: 0 5%;
+        }
+        label {
+            text-align: start;
+            margin-left: 5%;
+            display: block;
+        }
+        input {
+            width: 90%;
+            margin-bottom: 0.5em;
+        }
+        button {
+            margin: 1rem;
+        }
+    }
+}

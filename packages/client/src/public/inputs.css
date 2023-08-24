@@ -1,0 +1,23 @@
+.toggle-btn {
+    margin: 0.5em;
+
+    label {
+        display: inline-block;
+        cursor: pointer;
+        background-color: var(--bg-2);
+        color: var(--bg-3);
+        padding: 0.5em 1em;
+        border-radius: 5%;
+    }
+    input:checked + label {
+        background-color: var(--primary);
+        color: var(--text-light);
+    }
+}
+
+.delete-btn {
+    margin: 0.5em;
+    background-color: firebrick;
+    border-radius: 5%;
+    padding: 0.25em 1em;
+}

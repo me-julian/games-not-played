@@ -11,6 +11,7 @@ import ActionNav from '../components/ActionNav'
 import { getJwt } from '../auth'
 import { type RootLoaderData } from './Root'
 import RawgAttribution from '../components/RawgAttribution'
+import EntryFlagToggle from '../components/EntryFlagToggle'
 
 function entryUrlRequest(method: string, urlEnding: string) {
     const jwt = getJwt()
@@ -65,7 +66,6 @@ export async function editEntry({
 }
 
 function Details() {
-    const fetcher = useFetcher()
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
     const { entryId } = useParams()
     // No user feedback if there's an error (bad/stale ID in url)
@@ -80,64 +80,17 @@ function Details() {
                 <h4>{entry.game.name}</h4>
                 <p>{entry.game.playtime} Hours</p>
                 <p>Added {entry.game.updatedAt.toLocaleString()}</p>
-                <fetcher.Form
-                    onChange={(event) => {
-                        fetcher.submit(event.currentTarget, {
-                            method: 'PATCH',
-                        })
-                    }}
-                    method="PATCH"
-                >
-                    {<label htmlFor={'playing'}>Playing</label>}
-                    <input
-                        type="checkbox"
-                        id="playing"
-                        name="playing"
-                        value={'true'}
-                        defaultChecked={entry.isPlaying}
-                    />
-                    {/* This value is sent even if unchecking the checkbox.
-                    The API prioritizes 'playing' so it doesn't interfere. */}
-                    <input type="hidden" name="unplaying" value={'false'} />
-                </fetcher.Form>
-                <fetcher.Form
-                    onChange={(event) => {
-                        fetcher.submit(event.currentTarget, {
-                            method: 'PATCH',
-                        })
-                    }}
-                    method="PATCH"
-                >
-                    {<label htmlFor={'owned'}>Owned</label>}
-                    <input
-                        type="checkbox"
-                        id="owned"
-                        name="owned"
-                        value={'true'}
-                        defaultChecked={entry.isOwned}
-                    />
-                    <input type="hidden" name="unowned" value={'false'} />
-                </fetcher.Form>
-                <fetcher.Form
-                    onChange={(event) => {
-                        fetcher.submit(event.currentTarget, {
-                            method: 'PATCH',
-                        })
-                    }}
-                    method="PATCH"
-                >
-                    {<label htmlFor={'starred'}>Starred</label>}
-                    <input
-                        type="checkbox"
-                        id="starred"
-                        name="starred"
-                        value={'true'}
-                        defaultChecked={entry.isStarred}
-                    />
-                    <input type="hidden" name="unstarred" value={'false'} />
-                </fetcher.Form>
+                <EntryFlagToggle
+                    flagValue={entry.isPlaying}
+                    flagType="playing"
+                />
+                <EntryFlagToggle flagValue={entry.isOwned} flagType="owned" />
+                <EntryFlagToggle
+                    flagValue={entry.isStarred}
+                    flagType="starred"
+                />
                 <Form method="DELETE">
-                    <button name="delete" type="submit">
+                    <button className="delete-btn" name="delete" type="submit">
                         Delete
                     </button>
                 </Form>

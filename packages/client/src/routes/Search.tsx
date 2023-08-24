@@ -14,6 +14,7 @@ import ActionNav from '../components/ActionNav'
 import { getJwt } from '../auth'
 import SearchResult from '../components/SearchResult'
 import { RAWG } from '@games-not-played/types'
+import RawgAttribution from '../components/RawgAttribution'
 
 type SearchLoaderData = RAWG.SearchResults | Response | null
 
@@ -213,6 +214,7 @@ function Search() {
                     </>
                 )}
             </main>
+            <RawgAttribution />
         </>
     )
 }

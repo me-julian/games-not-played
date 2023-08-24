@@ -10,6 +10,7 @@ import {
 import ActionNav from '../components/ActionNav'
 import { getJwt } from '../auth'
 import { type RootLoaderData } from './Root'
+import RawgAttribution from '../components/RawgAttribution'
 
 function entryUrlRequest(method: string, urlEnding: string) {
     const jwt = getJwt()
@@ -141,6 +142,7 @@ function Details() {
                     </button>
                 </Form>
             </main>
+            <RawgAttribution />
         </>
     ) : (
         <Navigate to={'/'} />

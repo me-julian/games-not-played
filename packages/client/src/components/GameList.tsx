@@ -91,6 +91,7 @@ function GameList({ entries }: Props) {
                                     <div
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
+                                        className="list-section"
                                     >
                                         {playingEntries.map((entry, index) => (
                                             <Entry
@@ -119,7 +120,7 @@ function GameList({ entries }: Props) {
                         <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}
-                            className="list"
+                            className="list-section"
                         >
                             {otherEntries.map((entry, index) => (
                                 <Entry

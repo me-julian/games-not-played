@@ -15,23 +15,25 @@
     }
 } */
 
-.entry {
-    .wrapper {
-        color: var(--light-text);
-        overflow: auto;
-    }
-    .card {
-        background-color: var(--bg-0);
-        border: var(--bg-1) solid 3px;
-        border-bottom: none;
-        border-top: none;
-        border-radius: 3px;
-        padding: 0.5em;
-        margin: 0.5em;
-    }
-    .name {
-        font-size: 1.15rem;
-        font-weight: 400;
-        margin: none;
+#list {
+    .entry {
+        .wrapper {
+            color: var(--light-text);
+            overflow: auto;
+        }
+        .card {
+            background-color: var(--bg-0);
+            border: var(--bg-1) solid 3px;
+            border-bottom: none;
+            border-top: none;
+            border-radius: 3px;
+            padding: 0.5em;
+            margin: 0.5em;
+        }
+        .name {
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin: none;
+        }
     }
 }

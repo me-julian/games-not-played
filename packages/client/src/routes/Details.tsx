@@ -83,7 +83,7 @@ function Details() {
         <>
             <ActionNav actionName="Details" />
             <main
-                className="details"
+                id="details"
                 style={{
                     backgroundImage:
                         `linear-gradient(to bottom, #00000099, var(--bg-0)), url(${entry.game.backgroundImage})` ||
@@ -91,7 +91,7 @@ function Details() {
                 }}
             >
                 <div className="text-info">
-                    <h4 className="title">{entry.game.name}</h4>
+                    <h4 className="name">{entry.game.name}</h4>
                     <p>Average Length: {entry.game.playtime} Hours</p>
                     <p>
                         On list for {returnDaysSince(entry.game.updatedAt)} days

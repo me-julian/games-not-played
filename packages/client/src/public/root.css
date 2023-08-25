@@ -38,3 +38,9 @@ a {
     word-spacing: -0.07em;
     white-space: nowrap;
 }
+
+.rawg-attribution {
+    text-align: center;
+    padding: 1em;
+    padding-bottom: 1em;
+}

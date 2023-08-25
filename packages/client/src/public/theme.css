@@ -29,6 +29,12 @@ input[type='password'] {
 }
 
 button {
+    color: var(--bg-0);
     background-color: var(--primary);
     border: 0;
+}
+
+button:disabled {
+    color: var(--bg-2);
+    background-color: var(--primary-desat);
 }

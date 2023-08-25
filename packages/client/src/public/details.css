@@ -1,4 +1,4 @@
-.details {
+#details {
     background-color: var(--bg-0);
     background-position: center;
     background-repeat: no-repeat;
@@ -9,7 +9,7 @@
             text-shadow: 1px 1px 2px var(--bg-0);
         }
     }
-    .title {
+    .name {
         margin: 0.5em;
         text-align: center;
     }

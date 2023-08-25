@@ -5,8 +5,8 @@ function About() {
     return (
         <>
             <ActionNav actionName={'About'} />
-            <main>
-                <section className="about-section">
+            <main id="about">
+                <section>
                     <h4>About the App</h4>
                     <p>
                         <span className="brand">Games Not Played</span> is a web

@@ -1,21 +1,4 @@
 #list {
-    /* .entry {
-    color: var(--light);
-    overflow: auto;
-
-    .wrapper {
-        background-color: var(--bg-1);
-        border-radius: 16px;
-        padding: 0.5em;
-        margin: 0.5em;
-    }
-    .name {
-        font-size: 1.15rem;
-        font-weight: 400;
-        margin: none;
-    }
-    } */
-
     .entry {
         .wrapper {
             color: var(--light);
@@ -34,6 +17,37 @@
             font-size: 1.15rem;
             font-weight: 400;
             margin: none;
+        }
+
+        .entry-info {
+            display: flex;
+            flex-direction: column;
+
+            .playtime-and-pills {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+            .playtime {
+                align-self: flex-start;
+                font-size: smaller;
+            }
+            .pill {
+                display: inline-block;
+                padding: 0.2em 0.5em;
+                border-radius: 1em;
+            }
+            .pill.playing {
+                background-color: royalblue;
+            }
+            .pill.owned {
+                background-color: olivedrab;
+            }
+            .date-added {
+                align-self: flex-end;
+            }
         }
     }
 }

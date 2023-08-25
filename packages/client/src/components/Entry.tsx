@@ -24,12 +24,36 @@ function Entry({ index, entry }: Props) {
                     >
                         <div className="wrapper">
                             <div className="card">
-                                <h2 className="name">{entry.game.name}</h2>
-                                {entry.game.playtime && (
-                                    <span>{entry.game.playtime} Hours</span>
-                                )}
-                                {entry.isPlaying && <div>Playing!</div>}
-                                {entry.isOwned && <div>Owned!</div>}
+                                <h2 className="name text-wrap">
+                                    {entry.game.name}
+                                </h2>
+                                <div className="entry-info">
+                                    <div className="playtime-and-pills">
+                                        {entry.game.playtime && (
+                                            <span className="playtime">
+                                                {entry.game.playtime} Hours
+                                            </span>
+                                        )}
+                                        {entry.isPlaying && (
+                                            <div className="pill playing">
+                                                Playing!
+                                            </div>
+                                        )}
+                                        {entry.isOwned && !entry.isPlaying && (
+                                            <div className="pill owned">
+                                                Owned!
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="date-added">
+                                        Added on{' '}
+                                        {new Date(
+                                            entry.createdAt
+                                        ).toLocaleString(undefined, {
+                                            dateStyle: 'short',
+                                        })}
+                                    </div>
+                                </div>
                                 {entry.isStarred && <div>Starred!</div>}
                             </div>
                         </div>

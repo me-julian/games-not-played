@@ -5,6 +5,7 @@
     padding-bottom: var(--fixed-action-height);
 
     .list-section {
+        width: 100%;
         position: relative;
         background-color: var(--bg-0);
     }

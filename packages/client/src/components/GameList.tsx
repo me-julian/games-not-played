@@ -92,7 +92,11 @@ function GameList({ entries }: Props) {
                         timeout={{ enter: 300, exit: 200 }}
                         classNames="playing-section"
                     >
-                        <div ref={nodeRef}>
+                        <div
+                            ref={nodeRef}
+                            id="playing-section"
+                            className="list-section"
+                        >
                             <Droppable
                                 droppableId="playing-list"
                                 type="PLAYING"
@@ -101,7 +105,6 @@ function GameList({ entries }: Props) {
                                     <div
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
-                                        className="list-section"
                                     >
                                         {playingEntries.map((entry, index) => (
                                             <Entry

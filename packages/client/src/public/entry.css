@@ -1,6 +1,6 @@
 #list {
     /* .entry {
-    color: var(--light-text);
+    color: var(--light);
     overflow: auto;
 
     .wrapper {
@@ -18,7 +18,7 @@
 
     .entry {
         .wrapper {
-            color: var(--light-text);
+            color: var(--light);
             overflow: auto;
         }
         .card {

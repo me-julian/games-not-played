@@ -28,7 +28,17 @@
     }
     input:checked + label {
         background-color: var(--primary);
-        color: var(--text-light);
+        color: var(--light);
+    }
+}
+.toggle-btn.swap {
+    label {
+        background-color: var(--primary);
+        color: var(--light);
+    }
+    input:checked + label {
+        background-color: var(--primary);
+        color: var(--light);
     }
 }
 

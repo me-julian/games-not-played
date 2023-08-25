@@ -1,7 +1,7 @@
 #search {
     #search-form {
         text-align: center;
-        border-bottom: 2px solid var(--light-text);
+        border-bottom: 2px solid var(--light);
 
         form {
             text-align: center;
@@ -16,7 +16,7 @@
         }
     }
     .card {
-        color: var(--light-text);
+        color: var(--light);
         background-color: var(--bg-0);
         border-bottom: var(--bg-1) solid 3px;
         border-left: none;

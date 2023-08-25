@@ -1,6 +1,5 @@
 :root {
-    --light: #fffbfa;
-    --light-text: #e6fffbfa;
+    --light: #e6fffbfa;
     --primary: #3b5249;
     --primary-desat: #3e4f48; /* Desaturated 30% */
     --secondary: #a4b494;
@@ -15,12 +14,12 @@
 
 body {
     background: var(--bg-0);
-    color: var(--light-text);
+    color: var(--light);
 }
 
 input[type='text'],
 input[type='password'] {
-    color: var(--light-text);
+    color: var(--light);
     background-color: var(--bg-1);
     border: none;
     border-radius: 5px;
@@ -29,7 +28,7 @@ input[type='password'] {
 }
 
 button {
-    color: var(--bg-0);
+    color: var(--light);
     background-color: var(--primary);
     border: 0;
 }

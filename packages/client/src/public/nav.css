@@ -8,7 +8,7 @@ nav {
 
     a {
         text-decoration: none;
-        color: var(--light-text);
+        color: var(--light);
     }
     .title {
         font-size: 1.5rem;

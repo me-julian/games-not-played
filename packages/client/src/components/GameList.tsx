@@ -1,12 +1,18 @@
+import '../public/list.css'
+import { type RootOutletContext } from '../routes/Root'
+import { type Client } from '@games-not-played/types'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import { Droppable } from '@hello-pangea/dnd'
-import Entry from './Entry'
-import AddGame from './AddGame'
-import { type RootOutletContext } from '../routes/Root'
-import { type Client } from '@games-not-played/types'
 import { CSSTransition } from 'react-transition-group'
-import '../public/list.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faGamepad,
+    faCaretDown,
+    faCaretUp,
+} from '@fortawesome/free-solid-svg-icons'
+import Entry from './Entry'
+import RawgAttribution from './RawgAttribution'
 
 type Props = {
     entries: Client.Entry[] | null
@@ -71,10 +77,14 @@ function GameList({ entries }: Props) {
             {playingEntries && playingEntries.length > 0 && (
                 <>
                     <button
+                        id="toggle-playing-btn"
                         type="button"
+                        name="toggle-playing"
                         onClick={() => setShowPlaying(!showPlaying)}
                     >
-                        Show Playing
+                        <FontAwesomeIcon
+                            icon={showPlaying ? faCaretUp : faCaretDown}
+                        ></FontAwesomeIcon>
                     </button>
                     <CSSTransition
                         nodeRef={nodeRef}
@@ -134,13 +144,19 @@ function GameList({ entries }: Props) {
                     )}
                 </Droppable>
             )}
-            <AddGame />
-            <Link to={'/random'}>
-                <button>Random</button>
+            <Link to="/search">
+                <span className="sr-only sr-only-focusable">Add Game</span>
+                <FontAwesomeIcon icon={faGamepad} size="4x" />
             </Link>
-            <Link to={'/filter'}>
-                <button>Filter</button>
-            </Link>
+            <RawgAttribution />
+            <div id="list-actions">
+                <Link to={'/random'} id="random-btn">
+                    <button>Random</button>
+                </Link>
+                <Link to={'/filter'} id="filter-btn">
+                    <button>Filter</button>
+                </Link>
+            </div>
         </>
     )
 }

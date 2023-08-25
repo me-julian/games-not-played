@@ -1,4 +1,5 @@
-/* .entry {
+#list {
+    /* .entry {
     color: var(--light-text);
     overflow: auto;
 
@@ -13,9 +14,8 @@
         font-weight: 400;
         margin: none;
     }
-} */
+    } */
 
-#list {
     .entry {
         .wrapper {
             color: var(--light-text);

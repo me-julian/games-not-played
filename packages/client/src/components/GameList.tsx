@@ -149,7 +149,7 @@ function GameList({ entries }: Props) {
                 <FontAwesomeIcon icon={faGamepad} size="4x" />
             </Link>
             <RawgAttribution />
-            <div id="list-actions">
+            <div className="list-actions">
                 <Link to={'/random'} id="random-btn">
                     <button>Random</button>
                 </Link>

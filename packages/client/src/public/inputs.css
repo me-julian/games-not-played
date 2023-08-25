@@ -1,5 +1,22 @@
+.fixed-action {
+    position: fixed;
+    background-color: var(--bg-0);
+    height: var(--fixed-action-height);
+    width: 100%;
+    bottom: 0px;
+
+    .button-wrapper {
+        height: 100%;
+        width: 100%;
+        .action-btn {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
 .toggle-btn {
-    margin: 0.5em;
+    margin: 2.5%;
 
     label {
         display: inline-block;
@@ -13,6 +30,33 @@
         background-color: var(--primary);
         color: var(--text-light);
     }
+}
+
+/* Not part of React-Transition-Group */
+/* Just an initial value to get overrided as soon as it's interacted with. */
+.focus-btns-initial {
+    transform: scale(0.9);
+}
+.focus-btns-enter {
+    transform: scale(0.9);
+}
+.focus-btns-enter-active {
+    transform: scale(1);
+    transition: all 200ms;
+}
+.focus-btns-enter-done {
+    transform: scale(1);
+}
+
+.focus-btns-exit {
+    transform: scale(1);
+}
+.focus-btns-exit-active {
+    transform: scale(0.9);
+    transition: all 200ms;
+}
+.focus-btns-exit-done {
+    transform: scale(0.9);
 }
 
 .delete-btn {

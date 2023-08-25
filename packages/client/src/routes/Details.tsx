@@ -1,17 +1,17 @@
+import '../public/details.css'
+import { type RootLoaderData } from './Root'
 import {
     ActionFunctionArgs,
     Form,
     Navigate,
     redirect,
-    useFetcher,
     useParams,
     useRouteLoaderData,
 } from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
-import { getJwt } from '../auth'
-import { type RootLoaderData } from './Root'
-import RawgAttribution from '../components/RawgAttribution'
 import EntryFlagToggle from '../components/EntryFlagToggle'
+import RawgAttribution from '../components/RawgAttribution'
+import { getJwt } from '../auth'
 
 function entryUrlRequest(method: string, urlEnding: string) {
     const jwt = getJwt()
@@ -65,6 +65,12 @@ export async function editEntry({
     }
 }
 
+function returnDaysSince(date: Date | string) {
+    const interval = Date.now() - new Date(date).getTime()
+    const dayMs = 1000 * 60 * 60 * 24
+    return Math.floor(interval / dayMs)
+}
+
 function Details() {
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
     const { entryId } = useParams()
@@ -76,10 +82,21 @@ function Details() {
     return entry ? (
         <>
             <ActionNav actionName="Details" />
-            <main>
-                <h4>{entry.game.name}</h4>
-                <p>{entry.game.playtime} Hours</p>
-                <p>Added {entry.game.updatedAt.toLocaleString()}</p>
+            <main
+                className="details"
+                style={{
+                    backgroundImage:
+                        `linear-gradient(to bottom, #00000099, var(--bg-0)), url(${entry.game.backgroundImage})` ||
+                        'none',
+                }}
+            >
+                <div className="text-info">
+                    <h4 className="title">{entry.game.name}</h4>
+                    <p>Average Length: {entry.game.playtime} Hours</p>
+                    <p>
+                        On list for {returnDaysSince(entry.game.updatedAt)} days
+                    </p>
+                </div>
                 <EntryFlagToggle
                     flagValue={entry.isPlaying}
                     flagType="playing"

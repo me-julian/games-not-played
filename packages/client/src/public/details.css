@@ -1,0 +1,16 @@
+.details {
+    background-color: var(--bg-0);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .text-info {
+        * {
+            text-shadow: 1px 1px 2px var(--bg-0);
+        }
+    }
+    .title {
+        margin: 0.5em;
+        text-align: center;
+    }
+}

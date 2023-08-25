@@ -40,6 +40,12 @@ a {
     white-space: nowrap;
 }
 
+.text-wrap {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .rawg-attribution {
     text-align: center;
     padding: 1em;

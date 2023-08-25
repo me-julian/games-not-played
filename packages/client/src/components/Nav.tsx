@@ -22,7 +22,7 @@ function Nav() {
                 </Link>
                 {jwt ? (
                     <>
-                        <span className="username">
+                        <span className="text-wrap">
                             {parseJwt(jwt).username}
                         </span>
                         <span

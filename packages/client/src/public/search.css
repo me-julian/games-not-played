@@ -28,9 +28,6 @@
         margin: 0.5em 0;
         font-weight: 500;
         margin: none;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
     }
 
     .page-navigation {

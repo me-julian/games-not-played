@@ -15,11 +15,6 @@ nav {
         font-weight: 600;
         margin-right: auto;
     }
-    .username {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
     .link-icon {
         cursor: pointer;
         margin-left: 0.25em;

@@ -20,7 +20,7 @@ function SearchEntry({
     return (
         <Form method="POST" onClick={(event) => onSelect(event)}>
             <div className="card">
-                <h5 className="name">{name}</h5>
+                <h5 className="name text-wrap">{name}</h5>
                 <input type="hidden" id="id" name="id" value={id} />
                 <input type="hidden" id="name" name="name" value={name} />
                 {playtime !== 0 && (

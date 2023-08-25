@@ -1,7 +1,7 @@
+import '../public/search.css'
 import { useEffect, useRef, useState } from 'react'
 import {
     Form,
-    useActionData,
     ActionFunctionArgs,
     redirect,
     LoaderFunctionArgs,
@@ -12,11 +12,11 @@ import {
 } from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
 import { getJwt } from '../auth'
-import SearchResult from '../components/SearchResult'
 import { RAWG } from '@games-not-played/types'
 import RawgAttribution from '../components/RawgAttribution'
+import SearchResults from '../components/SearchResults'
 
-type SearchLoaderData = RAWG.SearchResults | Response | null
+export type SearchLoaderData = RAWG.SearchResults | Response | null
 
 function requestSearch(urlEnding: string) {
     const jwt = getJwt()
@@ -79,19 +79,8 @@ export async function addToList({ request }: ActionFunctionArgs) {
     }
 }
 
-function isResults(
-    data: SearchLoaderData | Response | null
-): data is RAWG.SearchResults {
-    if (data) {
-        return (data as RAWG.SearchResults).results !== undefined
-    } else {
-        return false
-    }
-}
-
 function Search() {
     const searchData = useLoaderData() as SearchLoaderData
-    const actionResponse = useActionData()
 
     const submit = useSubmit()
     const [searchParams, setSearchParams] = useSearchParams()
@@ -99,10 +88,6 @@ function Search() {
         searchParams.get('search') || ''
     )
     const page = searchParams.has('page') ? Number(searchParams.get('page')) : 1
-
-    function handleSelect(event: any) {
-        submit(event.currentTarget)
-    }
 
     const searchForm = useRef<HTMLFormElement>(null)
     useEffect(() => {
@@ -118,11 +103,13 @@ function Search() {
     return (
         <>
             <ActionNav actionName={'Search'} />
-            <main>
-                <section>
+            <main id="search">
+                <section id="search-form">
                     <Form method="GET" ref={searchForm}>
                         <div>
-                            <label htmlFor="search">Search</label>
+                            <label htmlFor="search" className="sr-only">
+                                Search
+                            </label>
                             <input
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -139,79 +126,17 @@ function Search() {
                                 id="page"
                                 name="page"
                             />
-                            <button type="submit">Search</button>
                         </div>
                     </Form>
-                    <hr />
                 </section>
                 {navigation.state !== 'idle' ? (
                     <p>Loading...</p>
                 ) : (
-                    <>
-                        {typeof actionResponse === 'string' && (
-                            <section>
-                                <p>{actionResponse}</p>
-                            </section>
-                        )}
-                        {searchData &&
-                            (isResults(searchData) ? (
-                                <>
-                                    {searchData.results.map((result) => (
-                                        <SearchResult
-                                            key={result.id}
-                                            id={result.id}
-                                            name={result.name}
-                                            playtime={result.playtime}
-                                            backgroundImage={
-                                                result.background_image
-                                            }
-                                            updated={result.updated}
-                                            onSelect={handleSelect}
-                                        />
-                                    ))}
-                                    {(searchData.previous ||
-                                        searchData.next) && (
-                                        <>
-                                            <div>Page: {page}</div>
-                                            <button
-                                                disabled={!searchData.previous}
-                                                onClick={() => {
-                                                    searchParams.set(
-                                                        'page',
-                                                        (page - 1).toString()
-                                                    )
-                                                    setSearchParams(
-                                                        searchParams
-                                                    )
-                                                }}
-                                            >
-                                                Previous Page
-                                            </button>
-                                            <button
-                                                disabled={!searchData.next}
-                                                onClick={() => {
-                                                    searchParams.set(
-                                                        'page',
-                                                        (page + 1).toString()
-                                                    )
-                                                    setSearchParams(
-                                                        searchParams
-                                                    )
-                                                }}
-                                            >
-                                                Next Page
-                                            </button>
-                                        </>
-                                    )}
-                                    <sub>{searchData.count} results found.</sub>
-                                </>
-                            ) : (
-                                <p>
-                                    There was an issue finding any results for
-                                    your search.
-                                </p>
-                            ))}
-                    </>
+                    <SearchResults
+                        searchData={searchData}
+                        page={page}
+                        useSearchParams={[searchParams, setSearchParams]}
+                    />
                 )}
             </main>
             <RawgAttribution />

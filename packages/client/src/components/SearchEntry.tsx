@@ -9,7 +9,7 @@ type Props = {
     onSelect: (event: any) => void
 }
 
-function SearchResult({
+function SearchEntry({
     id,
     name,
     playtime,
@@ -19,9 +19,8 @@ function SearchResult({
 }: Props) {
     return (
         <Form method="POST" onClick={(event) => onSelect(event)}>
-            <div>
-                <h6>{name}</h6>
-                {playtime !== 0 && <span>{playtime}</span>}
+            <div className="card">
+                <h5 className="name">{name}</h5>
                 <input type="hidden" id="id" name="id" value={id} />
                 <input type="hidden" id="name" name="name" value={name} />
                 {playtime !== 0 && (
@@ -46,10 +45,9 @@ function SearchResult({
                     name="updated"
                     value={updated}
                 />
-                <hr />
             </div>
         </Form>
     )
 }
 
-export default SearchResult
+export default SearchEntry

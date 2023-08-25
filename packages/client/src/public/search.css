@@ -1,0 +1,59 @@
+#search {
+    #search-form {
+        text-align: center;
+        border-bottom: 2px solid var(--light-text);
+
+        form {
+            text-align: center;
+
+            section {
+                margin: 0 5%;
+            }
+            input {
+                width: 90%;
+                margin: 1em 5%;
+            }
+        }
+    }
+    .card {
+        color: var(--light-text);
+        background-color: var(--bg-0);
+        border-bottom: var(--bg-1) solid 3px;
+        border-left: none;
+        border-right: none;
+        border-radius: 3px;
+        padding: 0.5em;
+    }
+    .name {
+        margin: 0.5em 0;
+        font-weight: 500;
+        margin: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .page-navigation {
+        display: flex;
+        flex-direction: column;
+        margin: 2.5%;
+        text-align: center;
+
+        .result-count {
+            display: block;
+        }
+        .page-number {
+            font-size: smaller;
+        }
+        .page-buttons {
+            display: flex;
+            flex: row;
+            justify-content: space-between;
+
+            button {
+                border-radius: 5px;
+                width: 45%;
+            }
+        }
+    }
+}

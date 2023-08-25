@@ -42,9 +42,16 @@
     }
 }
 
-/* Not part of React-Transition-Group */
-/* Just an initial value to get overrided as soon as it's interacted with. */
+.delete-btn {
+    margin: 2.5%;
+    background-color: firebrick;
+    border-radius: 5%;
+    padding: 0.25em 1em;
+}
+
 .focus-btns-initial {
+    /* Not part of React-Transition-Group */
+    /* Just an initial value to get overrided as soon as it's interacted with. */
     transform: scale(0.9);
 }
 .focus-btns-enter {
@@ -67,11 +74,4 @@
 }
 .focus-btns-exit-done {
     transform: scale(0.9);
-}
-
-.delete-btn {
-    margin: 0.5em;
-    background-color: firebrick;
-    border-radius: 5%;
-    padding: 0.25em 1em;
 }

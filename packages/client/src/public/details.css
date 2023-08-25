@@ -5,6 +5,13 @@
     background-size: cover;
 
     .text-info {
+        background: linear-gradient(
+            to bottom,
+            var(--bg-transparent) 75%,
+            rgba(0, 0, 0, 0)
+        );
+        padding: 2.5% 2.5% 2em;
+
         * {
             text-shadow: 1px 1px 2px var(--bg-0);
         }

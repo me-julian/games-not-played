@@ -1,4 +1,21 @@
+:root {
+    --light: #e6fffbfa;
+    --primary: #3b5249;
+    --primary-desat: #3e4f48; /* Desaturated 30% */
+    --secondary: #a4b494;
+    --secondary-desat: #a4af99; /* Desatured 30% */
+    --secondary-desat-darken: #a4af99; /* Desaturated 30%, Darkened 20% */
+    --accent: #aa5042;
+    --bg-0: #141314;
+    --bg-1: #272527;
+    --bg-2: #3b383b;
+    --bg-3: #4e4a4e;
+    --bg-transparent: #14131480;
+}
+
 body {
+    background: var(--bg-0);
+    color: var(--light);
     height: 100vh;
     font-family: 'Ubuntu', sans-serif;
     --fixed-action-height: 2rem;
@@ -38,12 +55,6 @@ a {
     letter-spacing: -0.07em;
     word-spacing: -0.07em;
     white-space: nowrap;
-}
-
-.text-wrap {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 .rawg-attribution {

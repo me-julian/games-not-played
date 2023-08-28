@@ -24,8 +24,8 @@
             height: inherit;
         }
     }
-    #add-game-btn {
-    }
+    /* #add-game-btn {
+    } */
     .list-actions {
         position: fixed;
         background-color: var(--bg-0);

@@ -2,6 +2,8 @@ import '../public//component-css/entry.css'
 import { Link } from 'react-router-dom'
 import { Draggable } from '@hello-pangea/dnd'
 import { type Client } from '@games-not-played/types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
     entry: Client.Entry
@@ -24,9 +26,14 @@ function Entry({ index, entry }: Props) {
                     >
                         <div className="wrapper">
                             <div className="card">
-                                <h2 className="name text-wrap">
-                                    {entry.game.name}
-                                </h2>
+                                <div className="name-and-star">
+                                    <h2 className="name text-wrap">
+                                        {entry.game.name}
+                                    </h2>
+                                    {entry.isStarred && (
+                                        <FontAwesomeIcon icon={faStar} />
+                                    )}
+                                </div>
                                 <div className="entry-info">
                                     <div className="playtime-and-pills">
                                         {entry.game.playtime && (
@@ -36,12 +43,12 @@ function Entry({ index, entry }: Props) {
                                         )}
                                         {entry.isPlaying && (
                                             <div className="pill playing">
-                                                Playing!
+                                                Playing
                                             </div>
                                         )}
                                         {entry.isOwned && !entry.isPlaying && (
                                             <div className="pill owned">
-                                                Owned!
+                                                Owned
                                             </div>
                                         )}
                                     </div>
@@ -54,7 +61,6 @@ function Entry({ index, entry }: Props) {
                                         })}
                                     </div>
                                 </div>
-                                {entry.isStarred && <div>Starred!</div>}
                             </div>
                         </div>
                     </div>

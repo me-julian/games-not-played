@@ -1,13 +1,3 @@
-input[type='text'],
-input[type='password'] {
-    color: var(--light);
-    background-color: var(--bg-1);
-    border: none;
-    border-radius: 5px;
-    padding: 0.25em;
-    border: 2px solid var(--bg-2);
-}
-
 button {
     cursor: pointer;
     color: var(--light);

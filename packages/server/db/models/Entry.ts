@@ -55,35 +55,38 @@ export default class Entry extends Model {
     @BeforeDestroy
     // Likely not playing anymore if it was removed.
     // Simplifies resetting order on restoration.
-    static async unsetPlaying(instance: Entry) {
+    static async unsetPlaying(instance: Entry, options: any) {
         try {
-            await instance.update('isPlaying', false)
+            await instance.update(
+                { isPlaying: false },
+                { transaction: options.transaction }
+            )
         } catch (error) {
             throw error
         }
     }
-    @AfterDestroy
-    static async fillOrderGap(instance: Entry) {
+    @BeforeDestroy
+    // Fix potential gap in entry order by moving deleted to end.
+    static async fillOrderGap(instance: Entry, options: any) {
         const startIndex = instance.order
 
-        const entries = await Entry.findAll({ where: { id: instance.userId } })
-        if (entries.length < 1 || startIndex === entries.length - 1) {
-            return
-        }
+        const count = await Entry.count({ where: { userId: instance.userId } })
 
-        const t = await sequelize.transaction()
         try {
-            await Entry.reorder(entries, startIndex, entries.length - 1, t)
-            await t.commit()
+            await Entry.moveOne(
+                instance.userId,
+                startIndex,
+                count - 1,
+                options.transaction
+            )
         } catch (error) {
-            await t.rollback()
             throw error
         }
     }
 
     @AfterRestore
     // Move restored instance to end of order
-    static async resetRestoredInstanceOrder(instance: Entry) {
+    static async resetRestoredInstanceOrder(instance: Entry, options: any) {
         const entryCount = await Entry.count({
             where: {
                 userId: instance.userId,
@@ -91,7 +94,10 @@ export default class Entry extends Model {
         })
 
         try {
-            await instance.update({ order: entryCount })
+            await instance.update(
+                { order: entryCount },
+                { transaction: options.transaction }
+            )
         } catch (error) {
             throw error
         }

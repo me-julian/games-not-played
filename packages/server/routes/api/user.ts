@@ -111,7 +111,11 @@ router.post(
             })
 
             if (entry.isSoftDeleted()) {
-                await entry.restore({ transaction: t })
+                await db.entries.restore({
+                    where: { id: entry.id },
+                    transaction: t,
+                    individualHooks: true,
+                })
             } else {
                 // Game already in user's list
                 if (!entryCreated) {
@@ -194,20 +198,26 @@ router.delete(
     '/list/:entryId',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
+        const t = await db.sequelize.transaction()
         try {
             // Soft deletion
             const deleted = await db.entries.destroy({
                 where: { id: req.params.entryId, userId: req.user!.id },
+                transaction: t,
+                individualHooks: true,
             })
 
             if (deleted) {
+                await t.commit()
                 res.sendStatus(204)
                 return
             } else {
+                await t.rollback()
                 res.sendStatus(404)
                 return
             }
         } catch (error: unknown) {
+            await t.commit()
             console.error(error)
             res.sendStatus(500)
             return

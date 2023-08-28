@@ -29,6 +29,7 @@ input[type='password'] {
 }
 
 button {
+    cursor: pointer;
     color: var(--light);
     background-color: var(--primary);
     border: 0;

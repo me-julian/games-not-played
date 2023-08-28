@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './public/reset.css'
 import './public/util.css'
 import './public/root.css'
-import './public/inputs.css'
+import './public/buttons.css'
 import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

@@ -1,4 +1,4 @@
-import '../public/search.css'
+import '../public/component-css/search.css'
 import { useEffect, useRef, useState } from 'react'
 import {
     Form,

@@ -1,4 +1,4 @@
-import '../public/nav.css'
+import '../public/component-css/nav.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons'

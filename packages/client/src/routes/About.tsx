@@ -1,4 +1,4 @@
-import '../public/about.css'
+import '../public/component-css/about.css'
 import ActionNav from '../components/ActionNav'
 
 function About() {

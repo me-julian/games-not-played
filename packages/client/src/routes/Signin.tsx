@@ -1,3 +1,4 @@
+import '../public/component-css/auth.css'
 import {
     Link,
     Navigate,

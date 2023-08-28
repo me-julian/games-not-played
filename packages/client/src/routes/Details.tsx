@@ -1,4 +1,4 @@
-import '../public/details.css'
+import '../public/component-css/details.css'
 import { type RootLoaderData } from './Root'
 import {
     ActionFunctionArgs,

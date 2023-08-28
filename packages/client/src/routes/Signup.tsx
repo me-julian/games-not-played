@@ -1,4 +1,4 @@
-import '../public/auth.css'
+import '../public/component-css/auth.css'
 import {
     ActionFunctionArgs,
     Link,

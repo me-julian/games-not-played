@@ -1,4 +1,4 @@
-import '../public/list.css'
+import '../public/component-css/gamelist.css'
 import { type RootOutletContext } from '../routes/Root'
 import { type Client } from '@games-not-played/types'
 import { useEffect, useRef, useState } from 'react'

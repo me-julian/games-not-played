@@ -1,0 +1,8 @@
+#filter-options {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: calc(var(--fixed-action-height) + 0.5rem);
+}

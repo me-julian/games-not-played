@@ -34,7 +34,7 @@
             min-height: 100px;
             padding: 0.5rem;
             border-top-left-radius: 3px;
-            border-top-right-radius: 3px;
+            border-bottom-left-radius: 3px;
         }
         .card-grip {
             border-left: none;

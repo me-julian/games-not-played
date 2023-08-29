@@ -1,7 +1,6 @@
 #list {
     .entry {
         .wrapper {
-            color: var(--light);
             overflow: auto;
 
             .spacer {
@@ -11,6 +10,7 @@
                 content: '';
             }
         }
+
         .card {
             display: flex;
             flex-direction: row;
@@ -20,15 +20,19 @@
             border-top: none;
             border-radius: 3px;
         }
+        .card-link {
+            display: block;
+            width: 100%;
+            overflow: auto;
+        }
         .card-box {
+            background-color: var(--bg-1);
+            color: var(--light);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             min-height: 100px;
             padding: 0.5rem;
-            background-color: var(--bg-1);
-            width: 100%;
-            overflow: auto;
             border-top-left-radius: 3px;
             border-top-right-radius: 3px;
         }

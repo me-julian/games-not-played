@@ -6,6 +6,12 @@
     --secondary-desat: #a4af99; /* Desatured 30% */
     --secondary-desat-darken: #a4af99; /* Desaturated 30%, Darkened 20% */
     --accent: #aa5042;
+    /* --playing-accent: #4068e0; */
+    /* --starred-accent: #ffff00; */
+    --playing-accent: #34748b;
+    --playing-accent-transparent: #34748b40;
+    --owned-accent: #2c783f;
+    --starred-accent: #f9dc5c;
     --bg-0: #141314;
     --bg-1: #272527;
     --bg-2: #3b383b;

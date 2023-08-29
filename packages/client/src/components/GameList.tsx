@@ -75,7 +75,12 @@ function GameList({ entries }: Props) {
     return (
         <>
             {playingEntries && playingEntries.length > 0 && (
-                <>
+                <div
+                    id="playing-section"
+                    className={`list-section ${
+                        showPlaying ? 'show-playing' : ''
+                    }`}
+                >
                     <button
                         id="toggle-playing-btn"
                         type="button"
@@ -90,13 +95,10 @@ function GameList({ entries }: Props) {
                         nodeRef={nodeRef}
                         in={showPlaying}
                         timeout={{ enter: 300, exit: 200 }}
-                        classNames="playing-section"
+                        classNames="playing-list"
                     >
-                        <div
-                            ref={nodeRef}
-                            id="playing-section"
-                            className="list-section"
-                        >
+                        <div ref={nodeRef}>
+                            <h5 className="header">Currently Playing</h5>
                             <Droppable
                                 droppableId="playing-list"
                                 type="PLAYING"
@@ -120,7 +122,7 @@ function GameList({ entries }: Props) {
                             {playingEntries.length > 0 && <hr />}
                         </div>
                     </CSSTransition>
-                </>
+                </div>
             )}
 
             {otherEntries && otherEntries.length > 0 && (

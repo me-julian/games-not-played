@@ -17,7 +17,7 @@ function Entry({ index, entry }: Props) {
             draggableId={entry.id.toString()}
             index={index}
         >
-            {(provided) => (
+            {(provided, snapshot) => (
                 <Link className="entry" to={`/details/${entry.id}`}>
                     <div
                         ref={provided.innerRef}
@@ -25,7 +25,11 @@ function Entry({ index, entry }: Props) {
                         {...provided.dragHandleProps}
                     >
                         <div className="wrapper">
-                            <div className="card">
+                            <div
+                                className={`card ${
+                                    snapshot.isDragging ? 'dragging' : ''
+                                }`}
+                            >
                                 <div className="name-and-star">
                                     <h2 className="name text-wrap">
                                         {entry.game.name}
@@ -40,11 +44,6 @@ function Entry({ index, entry }: Props) {
                                             <span className="playtime">
                                                 {entry.game.playtime} Hours
                                             </span>
-                                        )}
-                                        {entry.isPlaying && (
-                                            <div className="pill playing">
-                                                Playing
-                                            </div>
                                         )}
                                         {entry.isOwned && !entry.isPlaying && (
                                             <div className="pill owned">

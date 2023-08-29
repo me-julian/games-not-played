@@ -5,24 +5,43 @@
     padding-bottom: var(--fixed-action-height);
 
     .list-section {
+        text-align: center;
         width: 100%;
         position: relative;
         background-color: var(--bg-0);
     }
-    #toggle-playing-btn {
-        background-color: var(--primary);
-        border-radius: 1em;
-        margin: 0.25em;
-        line-height: 0.25em;
-        height: 0.75em;
-        width: 90%;
-        padding-inline: 0px;
-        padding-block: 0px;
+    #playing-section {
+        #toggle-playing-btn {
+            background-color: var(--playing-accent);
+            border-radius: 1em;
+            margin: 0.5em;
+            line-height: 0.25em;
+            height: 1em;
+            width: calc(100% - 1em);
+            padding-inline: 0px;
+            padding-block: 0px;
 
-        .svg-inline--fa {
-            line-height: inherit;
-            height: inherit;
+            .svg-inline--fa {
+                line-height: inherit;
+                height: inherit;
+            }
         }
+
+        .header {
+            display: inline-block;
+            font-size: 1.3rem;
+            font-weight: 500;
+            padding: 0.25rem 0.5rem;
+            border: 3px solid var(--playing-accent-transparent);
+            border-radius: 4px;
+        }
+    }
+    #playing-section.show-playing {
+        background: linear-gradient(
+            to bottom,
+            var(--playing-accent-transparent) 0px,
+            var(--bg-0) 100px
+        );
     }
     /* #add-game-btn {
     } */
@@ -60,22 +79,23 @@
     }
 }
 
-.playing-section-enter {
+/* Display list transitions */
+.playing-list-enter {
     max-height: 0dvh;
 }
-.playing-section-enter-active {
+.playing-list-enter-active {
     max-height: 100dvh;
     transition: all 300ms;
 }
 
-.playing-section-exit {
+.playing-list-exit {
     max-height: 100dvh;
 }
-.playing-section-exit-active {
+.playing-list-exit-active {
     max-height: 0px;
     transition: all 200ms;
 }
-.playing-section-exit-done {
+.playing-list-exit-done {
     display: none;
     max-height: 0px;
 }

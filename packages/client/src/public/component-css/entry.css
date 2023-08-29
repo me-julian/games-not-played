@@ -5,13 +5,15 @@
             overflow: auto;
         }
         .card {
-            background-color: var(--bg-0);
             border: var(--bg-1) solid 3px;
             border-bottom: none;
             border-top: none;
             border-radius: 3px;
-            padding: 0.5em;
-            margin: 0.5em;
+            padding: 0.5rem;
+            margin: 0.5rem;
+        }
+        .card.dragging {
+            background-color: var(--bg-0);
         }
 
         .name-and-star {
@@ -28,7 +30,7 @@
             }
             .svg-inline--fa {
                 margin-left: auto;
-                color: yellow;
+                color: var(--starred-accent);
             }
         }
 
@@ -50,14 +52,14 @@
             .pill {
                 display: inline-block;
                 padding: 0.2em 0.5em;
-                border-radius: 1em;
+                border-radius: 14px;
                 margin-left: auto;
             }
             .pill.playing {
-                background-color: royalblue;
+                background-color: var(--playing-accent);
             }
             .pill.owned {
-                background-color: olivedrab;
+                background-color: var(--owned-accent);
             }
             .date-added {
                 align-self: flex-end;

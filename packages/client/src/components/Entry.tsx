@@ -8,14 +8,16 @@ import { faBars, faStar } from '@fortawesome/free-solid-svg-icons'
 type Props = {
     entry: Client.Entry
     index: number
+    dndDisabled: boolean | undefined
 }
 
-function Entry({ index, entry }: Props) {
+function Entry({ index, entry, dndDisabled }: Props) {
     return (
         <Draggable
             key={entry.id}
             draggableId={entry.id.toString()}
             index={index}
+            isDragDisabled={dndDisabled}
         >
             {(provided, snapshot) => (
                 <div className="entry">
@@ -26,12 +28,16 @@ function Entry({ index, entry }: Props) {
                                     snapshot.isDragging ? 'dragging' : ''
                                 }`}
                             >
-                                <div
-                                    className="card-grip"
-                                    {...provided.dragHandleProps}
-                                >
-                                    <FontAwesomeIcon icon={faBars} />
-                                </div>
+                                {!dndDisabled && (
+                                    <>
+                                        <div
+                                            className="card-grip"
+                                            {...provided.dragHandleProps}
+                                        >
+                                            <FontAwesomeIcon icon={faBars} />
+                                        </div>
+                                    </>
+                                )}
                                 <Link
                                     className="card-link"
                                     to={`/details/${entry.id}`}

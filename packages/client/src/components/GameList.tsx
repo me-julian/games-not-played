@@ -113,6 +113,7 @@ function GameList({ entries }: Props) {
                                                 key={entry.id}
                                                 index={index}
                                                 entry={entry}
+                                                dndDisabled={undefined}
                                             />
                                         ))}
                                         {provided.placeholder}
@@ -142,6 +143,7 @@ function GameList({ entries }: Props) {
                                     key={entry.id}
                                     index={index + playingIndexOffset}
                                     entry={entry}
+                                    dndDisabled={dndDisabled}
                                 />
                             ))}
                             {provided.placeholder}

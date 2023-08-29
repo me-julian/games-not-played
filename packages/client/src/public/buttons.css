@@ -28,7 +28,6 @@ button:disabled {
 }
 
 .toggle-btn {
-    text-align: center;
     margin: 0.5rem;
 
     label {

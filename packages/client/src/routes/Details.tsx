@@ -92,7 +92,12 @@ function Details() {
             >
                 <div className="text-info">
                     <h4 className="name">{entry.game.name}</h4>
-                    <p>Average Length: {entry.game.playtime} Hours</p>
+                    <p>
+                        Average Length:{' '}
+                        {entry.game.playtime
+                            ? `${entry.game.playtime} Hours`
+                            : 'Unknown'}
+                    </p>
                     <p>
                         On list for {returnDaysSince(entry.game.updatedAt)} days
                     </p>

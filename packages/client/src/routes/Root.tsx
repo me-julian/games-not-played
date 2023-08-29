@@ -44,6 +44,10 @@ export type RootOutletContext = {
         state: 'asc' | 'desc'
         setter: React.Dispatch<React.SetStateAction<'asc' | 'desc'>>
     }
+    showPlaying: {
+        state: boolean
+        setter: React.Dispatch<React.SetStateAction<boolean>>
+    }
 }
 
 function Root() {
@@ -54,10 +58,17 @@ function Root() {
         localStorage.getItem('lastFilterDirection') || 'asc'
     )
 
+    const [showPlaying, setShowPlaying] = useState(
+        localStorage.getItem('lastShowPlaying')
+            ? localStorage.getItem('lastShowPlaying') === 'true'
+            : true
+    )
+
     useEffect(() => {
         localStorage.setItem('lastFilter', currentFilter)
         localStorage.setItem('lastFilterDirection', filterDirection)
-    }, [currentFilter, filterDirection])
+        localStorage.setItem('lastShowPlaying', showPlaying.toString())
+    }, [currentFilter, filterDirection, showPlaying])
 
     return (
         <>
@@ -70,6 +81,10 @@ function Root() {
                     filterDirection: {
                         state: filterDirection,
                         setter: setFilterDirection,
+                    },
+                    showPlaying: {
+                        state: showPlaying,
+                        setter: setShowPlaying,
                     },
                 }}
             />

@@ -158,10 +158,20 @@ function GameList({ entries }: Props) {
             <RawgAttribution />
             <div className="list-actions">
                 <Link to={'/random'} id="random-btn">
-                    <button>Random</button>
+                    <div>Random</div>
                 </Link>
                 <Link to={'/filter'} id="filter-btn">
-                    <button>Filter</button>
+                    <div>
+                        <span>Filter</span>
+                        {/* <span>
+                            {' '}
+                            {currentFilter.state.charAt(0).toUpperCase() +
+                                currentFilter.state.slice(1)}
+                            {(currentFilter.state === 'length' ||
+                                currentFilter.state === 'dateAdded') &&
+                                `[${filterDirection.state.toUpperCase()}]`}
+                        </span> */}
+                    </div>
                 </Link>
             </div>
         </>

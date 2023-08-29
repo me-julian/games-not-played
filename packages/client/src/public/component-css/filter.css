@@ -5,4 +5,16 @@
     justify-content: flex-end;
     align-items: center;
     margin-bottom: calc(var(--fixed-action-height) + 0.5rem);
+
+    .toggle-btn {
+        width: 100%;
+        label {
+            width: 50%;
+        }
+        .swap {
+            label {
+                width: 25%;
+            }
+        }
+    }
 }

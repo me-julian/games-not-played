@@ -54,7 +54,7 @@ function Filter() {
                             checked={currentFilter.state === 'length'}
                             onChange={() => currentFilter.setter('length')}
                         />
-                        <label htmlFor="filter-by-length">Length</label>
+                        <label htmlFor="filter-by-length">Average Length</label>
                         {currentFilter.state === 'length' && (
                             <span className="toggle-btn swap">
                                 <input

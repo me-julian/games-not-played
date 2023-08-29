@@ -84,7 +84,7 @@
             .pill {
                 display: inline-block;
                 padding: 0.2em 0.5em;
-                border-radius: 14px;
+                border-radius: 12px;
                 margin-left: auto;
             }
             .pill.playing {

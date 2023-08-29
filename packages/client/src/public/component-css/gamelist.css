@@ -54,12 +54,12 @@
         display: flex;
         justify-content: space-between;
         #random-btn {
-            border-right: 1px solid var(--bg-1);
+            border-right: 1px solid var(--bg-2);
         }
         #filter-btn {
-            border-left: 1px solid var(--bg-1);
+            border-left: 1px solid var(--bg-2);
             button {
-                background-color: var(--bg-3);
+                background-color: var(--bg-4);
             }
         }
         #random-btn,

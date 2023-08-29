@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom'
 import { Draggable } from '@hello-pangea/dnd'
 import { type Client } from '@games-not-played/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+import {
+    faBars,
+    faGripLinesVertical,
+    faStar,
+} from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
     entry: Client.Entry
@@ -30,34 +34,40 @@ function Entry({ index, entry }: Props) {
                                     snapshot.isDragging ? 'dragging' : ''
                                 }`}
                             >
-                                <div className="name-and-star">
-                                    <h2 className="name text-wrap">
-                                        {entry.game.name}
-                                    </h2>
-                                    {entry.isStarred && (
-                                        <FontAwesomeIcon icon={faStar} />
-                                    )}
+                                <div className="card-grip">
+                                    <FontAwesomeIcon icon={faBars} />
                                 </div>
-                                <div className="entry-info">
-                                    <div className="playtime-and-pills">
-                                        {entry.game.playtime && (
-                                            <span className="playtime">
-                                                {entry.game.playtime} Hours
-                                            </span>
-                                        )}
-                                        {entry.isOwned && !entry.isPlaying && (
-                                            <div className="pill owned">
-                                                Owned
-                                            </div>
+                                <div className="card-box">
+                                    <div className="name-and-star">
+                                        <h2 className="name text-wrap">
+                                            {entry.game.name}
+                                        </h2>
+                                        {entry.isStarred && (
+                                            <FontAwesomeIcon icon={faStar} />
                                         )}
                                     </div>
-                                    <div className="date-added">
-                                        Added on{' '}
-                                        {new Date(
-                                            entry.createdAt
-                                        ).toLocaleString(undefined, {
-                                            dateStyle: 'short',
-                                        })}
+                                    <div className="entry-info">
+                                        <div className="playtime-and-pills">
+                                            {entry.game.playtime && (
+                                                <span className="playtime">
+                                                    {entry.game.playtime} Hours
+                                                </span>
+                                            )}
+                                            {entry.isOwned &&
+                                                !entry.isPlaying && (
+                                                    <div className="pill owned">
+                                                        Owned
+                                                    </div>
+                                                )}
+                                        </div>
+                                        <div className="date-added">
+                                            Added on{' '}
+                                            {new Date(
+                                                entry.createdAt
+                                            ).toLocaleString(undefined, {
+                                                dateStyle: 'short',
+                                            })}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

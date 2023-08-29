@@ -6,7 +6,7 @@ button {
 }
 
 button:disabled {
-    color: var(--bg-2);
+    color: var(--bg-3);
     background-color: var(--primary-desat);
 }
 
@@ -33,8 +33,8 @@ button:disabled {
     label {
         display: inline-block;
         cursor: pointer;
-        background-color: var(--bg-2);
-        color: var(--bg-3);
+        background-color: var(--bg-3);
+        color: var(--bg-4);
         padding: 0.5em 1em;
         border-radius: 5%;
     }

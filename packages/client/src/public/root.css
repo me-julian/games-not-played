@@ -13,9 +13,10 @@
     --owned-accent: #2c783f;
     --starred-accent: #f9dc5c;
     --bg-0: #141314;
-    --bg-1: #272527;
-    --bg-2: #3b383b;
-    --bg-3: #4e4a4e;
+    --bg-1: #201e20;
+    --bg-2: #272527;
+    --bg-3: #3b383b;
+    --bg-4: #4e4a4e;
     --bg-transparent: #14131480;
 }
 
@@ -45,11 +46,11 @@ a {
 input[type='text'],
 input[type='password'] {
     color: var(--light);
-    background-color: var(--bg-1);
+    background-color: var(--bg-2);
     border: none;
     border-radius: 5px;
     padding: 0.25em;
-    border: 2px solid var(--bg-2);
+    border: 2px solid var(--bg-3);
 }
 
 .svg-inline--fa {

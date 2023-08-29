@@ -18,7 +18,7 @@
     .card {
         color: var(--light);
         background-color: var(--bg-0);
-        border-bottom: var(--bg-1) solid 3px;
+        border-bottom: var(--bg-2) solid 3px;
         border-left: none;
         border-right: none;
         border-radius: 3px;

@@ -3,14 +3,40 @@
         .wrapper {
             color: var(--light);
             overflow: auto;
+
+            .spacer {
+                background-color: transparent;
+                width: 4px;
+                height: 100px;
+                content: '';
+            }
         }
         .card {
-            border: var(--bg-1) solid 3px;
+            display: flex;
+            flex-direction: row;
+            margin: 0.5rem;
+            border: var(--bg-2) solid 3px;
             border-bottom: none;
             border-top: none;
             border-radius: 3px;
+        }
+        .card-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100px;
             padding: 0.5rem;
-            margin: 0.5rem;
+            background-color: var(--bg-1);
+            width: 100%;
+            overflow: auto;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        .card-grip {
+            border-left: none;
+            border-right: none;
+            padding: 0 0.25rem;
+            align-self: center;
         }
         .card.dragging {
             background-color: var(--bg-0);
@@ -26,7 +52,7 @@
             .name {
                 font-size: 1.15rem;
                 font-weight: 400;
-                margin: none;
+                margin: 0;
             }
             .svg-inline--fa {
                 margin-left: auto;
@@ -36,7 +62,9 @@
 
         .entry-info {
             display: flex;
+            flex: 1;
             flex-direction: column;
+            justify-content: space-between;
 
             .playtime-and-pills {
                 display: flex;
@@ -62,6 +90,7 @@
                 background-color: var(--owned-accent);
             }
             .date-added {
+                margin-top: auto;
                 align-self: flex-end;
             }
         }

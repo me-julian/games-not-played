@@ -1,4 +1,5 @@
 import '../public/component-css/search.css'
+import { RAWG } from '@games-not-played/types'
 import { useEffect, useRef, useState } from 'react'
 import {
     Form,
@@ -10,11 +11,12 @@ import {
     useSearchParams,
     useNavigation,
 } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import ActionNav from '../components/ActionNav'
-import { getJwt } from '../auth'
-import { RAWG } from '@games-not-played/types'
-import RawgAttribution from '../components/RawgAttribution'
 import SearchResults from '../components/SearchResults'
+import RawgAttribution from '../components/RawgAttribution'
+import { getJwt } from '../auth'
 
 export type SearchLoaderData = RAWG.SearchResults | Response | null
 
@@ -130,7 +132,9 @@ function Search() {
                     </Form>
                 </section>
                 {navigation.state !== 'idle' ? (
-                    <p>Loading...</p>
+                    <div className="spinner">
+                        <FontAwesomeIcon icon={faCircleNotch} spin size="3x" />
+                    </div>
                 ) : (
                     <SearchResults
                         searchData={searchData}

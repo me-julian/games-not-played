@@ -39,7 +39,7 @@
         .card-grip {
             border-left: none;
             border-right: none;
-            padding: 0 0.25rem;
+            padding: 0 0.2rem;
             align-self: center;
         }
         .card.dragging {

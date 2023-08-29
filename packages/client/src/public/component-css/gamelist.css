@@ -12,12 +12,15 @@
     }
     #playing-section {
         #toggle-playing-btn {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
             background-color: var(--playing-accent);
             border-radius: 1em;
-            margin: 0.5em;
-            line-height: 0.25em;
+            margin-top: 0.5rem;
+            line-height: 0.25;
             height: 1em;
-            width: calc(100% - 1em);
+            width: calc(100% - 1rem);
             padding-inline: 0px;
             padding-block: 0px;
 
@@ -31,6 +34,7 @@
             display: inline-block;
             font-size: 1.3rem;
             font-weight: 500;
+            margin-top: 0.5rem;
             padding: 0.25rem 0.5rem;
             border: 3px solid var(--playing-accent-transparent);
             border-radius: 4px;
@@ -55,23 +59,26 @@
         justify-content: space-between;
         #random-btn {
             border-right: 1px solid var(--bg-2);
+            div {
+                background-color: var(--primary);
+            }
         }
         #filter-btn {
             border-left: 1px solid var(--bg-2);
-            button {
+            div {
                 background-color: var(--bg-4);
             }
         }
         #random-btn,
         #filter-btn {
+            color: var(--light);
+            text-align: center;
+            line-height: var(--fixed-action-height);
             display: block;
             height: 100%;
             width: 50%;
-        }
-
-        #random-btn,
-        #filter-btn {
-            button {
+            div {
+                margin: auto;
                 width: 100%;
                 height: 100%;
             }

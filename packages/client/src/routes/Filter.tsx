@@ -1,4 +1,4 @@
-import '../public/component-css/filter.css'
+import '../public/actions.css'
 import {
     Link,
     Navigate,
@@ -19,7 +19,7 @@ function Filter() {
         return (
             <>
                 <ActionNav actionName="Filter" />
-                <div id="filter-options">
+                <div id="filter-options" className="action-options">
                     <span className="toggle-btn">
                         <input
                             className="sr-only"

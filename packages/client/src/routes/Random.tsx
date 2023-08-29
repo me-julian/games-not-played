@@ -1,3 +1,4 @@
+import '../public/actions.css'
 import { useRef, useState } from 'react'
 import { Link, Navigate, useRouteLoaderData } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
@@ -54,79 +55,84 @@ function Random() {
         return (
             <>
                 <ActionNav actionName="Select Random" />
-                <CSSTransition
-                    nodeRef={selectAnyRef}
-                    in={!selectFromOwned && !selectFromStarred}
-                    timeout={{ enter: 200, exit: 200 }}
-                    classNames="focus-btns"
-                >
-                    <span
-                        className="toggle-btn focus-btns-enter-done"
-                        ref={selectAnyRef}
+                <div id="select-random" className="action-options">
+                    {!selectedEntry && <span>No matching games</span>}
+                    <CSSTransition
+                        nodeRef={selectAnyRef}
+                        in={!selectFromOwned && !selectFromStarred}
+                        timeout={{ enter: 200, exit: 200 }}
+                        classNames="focus-btns"
                     >
+                        <span
+                            className="toggle-btn focus-btns-enter-done"
+                            ref={selectAnyRef}
+                        >
+                            <input
+                                className="sr-only"
+                                type="checkbox"
+                                name="select-from-any"
+                                id="select-from-any"
+                                checked={!selectFromOwned && !selectFromStarred}
+                                onChange={() => {
+                                    setSelectFromOwned(false)
+                                    setSelectFromStarred(false)
+                                }}
+                            />
+                            <label htmlFor="select-from-any">Any</label>
+                        </span>
+                    </CSSTransition>
+                    <CSSTransition
+                        nodeRef={selectSpecificRef}
+                        in={selectFromOwned || selectFromStarred}
+                        timeout={{ enter: 200, exit: 200 }}
+                        classNames="focus-btns"
+                    >
+                        <div
+                            ref={selectSpecificRef}
+                            className="focus-btns-initial"
+                        >
+                            <span className="toggle-btn">
+                                <input
+                                    className="sr-only"
+                                    type="checkbox"
+                                    name="select-from-owned"
+                                    id="select-from-owned"
+                                    checked={selectFromOwned}
+                                    onChange={() =>
+                                        setSelectFromOwned(!selectFromOwned)
+                                    }
+                                />
+                                <label htmlFor="select-from-owned">Owned</label>
+                            </span>
+                            <span className="toggle-btn">
+                                <input
+                                    className="sr-only"
+                                    type="checkbox"
+                                    name="select-from-starred"
+                                    id="select-from-starred"
+                                    checked={selectFromStarred}
+                                    onChange={() =>
+                                        setSelectFromStarred(!selectFromStarred)
+                                    }
+                                />
+                                <label htmlFor="select-from-starred">
+                                    Starred
+                                </label>
+                            </span>
+                        </div>
+                    </CSSTransition>
+                    <span id="include-playing-btn" className="toggle-btn">
                         <input
                             className="sr-only"
                             type="checkbox"
-                            name="select-from-any"
-                            id="select-from-any"
-                            checked={!selectFromOwned && !selectFromStarred}
-                            onChange={() => {
-                                setSelectFromOwned(false)
-                                setSelectFromStarred(false)
-                            }}
+                            name="include-playing"
+                            id="include-playing"
+                            checked={includePlaying}
+                            onChange={() => setIncludePlaying(!includePlaying)}
                         />
-                        <label htmlFor="select-from-any">Any</label>
+                        <label htmlFor="include-playing">Include Playing</label>
                     </span>
-                </CSSTransition>
-                <CSSTransition
-                    nodeRef={selectSpecificRef}
-                    in={selectFromOwned || selectFromStarred}
-                    timeout={{ enter: 200, exit: 200 }}
-                    classNames="focus-btns"
-                >
-                    <div ref={selectSpecificRef} className="focus-btns-initial">
-                        <span className="toggle-btn">
-                            <input
-                                className="sr-only"
-                                type="checkbox"
-                                name="select-from-owned"
-                                id="select-from-owned"
-                                checked={selectFromOwned}
-                                onChange={() =>
-                                    setSelectFromOwned(!selectFromOwned)
-                                }
-                            />
-                            <label htmlFor="select-from-owned">Owned</label>
-                        </span>
-                        <span className="toggle-btn">
-                            <input
-                                className="sr-only"
-                                type="checkbox"
-                                name="select-from-starred"
-                                id="select-from-starred"
-                                checked={selectFromStarred}
-                                onChange={() =>
-                                    setSelectFromStarred(!selectFromStarred)
-                                }
-                            />
-                            <label htmlFor="select-from-starred">Starred</label>
-                        </span>
-                    </div>
-                </CSSTransition>
-                <span className="toggle-btn">
-                    <input
-                        className="sr-only"
-                        type="checkbox"
-                        name="include-playing"
-                        id="include-playing"
-                        checked={includePlaying}
-                        onChange={() => setIncludePlaying(!includePlaying)}
-                    />
-                    <label htmlFor="include-playing">Include Playing</label>
-                </span>
-                {!selectedEntry && (
-                    <span style={{ margin: '2.5%' }}>No matching games</span>
-                )}
+                </div>
                 <div className="fixed-action">
                     {selectedEntry ? (
                         <Link

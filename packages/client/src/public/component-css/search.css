@@ -16,6 +16,7 @@
         }
     }
     .card {
+        cursor: pointer;
         color: var(--light);
         background-color: var(--bg-0);
         border-bottom: var(--bg-2) solid 3px;

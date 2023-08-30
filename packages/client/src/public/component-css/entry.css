@@ -60,7 +60,7 @@
             }
             .svg-inline--fa {
                 margin-left: auto;
-                color: var(--starred-accent);
+                color: var(--starred);
             }
         }
 
@@ -87,11 +87,8 @@
                 border-radius: 12px;
                 margin-left: auto;
             }
-            .pill.playing {
-                background-color: var(--playing-accent);
-            }
             .pill.owned {
-                background-color: var(--owned-accent);
+                background-color: var(--owned);
             }
             .date-added {
                 font-size: 0.9rem;

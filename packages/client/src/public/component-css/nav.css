@@ -17,6 +17,10 @@ nav {
     }
     .link-icon {
         cursor: pointer;
-        margin-left: 0.25em;
+        margin-left: 0.5rem;
+    }
+    .link-icon:hover {
+        transition: background-color 0.1s, color 0.1s;
+        color: var(--light-active);
     }
 }

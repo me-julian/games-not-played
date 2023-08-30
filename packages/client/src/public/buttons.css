@@ -10,9 +10,15 @@ button {
     box-shadow: 1px 1px 2px var(--bg-0);
 }
 
+button:hover {
+    transition: background-color 0.1s, color 0.1s;
+    background-color: var(--primary-active);
+}
+
 button:disabled {
-    color: var(--bg-3);
-    background-color: var(--primary-desat);
+    cursor: default;
+    color: var(--bg-4);
+    background-color: var(--bg-3);
 }
 
 .fixed-action {
@@ -45,9 +51,18 @@ button:disabled {
         border-radius: 3px;
         box-shadow: 1px 1px 2px var(--bg-0);
     }
+    label:hover {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--bg-4);
+        color: var(--bg-3);
+    }
     input:checked + label {
         background-color: var(--primary);
         color: var(--light);
+    }
+    input:checked + label:hover {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--primary-active);
     }
 }
 .toggle-btn.swap {
@@ -63,9 +78,13 @@ button:disabled {
 
 .delete-btn {
     margin: 0.5rem;
-    background-color: var(--warning-accent);
+    background-color: var(--warning);
     border-radius: 3px;
     padding: 0.5rem 1rem;
+}
+.delete-btn:hover {
+    transition: background-color 0.1s, color 0.1s;
+    background-color: var(--warning-active);
 }
 
 .focus-btns-initial {

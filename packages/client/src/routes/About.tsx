@@ -14,7 +14,10 @@ function About() {
                     </p>
                     <p>
                         The name is a reference to the poem{' '}
-                        <a href="https://www.poetryfoundation.org/poems/44272/the-road-not-taken">
+                        <a
+                            className="accent"
+                            href="https://www.poetryfoundation.org/poems/44272/the-road-not-taken"
+                        >
                             The Road Not Taken
                         </a>{' '}
                         by Robert Frost - in reference to the sometimes
@@ -29,7 +32,10 @@ function About() {
                     </p>
                     <p>
                         This is my final project for Inventive Academy's{' '}
-                        <a href="https://learn.inventiveacademy.io/p/full-stack-immersive-bootcamp-with-node">
+                        <a
+                            className="accent"
+                            href="https://learn.inventiveacademy.io/p/full-stack-immersive-bootcamp-with-node"
+                        >
                             Full Stack Immersive
                         </a>{' '}
                         web development course.
@@ -41,7 +47,10 @@ function About() {
                         source code?
                     </p>
                     <p>
-                        <a href="https://github.com/julianmedwards/final-project-games-not-played">
+                        <a
+                            className="accent"
+                            href="https://github.com/julianmedwards/final-project-games-not-played"
+                        >
                             View the github repo.
                         </a>
                     </p>

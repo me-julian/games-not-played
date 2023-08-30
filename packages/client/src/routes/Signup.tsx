@@ -42,7 +42,7 @@ function Signup() {
                     <CredentialsForm />
                     <div>
                         <p>Already have an account? </p>
-                        <Link to={'/signin'} replace={true}>
+                        <Link className="accent" to={'/signin'} replace={true}>
                             Sign in
                         </Link>
                     </div>

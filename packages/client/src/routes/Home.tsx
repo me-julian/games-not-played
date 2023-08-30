@@ -97,8 +97,10 @@ function Home() {
                         <div className="welcome">
                             <h1>Welcome!</h1>
                             <p>
-                                <Link to="/signin">Sign in</Link> to get
-                                started.
+                                <Link className="accent" to="/signin">
+                                    Sign in
+                                </Link>{' '}
+                                to get started.
                             </p>
                         </div>
                     )}

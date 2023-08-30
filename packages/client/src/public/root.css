@@ -1,17 +1,20 @@
 :root {
     /* Colors */
     --light: #e6fffbfa;
+    --light-active: #c7d5d3fa;
     --primary: #3b5249;
-    --primary-desat: #3e4f48; /* Desaturated 30% */
-    --secondary: #a4b494;
-    --secondary-desat: #a4af99; /* Desatured 30% */
-    --secondary-desat-darken: #a4af99; /* Desaturated 30%, Darkened 20% */
+    --primary-active: #3c6e5b;
     --accent: #aa5042;
-    --playing-accent: #34748b;
-    --playing-accent-transparent: #34748b40;
-    --owned-accent: #2c783f;
-    --starred-accent: #f9dc5c;
-    --warning-accent: #b22222;
+    --accent-active: #be6557;
+    --playing: #34748b;
+    --playing-active: #4191ae;
+    --playing-transparent: #34748b40;
+    --owned: #2c783f;
+    --owned-active: #3a9e53;
+    --starred: #f9dc5c;
+    --starred-active: #fadf6c;
+    --warning: #b22222;
+    --warning-active: #d62a2a;
     --bg-0: #141314;
     --bg-1: #201e20;
     --bg-2: #272527;
@@ -53,7 +56,26 @@ main {
 
 a {
     text-decoration: none;
+    color: var(--light);
+}
+
+a:hover {
+    transition: background-color 0.1s, color 0.1s;
+    color: var(--light-active);
+}
+
+a.accent {
     color: var(--accent);
+}
+a.accent:hover {
+    color: var(--accent-active);
+}
+
+a.light {
+    color: var(--light);
+}
+a.light:hover {
+    color: var(--light-active);
 }
 
 input[type='text'],

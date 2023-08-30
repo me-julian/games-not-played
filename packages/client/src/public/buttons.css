@@ -32,9 +32,12 @@ button:disabled {
     bottom: 0px;
 
     .button-wrapper {
+        display: block;
         height: 100%;
         width: 100%;
         .action-btn {
+            border: none;
+            border-radius: 0;
             box-shadow: none;
             height: 100%;
             width: 100%;
@@ -117,6 +120,13 @@ button:disabled {
 .delete-btn:active {
     transition: background-color 0.1s, color 0.1s;
     background-color: var(--warning);
+}
+
+@media screen and (height < 400px) {
+    .toggle-btn {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
 }
 
 .focus-btns-initial {

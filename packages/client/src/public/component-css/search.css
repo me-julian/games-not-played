@@ -47,6 +47,7 @@
             display: flex;
             flex: row;
             justify-content: space-between;
+            margin: 0.5rem 0;
 
             button {
                 border-radius: 5px;

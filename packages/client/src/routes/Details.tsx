@@ -102,20 +102,33 @@ function Details() {
                         On list for {returnDaysSince(entry.game.updatedAt)} days
                     </p>
                 </div>
-                <EntryFlagToggle
-                    flagValue={entry.isPlaying}
-                    flagType="playing"
-                />
-                <EntryFlagToggle flagValue={entry.isOwned} flagType="owned" />
-                <EntryFlagToggle
-                    flagValue={entry.isStarred}
-                    flagType="starred"
-                />
-                <Form method="DELETE">
-                    <button className="delete-btn" name="delete" type="submit">
-                        Delete
-                    </button>
-                </Form>
+                <div className="details-btns">
+                    <div className="wrapper">
+                        <Form method="DELETE" className="delete-form">
+                            <button
+                                className="delete-btn"
+                                name="delete"
+                                type="submit"
+                            >
+                                Delete
+                            </button>
+                        </Form>
+                        <div className="flag-toggles">
+                            <EntryFlagToggle
+                                flagValue={entry.isPlaying}
+                                flagType="playing"
+                            />
+                            <EntryFlagToggle
+                                flagValue={entry.isOwned}
+                                flagType="owned"
+                            />
+                            <EntryFlagToggle
+                                flagValue={entry.isStarred}
+                                flagType="starred"
+                            />
+                        </div>
+                    </div>
+                </div>
             </main>
             <RawgAttribution />
         </>

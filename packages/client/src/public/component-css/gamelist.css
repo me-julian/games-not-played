@@ -55,8 +55,14 @@
         );
     }
 
-    /* #add-game-btn {
-    } */
+    #add-section {
+        flex: 1;
+        width: 100%;
+        position: relative;
+        background-color: var(--bg-0);
+        text-align: center;
+        margin-top: 0.5rem;
+    }
 
     .list-actions {
         position: fixed;

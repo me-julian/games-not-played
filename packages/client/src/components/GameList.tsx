@@ -151,11 +151,13 @@ function GameList({ entries }: Props) {
                     )}
                 </Droppable>
             )}
-            <Link to="/search">
-                <span className="sr-only sr-only-focusable">Add Game</span>
-                <FontAwesomeIcon icon={faGamepad} size="4x" />
-            </Link>
-            <RawgAttribution />
+            <div id="add-section">
+                <Link to="/search">
+                    <span className="sr-only sr-only-focusable">Add Game</span>
+                    <FontAwesomeIcon icon={faGamepad} size="4x" />
+                </Link>
+                <RawgAttribution />
+            </div>
             <div className="list-actions">
                 <Link to={'/random'} id="random-btn">
                     <div>Random</div>

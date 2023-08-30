@@ -76,7 +76,7 @@ a.accent:hover {
 }
 
 a.light,
-a.accent:active {
+a.light:active {
     color: var(--light);
 }
 a.light:hover {

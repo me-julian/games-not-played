@@ -23,4 +23,8 @@ nav {
         transition: background-color 0.1s, color 0.1s;
         color: var(--light-active);
     }
+    .link-icon:active {
+        transition: background-color 0.1s, color 0.1s;
+        color: var(--light);
+    }
 }

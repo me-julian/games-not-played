@@ -33,6 +33,10 @@
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--playing-active);
         }
+        #toggle-playing-btn:active {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--playing);
+        }
 
         .header {
             display: inline-block;
@@ -88,6 +92,11 @@
                 background-color: var(--primary-active);
             }
         }
+        #random-btn:active {
+            div {
+                background-color: var(--primary-active);
+            }
+        }
         #filter-btn {
             border-left: 1px solid var(--bg-2);
             div {
@@ -97,6 +106,11 @@
         #filter-btn:hover {
             div {
                 background-color: var(--bg-3);
+            }
+        }
+        #filter-btn:active {
+            div {
+                background-color: var(--bg-4);
             }
         }
         #random-btn:hover,

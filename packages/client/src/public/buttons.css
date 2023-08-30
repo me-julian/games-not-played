@@ -9,10 +9,13 @@ button {
     padding-inline: 0;
     box-shadow: 1px 1px 2px var(--bg-0);
 }
-
 button:hover {
     transition: background-color 0.1s, color 0.1s;
     background-color: var(--primary-active);
+}
+button:active {
+    transition: background-color 0.1s, color 0.1s;
+    background-color: var(--primary);
 }
 
 button:disabled {
@@ -56,6 +59,11 @@ button:disabled {
         background-color: var(--bg-4);
         color: var(--bg-3);
     }
+    label:active {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--bg-3);
+        color: var(--bg-4);
+    }
     input:checked + label {
         background-color: var(--primary);
         color: var(--light);
@@ -64,15 +72,35 @@ button:disabled {
         transition: background-color 0.1s, color 0.1s;
         background-color: var(--primary-active);
     }
+    input:checked + label:active {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--primary);
+    }
 }
 .toggle-btn.swap {
     label {
         background-color: var(--primary);
         color: var(--light);
     }
+    label:hover {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--primary-active);
+    }
+    label:active {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--primary);
+    }
     input:checked + label {
         background-color: var(--primary);
         color: var(--light);
+    }
+    input:checked + label:hover {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--primary-active);
+    }
+    input:checked + label:active {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--primary);
     }
 }
 
@@ -85,6 +113,10 @@ button:disabled {
 .delete-btn:hover {
     transition: background-color 0.1s, color 0.1s;
     background-color: var(--warning-active);
+}
+.delete-btn:active {
+    transition: background-color 0.1s, color 0.1s;
+    background-color: var(--warning);
 }
 
 .focus-btns-initial {

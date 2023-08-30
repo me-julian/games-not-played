@@ -58,20 +58,25 @@ a {
     text-decoration: none;
     color: var(--light);
 }
-
 a:hover {
     transition: background-color 0.1s, color 0.1s;
     color: var(--light-active);
 }
+a:active {
+    transition: background-color 0.1s, color 0.1s;
+    color: var(--light);
+}
 
-a.accent {
+a.accent,
+a.accent:active {
     color: var(--accent);
 }
 a.accent:hover {
     color: var(--accent-active);
 }
 
-a.light {
+a.light,
+a.accent:active {
     color: var(--light);
 }
 a.light:hover {

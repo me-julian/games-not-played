@@ -5,6 +5,7 @@ button {
     border: 0;
     padding-block: 0;
     padding-inline: 0;
+    box-shadow: 1px 1px 2px var(--bg-0);
 }
 
 button:disabled {
@@ -23,6 +24,7 @@ button:disabled {
         height: 100%;
         width: 100%;
         .action-btn {
+            box-shadow: none;
             height: 100%;
             width: 100%;
         }
@@ -39,6 +41,7 @@ button:disabled {
         color: var(--bg-4);
         padding: 0.5rem 1rem;
         border-radius: 3px;
+        box-shadow: 1px 1px 2px var(--bg-0);
     }
     input:checked + label {
         background-color: var(--primary);

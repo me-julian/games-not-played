@@ -231,21 +231,25 @@ function GameList({ entries }: Props) {
             </div>
             <div className="list-actions">
                 <Link to={'/random'} id="random-btn">
-                    <div>Random</div>
+                    <div className="button-div">Random</div>
                 </Link>
-                <Link to={'/filter'} id="filter-btn">
-                    <div>
+                <div id="filter-btn">
+                    {currentFilter.state !== 'custom' && (
+                        <div className="current-filter">
+                            <span>
+                                Current:{' '}
+                                {currentFilter.state === 'owned' && 'Owned'}
+                                {currentFilter.state === 'length' && 'Length'}
+                                {currentFilter.state === 'dateAdded' &&
+                                    'Date Added'}
+                            </span>
+                        </div>
+                    )}
+                    <Link to={'/filter'} className="button-div">
                         <span>Filter</span>
-                        {/* <span>
-                            {' '}
-                            {currentFilter.state.charAt(0).toUpperCase() +
-                                currentFilter.state.slice(1)}
-                            {(currentFilter.state === 'length' ||
-                                currentFilter.state === 'dateAdded') &&
-                                `[${filterDirection.state.toUpperCase()}]`}
-                        </span> */}
-                    </div>
-                </Link>
+                        {}
+                    </Link>
+                </div>
             </div>
         </>
     )

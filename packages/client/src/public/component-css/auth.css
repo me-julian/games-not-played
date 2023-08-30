@@ -2,7 +2,7 @@
     text-align: center;
 
     .brand {
-        margin: 0.5em;
+        margin: 0.5rem;
     }
     form {
         text-align: center;
@@ -17,9 +17,10 @@
         }
         input {
             width: 90%;
-            margin-bottom: 0.5em;
+            margin-bottom: 0.5rem;
         }
         button {
+            padding: 0.5rem 1rem;
             margin: 1rem;
         }
     }

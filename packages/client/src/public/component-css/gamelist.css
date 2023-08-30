@@ -56,6 +56,9 @@
     }
 
     #add-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
         flex: 1;
         width: 100%;
         position: relative;

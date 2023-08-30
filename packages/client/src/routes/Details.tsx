@@ -81,7 +81,7 @@ function Details() {
 
     return entry ? (
         <>
-            <ActionNav actionName="Details" />
+            <ActionNav actionName="Game Details" />
             <main
                 id="details"
                 style={{

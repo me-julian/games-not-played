@@ -62,7 +62,6 @@
         #filter-btn {
             color: var(--light);
             text-align: center;
-            line-height: calc(var(--list-action-height) - 1rem);
             display: block;
             height: 100%;
             width: 50%;
@@ -70,6 +69,7 @@
                 display: block;
                 border-radius: 15px;
                 margin: 0 0.5rem 0.5rem 0.5rem;
+                padding: 0.35rem;
                 box-shadow: 2px 2px 3px var(--bg-0);
             }
         }
@@ -100,7 +100,7 @@
                 font-size: small;
                 position: absolute;
                 line-height: normal;
-                bottom: calc(var(--list-action-height) + 0.2rem);
+                bottom: calc(var(--list-action-height) + 0.25rem);
                 left: 75%;
                 right: -25%;
                 transform: translate(-50%, 50%);

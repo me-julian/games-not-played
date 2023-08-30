@@ -54,7 +54,7 @@
             width: 100%;
 
             .name {
-                font-size: 1.15rem;
+                font-size: 1.2rem;
                 font-weight: 400;
                 margin: 0;
             }
@@ -79,9 +79,9 @@
             }
             .playtime {
                 align-self: flex-start;
-                font-size: smaller;
             }
             .pill {
+                box-shadow: 1px 1px 2px var(--bg-0);
                 display: inline-block;
                 padding: 0.2em 0.5em;
                 border-radius: 12px;
@@ -94,6 +94,7 @@
                 background-color: var(--owned-accent);
             }
             .date-added {
+                font-size: 0.9rem;
                 margin-top: auto;
                 align-self: flex-end;
             }

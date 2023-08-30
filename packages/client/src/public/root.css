@@ -4,6 +4,7 @@
     --light-active: #c7d5d3fa;
     --primary: #3b5249;
     --primary-active: #3c6e5b;
+    --primary-dark: #283e36;
     --accent: #aa5042;
     --accent-active: #be6557;
     --playing: #34748b;
@@ -22,7 +23,7 @@
     --bg-4: #4e4a4e;
     --bg-transparent: #14131480;
     /* Spacing */
-    --fixed-action-height: 2.25rem;
+    --fixed-action-height: 2.75rem;
 }
 
 body {

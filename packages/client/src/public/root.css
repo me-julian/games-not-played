@@ -23,7 +23,8 @@
     --bg-4: #4e4a4e;
     --bg-transparent: #14131480;
     /* Spacing */
-    --fixed-action-height: 3.5rem;
+    --list-action-height: 3.25rem;
+    --std-action-height: 2.75rem;
 }
 
 body {

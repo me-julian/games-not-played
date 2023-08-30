@@ -27,7 +27,7 @@ button:disabled {
 .fixed-action {
     position: fixed;
     background-color: var(--bg-0);
-    height: var(--fixed-action-height);
+    height: var(--std-action-height);
     width: 100%;
     bottom: 0px;
 

@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: var(--fixed-action-height);
+    padding-bottom: var(--list-action-height);
 
     .list-section {
         text-align: center;

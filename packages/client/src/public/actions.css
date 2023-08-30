@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: calc(var(--fixed-action-height) + 0.5rem);
+    margin-bottom: calc(var(--std-action-height) + 0.5rem);
     text-align: center;
 }
 
@@ -53,7 +53,7 @@
         position: fixed;
         display: flex;
         justify-content: space-around;
-        height: calc(var(--fixed-action-height) - 0.5rem);
+        height: calc(var(--list-action-height + 0.5rem));
         width: 100%;
         bottom: 0px;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg-0));
@@ -62,7 +62,7 @@
         #filter-btn {
             color: var(--light);
             text-align: center;
-            line-height: calc(var(--fixed-action-height) - 1.25rem);
+            line-height: calc(var(--list-action-height) - 1rem);
             display: block;
             height: 100%;
             width: 50%;
@@ -100,7 +100,7 @@
                 font-size: small;
                 position: absolute;
                 line-height: normal;
-                bottom: calc(var(--fixed-action-height) + 0.2rem);
+                bottom: calc(var(--list-action-height) + 0.2rem);
                 left: 75%;
                 right: -25%;
                 transform: translate(-50%, 50%);

@@ -114,12 +114,44 @@ button:disabled {
     padding: 0.5rem 1rem;
 }
 .delete-btn:hover {
-    transition: background-color 0.1s, color 0.1s;
+    transition: background-color 100ms, color 0.1s;
     background-color: var(--warning-active);
 }
 .delete-btn:active {
-    transition: background-color 0.1s, color 0.1s;
+    transition: background-color 100ms, color 0.1s;
     background-color: var(--warning);
+}
+
+#add-game-btn {
+    padding-left: calc(93px - 82px);
+    transition: transform 100ms;
+}
+#add-game-btn:hover {
+    .circle {
+        transition: fill 100ms;
+        fill: var(--bg-4);
+    }
+    .controller-btn {
+        transition: stroke 100ms;
+        stroke: var(--accent-active);
+    }
+    /* .controller-outline {} */
+    /* .plus {} */
+}
+#add-game-btn:active {
+    transform: scale(0.9);
+    transition: transform 100ms;
+
+    .circle {
+        fill: var(--bg-3);
+        transition: fill 100ms;
+    }
+    .controller-btn {
+        stroke: var(--accent);
+        transition: stroke 100ms;
+    }
+    /* .controller-outline {} */
+    /* .plus {} */
 }
 
 @media screen and (height < 400px) {

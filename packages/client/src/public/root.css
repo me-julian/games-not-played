@@ -88,7 +88,8 @@ input[type='password'] {
 }
 
 .rawg-attribution {
+    font-size: 0.75rem;
+    font-weight: 300;
     text-align: center;
-    padding: 1em;
-    padding-bottom: 1em;
+    padding: 0.5rem 1rem 1rem;
 }

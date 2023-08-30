@@ -1,4 +1,4 @@
-#list {
+#game-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,69 +62,6 @@
         background-color: var(--bg-0);
         text-align: center;
         margin-top: 0.5rem;
-    }
-
-    .list-actions {
-        position: fixed;
-        background-color: var(--bg-0);
-        height: var(--fixed-action-height);
-        width: 100%;
-        bottom: 0px;
-        display: flex;
-        justify-content: space-between;
-
-        #random-btn,
-        #filter-btn {
-            color: var(--light);
-            text-align: center;
-            line-height: var(--fixed-action-height);
-            display: block;
-            height: 100%;
-            width: 50%;
-            div {
-                margin: auto;
-                width: 100%;
-                height: 100%;
-            }
-        }
-        #random-btn {
-            border-right: 1px solid var(--bg-2);
-            div {
-                background-color: var(--primary);
-            }
-        }
-        #random-btn:hover {
-            div {
-                background-color: var(--primary-active);
-            }
-        }
-        #random-btn:active {
-            div {
-                background-color: var(--primary-active);
-            }
-        }
-        #filter-btn {
-            border-left: 1px solid var(--bg-2);
-            div {
-                background-color: var(--bg-4);
-            }
-        }
-        #filter-btn:hover {
-            div {
-                background-color: var(--bg-3);
-            }
-        }
-        #filter-btn:active {
-            div {
-                background-color: var(--bg-4);
-            }
-        }
-        #random-btn:hover,
-        #filter-btn:hover {
-            div {
-                transition: background-color 0.1s, color 0.1s;
-            }
-        }
     }
 }
 

@@ -6,11 +6,7 @@ import { Link, useOutletContext } from 'react-router-dom'
 import { Droppable } from '@hello-pangea/dnd'
 import { CSSTransition } from 'react-transition-group'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faGamepad,
-    faCaretDown,
-    faCaretUp,
-} from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import Entry from './Entry'
 import RawgAttribution from './RawgAttribution'
 

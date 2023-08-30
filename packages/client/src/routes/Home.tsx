@@ -90,7 +90,7 @@ function Home() {
         <>
             <DragDropContext onDragEnd={onDragEnd}>
                 <Nav />
-                <main id="list">
+                <main id="game-list">
                     {jwt && rootLoaderData ? (
                         <GameList entries={optimisticEntries} />
                     ) : (

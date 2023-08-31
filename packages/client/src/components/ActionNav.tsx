@@ -1,7 +1,6 @@
 import '../public/component-css/nav.css'
 import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import BackIcon from './icons/BackIcon'
 
 type Props = {
     actionName: string
@@ -27,7 +26,7 @@ function ActionNav({ actionName, containerSize = 'lg' }: Props) {
             <div className={containerClass}>
                 <h1 className="title">{actionName}</h1>
                 <Link className="link-icon" to={'..'}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
+                    <BackIcon />
                 </Link>
             </div>
         </nav>

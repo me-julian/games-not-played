@@ -1,8 +1,8 @@
 import '../public/component-css/nav.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 import { getJwt, parseJwt } from '../auth'
+import SignInIcon from './icons/SignInIcon'
+import SignOutIcon from './icons/SignOutIcon'
 
 function Nav() {
     const jwt = getJwt()
@@ -37,7 +37,7 @@ function Nav() {
                                 <span className="sr-only sr-only-focusable">
                                     Sign Out Icon
                                 </span>
-                                <FontAwesomeIcon icon={faSignOutAlt} />
+                                <SignOutIcon />
                             </span>
                         </>
                     ) : (
@@ -45,7 +45,7 @@ function Nav() {
                             <span className="sr-only sr-only-focusable">
                                 Sign In Icon
                             </span>
-                            <FontAwesomeIcon icon={faSignInAlt} />
+                            <SignInIcon />
                         </Link>
                     )}
                 </div>

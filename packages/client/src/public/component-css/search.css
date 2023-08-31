@@ -32,9 +32,9 @@
     }
 
     .page-navigation {
-        display: flex;
-        flex-direction: column;
-        margin: 2.5%;
+        max-width: calc(var(--lg-content-width) * 0.66);
+        align-items: center;
+        margin: 0.5rem auto;
         text-align: center;
 
         .result-count {
@@ -45,12 +45,15 @@
         }
         .page-buttons {
             display: flex;
-            flex: row;
-            justify-content: space-between;
-            margin: 0.5rem 0;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+            padding: 0.5rem;
 
             button {
                 border-radius: 5px;
+                max-width: 150px;
+                padding: 0.5rem 0;
                 width: 45%;
             }
         }

@@ -4,11 +4,15 @@ nav {
     padding: 16px;
 
     .container-md,
+    .container-sm,
     .container-lg {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         margin: auto;
+    }
+    .container-sm {
+        max-width: var(--sm-content-width);
     }
     .container-md {
         max-width: var(--md-content-width);

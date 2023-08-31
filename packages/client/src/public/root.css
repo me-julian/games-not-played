@@ -25,6 +25,7 @@
     /* Spacing */
     --list-action-height: 3.25rem;
     --std-action-height: 2.75rem;
+    --sm-content-width: 350px;
     --md-content-width: 700px;
     --lg-content-width: 1000px;
 }
@@ -57,6 +58,7 @@ h6,
 main {
     flex: 1 0 auto;
     width: 100%;
+    align-self: center;
 }
 
 a {
@@ -96,7 +98,7 @@ input[type='password'] {
     border-radius: 5px;
     padding: 0.25em;
     border: 2px solid var(--bg-3);
-    max-width: calc(var(--lg-content-width) * 0.5);
+    max-width: calc(var(--sm-content-width));
 }
 
 .svg-inline--fa {

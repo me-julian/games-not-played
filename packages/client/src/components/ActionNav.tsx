@@ -5,13 +5,26 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
     actionName: string
-    containerSize?: 'container-lg' | 'container-md'
+    containerSize?: 'sm' | 'md' | 'lg'
 }
 
-function ActionNav({ actionName, containerSize = 'container-lg' }: Props) {
+function ActionNav({ actionName, containerSize = 'lg' }: Props) {
+    let containerClass
+    switch (containerSize) {
+        case 'sm':
+            containerClass = 'container-sm'
+            break
+        case 'md':
+            containerClass = 'container-md'
+            break
+        case 'lg':
+            containerClass = 'container-lg'
+            break
+    }
+
     return (
         <nav>
-            <div className={containerSize}>
+            <div className={containerClass}>
                 <h1 className="title">{actionName}</h1>
                 <Link className="link-icon" to={'..'}>
                     <FontAwesomeIcon icon={faArrowLeft} />

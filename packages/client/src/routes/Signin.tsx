@@ -33,9 +33,9 @@ function Signin() {
 
     const signinScreen = (
         <>
-            <ActionNav actionName={'Sign In'} />
-            <main>
-                <section className="auth">
+            <ActionNav actionName={'Sign In'} containerSize="sm" />
+            <main className="auth">
+                <section>
                     <h3 className="brand">Games Not Played</h3>
                     {typeof authResponse === 'string' && (
                         <section>

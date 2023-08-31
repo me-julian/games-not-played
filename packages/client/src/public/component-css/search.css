@@ -1,4 +1,6 @@
 #search {
+    max-width: var(--md-content-width);
+
     #search-form {
         text-align: center;
         border-bottom: 2px solid var(--light);
@@ -10,6 +12,7 @@
                 margin: 0 5%;
             }
             input {
+                max-width: var(--sm-content-width);
                 width: 90%;
                 margin: 1em 5%;
             }
@@ -32,7 +35,6 @@
     }
 
     .page-navigation {
-        max-width: calc(var(--md-content-width));
         align-items: center;
         margin: 0.5rem auto;
         text-align: center;

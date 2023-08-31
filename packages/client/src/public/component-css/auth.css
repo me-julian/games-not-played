@@ -1,4 +1,5 @@
 .auth {
+    max-width: var(--sm-content-width);
     text-align: center;
 
     .brand {
@@ -8,15 +9,16 @@
         text-align: center;
 
         section {
-            margin: 0 5%;
+            max-width: var(--sm-content-width);
+            padding: 0 0.5rem;
+            margin: auto;
         }
         label {
             text-align: start;
-            margin-left: 5%;
             display: block;
         }
         input {
-            width: 90%;
+            width: 100%;
             margin-bottom: 0.5rem;
         }
         button {
@@ -25,3 +27,10 @@
         }
     }
 }
+/* 
+@media screen and (width >= 350px) {
+    .auth {
+        align-self: center;
+        width: var(--sm-content-width);
+    }
+} */

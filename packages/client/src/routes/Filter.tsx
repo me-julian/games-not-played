@@ -18,10 +18,7 @@ function Filter() {
 
         return (
             <>
-                <ActionNav
-                    actionName="Filter List"
-                    containerSize="container-md"
-                />
+                <ActionNav actionName="Filter List" containerSize="md" />
                 <main id="filter-options" className="action-options">
                     <span className="toggle-btn">
                         <input

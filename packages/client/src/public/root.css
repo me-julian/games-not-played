@@ -101,6 +101,10 @@ input[type='password'] {
     max-width: calc(var(--sm-content-width));
 }
 
+.icon {
+    vertical-align: text-bottom;
+}
+
 .svg-inline--fa {
     vertical-align: middle;
 }

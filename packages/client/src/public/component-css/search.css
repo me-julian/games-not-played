@@ -32,7 +32,7 @@
     }
 
     .page-navigation {
-        max-width: calc(var(--lg-content-width) * 0.66);
+        max-width: calc(var(--md-content-width));
         align-items: center;
         margin: 0.5rem auto;
         text-align: center;

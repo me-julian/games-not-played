@@ -25,6 +25,7 @@
     /* Spacing */
     --list-action-height: 3.25rem;
     --std-action-height: 2.75rem;
+    --md-content-width: 700px;
     --lg-content-width: 1000px;
 }
 

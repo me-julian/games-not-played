@@ -17,7 +17,7 @@ function Nav() {
     return (
         <>
             <nav>
-                <div className="container">
+                <div className="container-lg">
                     <Link className="brand title" to={'/about'}>
                         Games Not Played
                     </Link>

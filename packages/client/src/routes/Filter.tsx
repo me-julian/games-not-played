@@ -120,12 +120,12 @@ function Filter() {
                             </span>
                         )}
                     </span>
+                    <div className="fixed-action">
+                        <Link className="button-wrapper" to={'/'}>
+                            <button className="action-btn">Confirm</button>
+                        </Link>
+                    </div>
                 </main>
-                <div className="fixed-action">
-                    <Link className="button-wrapper" to={'/'}>
-                        <button className="action-btn">Confirm</button>
-                    </Link>
-                </div>
             </>
         )
     }

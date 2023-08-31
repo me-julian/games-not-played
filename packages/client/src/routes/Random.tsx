@@ -132,27 +132,27 @@ function Random() {
                         />
                         <label htmlFor="include-playing">Include Playing</label>
                     </span>
+                    <div className="fixed-action">
+                        {selectedEntry ? (
+                            <Link
+                                className="button-wrapper"
+                                to={
+                                    selectedEntry
+                                        ? `/details/${selectedEntry.id}`
+                                        : ''
+                                }
+                            >
+                                <button className="action-btn">Confirm</button>
+                            </Link>
+                        ) : (
+                            <div className="button-wrapper">
+                                <button disabled={true} className="action-btn">
+                                    Confirm
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </main>
-                <div className="fixed-action">
-                    {selectedEntry ? (
-                        <Link
-                            className="button-wrapper"
-                            to={
-                                selectedEntry
-                                    ? `/details/${selectedEntry.id}`
-                                    : ''
-                            }
-                        >
-                            <button className="action-btn">Confirm</button>
-                        </Link>
-                    ) : (
-                        <div className="button-wrapper">
-                            <button disabled={true} className="action-btn">
-                                Confirm
-                            </button>
-                        </div>
-                    )}
-                </div>
             </>
         )
     }

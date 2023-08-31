@@ -25,7 +25,7 @@ button:disabled {
 }
 
 .fixed-action {
-    max-width: calc(var(--lg-content-width) * 0.66);
+    max-width: calc(var(--md-content-width));
     align-self: center;
     position: fixed;
     background-color: var(--bg-0);
@@ -171,7 +171,30 @@ button:disabled {
     }
 }
 
+@media screen and (width >= 700px) {
+    .fixed-action {
+        position: static;
+        margin: 0.5rem;
+        .button-wrapper {
+            .action-btn {
+                border-radius: 3px;
+                max-width: 75%;
+            }
+        }
+    }
+}
+
 @media screen and (width >= 1000px) {
+    .fixed-action {
+        position: static;
+        margin: 0.5rem;
+        .button-wrapper {
+            .action-btn {
+                border-radius: 3px;
+                max-width: 75%;
+            }
+        }
+    }
 }
 
 .focus-btns-initial {

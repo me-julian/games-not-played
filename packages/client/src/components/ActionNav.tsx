@@ -5,24 +5,10 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
     actionName: string
+    containerSize?: 'container-lg' | 'container-md'
 }
 
-function ActionNav({ actionName }: Props) {
-    let containerSize = ''
-    switch (actionName) {
-        case 'Select Random':
-        case 'Filter':
-            containerSize = 'container-md'
-            break
-        case 'About':
-        case 'Game Details':
-        case 'Sign In':
-        case 'Sign Out':
-        case 'Search':
-        default:
-            containerSize = 'container-lg'
-    }
-
+function ActionNav({ actionName, containerSize = 'container-lg' }: Props) {
     return (
         <nav>
             <div className={containerSize}>

@@ -54,7 +54,10 @@ function Random() {
 
         return (
             <>
-                <ActionNav actionName="Select Random" />
+                <ActionNav
+                    actionName="Select Random"
+                    containerSize="container-md"
+                />
                 <main id="select-random" className="action-options">
                     {!selectedEntry && <span>No matching games</span>}
                     <CSSTransition

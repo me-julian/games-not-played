@@ -86,7 +86,7 @@ function Details() {
 
     return entry ? (
         <>
-            <ActionNav actionName="Game Details" />
+            <ActionNav actionName="Game Details" containerSize="md" />
             <main
                 id="details"
                 style={{
@@ -95,17 +95,20 @@ function Details() {
                         'none',
                 }}
             >
-                <div className="text-info">
-                    <h4 className="name">{entry.game.name}</h4>
-                    <p>
-                        Average Length:{' '}
-                        {entry.game.playtime
-                            ? `${entry.game.playtime} Hours`
-                            : 'Unknown'}
-                    </p>
-                    <p>
-                        On list for {returnDaysSince(entry.game.updatedAt)} days
-                    </p>
+                <div className="text-bg">
+                    <div className="text-info">
+                        <h4 className="name">{entry.game.name}</h4>
+                        <p>
+                            Average Length:{' '}
+                            {entry.game.playtime
+                                ? `${entry.game.playtime} Hours`
+                                : 'Unknown'}
+                        </p>
+                        <p>
+                            On list for {returnDaysSince(entry.game.updatedAt)}{' '}
+                            days
+                        </p>
+                    </div>
                 </div>
                 <div className="details-btns">
                     <div className="wrapper">

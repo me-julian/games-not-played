@@ -7,20 +7,26 @@
     background-repeat: no-repeat;
     background-size: cover;
 
-    .text-info {
+    .text-bg {
         background: linear-gradient(
             to bottom,
             var(--bg-transparent) 75%,
             rgba(0, 0, 0, 0)
         );
-        padding: 0.5rem 0.5rem 2em;
+        .text-info {
+            margin: auto;
+            max-width: var(--md-content-width);
+            padding: 0.5rem 0.5rem 2em;
 
-        * {
-            text-shadow: 1px 1px 2px var(--bg-0);
+            * {
+                text-shadow: 1px 1px 2px var(--bg-0);
+            }
         }
     }
     .name {
-        margin: 0.5em;
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin: 0.5rem;
         text-align: center;
     }
 

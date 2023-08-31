@@ -25,6 +25,7 @@
     /* Spacing */
     --list-action-height: 3.25rem;
     --std-action-height: 2.75rem;
+    --lg-content-width: 1000px;
 }
 
 body {
@@ -47,13 +48,14 @@ h6,
 }
 
 #root {
-    height: inherit;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
 }
 
 main {
     flex: 1 0 auto;
+    width: 100%;
 }
 
 a {
@@ -121,4 +123,11 @@ input[type='password'] {
     font-weight: 300;
     text-align: center;
     padding: 0.5rem 1rem 1rem;
+}
+
+@media screen and (width >= 1000px) {
+    main {
+        align-self: center;
+        width: var(--lg-content-width);
+    }
 }

@@ -25,6 +25,8 @@ button:disabled {
 }
 
 .fixed-action {
+    max-width: calc(var(--lg-content-width) * 0.66);
+    align-self: center;
     position: fixed;
     background-color: var(--bg-0);
     height: var(--std-action-height);
@@ -159,6 +161,9 @@ button:disabled {
         margin-top: 0.25rem;
         margin-bottom: 0.25rem;
     }
+}
+
+@media screen and (width >= 1000px) {
 }
 
 .focus-btns-initial {

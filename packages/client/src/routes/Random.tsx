@@ -55,7 +55,7 @@ function Random() {
         return (
             <>
                 <ActionNav actionName="Select Random" />
-                <div id="select-random" className="action-options">
+                <main id="select-random" className="action-options">
                     {!selectedEntry && <span>No matching games</span>}
                     <CSSTransition
                         nodeRef={selectAnyRef}
@@ -132,7 +132,7 @@ function Random() {
                         />
                         <label htmlFor="include-playing">Include Playing</label>
                     </span>
-                </div>
+                </main>
                 <div className="fixed-action">
                     {selectedEntry ? (
                         <Link

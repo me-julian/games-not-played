@@ -19,7 +19,7 @@ function Filter() {
         return (
             <>
                 <ActionNav actionName="Filter List" />
-                <div id="filter-options" className="action-options">
+                <main id="filter-options" className="action-options">
                     <span className="toggle-btn">
                         <input
                             className="sr-only"
@@ -120,7 +120,7 @@ function Filter() {
                             </span>
                         )}
                     </span>
-                </div>
+                </main>
                 <div className="fixed-action">
                     <Link className="button-wrapper" to={'/'}>
                         <button className="action-btn">Confirm</button>

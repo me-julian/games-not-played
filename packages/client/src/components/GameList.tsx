@@ -230,25 +230,28 @@ function GameList({ entries }: Props) {
                 <RawgAttribution />
             </div>
             <div className="list-actions">
-                <Link to={'/random'} id="random-btn">
-                    <div className="button-div">Random</div>
-                </Link>
-                <div id="filter-btn">
-                    {currentFilter.state !== 'custom' && (
-                        <div className="current-filter">
-                            <span>
-                                Current:{' '}
-                                {currentFilter.state === 'owned' && 'Owned'}
-                                {currentFilter.state === 'length' && 'Length'}
-                                {currentFilter.state === 'dateAdded' &&
-                                    'Date Added'}
-                            </span>
-                        </div>
-                    )}
-                    <Link to={'/filter'} className="button-div">
-                        <span>Filter</span>
-                        {}
+                <div className="container">
+                    <Link to={'/random'} id="random-btn">
+                        <div className="button-div">Random</div>
                     </Link>
+                    <div id="filter-btn">
+                        {currentFilter.state !== 'custom' && (
+                            <div className="current-filter">
+                                <span>
+                                    Current:{' '}
+                                    {currentFilter.state === 'owned' && 'Owned'}
+                                    {currentFilter.state === 'length' &&
+                                        'Length'}
+                                    {currentFilter.state === 'dateAdded' &&
+                                        'Date Added'}
+                                </span>
+                            </div>
+                        )}
+                        <Link to={'/filter'} className="button-div">
+                            <span>Filter</span>
+                            {}
+                        </Link>
+                    </div>
                 </div>
             </div>
         </>

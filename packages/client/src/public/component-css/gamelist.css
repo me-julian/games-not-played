@@ -54,13 +54,13 @@
                 var(--playing-transparent) 0px,
                 var(--bg-0) 100px
             );
-            transition: width 200ms, left 200ms;
+            transition: width 600ms, left 600ms;
         }
 
         #toggle-playing-btn.show-playing::after {
-            left: 3px;
-            width: calc(100% - 6px);
-            transition: width 200ms, left 200ms;
+            left: 2px;
+            width: calc(100% - 4px);
+            transition: width 50ms, left 50ms;
         }
 
         .header {

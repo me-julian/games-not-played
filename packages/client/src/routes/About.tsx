@@ -4,7 +4,7 @@ import ActionNav from '../components/ActionNav'
 function About() {
     return (
         <>
-            <ActionNav actionName={'About'} />
+            <ActionNav actionName={'About'} containerSize="md" />
             <main id="about">
                 <section>
                     <h4>About the App</h4>

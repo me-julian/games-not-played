@@ -1,5 +1,6 @@
 #about {
-    margin: 0 0.5rem;
+    max-width: var(--md-content-width);
+    padding: 0 0.5rem;
     section {
         margin-top: 0.5rem;
         margin-bottom: 1.5rem;

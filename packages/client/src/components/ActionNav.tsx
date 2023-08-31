@@ -10,10 +10,12 @@ type Props = {
 function ActionNav({ actionName }: Props) {
     return (
         <nav>
-            <h1 className="title">{actionName}</h1>
-            <Link className="link-icon" to={'..'}>
-                <FontAwesomeIcon icon={faArrowLeft} />
-            </Link>
+            <div className="container">
+                <h1 className="title">{actionName}</h1>
+                <Link className="link-icon" to={'..'}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </Link>
+            </div>
         </nav>
     )
 }

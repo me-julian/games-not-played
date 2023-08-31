@@ -95,6 +95,7 @@ input[type='password'] {
     border-radius: 5px;
     padding: 0.25em;
     border: 2px solid var(--bg-3);
+    max-width: calc(var(--lg-content-width) * 0.5);
 }
 
 .svg-inline--fa {

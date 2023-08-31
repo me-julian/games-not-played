@@ -125,8 +125,16 @@ button:disabled {
 }
 
 #add-game-btn {
-    padding-left: calc(93px - 82px);
+    display: block;
+    margin: 0.5rem 0;
     transition: transform 100ms;
+
+    .controller {
+        transform: translateY(-10px);
+    }
+    .plus {
+        transform: translate(2px, 0px);
+    }
 }
 #add-game-btn:hover {
     .circle {

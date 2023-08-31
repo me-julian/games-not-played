@@ -131,7 +131,8 @@ function Search() {
                         </div>
                     </Form>
                 </section>
-                {navigation.state !== 'idle' ? (
+                {navigation.state === 'loading' &&
+                navigation.formMethod !== 'post' ? (
                     <div className="spinner">
                         <FontAwesomeIcon icon={faCircleNotch} spin size="3x" />
                     </div>
@@ -140,6 +141,7 @@ function Search() {
                         searchData={searchData}
                         page={page}
                         useSearchParams={[searchParams, setSearchParams]}
+                        navigation={navigation}
                     />
                 )}
                 <RawgAttribution />

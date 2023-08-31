@@ -5,6 +5,7 @@ import {
     Form,
     Navigate,
     redirect,
+    useNavigation,
     useParams,
     useRouteLoaderData,
 } from 'react-router-dom'
@@ -12,6 +13,8 @@ import ActionNav from '../components/ActionNav'
 import EntryFlagToggle from '../components/EntryFlagToggle'
 import RawgAttribution from '../components/RawgAttribution'
 import { getJwt } from '../auth'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
 function entryUrlRequest(method: string, urlEnding: string) {
     const jwt = getJwt()
@@ -79,6 +82,8 @@ function Details() {
         (entry) => entry.id === parseInt(entryId!)
     )
 
+    const navigation = useNavigation()
+
     return entry ? (
         <>
             <ActionNav actionName="Game Details" />
@@ -111,6 +116,16 @@ function Details() {
                                 type="submit"
                             >
                                 Delete
+                                {navigation.state === 'submitting' &&
+                                    navigation.formMethod === 'delete' && (
+                                        <>
+                                            {' '}
+                                            <FontAwesomeIcon
+                                                icon={faCircleNotch}
+                                                spin
+                                            />
+                                        </>
+                                    )}
                             </button>
                         </Form>
                         <div className="flag-toggles">

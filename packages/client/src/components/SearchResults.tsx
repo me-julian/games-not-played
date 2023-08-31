@@ -1,6 +1,11 @@
 import { RAWG } from '@games-not-played/types'
 import SearchEntry from './SearchEntry'
-import { useSubmit, useSearchParams, useActionData } from 'react-router-dom'
+import {
+    useSubmit,
+    useSearchParams,
+    useActionData,
+    Navigation,
+} from 'react-router-dom'
 import { type SearchLoaderData } from '../routes/Search'
 
 type Props = {
@@ -8,6 +13,7 @@ type Props = {
     page: number
     // React Router doesn't seem to export the type of setSearchParams.
     useSearchParams: ReturnType<typeof useSearchParams>
+    navigation: Navigation
 }
 
 function isResults(
@@ -20,7 +26,12 @@ function isResults(
     }
 }
 
-function SearchResults({ searchData, page, useSearchParams }: Props) {
+function SearchResults({
+    searchData,
+    page,
+    useSearchParams,
+    navigation,
+}: Props) {
     const actionResponse = useActionData()
 
     const submit = useSubmit()
@@ -49,6 +60,7 @@ function SearchResults({ searchData, page, useSearchParams }: Props) {
                                 backgroundImage={result.background_image}
                                 updated={result.updated}
                                 onSelect={handleSelect}
+                                navigation={navigation}
                             />
                         ))}
                         <div className="page-navigation">

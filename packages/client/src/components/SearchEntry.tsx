@@ -1,4 +1,6 @@
-import { Form } from 'react-router-dom'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Form, Navigation, useNavigation } from 'react-router-dom'
 
 type Props = {
     id: number
@@ -7,6 +9,7 @@ type Props = {
     backgroundImage: string | null
     updated: string
     onSelect: (event: any) => void
+    navigation: Navigation
 }
 
 function SearchEntry({
@@ -16,11 +19,19 @@ function SearchEntry({
     backgroundImage,
     updated,
     onSelect,
+    navigation,
 }: Props) {
     return (
         <Form method="POST" onClick={(event) => onSelect(event)}>
             <div className="card">
-                <h5 className="name text-wrap">{name}</h5>
+                <h5 className="name text-wrap">
+                    {name}{' '}
+                    {navigation.state === 'submitting' &&
+                        navigation.formMethod === 'post' &&
+                        navigation.formData.get('name') === name && (
+                            <FontAwesomeIcon icon={faCircleNotch} spin />
+                        )}
+                </h5>
                 <input type="hidden" id="id" name="id" value={id} />
                 <input type="hidden" id="name" name="name" value={name} />
                 {playtime !== 0 && (

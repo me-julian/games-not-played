@@ -5,18 +5,20 @@
     padding-bottom: var(--list-action-height);
 
     .list-section {
+        z-index: 1;
+        position: relative;
         text-align: center;
         width: 100%;
-        position: relative;
         background-color: var(--bg-0);
     }
     #playing-section {
         #toggle-playing-btn {
+            position: relative;
             display: block;
             margin-left: auto;
             margin-right: auto;
             background-color: var(--playing);
-            border-radius: 1em;
+            border-radius: 1rem;
             margin-top: 0.5rem;
             line-height: 0.25;
             height: 1em;
@@ -38,6 +40,29 @@
             background-color: var(--playing);
         }
 
+        #toggle-playing-btn::after {
+            z-index: -1;
+            position: absolute;
+            top: 8px;
+            display: block;
+            content: '';
+            width: calc(100% - 14px);
+            left: 7px;
+            height: 100px;
+            background: linear-gradient(
+                to bottom,
+                var(--playing-transparent) 0px,
+                var(--bg-0) 100px
+            );
+            transition: width 200ms, left 200ms;
+        }
+
+        #toggle-playing-btn.show-playing::after {
+            left: 3px;
+            width: calc(100% - 6px);
+            transition: width 200ms, left 200ms;
+        }
+
         .header {
             display: inline-block;
             font-size: 1.3rem;
@@ -46,13 +71,6 @@
             padding: 0.25rem 0.5rem;
             border-bottom: 2px solid var(--bg-transparent);
         }
-    }
-    #playing-section.show-playing {
-        background: linear-gradient(
-            to bottom,
-            var(--playing-transparent) 0px,
-            var(--bg-0) 100px
-        );
     }
 
     #add-section {

@@ -70,14 +70,10 @@ function GameList({ entries }: Props) {
     return (
         <>
             {playingEntries && playingEntries.length > 0 && (
-                <div
-                    id="playing-section"
-                    className={`list-section ${
-                        showPlaying.state ? 'show-playing' : ''
-                    }`}
-                >
+                <div id="playing-section" className="list-section">
                     <button
                         id="toggle-playing-btn"
+                        className={showPlaying.state ? 'show-playing' : ''}
                         type="button"
                         name="toggle-playing"
                         onClick={() => showPlaying.setter(!showPlaying.state)}

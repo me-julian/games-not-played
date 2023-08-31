@@ -36,11 +36,27 @@
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
         }
+        .card-box:hover {
+            background-color: var(--bg-2);
+        }
         .card-grip {
+            cursor: grab;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100px;
             border-left: none;
             border-right: none;
             padding: 0 0.2rem;
             align-self: center;
+            transition: padding 100ms;
+        }
+        .card-grip:hover {
+            padding: 0.4rem;
+            transition: padding 100ms;
+            svg {
+                color: var(--light-active);
+            }
         }
         .card.dragging {
             background-color: var(--bg-0);

@@ -142,8 +142,8 @@ function Search() {
                         useSearchParams={[searchParams, setSearchParams]}
                     />
                 )}
+                <RawgAttribution />
             </main>
-            <RawgAttribution />
         </>
     )
 }

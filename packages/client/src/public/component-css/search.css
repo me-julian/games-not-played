@@ -25,8 +25,17 @@
         border-bottom: var(--bg-2) solid 3px;
         border-left: none;
         border-right: none;
-        border-radius: 3px;
+        border-radius: 0;
         padding: 0.5em;
+        transition: font-size 100ms;
+    }
+    .card:hover {
+        background-color: var(--bg-1);
+        font-size: 1.15em;
+        transition: font-size 100ms;
+    }
+    .card:active {
+        background-color: var(--bg-2);
     }
     .name {
         margin: 0.5em 0;

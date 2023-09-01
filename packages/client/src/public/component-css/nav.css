@@ -16,12 +16,21 @@ nav {
     }
     .container-sm {
         max-width: var(--sm-content-width);
+        @media (width >= 350px) {
+            padding: 0 0.5rem;
+        }
     }
     .container-md {
         max-width: var(--md-content-width);
+        @media (width >= 700px) {
+            padding: 0 0.5rem;
+        }
     }
     .container-lg {
         max-width: var(--lg-content-width);
+        @media (width >= 1000px) {
+            padding: 0 0.5rem;
+        }
     }
     a {
         text-decoration: none;

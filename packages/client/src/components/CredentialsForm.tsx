@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { Form } from 'react-router-dom'
 
-function CredentialsForm() {
+type Props = {
+    type: 'signin' | 'signup'
+}
+
+function CredentialsForm({ type }: Props) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
@@ -31,9 +35,12 @@ function CredentialsForm() {
                         type="password"
                         autoComplete="current-password"
                         required
+                        minLength={type == 'signin' ? 1 : 6}
                     />
                 </section>
-                <button type="submit">Sign in</button>
+                <button type="submit">
+                    {type === 'signin' ? 'Sign In' : 'Sign Up'}
+                </button>
             </div>
         </Form>
     )

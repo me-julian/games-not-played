@@ -39,7 +39,7 @@ function Signup() {
                             <p>{authResponse}</p>
                         </section>
                     )}
-                    <CredentialsForm />
+                    <CredentialsForm type="signup" />
                     <div>
                         <p>Already have an account? </p>
                         <Link className="accent" to={'/signin'} replace={true}>

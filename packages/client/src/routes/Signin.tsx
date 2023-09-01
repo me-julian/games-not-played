@@ -42,7 +42,7 @@ function Signin() {
                             <p>{authResponse}</p>
                         </section>
                     )}
-                    <CredentialsForm />
+                    <CredentialsForm type="signin" />
                     <div>
                         <p>Don't have an account? </p>
                         <Link className="accent" to={'/signup'} replace={true}>

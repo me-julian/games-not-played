@@ -1,6 +1,6 @@
 nav {
     position: relative;
-    z-index: 150;
+    z-index: var(--z-nav);
     height: var(--nav-height);
     background-color: var(--bg-2);
     border-bottom: 1px solid;
@@ -78,7 +78,7 @@ nav {
 }
 
 .menu-wrapper {
-    z-index: 100;
+    z-index: var(--z-nav-menu);
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

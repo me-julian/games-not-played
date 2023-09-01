@@ -5,7 +5,6 @@
     padding-bottom: var(--list-action-height);
 
     .list-section {
-        z-index: 1;
         position: relative;
         text-align: center;
         width: 100%;
@@ -41,7 +40,7 @@
         }
 
         #toggle-playing-btn::after {
-            z-index: -1;
+            z-index: var(--z-playing-gradient);
             position: absolute;
             top: 8px;
             display: block;
@@ -74,7 +73,7 @@
 
     #add-section {
         position: relative;
-        z-index: 3;
+        z-index: var(--z-add-game-section);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;

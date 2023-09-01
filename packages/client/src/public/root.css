@@ -29,6 +29,18 @@
     --sm-content-width: 350px;
     --md-content-width: 700px;
     --lg-content-width: 1000px;
+    /*     Z Indexing */
+    --z-nav: 5;
+    --z-nav-menu: 4;
+    --z-list-actions: 3;
+    /* list-actions Stacking Context */
+    --z-action-button: 1;
+    --z-behind-buttons: 0;
+    /**/
+    --z-add-game-section: 2;
+    /* list-section Stacking Context */
+    --z-playing-gradient: -1;
+    /**/
 }
 
 body {

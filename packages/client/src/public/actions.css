@@ -66,7 +66,7 @@
 #game-list {
     .list-actions {
         position: fixed;
-        z-index: 3;
+        z-index: var(--z-list-actions);
         width: 100%;
         bottom: 0px;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg-0));
@@ -113,7 +113,7 @@
             position: relative;
 
             .button-div {
-                z-index: 1;
+                z-index: var(--z-action-button);
                 background-color: var(--bg-4);
                 border: 2px solid var(--bg-3);
                 &:hover {
@@ -132,7 +132,7 @@
                 bottom: calc(var(--list-action-height) - 2px);
                 left: 50%;
                 transform: translateX(-50%);
-                z-index: 0;
+                z-index: var(--z-behind-buttons);
                 width: 100%;
 
                 span {

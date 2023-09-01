@@ -102,22 +102,23 @@
             }
         }
         #filter-btn {
+            position: relative;
+
             .button-div {
-                position: relative;
                 z-index: 1;
                 background-color: var(--bg-4);
                 border: 2px solid var(--bg-3);
             }
             .current-filter {
+                pointer-events: all;
                 font-size: small;
                 position: absolute;
                 line-height: normal;
                 bottom: calc(var(--list-action-height) - 2px);
-                left: 75%;
-                right: -25%;
+                left: 50%;
                 transform: translateX(-50%);
                 z-index: 0;
-                width: fit-content;
+                width: 100%;
 
                 span {
                     background-color: var(--bg-3);

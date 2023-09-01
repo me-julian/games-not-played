@@ -1,6 +1,6 @@
+import { Form, Navigation } from 'react-router-dom'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Form, Navigation, useNavigation } from 'react-router-dom'
 
 type Props = {
     id: number

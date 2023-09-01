@@ -25,7 +25,7 @@ function SigninIcon() {
             <path
                 d="M15 12H3"
                 stroke="#FFFBFA"
-                stroke-opacity="0.9"
+                strokeOpacity="0.9"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"

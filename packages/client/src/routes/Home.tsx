@@ -27,8 +27,7 @@ export async function reorderList({ request }: ActionFunctionArgs) {
     if (response.ok) {
         return redirect('.')
     } else {
-        return 'failure to update'
-        // return new Response('Failure to update list order.', { status: 500 })
+        return 'Failed to reorder entries.'
     }
 }
 

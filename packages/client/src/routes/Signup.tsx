@@ -26,7 +26,7 @@ export async function signupAction({ request }: ActionFunctionArgs) {
 
 function Signup() {
     const jwt = getJwt()
-    const authResponse = useActionData()
+    const actionResponse = useActionData()
 
     const signupScreen = (
         <>
@@ -34,9 +34,9 @@ function Signup() {
             <main className="auth">
                 <section>
                     <h3 className="brand">Games Not Played</h3>
-                    {typeof authResponse === 'string' && (
+                    {typeof actionResponse === 'string' && (
                         <section>
-                            <p>{authResponse}</p>
+                            <p>{actionResponse}</p>
                         </section>
                     )}
                     <CredentialsForm type="signup" />

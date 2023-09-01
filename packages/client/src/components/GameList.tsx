@@ -21,6 +21,10 @@ function GameList({ entries }: Props) {
     const playingEntries = splitEntries?.playing
     const [otherEntries, setOtherEntries] = useState(splitEntries?.other)
 
+    // Apply the offset to the 'other' entries' index so that the separated
+    // sets of entries have one contiguous set of indexes on the backend.
+    const playingIndexOffset = playingEntries?.length || 0
+
     const { currentFilter, filterDirection, showPlaying } =
         useOutletContext() as RootOutletContext
     const [dndDisabled, setDndDisabled] = useState(false)
@@ -62,11 +66,7 @@ function GameList({ entries }: Props) {
         }
     }, [currentFilter.state, entries])
 
-    // Apply the offset to the 'other' entries' index so that the separated
-    // sets of entries have one contiguous set of indexes on the backend.
-    const playingIndexOffset = playingEntries?.length || 0
-
-    const nodeRef = useRef(null)
+    const playingSectionRef = useRef(null)
 
     return (
         <>
@@ -84,13 +84,13 @@ function GameList({ entries }: Props) {
                         ></FontAwesomeIcon>
                     </button>
                     <CSSTransition
-                        nodeRef={nodeRef}
+                        nodeRef={playingSectionRef}
                         in={showPlaying.state}
                         unmountOnExit
                         timeout={{ enter: 300, exit: 200 }}
                         classNames="playing-list"
                     >
-                        <div ref={nodeRef}>
+                        <div ref={playingSectionRef}>
                             <h5 className="header">Currently Playing</h5>
                             <Droppable
                                 droppableId="playing-list"

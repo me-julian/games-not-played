@@ -1,12 +1,12 @@
+import { type SearchLoaderData } from '../routes/Search'
 import { RAWG } from '@games-not-played/types'
-import SearchEntry from './SearchEntry'
 import {
     useSubmit,
     useSearchParams,
     useActionData,
     Navigation,
 } from 'react-router-dom'
-import { type SearchLoaderData } from '../routes/Search'
+import SearchEntry from './SearchEntry'
 
 type Props = {
     searchData: SearchLoaderData

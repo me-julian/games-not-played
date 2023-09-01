@@ -16,23 +16,19 @@ import { getJwt } from '../auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
-function entryUrlRequest(method: string, urlEnding: string) {
-    const jwt = getJwt()
-
-    return fetch(`${import.meta.env.VITE_API_URL}${urlEnding}`, {
-        method: method,
-        headers: {
-            Authorization: 'bearer ' + jwt,
-        },
-    })
-}
-
 export async function deleteEntry({
     params,
 }: ActionFunctionArgs): Promise<Response> {
-    const response = await entryUrlRequest(
-        'DELETE',
-        `/users/list/${params.entryId}`
+    const jwt = getJwt()
+
+    const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/list/${params.entryId}`,
+        {
+            method: 'DELETE',
+            headers: {
+                Authorization: 'bearer ' + jwt,
+            },
+        }
     )
 
     if (response.status === 204) {
@@ -47,8 +43,8 @@ export async function editEntry({
     request,
     params,
 }: ActionFunctionArgs): Promise<Response> {
-    // entryUrlRequest('PATCH', `/users/list/${params.entryId}`)
     const jwt = getJwt()
+
     const response = await fetch(
         `${import.meta.env.VITE_API_URL}/users/list/${params.entryId}`,
         {
@@ -75,14 +71,14 @@ function returnDaysSince(date: Date | string) {
 }
 
 function Details() {
+    const navigation = useNavigation()
+
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
     const { entryId } = useParams()
     // No user feedback if there's an error (bad/stale ID in url)
     const entry = rootLoaderData?.find(
         (entry) => entry.id === parseInt(entryId!)
     )
-
-    const navigation = useNavigation()
 
     return entry ? (
         <>

@@ -1,7 +1,7 @@
+import { Client } from '@games-not-played/types'
 import { useEffect, useState } from 'react'
 import { Outlet, redirect } from 'react-router-dom'
 import { getJwt } from '../auth'
-import { Client } from '@games-not-played/types'
 
 export type RootLoaderData = Client.Entry[] | null
 

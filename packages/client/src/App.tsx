@@ -51,12 +51,7 @@ export const routeObject = [
                 path: '/search',
                 element: <Search />,
                 loader: loadSearch,
-                action: async ({ request, params }: ActionFunctionArgs) => {
-                    switch (request.method) {
-                        case 'POST':
-                            return addToList({ request, params })
-                    }
-                },
+                action: addToList,
             },
             {
                 path: '/about',

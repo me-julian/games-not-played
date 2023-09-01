@@ -84,7 +84,9 @@ export async function addToList({ request }: ActionFunctionArgs) {
 function Search() {
     const searchData = useLoaderData() as SearchLoaderData
 
+    const navigation = useNavigation()
     const submit = useSubmit()
+
     const [searchParams, setSearchParams] = useSearchParams()
     const [searchQuery, setSearchQuery] = useState(
         searchParams.get('search') || ''
@@ -99,8 +101,6 @@ function Search() {
 
         return () => clearTimeout(search)
     }, [searchQuery])
-
-    const navigation = useNavigation()
 
     return (
         <>

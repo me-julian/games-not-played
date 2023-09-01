@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { type RootLoaderData } from './Root'
+import { type Client } from '@games-not-played/types'
+import { useState } from 'react'
 import {
     ActionFunctionArgs,
     Link,
@@ -10,8 +12,6 @@ import { DragDropContext, DropResult } from '@hello-pangea/dnd'
 import Nav from '../components/Nav'
 import GameList from '../components/GameList'
 import { getJwt } from '../auth'
-import { type RootLoaderData } from './Root'
-import { type Client } from '@games-not-played/types'
 
 export async function reorderList({ request }: ActionFunctionArgs) {
     const jwt = getJwt()
@@ -38,12 +38,6 @@ function Home() {
 
     const fetcher = useFetcher()
     const [optimisticEntries, setOptimisticEntries] = useState(rootLoaderData)
-
-    useEffect(() => {
-        if (fetcher.data) {
-            console.log(fetcher.data)
-        }
-    }, [fetcher.data])
 
     const reorder = (
         list: Client.Entry[],

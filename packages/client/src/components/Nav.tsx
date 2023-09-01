@@ -1,13 +1,20 @@
 import '../public/component-css/nav.css'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { getJwt, parseJwt } from '../auth'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import NavMenu from './NavMenu'
 import SignInIcon from './icons/SignInIcon'
-import SignOutIcon from './icons/SignOutIcon'
+import NavMenuBtn from './NavMenuBtn'
+import { getJwt, parseJwt } from '../auth'
 
 function Nav() {
     const jwt = getJwt()
     const navigate = useNavigate()
-    const location = useLocation()
+
+    const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    function handleMenuToggle() {
+        setShowMenu(!showMenu)
+    }
 
     async function handleSignout() {
         localStorage.removeItem('jwt')
@@ -18,28 +25,12 @@ function Nav() {
         <>
             <nav>
                 <div className="container-lg">
-                    <Link className="brand title" to={'/about'}>
-                        Games Not Played
-                    </Link>
+                    <span className="brand title">Games Not Played</span>
                     {jwt ? (
-                        <>
-                            <span className="text-wrap">
-                                {parseJwt(jwt).username}
-                            </span>
-                            <span
-                                className="link-icon"
-                                tabIndex={0}
-                                role="link"
-                                onClick={() => {
-                                    handleSignout()
-                                }}
-                            >
-                                <span className="sr-only sr-only-focusable">
-                                    Sign Out Icon
-                                </span>
-                                <SignOutIcon />
-                            </span>
-                        </>
+                        <NavMenuBtn
+                            showMenu={showMenu}
+                            onMenuToggle={handleMenuToggle}
+                        />
                     ) : (
                         <Link className="link-icon" to={'/signin'}>
                             <span className="sr-only sr-only-focusable">
@@ -50,6 +41,13 @@ function Nav() {
                     )}
                 </div>
             </nav>
+            {jwt && (
+                <NavMenu
+                    showMenu={showMenu}
+                    username={parseJwt(jwt).username}
+                    onSignout={handleSignout}
+                />
+            )}
         </>
     )
 }

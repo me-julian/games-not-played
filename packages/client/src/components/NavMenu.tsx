@@ -24,7 +24,7 @@ function NavMenu({ showMenu, username, onSignout }: Props) {
                 <div className="menu-box">
                     <div className="username text-clamp">{username}</div>
                     <Link to={'/about'}>About the app</Link>
-                    <div
+                    <span
                         className="link"
                         tabIndex={0}
                         role="link"
@@ -33,7 +33,7 @@ function NavMenu({ showMenu, username, onSignout }: Props) {
                         }}
                     >
                         Sign Out <SignOutIcon />
-                    </div>
+                    </span>
                 </div>
             </div>
         </CSSTransition>

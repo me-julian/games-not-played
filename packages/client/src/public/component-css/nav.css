@@ -100,13 +100,30 @@ nav {
         box-shadow: 0px 2px 2px var(--bg-0),
             inset 0px 2px 2px var(--bg-transparent);
 
-        .username {
+        > * {
             margin-bottom: 0.5rem;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        .username {
+            margin-right: 0.5rem;
             font-size: 1.2em;
             font-weight: 500;
         }
+        a,
         .link {
-            margin-top: 0.5rem;
+            display: block;
+            margin-left: auto;
+            width: fit-content;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--bg-transparent);
+            &:hover {
+                color: var(--light);
+                /* border: 2px solid var(--bg-4); */
+                background-color: var(--bg-4);
+            }
         }
     }
 }

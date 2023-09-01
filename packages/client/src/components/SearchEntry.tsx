@@ -24,7 +24,7 @@ function SearchEntry({
     return (
         <Form method="POST" onClick={(event) => onSelect(event)}>
             <div className="card">
-                <h5 className="name text-wrap">
+                <h5 className="name text-clamp">
                     {name}{' '}
                     {navigation.state === 'submitting' &&
                         navigation.formMethod === 'post' &&

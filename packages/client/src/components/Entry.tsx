@@ -44,7 +44,7 @@ function Entry({ index, entry, dndDisabled }: Props) {
                                 >
                                     <div className="card-box">
                                         <div className="name-and-star">
-                                            <h2 className="name text-wrap">
+                                            <h2 className="name text-clamp">
                                                 {entry.game.name}
                                             </h2>
                                             {entry.isStarred && (

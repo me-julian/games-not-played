@@ -8,20 +8,19 @@ button {
     padding-block: 0;
     padding-inline: 0;
     box-shadow: 1px 1px 2px var(--bg-0);
-}
-button:hover {
-    transition: background-color 0.1s, color 0.1s;
-    background-color: var(--primary-active);
-}
-button:active {
-    transition: background-color 0.1s, color 0.1s;
-    background-color: var(--primary);
-}
-
-button:disabled {
-    cursor: default;
-    color: var(--bg-4);
-    background-color: var(--bg-3);
+    &:hover {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--primary-active);
+    }
+    &:active {
+        transition: background-color 0.1s, color 0.1s;
+        background-color: var(--primary);
+    }
+    &:disabled {
+        cursor: default;
+        color: var(--bg-4);
+        background-color: var(--bg-3);
+    }
 }
 
 .fixed-action {
@@ -45,6 +44,28 @@ button:disabled {
             width: 100%;
         }
     }
+
+    @media (width >= 700px) {
+        position: static;
+        margin: 0.5rem;
+        .button-wrapper {
+            .action-btn {
+                border-radius: 3px;
+                max-width: 75%;
+            }
+        }
+    }
+
+    @media (width >= 1000px) {
+        position: static;
+        margin: 0.5rem;
+        .button-wrapper {
+            .action-btn {
+                border-radius: 3px;
+                max-width: 75%;
+            }
+        }
+    }
 }
 
 .toggle-btn {
@@ -58,54 +79,59 @@ button:disabled {
         padding: 0.5rem 1rem;
         border-radius: 3px;
         box-shadow: 1px 1px 2px var(--bg-0);
-    }
-    label:hover {
-        transition: background-color 0.1s, color 0.1s;
-        background-color: var(--bg-4);
-        color: var(--bg-3);
-    }
-    label:active {
-        transition: background-color 0.1s, color 0.1s;
-        background-color: var(--bg-3);
-        color: var(--bg-4);
+        &:hover {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--bg-4);
+            color: var(--bg-3);
+        }
+        &:active {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--bg-3);
+            color: var(--bg-4);
+        }
+
+        @media (height < 400px) {
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
     }
     input:checked + label {
         background-color: var(--primary);
         color: var(--light);
-    }
-    input:checked + label:hover {
-        transition: background-color 0.1s, color 0.1s;
-        background-color: var(--primary-active);
-    }
-    input:checked + label:active {
-        transition: background-color 0.1s, color 0.1s;
-        background-color: var(--primary);
+        &:hover {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--primary-active);
+        }
+        &:active {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--primary);
+        }
     }
 }
 .toggle-btn.swap {
     label {
         background-color: var(--primary);
         color: var(--light);
-    }
-    label:hover {
-        transition: background-color 0.1s, color 0.1s;
-        background-color: var(--primary-active);
-    }
-    label:active {
-        transition: background-color 0.1s, color 0.1s;
-        background-color: var(--primary);
+        &:hover {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--primary-active);
+        }
+        &:active {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--primary);
+        }
     }
     input:checked + label {
         background-color: var(--primary);
         color: var(--light);
-    }
-    input:checked + label:hover {
-        transition: background-color 0.1s, color 0.1s;
-        background-color: var(--primary-active);
-    }
-    input:checked + label:active {
-        transition: background-color 0.1s, color 0.1s;
-        background-color: var(--primary);
+        &:hover {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--primary-active);
+        }
+        &:active {
+            transition: background-color 0.1s, color 0.1s;
+            background-color: var(--primary);
+        }
     }
 }
 
@@ -114,86 +140,53 @@ button:disabled {
     background-color: var(--warning);
     border-radius: 3px;
     padding: 0.5rem 1rem;
-}
-.delete-btn:hover {
-    transition: background-color 100ms, color 0.1s;
-    background-color: var(--warning-active);
-}
-.delete-btn:active {
-    transition: background-color 100ms, color 0.1s;
-    background-color: var(--warning);
+    &:hover {
+        transition: background-color 100ms, color 0.1s;
+        background-color: var(--warning-active);
+    }
+    &:active {
+        transition: background-color 100ms, color 0.1s;
+        background-color: var(--warning);
+    }
 }
 
 #add-game-btn {
     display: block;
     margin: 0.5rem 0;
     transition: transform 100ms;
+    &:hover {
+        .circle {
+            transition: fill 100ms;
+            fill: var(--bg-4);
+        }
+        .controller-btn {
+            transition: stroke 100ms;
+            stroke: var(--accent-active);
+        }
+        /* .controller-outline {} */
+        /* .plus {} */
+    }
+    &:active {
+        transform: scale(0.9);
+        transition: transform 100ms;
+
+        .circle {
+            fill: var(--bg-3);
+            transition: fill 100ms;
+        }
+        .controller-btn {
+            stroke: var(--accent);
+            transition: stroke 100ms;
+        }
+        /* .controller-outline {} */
+        /* .plus {} */
+    }
 
     .controller {
         transform: translateY(-10px);
     }
     .plus {
         transform: translate(2px, 0px);
-    }
-}
-#add-game-btn:hover {
-    .circle {
-        transition: fill 100ms;
-        fill: var(--bg-4);
-    }
-    .controller-btn {
-        transition: stroke 100ms;
-        stroke: var(--accent-active);
-    }
-    /* .controller-outline {} */
-    /* .plus {} */
-}
-#add-game-btn:active {
-    transform: scale(0.9);
-    transition: transform 100ms;
-
-    .circle {
-        fill: var(--bg-3);
-        transition: fill 100ms;
-    }
-    .controller-btn {
-        stroke: var(--accent);
-        transition: stroke 100ms;
-    }
-    /* .controller-outline {} */
-    /* .plus {} */
-}
-
-@media screen and (height < 400px) {
-    .toggle-btn {
-        margin-top: 0.25rem;
-        margin-bottom: 0.25rem;
-    }
-}
-
-@media screen and (width >= 700px) {
-    .fixed-action {
-        position: static;
-        margin: 0.5rem;
-        .button-wrapper {
-            .action-btn {
-                border-radius: 3px;
-                max-width: 75%;
-            }
-        }
-    }
-}
-
-@media screen and (width >= 1000px) {
-    .fixed-action {
-        position: static;
-        margin: 0.5rem;
-        .button-wrapper {
-            .action-btn {
-                border-radius: 3px;
-                max-width: 75%;
-            }
-        }
     }
 }
 

@@ -25,19 +25,19 @@
             width: calc(100% - 1rem);
             padding-inline: 0px;
             padding-block: 0px;
+            &:hover {
+                transition: background-color 0.1s, color 0.1s;
+                background-color: var(--playing-active);
+            }
+            &:active {
+                transition: background-color 0.1s, color 0.1s;
+                background-color: var(--playing);
+            }
 
             .svg-inline--fa {
                 line-height: inherit;
                 height: inherit;
             }
-        }
-        #toggle-playing-btn:hover {
-            transition: background-color 0.1s, color 0.1s;
-            background-color: var(--playing-active);
-        }
-        #toggle-playing-btn:active {
-            transition: background-color 0.1s, color 0.1s;
-            background-color: var(--playing);
         }
 
         #toggle-playing-btn::after {

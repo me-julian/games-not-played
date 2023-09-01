@@ -28,14 +28,14 @@
         border-radius: 0;
         padding: 0.5em;
         transition: font-size 100ms;
-    }
-    .card:hover {
-        background-color: var(--bg-1);
-        font-size: 1.15em;
-        transition: font-size 100ms;
-    }
-    .card:active {
-        background-color: var(--bg-2);
+        &:hover {
+            background-color: var(--bg-1);
+            font-size: 1.15em;
+            transition: font-size 100ms;
+        }
+        &:active {
+            background-color: var(--bg-2);
+        }
     }
     .name {
         margin: 0.5em 0;

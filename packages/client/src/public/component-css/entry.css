@@ -20,6 +20,9 @@
             border-top: none;
             border-radius: 3px;
         }
+        .card.dragging {
+            background-color: var(--bg-0);
+        }
         .card-link {
             display: block;
             width: 100%;
@@ -35,9 +38,9 @@
             padding: 0.5rem;
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
-        }
-        .card-box:hover {
-            background-color: var(--bg-2);
+            &:hover {
+                background-color: var(--bg-2);
+            }
         }
         .card-grip {
             cursor: grab;
@@ -50,16 +53,13 @@
             padding: 0 0.2rem;
             align-self: center;
             transition: padding 100ms;
-        }
-        .card-grip:hover {
-            padding: 0.4rem;
-            transition: padding 100ms;
-            svg {
-                color: var(--light-active);
+            &:hover {
+                padding: 0.4rem;
+                transition: padding 100ms;
+                svg {
+                    color: var(--light-active);
+                }
             }
-        }
-        .card.dragging {
-            background-color: var(--bg-0);
         }
 
         .name-and-star {

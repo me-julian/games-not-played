@@ -62,6 +62,11 @@ main {
     flex: 1 0 auto;
     width: 100%;
     align-self: center;
+
+    @media (width >= 1000px) {
+        align-self: center;
+        width: var(--lg-content-width);
+    }
 }
 
 a,
@@ -141,11 +146,4 @@ input[type='password'] {
     line-height: 1;
     text-align: center;
     padding: 0.5rem 1rem 1rem;
-}
-
-@media screen and (width >= 1000px) {
-    main {
-        align-self: center;
-        width: var(--lg-content-width);
-    }
 }

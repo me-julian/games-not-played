@@ -10,7 +10,7 @@ import About from './routes/About'
 import Signin, { signinAction } from './routes/Signin'
 import Signup, { signupAction } from './routes/Signup'
 import Search, { loadSearch, addToList } from './routes/Search'
-import Details, { deleteEntry, editEntry } from './routes/Details'
+import GameDetails, { deleteEntry, editEntry } from './routes/GameDetails'
 import Random from './routes/Random'
 import Filter from './routes/Filter'
 
@@ -29,7 +29,7 @@ export const routeObject = [
             },
             {
                 path: '/details/:entryId',
-                element: <Details />,
+                element: <GameDetails />,
                 action: async ({ request, params }: ActionFunctionArgs) => {
                     switch (request.method) {
                         case 'DELETE':

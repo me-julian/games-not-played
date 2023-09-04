@@ -1,0 +1,260 @@
+#welcome {
+    text-align: center;
+
+    h1 {
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+    }
+
+    p {
+        font-size: 1.15rem;
+    }
+}
+
+#game-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: var(--list-action-height);
+
+    .list-section {
+        position: relative;
+        z-index: var(--z-list-section);
+        text-align: center;
+        width: 100%;
+        background-color: var(--bg-0);
+    }
+
+    #playing-section {
+        background-color: transparent;
+
+        #toggle-playing-btn {
+            position: relative;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: var(--playing);
+            border-radius: 1rem;
+            margin-top: 0.5rem;
+            line-height: 0.25;
+            height: 1em;
+            width: calc(100% - 1rem);
+            padding-inline: 0px;
+            padding-block: 0px;
+
+            &:hover {
+                transition: background-color 0.1s, color 0.1s;
+                background-color: var(--playing-active);
+            }
+
+            &:active {
+                transition: background-color 0.1s, color 0.1s;
+                background-color: var(--playing);
+            }
+
+            .svg-inline--fa {
+                line-height: inherit;
+                height: inherit;
+            }
+        }
+
+        #toggle-playing-btn::after {
+            z-index: var(--z-playing-gradient);
+            position: absolute;
+            top: 8px;
+            display: block;
+            content: '';
+            width: calc(100% - 14px);
+            left: 7px;
+            height: 100px;
+            background: linear-gradient(
+                to bottom,
+                var(--playing-transparent) 0px,
+                var(--bg-0) 100px
+            );
+            transition: width 600ms, left 600ms;
+        }
+
+        #toggle-playing-btn.show-playing::after {
+            left: 2px;
+            width: calc(100% - 4px);
+            transition: width 50ms, left 50ms;
+        }
+
+        .header {
+            display: inline-block;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+
+    #add-section {
+        position: relative;
+        z-index: var(--z-add-game-section);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        flex: 1;
+        width: 100%;
+        background-color: var(--bg-0);
+        text-align: center;
+
+        #add-game-btn {
+            display: block;
+            margin: 0.5rem 0;
+            transition: transform 100ms;
+
+            &:hover {
+                .circle {
+                    transition: fill 100ms;
+                    fill: var(--bg-4);
+                }
+
+                .controller-btn {
+                    transition: stroke 100ms;
+                    stroke: var(--accent-active);
+                }
+                /* .controller-outline {} */
+                /* .plus {} */
+            }
+
+            &:active {
+                transform: scale(0.9);
+                transition: transform 100ms;
+
+                .circle {
+                    fill: var(--bg-3);
+                    transition: fill 100ms;
+                }
+
+                .controller-btn {
+                    stroke: var(--accent);
+                    transition: stroke 100ms;
+                }
+                /* .controller-outline {} */
+                /* .plus {} */
+            }
+
+            .controller {
+                transform: translateY(-10px);
+            }
+
+            .plus {
+                transform: translate(2px, 0px);
+            }
+        }
+    }
+
+    .list-actions {
+        position: fixed;
+        z-index: var(--z-list-actions);
+        width: 100%;
+        bottom: 0px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg-0));
+        pointer-events: none;
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin: auto;
+            max-width: calc(var(--md-content-width));
+        }
+
+        #random-btn,
+        #filter-btn {
+            color: var(--light);
+            text-align: center;
+            display: block;
+            height: 100%;
+            width: 50%;
+
+            .button-div {
+                pointer-events: all;
+                display: block;
+                border-radius: 15px;
+                margin: 0 0.5rem 0.5rem 0.5rem;
+                padding: 0.35rem;
+                box-shadow: 2px 2px 3px var(--bg-0);
+
+                &:hover {
+                    transition: background-color 0.1s, color 0.1s;
+                }
+            }
+        }
+
+        #random-btn {
+            .button-div {
+                background-color: var(--primary);
+                border: 2px solid var(--primary-dark);
+
+                &:hover {
+                    background-color: var(--primary-active);
+                }
+
+                &:active {
+                    background-color: var(--primary);
+                }
+            }
+        }
+        #filter-btn {
+            position: relative;
+
+            .button-div {
+                z-index: var(--z-action-button);
+                background-color: var(--bg-4);
+                border: 2px solid var(--bg-3);
+
+                &:hover {
+                    background-color: var(--bg-3);
+                    border: 2px solid var(--bg-2);
+                }
+
+                &:active {
+                    background-color: var(--bg-4);
+                }
+            }
+            .current-filter {
+                pointer-events: all;
+                font-size: small;
+                position: absolute;
+                line-height: normal;
+                bottom: calc(var(--list-action-height) - 2px);
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: var(--z-behind-buttons);
+                width: 100%;
+
+                span {
+                    background-color: var(--bg-3);
+                    padding: 0.25rem;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
+                }
+            }
+        }
+    }
+}
+
+/* Display list transitions */
+.playing-list-enter {
+    max-height: 0dvh;
+}
+.playing-list-enter-active {
+    max-height: 100dvh;
+    transition: all 300ms;
+}
+
+.playing-list-exit {
+    max-height: 100dvh;
+}
+.playing-list-exit-active {
+    max-height: 0px;
+    transition: all 200ms;
+}
+.playing-list-exit-done {
+    display: none;
+    max-height: 0px;
+}

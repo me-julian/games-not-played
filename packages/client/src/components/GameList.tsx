@@ -9,7 +9,6 @@ import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import Entry from './Entry'
 import RawgAttribution from './RawgAttribution'
 import AddGameIcon from './icons/AddGameIcon'
-import '../public/css/routes/game-list.css'
 
 type Props = {
     entries: Client.Entry[] | null

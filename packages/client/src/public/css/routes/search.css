@@ -11,6 +11,7 @@
             section {
                 margin: 0 5%;
             }
+
             input {
                 max-width: var(--sm-content-width);
                 width: 90%;
@@ -28,15 +29,18 @@
         border-radius: 0;
         padding: 0.5em;
         transition: font-size 100ms;
+
         &:hover {
             background-color: var(--bg-1);
             font-size: 1.15em;
             transition: font-size 100ms;
         }
+
         &:active {
             background-color: var(--bg-2);
         }
     }
+
     .name {
         margin: 0.5em 0;
         font-weight: 500;
@@ -51,9 +55,11 @@
         .result-count {
             display: block;
         }
+
         .page-number {
             font-size: smaller;
         }
+
         .page-buttons {
             display: flex;
             flex-direction: row;

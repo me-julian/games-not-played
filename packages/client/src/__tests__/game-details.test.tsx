@@ -8,7 +8,7 @@ afterEach(() => {
     localStorage.removeItem('jwt')
 })
 
-describe('Entry details', () => {
+describe('Game details', () => {
     describe('Delete entry', () => {
         test('Delete entry "factorio" from list', async () => {
             const user = userEvent.setup()

@@ -12,6 +12,7 @@ import { DragDropContext, DropResult } from '@hello-pangea/dnd'
 import Nav from '../components/Nav'
 import GameList from '../components/GameList'
 import { getJwt } from '../auth'
+import '../public/css/routes/home.css'
 
 export async function reorderList({ request }: ActionFunctionArgs) {
     const jwt = getJwt()
@@ -87,7 +88,7 @@ function Home() {
                     {jwt && rootLoaderData ? (
                         <GameList entries={optimisticEntries} />
                     ) : (
-                        <div className="welcome">
+                        <div id="welcome">
                             <h1>Welcome!</h1>
                             <p>
                                 <Link className="accent" to="/signin">

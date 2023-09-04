@@ -8,14 +8,17 @@ button {
     padding-block: 0;
     padding-inline: 0;
     box-shadow: 1px 1px 2px var(--bg-0);
+
     &:hover {
         transition: background-color 0.1s, color 0.1s;
         background-color: var(--primary-active);
     }
+
     &:active {
         transition: background-color 0.1s, color 0.1s;
         background-color: var(--primary);
     }
+
     &:disabled {
         cursor: default;
         color: var(--bg-4);
@@ -36,6 +39,7 @@ button {
         display: block;
         height: 100%;
         width: 100%;
+
         .action-btn {
             border: none;
             border-radius: 0;
@@ -48,6 +52,7 @@ button {
     @media (width >= 700px) {
         position: static;
         margin: 0.5rem;
+
         .button-wrapper {
             button.action-btn {
                 border-radius: 3px;
@@ -59,6 +64,7 @@ button {
     @media (width >= 1000px) {
         position: static;
         margin: 0.5rem;
+
         .button-wrapper {
             button.action-btn {
                 border-radius: 3px;
@@ -79,11 +85,13 @@ button {
         padding: 0.5rem 1rem;
         border-radius: 3px;
         box-shadow: 1px 1px 2px var(--bg-0);
+
         &:hover {
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--bg-4);
             color: var(--bg-3);
         }
+
         &:active {
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--bg-3);
@@ -98,10 +106,12 @@ button {
     input:checked + label {
         background-color: var(--primary);
         color: var(--light);
+
         &:hover {
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--primary-active);
         }
+
         &:active {
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--primary);
@@ -112,10 +122,12 @@ button {
     label {
         background-color: var(--primary);
         color: var(--light);
+
         &:hover {
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--primary-active);
         }
+
         &:active {
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--primary);
@@ -124,10 +136,12 @@ button {
     input:checked + label {
         background-color: var(--primary);
         color: var(--light);
+
         &:hover {
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--primary-active);
         }
+
         &:active {
             transition: background-color 0.1s, color 0.1s;
             background-color: var(--primary);
@@ -140,53 +154,15 @@ button {
     background-color: var(--warning);
     border-radius: 3px;
     padding: 0.5rem 1rem;
+
     &:hover {
         transition: background-color 100ms, color 0.1s;
         background-color: var(--warning-active);
     }
+
     &:active {
         transition: background-color 100ms, color 0.1s;
         background-color: var(--warning);
-    }
-}
-
-#add-game-btn {
-    display: block;
-    margin: 0.5rem 0;
-    transition: transform 100ms;
-    &:hover {
-        .circle {
-            transition: fill 100ms;
-            fill: var(--bg-4);
-        }
-        .controller-btn {
-            transition: stroke 100ms;
-            stroke: var(--accent-active);
-        }
-        /* .controller-outline {} */
-        /* .plus {} */
-    }
-    &:active {
-        transform: scale(0.9);
-        transition: transform 100ms;
-
-        .circle {
-            fill: var(--bg-3);
-            transition: fill 100ms;
-        }
-        .controller-btn {
-            stroke: var(--accent);
-            transition: stroke 100ms;
-        }
-        /* .controller-outline {} */
-        /* .plus {} */
-    }
-
-    .controller {
-        transform: translateY(-10px);
-    }
-    .plus {
-        transform: translate(2px, 0px);
     }
 }
 

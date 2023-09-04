@@ -20,14 +20,17 @@
             border-top: none;
             border-radius: 3px;
         }
+
         .card.dragging {
             background-color: var(--bg-0);
         }
+
         .card-link {
             display: block;
             width: 100%;
             overflow: auto;
         }
+
         .card-box {
             background-color: var(--bg-1);
             color: var(--light);
@@ -38,10 +41,12 @@
             padding: 0.5rem;
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
+
             &:hover {
                 background-color: var(--bg-2);
             }
         }
+
         .card-grip {
             cursor: grab;
             display: flex;
@@ -53,9 +58,11 @@
             padding: 0 0.2rem;
             align-self: center;
             transition: padding 100ms;
+
             &:hover {
                 padding: 0.4rem;
                 transition: padding 100ms;
+
                 svg {
                     color: var(--light-active);
                 }
@@ -74,6 +81,7 @@
                 font-weight: 400;
                 margin: 0;
             }
+
             .svg-inline--fa {
                 margin-left: auto;
                 color: var(--starred);
@@ -93,9 +101,11 @@
                 align-items: center;
                 width: 100%;
             }
+
             .playtime {
                 align-self: flex-start;
             }
+
             .pill {
                 box-shadow: 1px 1px 2px var(--bg-0);
                 display: inline-block;
@@ -103,9 +113,11 @@
                 border-radius: 12px;
                 margin-left: auto;
             }
+
             .pill.owned {
                 background-color: var(--owned);
             }
+
             .date-added {
                 font-size: 0.9rem;
                 margin-top: auto;

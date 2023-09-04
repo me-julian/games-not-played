@@ -14,7 +14,7 @@ import RawgAttribution from '../components/RawgAttribution'
 import { getJwt } from '../auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
-import '../public/css/routes/details.css'
+import '../public/css/routes/game-details.css'
 
 export async function deleteEntry({
     params,
@@ -70,7 +70,7 @@ function returnDaysSince(date: Date | string) {
     return Math.floor(interval / dayMs)
 }
 
-function Details() {
+function GameDetails() {
     const navigation = useNavigation()
 
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
@@ -84,7 +84,7 @@ function Details() {
         <>
             <ActionNav actionName="Game Details" containerSize="md" />
             <main
-                id="details"
+                id="game-details"
                 style={{
                     backgroundImage:
                         `linear-gradient(to bottom, #00000099, var(--bg-0)), url(${entry.game.backgroundImage})` ||
@@ -151,4 +151,4 @@ function Details() {
     )
 }
 
-export default Details
+export default GameDetails

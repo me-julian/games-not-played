@@ -8,7 +8,7 @@ import {
 import ActionNav from '../components/ActionNav'
 import CredentialsForm from '../components/CredentialsForm'
 import { getJwt, requestAuth } from '../auth'
-import '../public/css/routes/auth.css'
+import '../public/css/auth.css'
 
 export async function signupAction({ request }: ActionFunctionArgs) {
     const response = await requestAuth(await request.formData(), '/signup')

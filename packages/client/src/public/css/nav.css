@@ -14,41 +14,49 @@ nav {
         align-items: center;
         margin: auto;
     }
+
     .container-sm {
         max-width: var(--sm-content-width);
         @media (width >= 350px) {
             padding: 0 0.5rem;
         }
     }
+
     .container-md {
         max-width: var(--md-content-width);
         @media (width >= 700px) {
             padding: 0 0.5rem;
         }
     }
+
     .container-lg {
         max-width: var(--lg-content-width);
         @media (width >= 1000px) {
             padding: 0 0.5rem;
         }
     }
+
     a {
         text-decoration: none;
         color: var(--light);
     }
+
     .title {
         font-size: 1.5rem;
         font-weight: 600;
         margin-right: auto;
     }
+
     .link-icon {
         cursor: pointer;
         margin-left: 0.5rem;
     }
+
     .link-icon:hover {
         transition: background-color 0.1s, color 0.1s;
         color: var(--light-active);
     }
+
     .link-icon:active {
         transition: background-color 0.1s, color 0.1s;
         color: var(--light);
@@ -58,14 +66,17 @@ nav {
         border: 2px solid var(--bg-3);
         padding: 0.25rem 0.5rem;
         transition: transform 100ms;
+
         &:hover {
             background-color: var(--bg-3);
             color: var(--light);
         }
+
         &:active {
             transform: scale(0.9);
             transition: transform 100ms;
         }
+
         &.enabled {
             background-color: var(--bg-3);
         }
@@ -93,6 +104,7 @@ nav {
         right: calc(0.5rem - 1px);
         transform: none;
     }
+
     @media (width >= 1000px) {
         max-width: var(--sm-content-width);
         left: auto;
@@ -115,11 +127,13 @@ nav {
                 margin-bottom: 0;
             }
         }
+
         .username {
             margin-right: 0.5rem;
             font-size: 1.2em;
             font-weight: 500;
         }
+
         a,
         .link {
             display: block;
@@ -128,6 +142,7 @@ nav {
             padding: 0.2rem 0.5rem;
             border-radius: 12px;
             border: 2px solid var(--bg-transparent);
+
             &:hover {
                 color: var(--light);
                 /* border: 2px solid var(--bg-4); */

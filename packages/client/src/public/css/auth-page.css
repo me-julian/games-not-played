@@ -1,5 +1,5 @@
 /* Used on routes '/signin' and '/signup' */
-.auth {
+.auth-page {
     max-width: var(--sm-content-width);
     text-align: center;
 

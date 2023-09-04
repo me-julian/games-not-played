@@ -71,16 +71,20 @@ function returnDaysSince(date: Date | string) {
 }
 
 function GameDetails() {
-    const navigation = useNavigation()
-
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
     const { entryId } = useParams()
-    // No user feedback if there's an error (bad/stale ID in url)
     const entry = rootLoaderData?.find(
         (entry) => entry.id === parseInt(entryId!)
     )
 
-    return entry ? (
+    // Currently no user feedback other than the redirection.
+    if (!entry) {
+        return <Navigate to={'/'} />
+    }
+
+    const navigation = useNavigation()
+
+    return (
         <>
             <ActionNav actionName="Game Details" containerSize="md" />
             <main
@@ -146,8 +150,6 @@ function GameDetails() {
             </main>
             <RawgAttribution />
         </>
-    ) : (
-        <Navigate to={'/'} />
     )
 }
 

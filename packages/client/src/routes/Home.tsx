@@ -36,6 +36,23 @@ function Home() {
     const jwt = getJwt()
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData
 
+    if (!jwt || !rootLoaderData) {
+        return (
+            <>
+                <Nav />
+                <main id="welcome">
+                    <h1>Welcome!</h1>
+                    <p>
+                        <Link className="accent" to="/signin">
+                            Sign in
+                        </Link>{' '}
+                        to get started.
+                    </p>
+                </main>
+            </>
+        )
+    }
+
     const fetcher = useFetcher()
     const [optimisticEntries, setOptimisticEntries] = useState(rootLoaderData)
 
@@ -85,19 +102,7 @@ function Home() {
             <DragDropContext onDragEnd={onDragEnd}>
                 <Nav />
                 <main id="game-list">
-                    {jwt && rootLoaderData ? (
-                        <GameList entries={optimisticEntries} />
-                    ) : (
-                        <div id="welcome">
-                            <h1>Welcome!</h1>
-                            <p>
-                                <Link className="accent" to="/signin">
-                                    Sign in
-                                </Link>{' '}
-                                to get started.
-                            </p>
-                        </div>
-                    )}
+                    <GameList entries={optimisticEntries} />
                 </main>
             </DragDropContext>
         </>

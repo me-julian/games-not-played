@@ -8,7 +8,7 @@ import {
 import ActionNav from '../components/ActionNav'
 import CredentialsForm from '../components/CredentialsForm'
 import { getJwt, requestAuth } from '../auth'
-import '../public/css/auth.css'
+import '../public/css/auth-page.css'
 
 export async function signupAction({ request }: ActionFunctionArgs) {
     const response = await requestAuth(await request.formData(), '/signup')
@@ -26,12 +26,17 @@ export async function signupAction({ request }: ActionFunctionArgs) {
 
 function Signup() {
     const jwt = getJwt()
+
+    if (jwt) {
+        return <Navigate to="/" replace={true} />
+    }
+
     const actionResponse = useActionData()
 
-    const signupScreen = (
+    return (
         <>
             <ActionNav actionName={'Sign Up'} containerSize="sm" />
-            <main className="auth">
+            <main className="auth-page">
                 <section>
                     <h3 className="brand">Games Not Played</h3>
                     {typeof actionResponse === 'string' && (
@@ -50,8 +55,6 @@ function Signup() {
             </main>
         </>
     )
-
-    return jwt ? <Navigate to="/" replace={true} /> : signupScreen
 }
 
 export default Signup

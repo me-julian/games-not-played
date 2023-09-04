@@ -97,8 +97,10 @@ describe('Basic Auth Flow', () => {
                 password = 'password'
             await testLogin(user, username, password)
 
+            await user.click(await screen.findByRole('link', { name: /menu/i }))
+
             await user.click(
-                await screen.findByRole('link', { name: /sign out icon/i })
+                await screen.findByRole('link', { name: /sign out/i })
             )
 
             expect(await screen.findByText('Welcome!'))

@@ -105,7 +105,7 @@ function Search() {
     return (
         <>
             <ActionNav actionName={'Search'} containerSize="md" />
-            <main id="search">
+            <main id="search-page">
                 <section id="search-form">
                     <Form method="GET" ref={searchForm}>
                         <div>

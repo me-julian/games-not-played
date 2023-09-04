@@ -22,5 +22,7 @@ export async function testLogin(
     expect(
         await screen.findByRole('link', { name: /add game/i })
     ).toBeInTheDocument()
-    expect(await screen.findByText(username)).toBeInTheDocument()
+    expect(
+        await screen.findByRole('link', { name: /menu/i })
+    ).toBeInTheDocument()
 }

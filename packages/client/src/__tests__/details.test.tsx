@@ -19,7 +19,6 @@ describe('Entry details', () => {
                 password = 'password'
             await testLogin(user, username, password)
 
-            expect(await screen.findByText(username)).toBeInTheDocument()
             expect(
                 await screen.findByText('Europa Universalis IV')
             ).toBeInTheDocument()
@@ -34,11 +33,15 @@ describe('Entry details', () => {
             expect(searchBar).toBeInTheDocument()
             await user.type(searchBar, 'factorio')
 
-            await user.click(
-                await screen.findByRole('button', { name: /search/i })
+            // Loading search results. Requires extra time.
+            await waitFor(
+                () => {
+                    screen.getByText(/^factorio$/i)
+                },
+                { timeout: 2000 }
             )
 
-            await user.click(await screen.findByText(/^factorio$/i))
+            await user.click(screen.getByText(/^factorio$/i))
 
             expect(
                 await screen.findByRole('link', { name: /add game/i })

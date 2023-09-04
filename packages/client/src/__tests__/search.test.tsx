@@ -1,5 +1,5 @@
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { routeObject } from '../App'
 import { testLogin } from './util'
@@ -19,7 +19,6 @@ describe('Search', () => {
                 password = 'password'
             await testLogin(user, username, password)
 
-            expect(await screen.findByText(username)).toBeInTheDocument()
             expect(
                 await screen.findByText('Europa Universalis IV')
             ).toBeInTheDocument()
@@ -34,11 +33,15 @@ describe('Search', () => {
             expect(searchBar).toBeInTheDocument()
             await user.type(searchBar, 'dark souls')
 
-            await user.click(
-                await screen.findByRole('button', { name: /search/i })
+            // Loading search results. Requires extra time.
+            await waitFor(
+                () => {
+                    screen.getByText(/^dark souls$/i)
+                },
+                { timeout: 2000 }
             )
 
-            await user.click(await screen.findByText(/^dark souls$/i))
+            await user.click(screen.getByText(/^dark souls$/i))
 
             expect(
                 await screen.findByRole('link', { name: /add game/i })

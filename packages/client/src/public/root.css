@@ -38,6 +38,7 @@
     --z-behind-buttons: 0;
     /**/
     --z-add-game-section: 2;
+    --z-list-section: auto;
     /* list-section Stacking Context */
     --z-playing-gradient: -1;
     /**/

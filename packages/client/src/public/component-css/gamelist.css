@@ -6,11 +6,13 @@
 
     .list-section {
         position: relative;
+        z-index: var(--z-list-section);
         text-align: center;
         width: 100%;
         background-color: var(--bg-0);
     }
     #playing-section {
+        background-color: transparent;
         #toggle-playing-btn {
             position: relative;
             display: block;

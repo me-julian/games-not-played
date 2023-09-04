@@ -1,6 +1,6 @@
-import '../public/component-css/nav.css'
 import { Link } from 'react-router-dom'
 import BackIcon from './icons/BackIcon'
+import '../public/css/nav.css'
 
 type Props = {
     actionName: string

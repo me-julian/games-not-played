@@ -1,4 +1,3 @@
-import '../public/component-css/auth.css'
 import {
     Link,
     Navigate,
@@ -9,6 +8,7 @@ import {
 import ActionNav from '../components/ActionNav'
 import CredentialsForm from '../components/CredentialsForm'
 import { getJwt, requestAuth } from '../auth'
+import '../public/css/routes/auth.css'
 
 export async function signinAction({ request }: ActionFunctionArgs) {
     const response = await requestAuth(

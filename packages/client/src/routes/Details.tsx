@@ -1,4 +1,3 @@
-import '../public/component-css/details.css'
 import { type RootLoaderData } from './Root'
 import {
     ActionFunctionArgs,
@@ -15,6 +14,7 @@ import RawgAttribution from '../components/RawgAttribution'
 import { getJwt } from '../auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import '../public/css/routes/details.css'
 
 export async function deleteEntry({
     params,

@@ -1,5 +1,5 @@
-import '../public/component-css/about.css'
 import ActionNav from '../components/ActionNav'
+import '../public/css/routes/about.css'
 
 function About() {
     return (

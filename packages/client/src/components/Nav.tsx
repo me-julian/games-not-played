@@ -1,10 +1,10 @@
-import '../public/component-css/nav.css'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import NavMenu from './NavMenu'
 import SignInIcon from './icons/SignInIcon'
 import NavMenuBtn from './NavMenuBtn'
 import { getJwt, parseJwt } from '../auth'
+import '../public/css/nav.css'
 
 function Nav() {
     const jwt = getJwt()

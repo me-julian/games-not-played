@@ -1,4 +1,3 @@
-import '../public/component-css/search.css'
 import { RAWG } from '@games-not-played/types'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -17,6 +16,7 @@ import ActionNav from '../components/ActionNav'
 import SearchResults from '../components/SearchResults'
 import RawgAttribution from '../components/RawgAttribution'
 import { getJwt } from '../auth'
+import '../public/css/routes/search.css'
 
 export type SearchLoaderData = RAWG.SearchResults | Response | null
 

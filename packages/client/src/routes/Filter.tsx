@@ -1,4 +1,3 @@
-import '../public/actions.css'
 import { type RootOutletContext, type RootLoaderData } from './Root'
 import {
     Link,
@@ -7,6 +6,7 @@ import {
     useRouteLoaderData,
 } from 'react-router-dom'
 import ActionNav from '../components/ActionNav'
+import '../public/css/actions.css'
 
 function Filter() {
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData

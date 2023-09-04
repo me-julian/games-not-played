@@ -1,9 +1,9 @@
-import '../public//component-css/entry.css'
 import { type Client } from '@games-not-played/types'
 import { Link } from 'react-router-dom'
 import { Draggable } from '@hello-pangea/dnd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faStar } from '@fortawesome/free-solid-svg-icons'
+import '../public/css/entry.css'
 
 type Props = {
     entry: Client.Entry

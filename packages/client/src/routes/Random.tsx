@@ -1,10 +1,10 @@
-import '../public/actions.css'
 import { type RootLoaderData } from './Root'
 import { type Entry } from '@games-not-played/types/Entry'
 import { useRef, useState } from 'react'
 import { Link, Navigate, useRouteLoaderData } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import ActionNav from '../components/ActionNav'
+import '../public/css/actions.css'
 
 function Random() {
     const rootLoaderData = useRouteLoaderData('root') as RootLoaderData

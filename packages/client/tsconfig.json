@@ -24,6 +24,6 @@
         "types": ["vitest/globals"]
     },
     "exclude": ["dist"],
-    "include": ["src", "src/components", "src/App.tsx", "vitest-setup.ts"],
+    "include": ["src", "vitest-setup.ts"],
     "references": [{ "path": "../../tsconfig.vite.json" }]
 }

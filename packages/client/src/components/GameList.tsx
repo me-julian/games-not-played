@@ -11,14 +11,14 @@ import RawgAttribution from './RawgAttribution'
 import AddGameIcon from './icons/AddGameIcon'
 
 type Props = {
-    entries: Client.Entry[] | null
+    entries: Client.Entry[]
 }
 
 function GameList({ entries }: Props) {
-    const splitEntries = entries ? splitEntriesByPlaying(entries) : entries
+    const [playingEntries, otherEntries] = splitEntriesByPlaying(entries)
 
-    const playingEntries = splitEntries?.playing
-    const [otherEntries, setOtherEntries] = useState(splitEntries?.other)
+    const [filteredOtherEntries, setFilteredOtherEntries] =
+        useState(otherEntries)
 
     // Apply the offset to the 'other' entries' index so that the separated
     // sets of entries have one contiguous set of indexes on the backend.
@@ -32,35 +32,23 @@ function GameList({ entries }: Props) {
         switch (currentFilter.state) {
             case 'custom':
                 setDndDisabled(false)
-                setOtherEntries(splitEntries?.other)
+                setFilteredOtherEntries(otherEntries)
                 break
             case 'owned':
                 setDndDisabled(true)
-                if (splitEntries) {
-                    setOtherEntries(filterByOwned(splitEntries.other))
-                }
+                setFilteredOtherEntries(filterByOwned(otherEntries))
                 break
             case 'length':
                 setDndDisabled(true)
-                if (splitEntries) {
-                    setOtherEntries(
-                        filterByPlaytime(
-                            splitEntries.other,
-                            filterDirection.state
-                        )
-                    )
-                }
+                setFilteredOtherEntries(
+                    filterByPlaytime(otherEntries, filterDirection.state)
+                )
                 break
             case 'dateAdded':
                 setDndDisabled(true)
-                if (splitEntries) {
-                    setOtherEntries(
-                        filterByDateAdded(
-                            splitEntries.other,
-                            filterDirection.state
-                        )
-                    )
-                }
+                setFilteredOtherEntries(
+                    filterByDateAdded(otherEntries, filterDirection.state)
+                )
                 break
         }
     }, [currentFilter.state, entries])
@@ -69,7 +57,7 @@ function GameList({ entries }: Props) {
 
     return (
         <>
-            {playingEntries && playingEntries.length > 0 && (
+            {playingEntries.length > 0 && (
                 <div id="playing-section" className="list-section">
                     <button
                         id="toggle-playing-btn"
@@ -118,7 +106,7 @@ function GameList({ entries }: Props) {
                 </div>
             )}
 
-            {otherEntries && otherEntries.length > 0 && (
+            {filteredOtherEntries.length > 0 && (
                 <Droppable
                     droppableId="other-list"
                     type="OTHER"
@@ -130,7 +118,7 @@ function GameList({ entries }: Props) {
                             {...provided.droppableProps}
                             className="list-section"
                         >
-                            {otherEntries.map((entry, index) => (
+                            {filteredOtherEntries.map((entry, index) => (
                                 <Entry
                                     key={entry.id}
                                     index={index + playingIndexOffset}
@@ -179,8 +167,12 @@ function GameList({ entries }: Props) {
     )
 }
 
-function splitEntriesByPlaying(entries: Client.Entry[]) {
-    return entries?.reduce<{
+function splitEntriesByPlaying(entries: Client.Entry[] | null) {
+    if (entries === null) {
+        return [[], []]
+    }
+
+    const splitEntries = entries?.reduce<{
         playing: Client.Entry[]
         other: Client.Entry[]
     }>(
@@ -192,6 +184,8 @@ function splitEntriesByPlaying(entries: Client.Entry[]) {
         },
         { playing: [], other: [] }
     )
+
+    return [splitEntries.playing, splitEntries.other]
 }
 
 function filterByOwned(entries: Client.Entry[]) {

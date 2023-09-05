@@ -1,6 +1,6 @@
 const config = {
     env: process.env.NODE_ENV || 'development',
-    port: Number(process.env.PORT) || 5000,
+    port: Number(process.env.API_PORT) || 5000,
     jwtOptions: {
         issuer: process.env.VITE_API_URL,
         audience: process.env.CLIENT_URL || 'localhost',

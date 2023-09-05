@@ -1,7 +1,8 @@
 name: Build client and server source
 
 on:
-  # Should only be called by other workflows.
+  # Can be manually run or called by other workflows
+  workflow_dispatch:
   workflow_call:
 
 jobs:
@@ -53,3 +54,36 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           path: 'packages/client/dist'
+
+      # Package the server for deployment to EBS
+      - name: Build EBS package
+        working-directory: ./elastic-beanstalk
+        run: |
+          chmod +x build.sh; \
+          ./build.sh
+
+      # Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::173624809884:role/AutomationPowerUserAccessRole
+          aws-region: us-east-2
+          output-credentials: 'true'
+
+      # Login to AWS ECR
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registries: '173624809884.dkr.ecr.us-east-2.amazonaws.com'
+          mask_password: 'true'
+
+      # Build and push the server image to ECR
+      - name: Build and push the server image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: games-not-played-api
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -f ./packages/server/Dockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

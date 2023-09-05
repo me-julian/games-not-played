@@ -44,8 +44,7 @@ jobs:
         with:
           node-version: 18
           cache: 'pnpm'
-          cache-dependency-path: |
-            **/package-lock.json
+          cache-dependency-path: '**/package-lock.json'
 
         # Install workspace root dependencies 
       - name: Install dependencies

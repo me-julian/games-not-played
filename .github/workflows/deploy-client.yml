@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  deploy-client:
     runs-on: ubuntu-latest
 
     environment:

@@ -10,12 +10,10 @@ jobs:
   build:
     name: Build the client and server
     uses: julianmedwards/final-project-games-not-played/.github/workflows/build.yml@main
-    secrets: inherit
   deploy-client:
     name: Deploy client
     needs: build
     uses: julianmedwards/final-project-games-not-played/.github/workflows/build.yml@main
-    secrets: inherit
   # deploy-server:
   # name: Deploy server
   # needs: build

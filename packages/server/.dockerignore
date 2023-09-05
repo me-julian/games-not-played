@@ -1,0 +1,7 @@
+# Exclude everything except package.json and dist
+node_modules
+db
+routes
+config.ts
+server.tsconfig
+tsconfig.json

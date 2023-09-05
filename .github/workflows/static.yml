@@ -77,7 +77,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: '/packages/client/dist'
+          path: 'packages/client/dist'
 
       # Deploy client to GitHub Pages
       - name: Deploy to GitHub Pages

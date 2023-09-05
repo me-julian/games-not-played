@@ -32,13 +32,8 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
-      # Package the client's build output into an artifact
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: 'packages/client/dist'
-
-      # Deploy client to GitHub Pages
+      # Deploy client to GitHub Pages, automatically retrieves the
+      # artifact created by actions/upload-pages-artifact
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2

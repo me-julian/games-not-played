@@ -47,3 +47,9 @@ jobs:
       # Build both the client and server packages
       - name: Build
         run: pnpm run build
+
+      # Package the client's build output into an artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: 'packages/client/dist'

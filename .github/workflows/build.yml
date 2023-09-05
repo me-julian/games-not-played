@@ -81,7 +81,7 @@ jobs:
       # Get the time
       - name: Get the time
         id: time
-        uses: nanzm/get-time-action@v1.1
+        uses: nanzm/get-time-action@v2.0
         with:
           timeZone: 8
           format: 'YYYY-MM-DD-HH-mm-ss'
@@ -93,5 +93,5 @@ jobs:
           ECR_REPOSITORY: games-not-played-api
           IMAGE_TAG: ${{ steps.time.outputs.time }}
         run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG ./packages/server
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./packages/server
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

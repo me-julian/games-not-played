@@ -75,8 +75,8 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         with:
-          registries: '173624809884.dkr.ecr.us-east-2.amazonaws.com'
-          mask_password: 'true'
+          registries: '173624809884'
+          mask-password: 'true'
 
       # Build and push the server image to ECR
       - name: Build and push the server image to ECR

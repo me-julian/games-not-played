@@ -31,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-        # Setup node with PNPM
+        # Setup node with pnpm caching
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -40,7 +40,14 @@ jobs:
           cache-dependency-path: |
             **/package-lock.json
 
-      # Install monorepo dependencies.
+        # Install pnpm
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+
+        # Install workspace root dependencies 
       - name: Install dependencies
         run: pnpm install
 

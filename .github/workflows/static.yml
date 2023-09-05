@@ -59,6 +59,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      # Replace gitignore with one which allows dist files.
+      - run: |
+        rm .gitignore
+        mv .gitignore.deployment .gitignore
+
       # Build both the client and server packages
       - name: Build
         run: pnpm run build

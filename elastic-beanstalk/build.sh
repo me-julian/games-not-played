@@ -1,6 +1,6 @@
 #!/bin/bash
 
 echo "Building AWS Elastic Beanstalk package..."
-mkdir -p ebs/package
-rm -rf ebs/package/jecoaching-site.zip
-(cd ebs; zip -r package/jecoaching-site.zip . -x package/)
+mkdir -p ./package
+rm -rf ./package/games-not-played-api.zip
+(zip -r package/games-not-played-api.zip . -x package/)

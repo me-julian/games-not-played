@@ -86,6 +86,20 @@ jobs:
           timeZone: 8
           format: 'YYYY-MM-DD-HH-mm-ss'
 
+      # Install dasel
+      - name: Install dasel
+        run: |
+          curl -s -L https://github.com/TomWright/dasel/releases/download/v2.3.6/dasel_linux_amd64 > dasel
+          sudo mv dasel /usr/local/bin/
+          sudo chmod +x /usr/local/bin/dasel
+          dasel --version
+
+      # pnpm doesn't play nice with dockerizing packages - having the
+      # types workspace dependency causes errors. Get rid of all the
+      # dev dependencies and use npm in image as simplest solution.
+      - name: Modify server package.json for dockerization
+        run: dasel delete -r json -f packages/server/package.json 'devDependencies'
+
       # Build and push the server image to ECR
       - name: Build and push the server image to ECR
         env:

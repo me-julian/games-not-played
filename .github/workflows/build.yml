@@ -13,6 +13,9 @@ jobs:
       contents: read
       id-token: write
 
+    outputs:
+      time-tag: ${{ steps.get-time.outputs.time }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -48,25 +51,34 @@ jobs:
       # Build both the client and server packages
       - name: Build
         run: pnpm run build
+        env:
+          VITE_API_URL: ${{ vars.API_URL }}
 
       # Package the client's build output into an artifact
-      - name: Upload artifact
+      - name: Upload client artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: 'packages/client/dist'
+          path: './packages/client/dist'
 
-      # Package the server for deployment to EBS
-      - name: Build EBS package
+      # Package the EBS files for deployment
+      - name: Zip EBS package
         working-directory: ./elastic-beanstalk
         run: |
           chmod +x build.sh; \
           ./build.sh
 
+      # Upload the EBS package as an artifact
+      - name: Upload EBS artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: api-package
+          path: './elastic-beanstalk/package/games-not-played-api.zip'
+
       # Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::173624809884:role/GithubActionsAutomatorECR
+          role-to-assume: arn:aws:iam::173624809884:role/GithubActionsAutomator
           aws-region: us-east-2
           output-credentials: 'true'
 
@@ -80,7 +92,7 @@ jobs:
 
       # Get the time
       - name: Get the time
-        id: time
+        id: get-time
         uses: nanzm/get-time-action@v2.0
         with:
           timeZone: 8
@@ -94,6 +106,12 @@ jobs:
           sudo chmod +x /usr/local/bin/dasel
           dasel --version
 
+      # Update EBS package docker image version
+      - name: Update EBS package docker image versions
+        working-directory: ./elastic-beanstalk
+        run: |
+          dasel put -r yaml -t string -f docker-compose.yaml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.time.outputs.time }}' services.api.image
+
       # pnpm doesn't play nice with dockerizing packages - having the
       # types workspace dependency causes errors. Get rid of all the
       # dev dependencies and use npm in image as simplest solution.
@@ -105,7 +123,10 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: games-not-played-api
-          IMAGE_TAG: ${{ steps.time.outputs.time }}
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./packages/server
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          IMAGE_TAG: ${{ steps.get-time.outputs.time }}
+        uses: docker/build-push-action@v4
+        with:
+          context: ./packages/server
+          platforms: linux/arm64
+          push: true
+          tags: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

@@ -9,19 +9,24 @@ jobs:
   deploy-server:
     runs-on: ubuntu-latest
 
-    environment: production
-
     permissions:
       contents: write
       id-token: write
 
     steps:
+      - name: Download EBS package artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: api-package
+
       # Configure AWS Credentials
       - name: Configure AWS Credentials
+        id: get-aws-creds
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          # role-to-assume:
+          role-to-assume: arn:aws:iam::173624809884:role/GithubActionsAutomator
           aws-region: us-east-2
+          output-credentials: 'true'
 
       # Login to AWS ECR
       - name: Login to AWS ECR
@@ -35,9 +40,10 @@ jobs:
       - name: Deploy server to Elastic Beanstalk application
         uses: einaregilsson/beanstalk-deploy@v21
         with:
-          aws_access_key: ${{ steps.creds.outputs.aws-access-key-id }}
-          aws_secret_key: ${{ steps.creds.outputs.aws-secret-access-key }}
-          application_name: games-not-played-api
-          # environment_name:
-          # version_label:
+          aws_access_key: ${{ steps.get-aws-creds.outputs.aws-access-key-id }}
+          aws_secret_key: ${{ steps.get-aws-creds.outputs.aws-secret-access-key }}
+          application_name: games-not-played
+          environment_name: games-not-played-production
+          version_label: games-not-played-${{ needs.build.outputs.time }}
           region: us-east-1
+          deployment_package: games-not-played-api.zip

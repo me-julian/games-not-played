@@ -1,6 +1,8 @@
 FROM node:lts-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/api
+
+ENV NODE_ENV="production"
 
 COPY package.json ./
 

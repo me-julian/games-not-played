@@ -16,8 +16,8 @@ jobs:
     needs: build
     uses: julianmedwards/final-project-games-not-played/.github/workflows/deploy-client.yml@main
     secrets: inherit
-  # deploy-server:
-  # name: Deploy server
-  # needs: build
-  # uses: julianmedwards/final-project-games-not-played/.github/workflows/deploy-server.yml@main
-  # secrets: inherit
+  deploy-server:
+    name: Deploy server
+    needs: build
+    uses: julianmedwards/final-project-games-not-played/.github/workflows/deploy-server.yml@main
+    secrets: inherit

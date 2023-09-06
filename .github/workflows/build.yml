@@ -4,6 +4,8 @@ on:
   # Can be manually run or called by other workflows
   workflow_dispatch:
   workflow_call:
+    outputs:
+      version-tag: ${{ steps.get-time.outputs.time }}
 
 jobs:
   build:

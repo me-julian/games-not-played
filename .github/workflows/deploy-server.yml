@@ -3,8 +3,11 @@ name: Deploy server to AWS
 on:
   # Can only be called by other workflows
   workflow_call:
-  # Requires version-tag (time) from build
-  # workflow_dispatch:
+    inputs:
+      version-tag:
+        description: 'Deployment version as time string generated in build.'
+        required: true
+        type: string
 
 jobs:
   deploy-server:
@@ -45,6 +48,6 @@ jobs:
           aws_secret_key: ${{ steps.get-aws-creds.outputs.aws-secret-access-key }}
           application_name: games-not-played
           environment_name: games-not-played-production
-          version_label: games-not-played-${{ needs.build.outputs.version-tag }}
+          version_label: games-not-played-${{ inputs.version-tag }}
           region: us-east-1
           deployment_package: games-not-played-api.zip

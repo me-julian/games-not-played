@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build the client and server
+    name: Build deployment assets
     uses: julianmedwards/final-project-games-not-played/.github/workflows/build.yml@main
     secrets: inherit
   deploy-client:
@@ -20,4 +20,6 @@ jobs:
     name: Deploy server
     needs: build
     uses: julianmedwards/final-project-games-not-played/.github/workflows/deploy-server.yml@main
+    with:
+      version-tag: $${{ needs.build.outputs.version-tag }}
     secrets: inherit

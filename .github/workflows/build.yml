@@ -4,10 +4,12 @@ on:
   # Can be manually run or called by other workflows
   workflow_dispatch:
   workflow_call:
+    # Map job outputs and workflow outputs
     outputs:
       version-tag:
         description: 'Deployment version as time string.'
         value: ${{ jobs.build.outputs.version-tag }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +19,7 @@ jobs:
       id-token: write
 
     outputs:
-      version-tag: ${{ steps.get-time.outputs.time }}
+      version-tag: ${{ steps.output-version.outputs.VERSION_TAG }}
 
     steps:
       - name: Checkout
@@ -138,3 +140,7 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+
+      - name: Output version tag.
+        id: output-version
+        run: echo "VERSION_TAG=${{ steps.get-time.outputs.time }}" >> $GITHUB_OUTPUT

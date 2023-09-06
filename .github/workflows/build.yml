@@ -7,7 +7,7 @@ on:
     outputs:
       version-tag:
         description: 'Deployment version as time string.'
-        value: ${{ jobs.build.get-time.outputs.time }}
+        value: ${{ jobs.build.outputs.version-tag }}
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -26,7 +26,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::173624809884:role/GithubActionsAutomator
           aws-region: us-east-2
-          output-credentials: 'true'
+          output-credentials: true
 
       # Login to AWS ECR
       - name: Login to AWS ECR
@@ -34,7 +34,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         with:
           registries: '173624809884'
-          mask-password: 'true'
+          mask-password: true
 
       # Deploy server to Elastic Beanstalk application
       - name: Deploy server to Elastic Beanstalk application

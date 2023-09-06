@@ -44,6 +44,6 @@ jobs:
           aws_secret_key: ${{ steps.get-aws-creds.outputs.aws-secret-access-key }}
           application_name: games-not-played
           environment_name: games-not-played-production
-          version_label: games-not-played-${{ needs.build.outputs.time }}
+          version_label: games-not-played-${{ needs.build.outputs.version-tag }}
           region: us-east-1
           deployment_package: games-not-played-api.zip

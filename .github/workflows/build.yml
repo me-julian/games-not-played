@@ -14,7 +14,7 @@ jobs:
       id-token: write
 
     outputs:
-      time-tag: ${{ steps.get-time.outputs.time }}
+      version-tag: ${{ steps.get-time.outputs.time }}
 
     steps:
       - name: Checkout

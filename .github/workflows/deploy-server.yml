@@ -2,9 +2,9 @@ name: Deploy server to AWS
 
 on:
   # Can only be called by other workflows
-  workflow_dispatch:
+  workflow_call:
   # Requires version-tag (time) from build
-  # workflow_call:
+  # workflow_dispatch:
 
 jobs:
   deploy-server:

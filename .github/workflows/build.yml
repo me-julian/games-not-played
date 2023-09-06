@@ -5,8 +5,9 @@ on:
   workflow_dispatch:
   workflow_call:
     outputs:
-      version-tag: ${{ steps.get-time.outputs.time }}
-
+      version-tag:
+        description: 'Deployment version as time string.'
+        value: ${{ jobs.build.get-time.outputs.time }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,7 +17,7 @@ jobs:
       id-token: write
 
     outputs:
-      version_tag: ${{ steps.get-time.outputs.time }}
+      version-tag: ${{ steps.get-time.outputs.time }}
 
     steps:
       - name: Checkout

@@ -18,8 +18,8 @@
         "build": "pnpm run compile-typescript && pnpm run build-client"
     },
     "dependencies": {
-        "client": "workspace:*",
-        "server": "workspace:*"
+        "@games-not-played/client": "workspace:*",
+        "@games-not-played/server": "workspace:*"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^5.16.5",

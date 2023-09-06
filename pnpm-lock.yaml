@@ -8,10 +8,10 @@ importers:
 
   .:
     dependencies:
-      client:
+      '@games-not-played/client':
         specifier: workspace:*
         version: link:packages/client
-      server:
+      '@games-not-played/server':
         specifier: workspace:*
         version: link:packages/server
     devDependencies:

@@ -2,6 +2,9 @@ version: '3'
 
 services:
   api:
+    container_name: api
+    platform: linux/arm64/v8
+    image: unset
     depends_on:
       - db
     environment:
@@ -13,14 +16,12 @@ services:
       RAWG_API_TOKEN: '${RAWG_API_TOKEN}'
     restart: always
     working_dir: /usr/src/api
-    image: unset
-    platform: linux/arm64/v8
-    container_name: api
     ports:
       - 80:${API_PORT}
     networks:
       - localnetwork
   db:
+    platform: linux/arm64/v8
     image: mysql:${MYSQL_VERSION}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}

@@ -3,8 +3,8 @@ version: '3'
 services:
   api:
     container_name: api
-    platform: linux/arm64/v8
     image: unset
+    platform: linux/arm64/v8
     depends_on:
       - db
     environment:
@@ -21,8 +21,8 @@ services:
     networks:
       - localnetwork
   db:
+    image: ${MYSQL_IMAGE}
     platform: linux/arm64/v8
-    image: mysql:${MYSQL_VERSION}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     restart: always

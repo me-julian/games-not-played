@@ -28,6 +28,7 @@ jobs:
         id: get-aws-creds
         uses: aws-actions/configure-aws-credentials@v3
         with:
+          unset-current-credentials: true
           role-to-assume: arn:aws:iam::173624809884:role/GithubActionsAutomator
           aws-region: us-east-2
           output-credentials: true

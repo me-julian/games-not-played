@@ -65,6 +65,20 @@ jobs:
         with:
           path: './packages/client/dist'
 
+      # Install dasel
+      - name: Install dasel
+        run: |
+          curl -s -L https://github.com/TomWright/dasel/releases/download/v2.3.6/dasel_linux_amd64 > dasel
+          sudo mv dasel /usr/local/bin/
+          sudo chmod +x /usr/local/bin/dasel
+          dasel --version
+
+      # Update EB package docker image version
+      - name: Update EB package docker image versions
+        working-directory: ./elastic-beanstalk
+        run: |
+          dasel put -r yaml -t string -f docker-compose.yaml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.get-time.outputs.time }}' services.api.image
+
       # Package the EB files for deployment
       - name: Zip EB package
         working-directory: ./elastic-beanstalk
@@ -80,6 +94,7 @@ jobs:
           path: './elastic-beanstalk/package/games-not-played-api.zip'
 
       # Install buildx for docker/build-push-action@v4
+      # Apparently this needs to stay before AWS auth
       - name: Install buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
@@ -107,20 +122,6 @@ jobs:
         with:
           timeZone: 8
           format: 'YYYY-MM-DD-HH-mm-ss'
-
-      # Install dasel
-      - name: Install dasel
-        run: |
-          curl -s -L https://github.com/TomWright/dasel/releases/download/v2.3.6/dasel_linux_amd64 > dasel
-          sudo mv dasel /usr/local/bin/
-          sudo chmod +x /usr/local/bin/dasel
-          dasel --version
-
-      # Update ES package docker image version
-      - name: Update EB package docker image versions
-        working-directory: ./elastic-beanstalk
-        run: |
-          dasel put -r yaml -t string -f docker-compose.yaml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.get-time.outputs.time }}' services.api.image
 
       # pnpm doesn't play nice with dockerizing packages - having the
       # types workspace dependency causes errors. Get rid of all the

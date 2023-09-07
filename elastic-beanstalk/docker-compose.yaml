@@ -28,7 +28,7 @@ services:
         ports:
             - 3306
         volumes:
-            - db-data:/var/lib/mysql
+            - /dev/sdh/mysql:/var/lib/mysql
         networks:
             - localnetwork
 

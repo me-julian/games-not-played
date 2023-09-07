@@ -65,15 +65,15 @@ jobs:
         with:
           path: './packages/client/dist'
 
-      # Package the EBS files for deployment
-      - name: Zip EBS package
+      # Package the EB files for deployment
+      - name: Zip EB package
         working-directory: ./elastic-beanstalk
         run: |
           chmod +x build.sh; \
           ./build.sh
 
-      # Upload the EBS package as an artifact
-      - name: Upload EBS artifact
+      # Upload the EB package as an artifact
+      - name: Upload EB artifact
         uses: actions/upload-artifact@v3
         with:
           name: api-package
@@ -116,8 +116,8 @@ jobs:
           sudo chmod +x /usr/local/bin/dasel
           dasel --version
 
-      # Update EBS package docker image version
-      - name: Update EBS package docker image versions
+      # Update ES package docker image version
+      - name: Update EB package docker image versions
         working-directory: ./elastic-beanstalk
         run: |
           dasel put -r yaml -t string -f docker-compose.yaml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.get-time.outputs.time }}' services.api.image

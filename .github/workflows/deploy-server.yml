@@ -18,7 +18,7 @@ jobs:
       id-token: write
 
     steps:
-      - name: Download EBS package artifact
+      - name: Download EB package artifact
         uses: actions/download-artifact@v3
         with:
           name: api-package

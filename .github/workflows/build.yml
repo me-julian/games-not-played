@@ -77,7 +77,7 @@ jobs:
       - name: Update EB package docker image versions
         working-directory: ./elastic-beanstalk
         run: |
-          dasel put -r yaml -t string -f docker-compose.yaml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.get-time.outputs.time }}' services.api.image
+          dasel put -r yaml -t string -f docker-compose.yml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.get-time.outputs.time }}' services.api.image
 
       # Package the EB files for deployment
       - name: Zip EB package

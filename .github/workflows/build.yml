@@ -22,6 +22,14 @@ jobs:
       version-tag: ${{ steps.output-version.outputs.VERSION_TAG }}
 
     steps:
+      # Get the time
+      - name: Get the time
+        id: get-time
+        uses: nanzm/get-time-action@v2.0
+        with:
+          timeZone: 8
+          format: 'YYYY-MM-DD-HH-mm-ss'
+
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -115,14 +123,6 @@ jobs:
           registries: '173624809884'
           mask-password: 'true'
 
-      # Get the time
-      - name: Get the time
-        id: get-time
-        uses: nanzm/get-time-action@v2.0
-        with:
-          timeZone: 8
-          format: 'YYYY-MM-DD-HH-mm-ss'
-
       # pnpm doesn't play nice with dockerizing packages - having the
       # types workspace dependency causes errors. Get rid of all the
       # dev dependencies and use npm in image as simplest solution.
@@ -142,6 +142,7 @@ jobs:
           push: true
           tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
 
+      # Output time of commit as version tag.
       - name: Output version tag.
         id: output-version
         run: echo "VERSION_TAG=${{ steps.get-time.outputs.time }}" >> $GITHUB_OUTPUT

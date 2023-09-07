@@ -50,5 +50,5 @@ jobs:
           application_name: games-not-played
           environment_name: games-not-played-production
           version_label: games-not-played-${{ inputs.version-tag }}
-          region: us-east-1
+          region: us-east-2
           deployment_package: games-not-played-api.zip

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "Creating node user..."
+echo "unimplemented"
+
+# echo "Creating node user..."
 # if ! id node &> /dev/null; then
 #   useradd -u 1000 -g 1000 node
 # fi

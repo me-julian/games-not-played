@@ -57,7 +57,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      # Install workspace root dependencies
+      # Install workspace dependencies
       - name: Install dependencies
         run: pnpm install
 
@@ -81,21 +81,21 @@ jobs:
           sudo chmod +x /usr/local/bin/dasel
           dasel --version
 
-      # Update EB package docker image version
-      - name: Update EB package docker image versions
+      # Update ELB package docker image version
+      - name: Update ELB package docker image versions
         working-directory: ./elastic-beanstalk
         run: |
           dasel put -r yaml -t string -f docker-compose.yml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.get-time.outputs.time }}' services.api.image
 
-      # Package the EB files for deployment
-      - name: Zip EB package
+      # Package the ELB files for deployment
+      - name: Zip ELB package
         working-directory: ./elastic-beanstalk
         run: |
           chmod +x build.sh; \
           ./build.sh
 
-      # Upload the EB package as an artifact
-      - name: Upload EB artifact
+      # Upload the ELB package as an artifact
+      - name: Upload ELB artifact
         uses: actions/upload-artifact@v3
         with:
           name: api-package

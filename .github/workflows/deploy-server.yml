@@ -18,7 +18,7 @@ jobs:
       id-token: write
 
     steps:
-      - name: Download EB package artifact
+      - name: Download ELB package artifact
         uses: actions/download-artifact@v3
         with:
           name: api-package
@@ -41,8 +41,8 @@ jobs:
           registries: '173624809884'
           mask-password: 'true'
 
-      # Deploy server to Elastic Beanstalk application
-      - name: Deploy server to Elastic Beanstalk application
+      # Deploy server to ELB application
+      - name: Deploy server to ELB application
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ steps.get-aws-creds.outputs.aws-access-key-id }}

@@ -6,9 +6,6 @@ IMDS_TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2
 # Use the token to request this instance's id
 INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $IMDS_TOKEN" -s  http://169.254.169.254/latest/meta-data/instance-id)
 
-# Id of the DB store volume we want to attach to ourselves.
-DATA_VOLUME_ID=vol-0f08cb8b95f5138d0
-
 # Check if volume is already attached.
 if DATA_VOLUME_ATTACHED=$(aws ec2 describe-volumes --filters Name=attachment.instance-id,Values=$INSTANCE_ID | jq --arg DATA_VOLUME_ID "$DATA_VOLUME_ID" 'contains({Volumes: [{VolumeId: $DATA_VOLUME_ID}]})')
 then

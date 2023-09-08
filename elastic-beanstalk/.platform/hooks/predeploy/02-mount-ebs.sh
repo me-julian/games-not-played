@@ -24,4 +24,8 @@ aws ec2 wait volume-in-use --region us-east-2 --volume-ids $DATA_VOLUME_ID
 
 # Attach volume to this application instance on /dev/sdh
 aws ec2 attach-volume --volume-id $DATA_VOLUME_ID --instance-id $INSTANCE_ID --device /dev/sdh
+
+mkfs -t ext4 /dev/sdh
+mkdir /data
+mount /dev/sdh/mysql /data
 fi

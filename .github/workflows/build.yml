@@ -105,7 +105,7 @@ jobs:
       - name: Package Sequelize Migrations
         working-directory: ./packages/server/db
         run: |
-          zip -r migrations.zip -i migrations dbConfig.js
+          zip -r migrations.zip . -i ./migrations/* -i ./dbConfig.js
 
       # Upload Database Migrations
       - name: Package Sequelize Migrations

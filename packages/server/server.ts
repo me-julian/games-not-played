@@ -1,7 +1,7 @@
 import express, { Express } from 'express'
 import path from 'path'
 import logger from 'morgan'
-import 'dotenv/config'
+// import 'dotenv/config'
 
 const app: Express = express()
 

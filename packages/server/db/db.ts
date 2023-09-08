@@ -1,6 +1,6 @@
 'use strict'
 import { Sequelize } from 'sequelize-typescript'
-import 'dotenv/config'
+// import 'dotenv/config'
 
 import config from './dbConfig'
 

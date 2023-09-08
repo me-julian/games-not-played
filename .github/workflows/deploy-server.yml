@@ -53,7 +53,7 @@ jobs:
           node-version: 18
 
       - name: Install sequelize and sequelize-cli
-        run: npm install sequelize sequelize-cli
+        run: npm install sequelize sequelize-cli mysql2
 
       - name: Extract migrations package
         run: unzip migrations.zip -d .

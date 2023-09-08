@@ -58,7 +58,7 @@ jobs:
       # Run Sequelize migrations
       - name: Run Sequelize migrations
         run: |
-          npx sequelize migrate:db --migrations-path ./migrations --config ./dbConfig.js --env production
+          npx sequelize db:migrate --migrations-path ./migrations --config ./dbConfig.js --env production
 
       # Deploy server to ELB application
       - name: Deploy server to ELB application

@@ -55,6 +55,9 @@ jobs:
       - name: Install sequelize and sequelize-cli
         run: npm install sequelize sequelize-cli
 
+      - name: Extract migrations package
+        run: unzip migrations .
+
       # Run Sequelize migrations
       - name: Run Sequelize migrations
         run: |

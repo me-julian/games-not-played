@@ -46,10 +46,14 @@ jobs:
           registries: '173624809884'
           mask-password: 'true'
 
+      # Install Node for running Sequelize migrations
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
+
+      - name: Install sequelize and sequelize-cli
+        run: npm install sequelize sequelize-cli
 
       # Run Sequelize migrations
       - name: Run Sequelize migrations

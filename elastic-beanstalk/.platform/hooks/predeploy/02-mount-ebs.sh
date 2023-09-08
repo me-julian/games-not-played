@@ -6,6 +6,8 @@ IMDS_TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2
 # Use the token to request this instance's id
 INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $IMDS_TOKEN" -s  http://169.254.169.254/latest/meta-data/instance-id)
 
+DATA_VOLUME_ID=$(/opt/elasticbeanstalk/bin/get-config environment -k DATA_VOLUME_ID)
+
 # Check if volume is already attached.
 if DATA_VOLUME_ATTACHED=$(aws ec2 describe-volumes --filters Name=attachment.instance-id,Values=$INSTANCE_ID | jq --arg DATA_VOLUME_ID "$DATA_VOLUME_ID" 'contains({Volumes: [{VolumeId: $DATA_VOLUME_ID}]})')
 then

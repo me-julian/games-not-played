@@ -109,11 +109,10 @@ jobs:
 
       # Upload Database Migrations
       - name: Package Sequelize Migrations
-        working-directory: ./packages/server/db
         uses: actions/upload-artifact@v3
         with:
           name: migrations
-          path: './migrations.zip'
+          path: './packages/server/db/migrations.zip'
 
       # Install buildx for docker/build-push-action@v4
       # Apparently this needs to stay before AWS auth

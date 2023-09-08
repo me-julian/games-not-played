@@ -103,7 +103,7 @@ jobs:
 
       # Package Database Migrations
       - name: Package Sequelize Migrations
-        working-directory: /packages/server/db
+        working-directory: ./packages/server/db
         run: |
           zip -r migrations.zip . -x migrations dbConfig.js
 

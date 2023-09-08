@@ -101,6 +101,19 @@ jobs:
           name: api-package
           path: './elastic-beanstalk/package/games-not-played-api.zip'
 
+      # Package Database Migrations
+      - name: Package Sequelize Migrations
+        working-directory: /packages/server/db
+        run: |
+          zip -r migrations.zip . -x migrations dbConfig.js
+
+      # Upload Database Migrations
+      - name: Package Sequelize Migrations
+        uses: actions/upload-artifact@v3
+        with:
+          name: migrations
+          path: './migrations.zip'
+
       # Install buildx for docker/build-push-action@v4
       # Apparently this needs to stay before AWS auth
       - name: Install buildx

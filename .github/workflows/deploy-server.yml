@@ -23,6 +23,11 @@ jobs:
         with:
           name: api-package
 
+      - name: Download migrations artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: migrations
+
       # Configure AWS Credentials
       - name: Configure AWS Credentials
         id: get-aws-creds
@@ -40,6 +45,16 @@ jobs:
         with:
           registries: '173624809884'
           mask-password: 'true'
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Run Sequelize migrations
+      - name: Run Sequelize migrations
+        run: |
+          npx sequelize migrate:db --migrations-path ./migrations --config ./dbConfig.js --env production
 
       # Deploy server to ELB application
       - name: Deploy server to ELB application

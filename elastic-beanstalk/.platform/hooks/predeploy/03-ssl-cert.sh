@@ -11,20 +11,23 @@ echo "unimplemented"
 # certbot --nginx 
 
           # Enter email address (used for urgent renewal and security notices)
-          # jmedeployment@gmail.com [Enter]
+            # jmedeployment@gmail.com [Enter]
+          
           # Please read the Terms of Service at
           # https://letsencrypt.org/documents/LE-SA-v1.3-September-21-2022.pdf. You must
           # agree in order to register with the ACME server. Do you agree?
-          # Y [Enter]
+            # Y [Enter]
+          
           # Would you be willing, once your first certificate is successfully issued, to
           # share your email address with the Electronic Frontier Foundation, a founding
           # partner of the Let's Encrypt project and the non-profit organization that
           # develops Certbot? We'd like to send you email about our work encrypting the web,
           # EFF news, campaigns, and ways to support digital freedom.
-          # N [Enter]
+            # N [Enter]
+          
           # Please enter the domain name(s) you would like on your certificate (comma and/or
           # space separated)
-          # $DOMAIN_NAME [Enter]
+            # $DOMAIN_NAME [Enter]
 
 
 # Manual ver

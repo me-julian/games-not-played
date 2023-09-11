@@ -60,6 +60,8 @@ jobs:
 
       # Run Sequelize migrations
       - name: Run Sequelize migrations
+        env:
+          DATABASE_MIGRATIONS_PASSWORD: ${{ secrets.DATABASE_MIGRATIONS_PASSWORD }}
         run: |
           npx sequelize db:migrate --migrations-path ./migrations --config ./dbConfig.js --env production
 

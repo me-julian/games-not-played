@@ -58,6 +58,13 @@ jobs:
       - name: Extract migrations package
         run: unzip migrations.zip -d .
 
+      - name: TEMP - Test env vars
+        run: |
+          echo $DATABASE_USERNAME
+          echo $DATABASE_NAME
+          echo $DATABASE_HOST
+          echo $DATABASE_PORT
+
       # Run Sequelize migrations
       - name: Run Sequelize migrations
         env:

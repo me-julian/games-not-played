@@ -58,17 +58,13 @@ jobs:
       - name: Extract migrations package
         run: unzip migrations.zip -d .
 
-      - name: TEMP - Test env vars
-        run: |
-          echo $DATABASE_USERNAME
-          echo $DATABASE_NAME
-          echo $DATABASE_HOST
-          echo $DATABASE_PORT
-
       # Run Sequelize migrations
       - name: Run Sequelize migrations
         env:
           DATABASE_MIGRATIONS_PASSWORD: ${{ secrets.DATABASE_MIGRATIONS_PASSWORD }}
+          DATABASE_HOST: ${{ vars.DATABASE_HOST }}
+          DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+          DATABASE_USERNAME: ${{ vars.DATABASE_USERNAME }}
         run: |
           npx sequelize db:migrate --migrations-path ./migrations --config ./dbConfig.js --env production
 

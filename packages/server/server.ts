@@ -1,5 +1,4 @@
 import express, { Express } from 'express'
-import path from 'path'
 import logger from 'morgan'
 // import 'dotenv/config'
 
@@ -8,7 +7,12 @@ const app: Express = express()
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, 'public')))
+
+if (!process.env.JWT_SECRET || !process.env.RAWG_API_TOKEN) {
+    throw new Error(
+        'The environment variables for secrets are not properly set!'
+    )
+}
 
 // Auth & CORS setup
 app.use((req, res, next) => {

@@ -3,21 +3,24 @@ version: '3'
 services:
   api:
     container_name: api
-    image: unset
+    image: populateinbuild
     platform: linux/arm64/v8
     depends_on:
       - db
     environment:
       NODE_ENV: 'production'
       DATABASE_HOST: 'db'
-      DATABASE_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
-      API_PORT: '${API_PORT}'
-      RAWG_URL: '${RAWG_URL}'
-      RAWG_API_TOKEN: '${RAWG_API_TOKEN}'
+      DATABASE_NAME: ${MYSQL_DATABASE}
+      DATABASE_USERNAME: ${MYSQL_USER}
+      DATABASE_PASSWORD: ${MYSQL_USER_PASSWORD}
+      API_PORT: ${API_PORT}
+      RAWG_URL: ${RAWG_URL}
+      RAWG_API_TOKEN: ${RAWG_API_TOKEN}
+      CLIENT_URL: 'https://gamesnotplayed.mejulian.dev'
     restart: always
     working_dir: /usr/src/api
     ports:
-      - ${API_PORT}
+      - ${API_PORT}:${API_PORT}
     networks:
       - localnetwork
   db:
@@ -25,6 +28,9 @@ services:
     platform: linux/arm64/v8
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}
     restart: always
     ports:
       - 3306:3306

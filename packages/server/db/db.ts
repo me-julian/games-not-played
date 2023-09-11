@@ -4,16 +4,14 @@ import { Sequelize } from 'sequelize-typescript'
 
 import config from './dbConfig'
 
-const env = process.env.NODE_ENV || 'development'
-
 export const sequelize = new Sequelize(
-    config[env].database,
-    config[env].username,
-    config[env].password,
+    config.database,
+    config.username,
+    config.password,
     {
-        host: config[env].host,
-        port: config[env].port,
-        dialect: config[env].dialect,
+        host: config.host,
+        port: config.port,
+        dialect: config.dialect,
     }
 )
 

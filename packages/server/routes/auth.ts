@@ -69,7 +69,7 @@ passport.use(
     new JwtStrategy(
         {
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: 'your_jwt_secret',
+            secretOrKey: config.jwtSecret!,
             issuer: config.jwtOptions.issuer,
             audience: config.jwtOptions.audience,
         },
@@ -123,7 +123,7 @@ router.post('/login/password', (req, res, next) => {
                 // object and return it in the response
                 const jwt = jsonwebtoken.sign(
                     user,
-                    'your_jwt_secret',
+                    config.jwtSecret!,
                     config.jwtOptions
                 )
                 return res.json({
@@ -169,7 +169,7 @@ router.post('/signup', async function (req, res, next) {
                         // user object and return it in the response
                         const jwt = jsonwebtoken.sign(
                             resUser,
-                            'your_jwt_secret',
+                            config.jwtSecret!,
                             config.jwtOptions
                         )
                         return res.json({

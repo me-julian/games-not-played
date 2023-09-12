@@ -11,6 +11,6 @@ RAWG_API_TOKEN=$(aws secretsmanager get-secret-value --secret-id $RAWG_API_TOKEN
 MYSQL_USER_PASSWORD=$(aws secretsmanager get-secret-value --secret-id $MYSQL_PASS_ARN --region us-east-2 | jq -r '.SecretString' | jq -r '.password')
 
 # Append secret values to app .env
-echo "JWT_SECRET=${JWT_SECRET}" >> /var/app/current/.env 
-echo "RAWG_API_TOKEN=${RAWG_API_TOKEN}" >> /var/app/current/.env 
-echo "MYSQL_USER_PASSWORD=${MYSQL_USER_PASSWORD}" >> /var/app/current/.env 
+echo "JWT_SECRET=${JWT_SECRET}" >> /var/app/staging/.env 
+echo "RAWG_API_TOKEN=${RAWG_API_TOKEN}" >> /var/app/staging/.env 
+echo "MYSQL_USER_PASSWORD=${MYSQL_USER_PASSWORD}" >> /var/app/staging/.env 

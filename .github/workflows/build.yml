@@ -65,7 +65,7 @@ jobs:
       - name: Build
         run: pnpm run build
         env:
-          VITE_API_URL: ${{ vars.API_URL }}
+          VITE_API_URL: 'https://${{ vars.API_DOMAIN }}'
 
       # Package the client's build output into an artifact
       - name: Upload client artifact

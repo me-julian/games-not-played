@@ -1,6 +1,7 @@
+import { RAWG } from '@games-not-played/types'
 import express from 'express'
 import { Router } from 'express'
-import { RAWG } from '@games-not-played/types'
+import config from '../../config'
 
 const router: Router = express.Router()
 
@@ -11,7 +12,7 @@ router.get('/search', async (req, res) => {
     const pageSize = 10
 
     const urlSections = [
-        `${process.env.RAWG_URL}/games?key=${process.env.RAWG_API_TOKEN}`,
+        `${config.rawgUrl}/games?key=${config.rawgApiToken}`,
         `&page=${page ? page : 1}&page_size=${pageSize}`,
         `&search=${query}`,
         '&search_precise=true',

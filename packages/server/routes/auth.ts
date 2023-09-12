@@ -1,3 +1,4 @@
+import { Client } from '@games-not-played/types'
 import express, { Router } from 'express'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
@@ -5,7 +6,6 @@ import jsonwebtoken from 'jsonwebtoken'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import crypto from 'crypto'
 import db from '../db/db'
-import { Client } from '@games-not-played/types'
 import config from '../config'
 
 declare global {

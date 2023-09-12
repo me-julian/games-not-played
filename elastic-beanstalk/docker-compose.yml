@@ -15,8 +15,7 @@ services:
       DATABASE_PASSWORD: ${MYSQL_USER_PASSWORD}
       API_PORT: ${API_PORT}
       RAWG_URL: ${RAWG_URL}
-      RAWG_API_TOKEN: ${RAWG_API_TOKEN}
-      CLIENT_URL: 'https://gamesnotplayed.mejulian.dev'
+      CLIENT_URL: ${CLIENT_URL}
     restart: always
     working_dir: /usr/src/api
     ports:
@@ -24,10 +23,11 @@ services:
     networks:
       - localnetwork
   db:
+    container_name: db
     image: ${MYSQL_IMAGE}
     platform: linux/arm64/v8
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: 'true'
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}

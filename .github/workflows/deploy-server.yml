@@ -61,7 +61,7 @@ jobs:
       # Run Sequelize migrations
       - name: Run Sequelize migrations
         env:
-          DATABASE_MIGRATIONS_PASSWORD: ${{ secrets.DATABASE_MIGRATIONS_PASSWORD }}
+          DATABASE_USER_PASSWORD: ${{ secrets.DATABASE_USER_PASSWORD }}
           DATABASE_HOST: ${{ vars.DATABASE_HOST }}
           DATABASE_NAME: ${{ vars.DATABASE_NAME }}
           DATABASE_USERNAME: ${{ vars.DATABASE_USERNAME }}

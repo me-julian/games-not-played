@@ -18,6 +18,8 @@ jobs:
       id-token: write
 
     steps:
+      # Download api app package to upload to ELB
+      # api-package.zip extracts to games-not-played-api.zip
       - name: Download ELB package artifact
         uses: actions/download-artifact@v3
         with:
@@ -55,10 +57,10 @@ jobs:
       - name: Install sequelize and sequelize-cli
         run: npm install sequelize sequelize-cli mysql2
 
+      # Run Sequelize migrations
       - name: Extract migrations package
         run: unzip migrations.zip -d .
 
-      # Run Sequelize migrations
       - name: Run Sequelize migrations
         env:
           DATABASE_USER_PASSWORD: ${{ secrets.DATABASE_USER_PASSWORD }}

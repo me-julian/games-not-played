@@ -37,4 +37,4 @@ replace_line "#DOMAIN_CERT_LOCATION=" "DOMAIN_CERT_LOCATION=\"/etc/nginx/pki/$AP
 replace_line "#DOMAIN_KEY_LOCATION=" "DOMAIN_KEY_LOCATION=\"/etc/nginx/pki/private/$API_DOMAIN.key\"" "/root/.getssl/$API_DOMAIN/getssl.cfg"
 
 # Request certificate
-getssl $API_DOMAIN
+# getssl $API_DOMAIN

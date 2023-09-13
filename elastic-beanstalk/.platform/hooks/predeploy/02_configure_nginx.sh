@@ -24,14 +24,12 @@ sed -i "s/DOMAINREPLACEME/$API_DOMAIN/g" "$NGINX_PLATFORM_DIR/snippets/ssl.conf"
 sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
 sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_DIR/snippets/ssl.conf"
 
-ls $NGINX_PLATFORM_DIR
-
 # Copy updated files
 
 echo "Copying nginx configuration files..."
 
 yes | cp -rf "$NGINX_PLATFORM_DIR/nginx.conf" "$NGINX_DIR/nginx.conf"
-rm -r -f "$NGINX_PLATFORM_DIR/snippets"
-mkdir "$NGINX_PLATFORM_DIR/snippets"
+rm -r -f "$NGINX_DIR/snippets"
+mkdir "$NGINX_DIR/snippets"
 yes | cp -rf "$NGINX_PLATFORM_DIR/snippets/ssl.conf" "$NGINX_DIR/snippets/ssl.conf"
 yes | cp -rf "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf" "$NGINX_CONF_DIR/games-not-played.conf"

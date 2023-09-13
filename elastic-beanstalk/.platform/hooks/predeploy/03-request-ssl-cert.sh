@@ -2,11 +2,15 @@
 
 API_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k API_DOMAIN)
 
+if [ test -f "/etc/nginx/pki/$API_DOMAIN.crt" ]; then
+    echo "Certificate already exists."
+    openssl x509 -in /etc/nginx/pki/$API_DOMAIN.crt -text -noout
+else
 # Download GetSSL binary
 curl -s -L https://github.com/jeffmerkey/getssl/releases/download/v2.47/getssl-2.47-1.noarch.rpm > getssl-2.47-1.noarch.rpm
 # Install GetSSL
 rpm -Uv getssl-2.47-1.noarch.rpm
-# Run GetSSL
+# Create certification config with GetSSL
 getssl -c $API_DOMAIN
 
 # Args:
@@ -37,4 +41,5 @@ replace_line "#DOMAIN_CERT_LOCATION=" "DOMAIN_CERT_LOCATION=\"/etc/nginx/pki/$AP
 replace_line "#DOMAIN_KEY_LOCATION=" "DOMAIN_KEY_LOCATION=\"/etc/nginx/pki/private/$API_DOMAIN.key\"" "/root/.getssl/$API_DOMAIN/getssl.cfg"
 
 # Request certificate
-# getssl $API_DOMAIN
+getssl $API_DOMAIN
+fi

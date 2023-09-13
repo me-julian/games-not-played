@@ -1,51 +1,40 @@
 #!/bin/sh
 
-echo "unimplemented"
+API_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k API_DOMAIN)
 
-# python3 -m venv /opt/certbot/
-# /opt/certbot/bin/pip install --upgrade pip
+# Download GetSSL binary
+curl -s -L https://github.com/jeffmerkey/getssl/releases/download/v2.47/getssl-2.47-1.noarch.rpm > getssl-2.47-1.noarch.rpm
+# Install GetSSL
+rpm -i getssl-2.47-1.noarch.rpm
+# Run GetSSL
+getssl -c $API_DOMAIN
 
-# /opt/certbot/bin/pip install certbot certbot-nginx
-# ln -s /opt/certbot/bin/certbot /usr/bin/certbot
+# Args:
+#   1: Start of line to find.
+#   2: Full string to replace the line with.
+#   3: Path to file to edit.
+function replace_line () {
+    sed -i "s+^$1.*+$2+" ${3}
+}
 
-# certbot --nginx 
+# Set GetSSL base configuration.
 
-          # Enter email address (used for urgent renewal and security notices)
-            # jmedeployment@gmail.com [Enter]
-          
-          # Please read the Terms of Service at
-          # https://letsencrypt.org/documents/LE-SA-v1.3-September-21-2022.pdf. You must
-          # agree in order to register with the ACME server. Do you agree?
-            # Y [Enter]
-          
-          # Would you be willing, once your first certificate is successfully issued, to
-          # share your email address with the Electronic Frontier Foundation, a founding
-          # partner of the Let's Encrypt project and the non-profit organization that
-          # develops Certbot? We'd like to send you email about our work encrypting the web,
-          # EFF news, campaigns, and ways to support digital freedom.
-            # N [Enter]
-          
-          # Please enter the domain name(s) you would like on your certificate (comma and/or
-          # space separated)
-            # $DOMAIN_NAME [Enter]
+# Switch from staging to normal certificates.
+# replace_line "CA=\"https://acme" "CA=\"https://acme-v02.api.letsencrypt.org\"" "~/.getssl/getssl.cfg"
 
+# Set account email
+replace_line "#ACCOUNT_EMAIL=" "ACCOUNT_EMAIL=\"jmedeployment@gmail.com\"" "~/.getssl/getssl.cfg"
 
-# Manual ver
-          # Create a file containing just this data:
+# Set GetSSL domain configuration
 
-          # SLcGgMiIZ53wIt7Z18BaupGBvnTP6LMAtYUw9fL2-s0.gdTCyUPBEf1P5r1Yq-EAIY77n2F07miTlRpiJMeMMSA
+# Set acme challenge location
+replace_line "#ACL=" "ACL=(\"/var/lib/nginx/$API_DOMAIN/.well-known/acme-challenge\")" "~/.getssl/$API_DOMAIN/getssl.cfg"
+# Use same challenge for domain with and without www.
+replace_line "#USE_SINGLE_ACL=" "USE_SINGLE_ACL=\"true\"" "~/.getssl/$API_DOMAIN/getssl.cfg"
 
-          # And make it available on your web server at this URL:
+# Set location to copy certificate files to
+replace_line "#DOMAIN_CERT_LOCATION=" "DOMAIN_CERT_LOCATION=\"/etc/nginx/pki/$API_DOMAIN.crt\"" "~/.getssl/$API_DOMAIN/getssl.cfg"
+replace_line "#DOMAIN_KEY_LOCATION=" "DOMAIN_KEY_LOCATION=\"/etc/nginx/pki/private/$API_DOMAIN.key\"" "~/.getssl/$API_DOMAIN/getssl.cfg"
 
-          # http://${DOMAIN_NAME}/.well-known/acme-challenge/SLcGgMiIZ53wIt7Z18BaupGBvnTP6LMAtYUw9fL2-s0
-          # Press Enter to Continue
-          # [Enter]
-
-
-# CERTS_S3_BUCKET="s3://ssl-certificates/games-not-played"
-# CERTS_DIR="/etc/letsencrypt/live/${DOMAIN_NAME}"
-
-# echo "Copying SSL certificates from $CERTS_S3_BUCKET to $CERTS_DIR..."
-
-# aws s3 cp $CERTS_S3_BUCKET/REPLACEME $CERTS_DIR/fullchain.pem
-# aws s3 cp $CERTS_S3_BUCKET/REPLACEME $CERTS_DIR/privkey.pem
+# Request certificate
+getssl $API_DOMAIN

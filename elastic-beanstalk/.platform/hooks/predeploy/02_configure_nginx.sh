@@ -6,7 +6,7 @@ NGINX_CONF_DIR="$NGINX_DIR/conf.d"
 NGINX_PLATFORM_DIR=".platform/nginx"
 NGINX_PLATFORM_CONF_DIR="$NGINX_PLATFORM_DIR/conf.d"
 
-# API_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k API_DOMAIN)
+API_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k API_DOMAIN)
 API_PORT=$(/opt/elasticbeanstalk/bin/get-config environment -k API_PORT)
 
 # Remove old HTTPS config
@@ -17,10 +17,10 @@ rm -f "$NGINX_CONF_DIR/https.conf"
 
 # Update games-not-played config
 
-# echo "Configuring nginx to forward https://$API_DOMAIN to API server..."
+echo "Configuring nginx to forward https://$API_DOMAIN to API server..."
 
-# sed -i "s/servernamereplaceme/$API_DOMAIN/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
-sed -i "s/apiportreplaceme/$API_PORT/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
+sed -i "s/DOMAINREPLACEME/$API_DOMAIN/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
+sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
 
 # Copy updated files
 

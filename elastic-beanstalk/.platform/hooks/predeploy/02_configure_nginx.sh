@@ -21,8 +21,10 @@ echo "Configuring nginx to forward https://$API_DOMAIN to API server..."
 
 sed -i "s/DOMAINREPLACEME/$API_DOMAIN/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
 sed -i "s/DOMAINREPLACEME/$API_DOMAIN/g" "$NGINX_PLATFORM_DIR/snippets/ssl.conf"
-sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_DIR/games-not-played.conf"
-sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_CONF_DIR/snippets/ssl.conf"
+sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
+sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_DIR/snippets/ssl.conf"
+
+ls $NGINX_PLATFORM_DIR
 
 # Copy updated files
 

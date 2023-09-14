@@ -11,13 +11,21 @@ app.use(express.urlencoded({ extended: false }))
 
 // CORS setup
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', ['*'])
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE')
+    res.append('Access-Control-Allow-Origin', config.clientDomain)
+    res.append(
+        'Access-Control-Allow-Methods',
+        'GET,PUT,POST,PATCH,OPTIONS,DELETE'
+    )
     res.append('Access-Control-Allow-Headers', [
         'Content',
         'Content-Type',
         'Authorization',
     ])
+
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(204)
+    }
+
     next()
 })
 

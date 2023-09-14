@@ -1,10 +1,10 @@
 #!/bin/bash
 
-NGINX_DIR="/etc/nginx"
-NGINX_CONF_DIR="$NGINX_DIR/conf.d"
+# Latest files from .platform ELB has in staging
+NGINX_STAGING=".platform/nginx"
 
-NGINX_PLATFORM_DIR=".platform/nginx"
-NGINX_PLATFORM_CONF_DIR="$NGINX_PLATFORM_DIR/conf.d"
+# Deploy the edited staging files here
+NGINX_LIVE="/etc/nginx"
 
 API_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k API_DOMAIN)
 API_PORT=$(/opt/elasticbeanstalk/bin/get-config environment -k API_PORT)
@@ -13,23 +13,22 @@ API_PORT=$(/opt/elasticbeanstalk/bin/get-config environment -k API_PORT)
 
 echo "Removing default HTTPS config..."
 
-rm -f "$NGINX_CONF_DIR/https.conf"
+rm -f "$NGINX_LIVE/conf.d/https.conf"
 
 # Update games-not-played config
 
-echo "Configuring nginx to forward https://$API_DOMAIN to API server..."
+echo "Populating API domain and port information..."
 
-sed -i "s/DOMAINREPLACEME/$API_DOMAIN/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
-sed -i "s/DOMAINREPLACEME/$API_DOMAIN/g" "$NGINX_PLATFORM_DIR/snippets/ssl.conf"
-sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf"
-sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_PLATFORM_DIR/snippets/ssl.conf"
+sed -i "s/DOMAINREPLACEME/$API_DOMAIN/g" "$NGINX_STAGING/conf.d/games-not-played.conf"
+sed -i "s/DOMAINREPLACEME/$API_DOMAIN/g" "$NGINX_STAGING/snippets/https-proxy.conf"
+sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_STAGING/conf.d/games-not-played.conf"
+sed -i "s/APIPORTREPLACEME/$API_PORT/g" "$NGINX_STAGING/snippets/https-proxy.conf"
 
 # Copy updated files
 
 echo "Copying nginx configuration files..."
 
-yes | cp -rf "$NGINX_PLATFORM_DIR/nginx.conf" "$NGINX_DIR/nginx.conf"
-rm -r -f "$NGINX_DIR/snippets"
-mkdir "$NGINX_DIR/snippets"
-yes | cp -rf "$NGINX_PLATFORM_DIR/snippets/ssl.conf" "$NGINX_DIR/snippets/ssl.conf"
-yes | cp -rf "$NGINX_PLATFORM_CONF_DIR/games-not-played.conf" "$NGINX_CONF_DIR/games-not-played.conf"
+yes | cp -rf "$NGINX_STAGING/nginx.conf" "$NGINX_LIVE/nginx.conf"
+yes | cp -rf "$NGINX_STAGING/conf.d/games-not-played.conf" "$NGINX_LIVE/conf.d/games-not-played.conf"
+mkdir -p "$NGINX_LIVE/snippets"
+yes | cp -rf "$NGINX_STAGING/snippets/https-proxy.conf" "$NGINX_LIVE/snippets/https-proxy.conf"

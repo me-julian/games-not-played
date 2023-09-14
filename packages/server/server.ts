@@ -5,6 +5,13 @@ import config from './config'
 
 const app: Express = express()
 
+// Make sure secrets are retrieved.
+if (!config.jwtSecret || !config.rawgApiToken) {
+    throw new Error(
+        'The environment variables for secrets are not properly set!'
+    )
+}
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

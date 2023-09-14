@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // CORS setup
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', config.clientDomain)
+    res.append('Access-Control-Allow-Origin', `https://${config.clientDomain}`)
     res.append(
         'Access-Control-Allow-Methods',
         'GET,PUT,POST,PATCH,OPTIONS,DELETE'

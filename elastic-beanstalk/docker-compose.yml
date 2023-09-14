@@ -7,6 +7,8 @@ services:
     platform: linux/arm64/v8
     depends_on:
       - db
+    env_file:
+      - .env
     environment:
       NODE_ENV: 'production'
       DATABASE_HOST: 'db'
@@ -26,6 +28,8 @@ services:
     container_name: db
     image: ${MYSQL_IMAGE}
     platform: linux/arm64/v8
+    env_file:
+      - .env
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'true'
       MYSQL_DATABASE: ${MYSQL_DATABASE}

@@ -38,4 +38,3 @@ replace_line "#DOMAIN_KEY_LOCATION=" "DOMAIN_KEY_LOCATION=\"/etc/nginx/pki/priva
 
 # Request certificate
 getssl $API_DOMAIN
-fi

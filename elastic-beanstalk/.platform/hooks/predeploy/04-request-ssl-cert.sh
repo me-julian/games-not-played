@@ -6,6 +6,7 @@ API_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k API_DOMAIN)
 curl -s -L https://github.com/jeffmerkey/getssl/releases/download/v2.47/getssl-2.47-1.noarch.rpm > getssl-2.47-1.noarch.rpm
 # Install GetSSL
 rpm -Uv getssl-2.47-1.noarch.rpm
+rm -f getssl-2.47-1.noarch.rpm
 # Create certification config with GetSSL
 getssl -c $API_DOMAIN
 

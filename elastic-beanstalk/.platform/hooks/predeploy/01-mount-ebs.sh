@@ -35,7 +35,7 @@ fi
 
 # Create filesystem on volume if it's empty
 echo "Checking if volume contains filesystem..."
-if [ $(blkid | grep -c "/dev/sdh") -ne 0 ]
+if [ $(blkid -o value -s TYPE /dev/sdh) != "ext4" ]
 then
     echo "Volume is empty, creating filesystem..."
     mkfs -t ext4 /dev/sdh
@@ -44,5 +44,11 @@ else
 fi
 
 # Mount EBS to folder for MySQL docker image
-echo "Mounting EBS device at /dev/sdh to /data if it isn't already..."
-mount /dev/sdh /data
+echo "Checking if data is already mounted..."
+if $(mountpoint -q /data)
+then
+    echo "Already mounted."
+else
+    echo "Mounting /dev/sdh to /data..."
+    mount /dev/sdh /data
+fi

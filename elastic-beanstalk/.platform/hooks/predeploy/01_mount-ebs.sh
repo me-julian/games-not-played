@@ -48,6 +48,7 @@ else
             echo "Already mounted."
         else
             echo "Mounting /dev/sdh to /data..."
+            mkdir -p /data
             mount /dev/sdh /data
         fi
     else

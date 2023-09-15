@@ -34,9 +34,9 @@
             }
         },
         {
-            "label": "Undo Seed Database",
+            "label": "Clear Database",
             "type": "shell",
-            "command": "pnpm run undo-seed-db",
+            "command": "pnpm run clear-db",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -86,7 +86,7 @@
         {
             "label": "Test",
             "dependsOrder": "sequence",
-            "dependsOn": ["Undo Seed Database", "Seed Database", "Run Tests"]
+            "dependsOn": ["Clear Database", "Seed Database", "Run Tests"]
         }
     ]
 }

@@ -9,7 +9,7 @@
         "create-db": "sequelize db:create",
         "migrate-db": "sequelize db:migrate",
         "seed-db": "sequelize db:seed:all",
-        "undo-seed-db": "sequelize db:seed:undo:all",
+        "clear-db": "sequelize db:seed:undo:all",
         "start-client:dev": "vite dev",
         "start-api:dev": "nodemon packages/server/server.ts --exitcrash",
         "test": "vitest run --coverage",

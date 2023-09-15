@@ -10,7 +10,7 @@
             "port": 3306,
             "driver": "MySQL",
             "name": "dev-db",
-            "database": "database_development",
+            "database": "games_not_played_DEV",
             "username": "root",
             "askForPassword": true
         }

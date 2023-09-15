@@ -28,6 +28,9 @@ else
         echo "Attaching volume to self..."
         aws ec2 attach-volume --volume-id $DATA_VOLUME_ID --instance-id $INSTANCE_ID --device /dev/sdh
 
+        # Wait until volume is finished attaching.
+        aws ec2 wait volume-in-use --region us-east-2 --volume-ids $DATA_VOLUME_ID
+
         # Create filesystem on volume if it's empty
         echo "Checking if volume contains filesystem..."
         if [ $(blkid -o value -s TYPE /dev/sdh) != "ext4" ]

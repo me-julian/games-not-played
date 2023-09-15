@@ -27,28 +27,28 @@ else
         # Attach volume to this application instance on /dev/sdh
         echo "Attaching volume to self..."
         aws ec2 attach-volume --volume-id $DATA_VOLUME_ID --instance-id $INSTANCE_ID --device /dev/sdh
+
+        # Create filesystem on volume if it's empty
+        echo "Checking if volume contains filesystem..."
+        if [ $(blkid -o value -s TYPE /dev/sdh) != "ext4" ]
+        then
+            echo "Volume is empty, creating filesystem..."
+            mkfs -t ext4 /dev/sdh
+        else
+            echo "Existing filesystem detected on volume."
+        fi
+
+        # Mount EBS to folder for MySQL docker image
+        echo "Checking if data is already mounted..."
+        if $(mountpoint -q /data)
+        then
+            echo "Already mounted."
+        else
+            echo "Mounting /dev/sdh to /data..."
+            mount /dev/sdh /data
+        fi
     else
         echo "UNEXPECTED STATE OF VOLUME: Volume already in use by another instance!"
         exit
     fi
-fi
-
-# Create filesystem on volume if it's empty
-echo "Checking if volume contains filesystem..."
-if [ $(blkid -o value -s TYPE /dev/sdh) != "ext4" ]
-then
-    echo "Volume is empty, creating filesystem..."
-    mkfs -t ext4 /dev/sdh
-else
-    echo "Existing filesystem detected on volume."
-fi
-
-# Mount EBS to folder for MySQL docker image
-echo "Checking if data is already mounted..."
-if $(mountpoint -q /data)
-then
-    echo "Already mounted."
-else
-    echo "Mounting /dev/sdh to /data..."
-    mount /dev/sdh /data
 fi

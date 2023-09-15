@@ -26,9 +26,6 @@ replace_line "CA=\"https://acme" "CA=\"https://acme-v02.api.letsencrypt.org\"" "
 # Set account email
 replace_line "#ACCOUNT_EMAIL=" "ACCOUNT_EMAIL=\"jmedeployment@gmail.com\"" "/root/.getssl/getssl.cfg"
 
-# Restart nginx after getting a new certificate
-replace_line "#RELOAD_CMD=" "RELOAD_CMD=\"systemctl restart nginx\"" "/root/.getssl/getssl.cfg"
-
 # Set GetSSL domain specific configuration
 
 # Set acme challenge location
@@ -46,7 +43,8 @@ getssl $API_DOMAIN
 # Setup automatic renewal
 TEMP_CRON_FILE=$(mktemp)
 # Renew all expiring certs at 00:00 every Sunday (default is within 30 days)
-echo "0 0 * * 0 getssl -a" >> $TEMP_CRON_FILE
+# Manually restart afterwards.
+echo "0 0 * * 0 getssl -a && service nginx restart" >> $TEMP_CRON_FILE
 echo "Setting up cron job to check SSL cert renewal."
 crontab $TEMP_CRON_FILE
 rm -f $TEMP_CRON_FILE

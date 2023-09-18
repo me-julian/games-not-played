@@ -66,8 +66,8 @@ jobs:
         env:
           DATABASE_PASSWORD: ${{ secrets.MYSQL_USER_PASSWORD }}
           DATABASE_HOST: ${{ vars.API_DOMAIN }}
-          DATABASE_NAME: ${{ vars.DATABASE_NAME }}
-          DATABASE_USERNAME: ${{ vars.DATABASE_USERNAME }}
+          DATABASE_NAME: ${{ vars.MYSQL_DATABASE }}
+          DATABASE_USERNAME: ${{ vars.MYSQL_USER }}
         run: |
           npx sequelize db:migrate --migrations-path ./migrations --config ./dbConfig.js --env production
 

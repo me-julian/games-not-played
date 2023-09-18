@@ -87,15 +87,15 @@ jobs:
         run: |
           dasel put -r yaml -t string -f docker-compose.yml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.get-time.outputs.time }}' services.api.image
 
-      # Package the ELB files for deployment
-      - name: Zip ELB package
+      # Package the ELB config files for deployment
+      - name: Zip ELB config package
         working-directory: ./elastic-beanstalk
         run: |
           chmod +x build.sh; \
           ./build.sh
 
-      # Upload the ELB package as an artifact
-      - name: Upload ELB artifact
+      # Upload the ELB config package as an artifact
+      - name: Upload ELB config artifact
         uses: actions/upload-artifact@v3
         with:
           name: api-package

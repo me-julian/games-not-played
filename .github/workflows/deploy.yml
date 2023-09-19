@@ -1,4 +1,4 @@
-name: Deploy server to AWS
+name: Deploy app to AWS
 
 on:
   # Can be manually run or called by other workflows
@@ -19,12 +19,12 @@ jobs:
       id-token: write
 
     steps:
-      # Download api app package to upload to ELB
-      # api-package.zip extracts to games-not-played-api.zip
-      - name: Download ELB package artifact
+      # Download app package to upload to EB
+      # eb-app-package.zip extracts to games-not-played.zip
+      - name: Download EB package artifact
         uses: actions/download-artifact@v3
         with:
-          name: api-package
+          name: eb-app-package
 
       - name: Download migrations artifact
         uses: actions/download-artifact@v3
@@ -65,14 +65,14 @@ jobs:
       - name: Run Sequelize migrations
         env:
           DATABASE_PASSWORD: ${{ secrets.MYSQL_USER_PASSWORD }}
-          DATABASE_HOST: ${{ vars.API_DOMAIN }}
+          DATABASE_HOST: ${{ vars.APP_DOMAIN }}
           DATABASE_NAME: ${{ vars.MYSQL_DATABASE }}
           DATABASE_USERNAME: ${{ vars.MYSQL_USER }}
         run: |
           npx sequelize db:migrate --migrations-path ./migrations --config ./dbConfig.js --env production
 
-      # Deploy server to ELB application
-      - name: Deploy server to ELB application
+      # Deploy server to EB application
+      - name: Deploy server to EB application
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ steps.get-aws-creds.outputs.aws-access-key-id }}
@@ -81,5 +81,5 @@ jobs:
           environment_name: games-not-played-production
           version_label: games-not-played-${{ inputs.version-tag }}
           region: us-east-2
-          deployment_package: games-not-played-api.zip
+          deployment_package: games-not-played.zip
           use_existing_version_if_available: 'true'

@@ -1,4 +1,4 @@
-name: Build client and server source
+name: Build latest app version
 
 on:
   # Can be manually run or called by other workflows
@@ -62,16 +62,10 @@ jobs:
         run: pnpm install
 
       # Build both the client and server packages
-      - name: Build
+      - name: Build package sources
         run: pnpm run build
         env:
-          VITE_API_URL: 'https://${{ vars.API_DOMAIN }}'
-
-      # Package the client's build output into an artifact
-      - name: Upload client artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: './packages/client/dist'
+          VITE_API_URL: 'https://${{ vars.APP_DOMAIN }}/api'
 
       # Install dasel
       - name: Install dasel
@@ -81,25 +75,30 @@ jobs:
           sudo chmod +x /usr/local/bin/dasel
           dasel --version
 
-      # Update ELB package docker image version
-      - name: Update ELB package docker image versions
+      # Update EB package docker image version
+      - name: Update EB package docker image versions
         working-directory: ./elastic-beanstalk
         run: |
           dasel put -r yaml -t string -f docker-compose.yml -v '173624809884.dkr.ecr.us-east-2.amazonaws.com/games-not-played-api:${{ steps.get-time.outputs.time }}' services.api.image
 
-      # Package the ELB config files for deployment
-      - name: Zip ELB config package
+      # Move static client files to EB package directory
+      - name: Move client to EB package dir
+        run: |
+          mv ./packages/client/dist ./elastic-beanstalk/www
+
+      # Package the EB config and client files for deployment
+      - name: Zip EB app package
         working-directory: ./elastic-beanstalk
         run: |
           chmod +x build.sh; \
           ./build.sh
 
-      # Upload the ELB config package as an artifact
-      - name: Upload ELB config artifact
+      # Upload the EB app package as an artifact
+      - name: Upload EB app artifact
         uses: actions/upload-artifact@v3
         with:
-          name: api-package
-          path: './elastic-beanstalk/package/games-not-played-api.zip'
+          name: eb-app-package
+          path: './elastic-beanstalk/package/games-not-played.zip'
 
       # Package Database Migrations
       - name: Package Sequelize Migrations
@@ -108,7 +107,7 @@ jobs:
           zip -r migrations.zip . -i ./migrations/* -i ./dbConfig.js
 
       # Upload Database Migrations
-      - name: Package Sequelize Migrations
+      - name: Upload migrations package as artifact
         uses: actions/upload-artifact@v3
         with:
           name: migrations

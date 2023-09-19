@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // CORS setup
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', `https://${config.clientDomain}`)
+    res.append('Access-Control-Allow-Origin', `https://${config.appDomain}`)
     res.append(
         'Access-Control-Allow-Methods',
         'GET,PUT,POST,PATCH,OPTIONS,DELETE'
@@ -43,10 +43,8 @@ import apiRouter from './routes/api'
 app.use(authRouter)
 app.use(apiRouter)
 
-app.listen(config.port, () => {
-    console.log(
-        `[server]: Server is running at http://127.0.0.1:${config.port}`
-    )
+app.listen(5000, () => {
+    console.log(`[server]: Server is running at http://127.0.0.1:5000`)
 })
 
 process.on('SIGINT', function () {

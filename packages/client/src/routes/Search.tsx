@@ -59,7 +59,7 @@ export async function loadSearch({
 
 export async function addToList({ request }: ActionFunctionArgs) {
     const jwt = getJwt()
-    const urlEnding = `/users/list`
+    const urlEnding = `/list`
     const response = await fetch(
         `${import.meta.env.VITE_API_URL}${urlEnding}`,
         {

@@ -9,7 +9,7 @@ export async function rootLoader() {
     const jwt = getJwt()
 
     if (jwt) {
-        const urlEnding = '/users/list'
+        const urlEnding = '/list'
         const response = await fetch(
             `${import.meta.env.VITE_API_URL}${urlEnding}`,
             {

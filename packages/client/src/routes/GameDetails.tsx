@@ -22,7 +22,7 @@ export async function deleteEntry({
     const jwt = getJwt()
 
     const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/users/list/${params.entryId}`,
+        `${import.meta.env.VITE_API_URL}/list/${params.entryId}`,
         {
             method: 'DELETE',
             headers: {
@@ -46,7 +46,7 @@ export async function editEntry({
     const jwt = getJwt()
 
     const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/users/list/${params.entryId}`,
+        `${import.meta.env.VITE_API_URL}/list/${params.entryId}`,
         {
             method: 'PATCH',
             headers: {

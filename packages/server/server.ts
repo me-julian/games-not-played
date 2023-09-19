@@ -37,11 +37,8 @@ app.use((req, res, next) => {
 })
 
 // Routing & server initialization
-import authRouter from './routes/auth'
-import apiRouter from './routes/api'
-
-app.use(authRouter)
-app.use(apiRouter)
+import router from './routes'
+app.use('/api', router)
 
 app.listen(5000, () => {
     console.log(`[server]: Server is running at http://127.0.0.1:5000`)

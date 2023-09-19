@@ -16,7 +16,7 @@ import '../public/css/routes/home.css'
 
 export async function reorderList({ request }: ActionFunctionArgs) {
     const jwt = getJwt()
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/users/list`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/list`, {
         method: 'PATCH',
         headers: {
             'content-type': 'application/x-www-form-urlencoded',

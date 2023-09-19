@@ -1,9 +1,9 @@
 import express from 'express'
 import { Router } from 'express'
-import db from '../../db/db'
+import db from '../db/db'
 import passport from 'passport'
-import Game from '../../db/models/Game'
-import config from '../../config'
+import Game from '../db/models/Game'
+import config from '../config'
 
 const router: Router = express.Router()
 

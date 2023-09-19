@@ -1,7 +1,7 @@
 import { RAWG } from '@games-not-played/types'
 import express from 'express'
 import { Router } from 'express'
-import config from '../../config'
+import config from '../config'
 
 const router: Router = express.Router()
 

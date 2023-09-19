@@ -15,9 +15,8 @@ services:
       DATABASE_NAME: ${MYSQL_DATABASE}
       DATABASE_USERNAME: ${MYSQL_USER}
       DATABASE_PASSWORD: ${MYSQL_USER_PASSWORD}
-      API_PORT: ${API_PORT}
       RAWG_URL: ${RAWG_URL}
-      CLIENT_DOMAIN: ${CLIENT_DOMAIN}
+      APP_DOMAIN: ${APP_DOMAIN}
     restart: always
     working_dir: /usr/src/api
     ports:

@@ -30,6 +30,6 @@ yes | cp -rf "$NGINX_STAGING/snippets/https-proxy.conf" "$NGINX_LIVE/snippets/ht
 # Move static client files to www for Nginx to serve
 echo "Copying client files to www..."
 
-rm -rf "/www/$APP_DOMAIN"
-mkdir -p "/www/$APP_DOMAIN"
-mv "www" "/www/$APP_DOMAIN"
+rm -rf /www/$APP_DOMAIN
+mkdir -p /www/$APP_DOMAIN
+mv www/* /www/$APP_DOMAIN/

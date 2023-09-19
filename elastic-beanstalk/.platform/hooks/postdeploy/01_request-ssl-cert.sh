@@ -21,7 +21,7 @@ function replace_line () {
 # Set GetSSL base configuration
 
 # Switch from staging to normal certificates
-# replace_line "CA=\"https://acme" "CA=\"https://acme-v02.api.letsencrypt.org\"" "/root/.getssl/getssl.cfg"
+replace_line "CA=\"https://acme" "CA=\"https://acme-v02.api.letsencrypt.org\"" "/root/.getssl/getssl.cfg"
 
 # Set account email
 replace_line "#ACCOUNT_EMAIL=" "ACCOUNT_EMAIL=\"jmedeployment@gmail.com\"" "/root/.getssl/getssl.cfg"

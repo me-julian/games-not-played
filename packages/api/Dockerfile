@@ -10,4 +10,4 @@ RUN npm install
 
 COPY dist ./
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "api.js" ]

@@ -1,4 +1,5 @@
 import { type Client } from '@games-not-played/types'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Draggable } from '@hello-pangea/dnd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,6 +13,28 @@ type Props = {
 }
 
 function Entry({ index, entry, dndDisabled }: Props) {
+    // Make the whole card the drag handle instead of using the grippy
+    // on mobile due to mobile browser swipe gestures causing problems
+    // at edge of screen.
+    const mobileWidthBoundary = 768
+    const [isMobile, setIsMobile] = useState<boolean>(
+        window.innerWidth <= mobileWidthBoundary
+    )
+
+    function handleWindowSizeChange() {
+        if (window.innerWidth <= mobileWidthBoundary) {
+            setIsMobile(true)
+        } else if (window.innerWidth > mobileWidthBoundary) {
+            setIsMobile(false)
+        }
+    }
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange)
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange)
+        }
+    }, [])
+
     return (
         <Draggable
             key={entry.id}
@@ -28,7 +51,7 @@ function Entry({ index, entry, dndDisabled }: Props) {
                                     snapshot.isDragging ? 'dragging' : ''
                                 }`}
                             >
-                                {!dndDisabled && (
+                                {!dndDisabled && !isMobile && (
                                     <>
                                         <div
                                             className="card-grip"
@@ -41,6 +64,7 @@ function Entry({ index, entry, dndDisabled }: Props) {
                                 <Link
                                     className="card-link"
                                     to={`/details/${entry.id}`}
+                                    {...(isMobile && provided.dragHandleProps)}
                                 >
                                     <div className="card-box">
                                         <div className="name-and-star">

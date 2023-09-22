@@ -11,7 +11,7 @@ on:
         type: string
 
 jobs:
-  deploy-server:
+  deploy:
     runs-on: ubuntu-latest
 
     permissions:
@@ -71,8 +71,8 @@ jobs:
         run: |
           npx sequelize db:migrate --migrations-path ./migrations --config ./dbConfig.js --env production
 
-      # Deploy server to EB application
-      - name: Deploy server to EB application
+      # Deploy app to EB
+      - name: Deploy app to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ steps.get-aws-creds.outputs.aws-access-key-id }}

@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@games-not-played/client": "workspace:*",
-        "@games-not-played/server": "workspace:*"
+        "@games-not-played/api": "workspace:*"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^5.16.5",

@@ -61,7 +61,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Build both the client and server packages
+      # Build both the client and api packages
       - name: Build package sources
         run: pnpm run build
         env:
@@ -102,7 +102,7 @@ jobs:
 
       # Package Database Migrations
       - name: Package Sequelize Migrations
-        working-directory: ./packages/server/db
+        working-directory: ./packages/api/db
         run: |
           zip -r migrations.zip . -i ./migrations/* -i ./dbConfig.js
 
@@ -111,7 +111,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: migrations
-          path: './packages/server/db/migrations.zip'
+          path: './packages/api/db/migrations.zip'
 
       # Install buildx for docker/build-push-action@v4
       # Apparently this needs to stay before AWS auth
@@ -138,18 +138,18 @@ jobs:
       # pnpm doesn't play nice with dockerizing packages - having the
       # types workspace dependency causes errors. Get rid of all the
       # dev dependencies and use npm in image as simplest solution.
-      - name: Modify server package.json for dockerization
-        run: dasel delete -r json -f packages/server/package.json 'devDependencies'
+      - name: Modify api package.json for dockerization
+        run: dasel delete -r json -f packages/api/package.json 'devDependencies'
 
-      # Build and push the server image to ECR
-      - name: Build and push the server image to ECR
+      # Build and push the api image to ECR
+      - name: Build and push the api image to ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: games-not-played-api
           IMAGE_TAG: ${{ steps.get-time.outputs.time }}
         uses: docker/build-push-action@v4
         with:
-          context: ./packages/server
+          context: ./packages/api
           platforms: linux/arm64
           push: true
           tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}

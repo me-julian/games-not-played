@@ -1,8 +1,8 @@
 {
-    "name": "@games-not-played/server",
+    "name": "@games-not-played/api",
     "version": "1.0.0",
     "description": "",
-    "main": "server.js",
+    "main": "api.js",
     "keywords": [],
     "author": "Julian Edwards",
     "license": "ISC",

@@ -2,15 +2,27 @@ version: '3'
 
 services:
     devcontainer:
-      env_file: .env
-      image: mcr.microsoft.com/devcontainers/base:bullseye
-      volumes:
-        - ../..:/workspaces:cached
-      network_mode: service:db
-      command: sleep infinity
-    db:
+        image: mcr.microsoft.com/devcontainers/base:bullseye
         env_file: .env
+        environment:
+            DATABASE_HOST: db
+            DATABASE_NAME: ${MYSQL_DATABASE}
+            DATABASE_USERNAME: root
+            DATABASE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            VITE_API_URL: ${VITE_API_URL}
+            APP_DOMAIN: ${APP_DOMAIN}
+            RAWG_API_TOKEN: ${RAWG_API_TOKEN}
+            JWT_SECRET: ${JWT_SECRET}
+        volumes:
+            - ../..:/workspaces:cached
+        command: sleep infinity
+        network_mode: service:db
+    db:
         image: mysql:${MYSQL_VERSION}
+        env_file: .env
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
         restart: unless-stopped
         ports:
             - 3376:3306
@@ -18,4 +30,4 @@ services:
             - db-data:/var/lib/mysql
 
 volumes:
-  db-data:
+    db-data:

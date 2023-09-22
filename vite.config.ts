@@ -8,7 +8,6 @@ export default defineConfig({
     plugins: [react()],
     root: './packages/client',
     base: './',
-    envDir: '../../',
     test: {
         globals: true,
         environment: 'jsdom',

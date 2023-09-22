@@ -209,9 +209,6 @@ importers:
       '@types/validator':
         specifier: ^13.7.16
         version: 13.7.16
-      dotenv:
-        specifier: ^16.1.4
-        version: 16.1.4
       nodemon:
         specifier: ^2.0.22
         version: 2.0.22
@@ -2143,11 +2140,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       webidl-conversions: 7.0.0
-    dev: true
-
-  /dotenv@16.1.4:
-    resolution: {integrity: sha512-m55RtE8AsPeJBpOIFKihEmqUcoVncQIwo7x9U8ZwLEZw9ZpXboz2c+rvog+jUaJvVrZ5kBOeYQBX5+8Aa/OZQw==}
-    engines: {node: '>=12'}
     dev: true
 
   /dottie@2.0.3:

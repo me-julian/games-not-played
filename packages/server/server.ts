@@ -1,6 +1,5 @@
 import express, { Express } from 'express'
 import logger from 'morgan'
-// import 'dotenv/config'
 import config from './config'
 
 const app: Express = express()
@@ -16,9 +15,12 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+const clientOrigin =
+    process.env.NODE_ENV === 'production' ? `https://${config.appDomain}` : '*'
+
 // CORS setup
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', `https://${config.appDomain}`)
+    res.append('Access-Control-Allow-Origin', clientOrigin)
     res.append(
         'Access-Control-Allow-Methods',
         'GET,PUT,POST,PATCH,OPTIONS,DELETE'

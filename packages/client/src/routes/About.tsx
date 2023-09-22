@@ -7,10 +7,25 @@ function About() {
             <ActionNav actionName={'About'} containerSize="md" />
             <main id="about">
                 <section>
+                    <p>
+                        Wondering what this app was built with? Want to see the
+                        source code, hosting solution or continuous delivery
+                        pipeline?
+                    </p>
+                    <p>
+                        <a
+                            className="accent"
+                            href="https://github.com/julianmedwards/final-project-games-not-played"
+                        >
+                            <button>View the Github Repo and Wiki!</button>
+                        </a>
+                    </p>
+                </section>
+                <section>
                     <h4>About the App</h4>
                     <p>
-                        <span className="brand">Games Not Played</span> is a web
-                        app intended to help you decide what game to play next.
+                        Games Not Played is intended to help you decide what
+                        game to play next.
                     </p>
                     <p>
                         The name is a reference to the poem{' '}
@@ -20,11 +35,10 @@ function About() {
                         >
                             The Road Not Taken
                         </a>{' '}
-                        by Robert Frost - in reference to the sometimes
-                        agonizing process of decision making.
+                        by Robert Frost.
                     </p>
                 </section>
-                <section className="about-section">
+                <section>
                     <h4>About Me</h4>
                     <p>
                         I'm Julian Edwards and I'm a web developer in Austin,
@@ -39,20 +53,6 @@ function About() {
                             Full Stack Immersive
                         </a>{' '}
                         web development course.
-                    </p>
-                </section>
-                <section className="about-section">
-                    <p>
-                        Wondering what this app was built with? Want to see the
-                        source code?
-                    </p>
-                    <p>
-                        <a
-                            className="accent"
-                            href="https://github.com/julianmedwards/final-project-games-not-played"
-                        >
-                            View the github repo.
-                        </a>
                     </p>
                 </section>
             </main>

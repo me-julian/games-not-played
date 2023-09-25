@@ -16,9 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 const clientOrigin =
-    process.env.NODE_ENV === 'production'
-        ? [`https://${config.appDomain}`, `https://www.${config.appDomain}`]
-        : '*'
+    process.env.NODE_ENV === 'production' ? `https://${config.appDomain}` : '*'
 
 // CORS setup
 app.use((req, res, next) => {

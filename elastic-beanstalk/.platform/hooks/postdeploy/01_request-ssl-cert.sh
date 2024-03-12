@@ -44,7 +44,7 @@ getssl $APP_DOMAIN
 TEMP_CRON_FILE=$(mktemp)
 # Renew all expiring certs at 00:00 every Sunday (default is within 30 days)
 # Manually restart afterwards.
-echo "0 0 * * 0 getssl -a && service nginx restart" >> $TEMP_CRON_FILE
+echo "0 0 * * 0 getssl -a && /usr/bin/systemctl reload nginx.service" >> $TEMP_CRON_FILE
 echo "Setting up cron job to check SSL cert renewal."
 crontab $TEMP_CRON_FILE
 rm -f $TEMP_CRON_FILE

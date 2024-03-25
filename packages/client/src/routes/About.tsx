@@ -15,7 +15,7 @@ function About() {
                     <p>
                         <a
                             className="accent"
-                            href="https://github.com/julianmedwards/final-project-games-not-played"
+                            href="https://github.com/me-julian/games-not-played"
                         >
                             <button>View the Github Repo and Wiki!</button>
                         </a>

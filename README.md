@@ -28,4 +28,4 @@ This is my final project for Inventive Academy's [Full Stack Immersive](https://
 
 ### Want to learn more?
 
-#### [Check out the Wiki](https://github.com/julianmedwards/final-project-games-not-played/wiki)
+#### [Check out the Wiki](https://github.com/me-julian/final-project-games-not-played/wiki)

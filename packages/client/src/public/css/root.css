@@ -1,12 +1,12 @@
 :root {
     /* Base Theme Colors */
-    --light: #e6fffbfa;
-    --light-active: #c7d5d3fa;
+    --light: #f5f5f5;
+    --light-active: #dbdbdb;
     --primary: #3b5249;
     --primary-active: #3c6e5b;
     --primary-dark: #283e36;
-    --accent: #aa5042;
-    --accent-active: #be6557;
+    --accent: #d36135;
+    --accent-active: #be5e37;
     /* Background & Neutral Colors */
     --bg-0: #141314;
     --bg-1: #201e20;

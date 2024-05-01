@@ -18,7 +18,7 @@ function AddGameIcon() {
                 <path
                     className="controller-btn"
                     d="M27.5 49.75H36.5"
-                    stroke="#AA5042"
+                    stroke="#d36135"
                     strokeWidth="4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -26,7 +26,7 @@ function AddGameIcon() {
                 <path
                     className="controller-btn"
                     d="M32 45.25V54.25"
-                    stroke="#AA5042"
+                    stroke="#d36135"
                     strokeWidth="4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -34,7 +34,7 @@ function AddGameIcon() {
                 <path
                     className="controller-btn"
                     d="M47.75 52H47.7725"
-                    stroke="#AA5042"
+                    stroke="#d36135"
                     strokeWidth="4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -42,7 +42,7 @@ function AddGameIcon() {
                 <path
                     className="controller-btn"
                     d="M54.5 47.5H54.5225"
-                    stroke="#AA5042"
+                    stroke="#d36135"
                     strokeWidth="4"
                     strokeLinecap="round"
                     strokeLinejoin="round"

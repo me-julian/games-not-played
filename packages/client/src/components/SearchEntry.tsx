@@ -28,7 +28,7 @@ function SearchEntry({
                     {name}{' '}
                     {navigation.state === 'submitting' &&
                         navigation.formMethod === 'post' &&
-                        navigation.formData.get('name') === name && (
+                        navigation.formData?.get('name') === name && (
                             <FontAwesomeIcon icon={faCircleNotch} spin />
                         )}
                 </h5>

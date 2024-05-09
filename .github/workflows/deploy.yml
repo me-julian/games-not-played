@@ -78,7 +78,7 @@ jobs:
           aws_access_key: ${{ steps.get-aws-creds.outputs.aws-access-key-id }}
           aws_secret_key: ${{ steps.get-aws-creds.outputs.aws-secret-access-key }}
           application_name: games-not-played
-          environment_name: games-not-played-production
+          environment_name: games-not-played-env
           version_label: games-not-played-${{ inputs.version-tag }}
           region: us-east-2
           deployment_package: games-not-played.zip

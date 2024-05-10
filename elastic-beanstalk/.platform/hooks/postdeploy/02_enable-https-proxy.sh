@@ -7,4 +7,4 @@ echo "include /etc/nginx/snippets/https-proxy.conf;" >> "/etc/nginx/conf.d/games
 
 # Restart the server
 echo "Restart nginx with https server."
-service nginx restart
+systemctl reload nginx

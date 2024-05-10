@@ -22,19 +22,19 @@ jobs:
       # Download app package to upload to EB
       # eb-app-package.zip extracts to games-not-played.zip
       - name: Download EB package artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: eb-app-package
 
       - name: Download migrations artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: migrations
 
       # Configure AWS Credentials
       - name: Configure AWS Credentials
         id: get-aws-creds
-        uses: aws-actions/configure-aws-credentials@v3
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           unset-current-credentials: true
           role-to-assume: arn:aws:iam::173624809884:role/GithubActionsAutomator
@@ -44,16 +44,16 @@ jobs:
       # Login to AWS ECR
       - name: Login to AWS ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
         with:
           registries: '173624809884'
           mask-password: 'true'
 
       # Install Node for running Sequelize migrations
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install sequelize and sequelize-cli
         run: npm install sequelize sequelize-cli mysql2
@@ -73,7 +73,7 @@ jobs:
 
       # Deploy app to EB
       - name: Deploy app to EB
-        uses: einaregilsson/beanstalk-deploy@v21
+        uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ steps.get-aws-creds.outputs.aws-access-key-id }}
           aws_secret_key: ${{ steps.get-aws-creds.outputs.aws-secret-access-key }}

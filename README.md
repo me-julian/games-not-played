@@ -12,6 +12,16 @@ This is my final project for Inventive Academy's [Full Stack Immersive](https://
 
 View the [Figma design](https://www.figma.com/design/YgqdrvqSiBKGI61HwIVXrq/Main-Design-2024?m=auto&t=qQ2FIVCIR4OfliHz-1) to see a rough draft of the app I created before development.
 
+<p align="center">
+    <img width="66%" src="docs/assets/figma-design.png" />
+</p>
+
+I also used a Trello board to track progress and tasks during development.
+
+<p align="center">
+    <img width="66%" src="docs/assets/trello-board.png" />
+</p>
+
 ## Tech Stack
 
 ### App

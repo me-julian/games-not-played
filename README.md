@@ -2,9 +2,15 @@
 
 Games Not Played is a web app intended to help users decide what game to play next.
 
+Log in to curate, order and sort a list of games you're considering playing next, and keep track of what you're currently playing.
+
 [You can use the hosted app here!](https://gamesnotplayed.mejulian.dev)
 
 This is my final project for Inventive Academy's [Full Stack Immersive](https://learn.inventiveacademy.io/p/full-stack-immersive-bootcamp-with-node) web development course.
+
+## Development Resources
+
+View the [Figma design](https://www.figma.com/design/YgqdrvqSiBKGI61HwIVXrq/Main-Design-2024?m=auto&t=qQ2FIVCIR4OfliHz-1) to see a rough draft of the app I created before development.
 
 ## Tech Stack
 

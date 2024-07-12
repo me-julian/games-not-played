@@ -47,6 +47,8 @@ else
         then
             echo "Already mounted."
         else
+            echo "Sleeping 5s to ensure device is available..."
+            sleep 5
             echo "Mounting /dev/sdh to /data..."
             mkdir -p /data
             mount /dev/sdh /data

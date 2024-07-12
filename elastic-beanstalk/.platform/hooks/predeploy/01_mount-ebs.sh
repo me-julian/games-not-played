@@ -37,6 +37,8 @@ else
         then
             echo "Volume is empty, creating filesystem..."
             mkfs -t ext4 /dev/sdh
+            sync
+            sleep 1
         else
             echo "Existing filesystem detected on volume."
         fi
@@ -47,8 +49,9 @@ else
         then
             echo "Already mounted."
         else
-            echo "Sleeping 5s to ensure device is available..."
-            sleep 5
+            echo "Syncing and sleeping to ensure device is available..."
+            sync
+            sleep 1
             echo "Mounting /dev/sdh to /data..."
             mkdir -p /data
             mount /dev/sdh /data

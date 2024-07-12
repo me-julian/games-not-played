@@ -2,12 +2,12 @@
 
 APP_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k APP_DOMAIN)
 
-# Download GetSSL binary
+echo "Downloading GetSSL binary..."
 curl -s -L https://github.com/jeffmerkey/getssl/releases/download/v2.47/getssl-2.47-1.noarch.rpm > getssl-2.47-1.noarch.rpm
 # Install GetSSL
 rpm -Uv getssl-2.47-1.noarch.rpm
 rm -f getssl-2.47-1.noarch.rpm
-# Create certification config with GetSSL
+echo "Creating default certification config with GetSSL..."
 getssl -c $APP_DOMAIN
 
 # Args:
@@ -38,13 +38,14 @@ replace_line "#DOMAIN_CERT_LOCATION=" "DOMAIN_CERT_LOCATION=\"/etc/nginx/pki/$AP
 replace_line "#DOMAIN_KEY_LOCATION=" "DOMAIN_KEY_LOCATION=\"/etc/nginx/pki/private/$APP_DOMAIN.key\"" "/root/.getssl/$APP_DOMAIN/getssl.cfg"
 
 # Request or renew certificate if necessary
+echo "Requesting SSL certificate..."
 getssl $APP_DOMAIN
 
 # Setup automatic renewal
 TEMP_CRON_FILE=$(mktemp)
+echo "Setting up cron job to check SSL cert renewal."
 # Renew all expiring certs at 00:00 every Sunday (default is within 30 days)
 # Manually restart afterwards.
 echo "0 0 * * 0 getssl -a && /usr/bin/systemctl reload nginx.service" >> $TEMP_CRON_FILE
-echo "Setting up cron job to check SSL cert renewal."
 crontab $TEMP_CRON_FILE
 rm -f $TEMP_CRON_FILE

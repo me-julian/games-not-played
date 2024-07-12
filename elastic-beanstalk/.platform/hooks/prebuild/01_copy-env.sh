@@ -9,7 +9,7 @@ RAWG_URL=$(/opt/elasticbeanstalk/bin/get-config environment -k RAWG_URL)
 
 
 # Copy EB environment property env vars to app .env
-echo "Copying EB  to app location.
+echo "Copying EB  to app location."
 echo "APP_DOMAIN=${APP_DOMAIN}" >> /var/app/staging/.env
 echo "DATA_VOLUME_ID=${DATA_VOLUME_ID}" >> /var/app/staging/.env
 echo "MYSQL_DATABASE=${MYSQL_DATABASE}" >> /var/app/staging/.env

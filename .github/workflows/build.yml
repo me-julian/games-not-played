@@ -1,4 +1,4 @@
-name: Build latest app version
+name: Build
 
 on:
   # Can be manually run or called by other workflows

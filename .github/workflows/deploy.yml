@@ -1,4 +1,4 @@
-name: Deploy app to AWS
+name: Deploy updated app to AWS
 
 on:
   # Can be manually run or called by other workflows

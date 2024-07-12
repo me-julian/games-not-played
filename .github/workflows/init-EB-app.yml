@@ -1,4 +1,4 @@
-name: First time build & deployment to AWS EB application
+name: Manual deployment to fresh EB app
 
 on:
   # Can be manually run or called by other workflows

@@ -1,0 +1,62 @@
+name: First time build & deployment to AWS EB application
+
+on:
+  # Can be manually run or called by other workflows
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      version-tag:
+        description: 'Deployment version as time string generated in build.'
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: Build deployment assets
+    uses: me-julian/games-not-played/.github/workflows/build.yml@main
+    secrets: inherit
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      # Download app package to upload to EB
+      # eb-app-package.zip extracts to games-not-played.zip
+      - name: Download EB package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: eb-app-package
+
+      # Configure AWS Credentials
+      - name: Configure AWS Credentials
+        id: get-aws-creds
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          unset-current-credentials: true
+          role-to-assume: arn:aws:iam::173624809884:role/GithubActionsAutomator
+          aws-region: us-east-2
+          output-credentials: true
+
+      # Login to AWS ECR
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: '173624809884'
+          mask-password: 'true'
+
+      # Deploy app to EB
+      - name: Deploy app to EB
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          aws_access_key: ${{ steps.get-aws-creds.outputs.aws-access-key-id }}
+          aws_secret_key: ${{ steps.get-aws-creds.outputs.aws-secret-access-key }}
+          application_name: games-not-played
+          environment_name: games-not-played-env
+          version_label: games-not-played-${{ inputs.version-tag }}
+          region: us-east-2
+          deployment_package: games-not-played.zip
+          use_existing_version_if_available: 'true'

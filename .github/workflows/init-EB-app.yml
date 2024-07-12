@@ -4,11 +4,6 @@ on:
   # Can be manually run or called by other workflows
   workflow_dispatch:
   workflow_call:
-    inputs:
-      version-tag:
-        description: 'Deployment version as time string generated in build.'
-        required: true
-        type: string
 
 jobs:
   build:
@@ -58,7 +53,7 @@ jobs:
           aws_secret_key: ${{ steps.get-aws-creds.outputs.aws-secret-access-key }}
           application_name: games-not-played
           environment_name: games-not-played-env
-          version_label: games-not-played-${{ inputs.version-tag }}
+          version_label: games-not-played-${{ needs.build.outputs.version-tag }}
           region: us-east-2
           deployment_package: games-not-played.zip
           use_existing_version_if_available: 'true'

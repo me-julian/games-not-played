@@ -10,16 +10,6 @@ This is my final project for Inventive Academy's [Full Stack Immersive](https://
 
 ### [Check out the wiki](https://github.com/me-julian/final-project-games-not-played/wiki) for detailed information
 
-<p align="center">
-    <img width="66%" src="docs/assets/figma-design.png" />
-</p>
-
-I also used a Trello board to track progress and tasks during development.
-
-<p align="center">
-    <img width="66%" src="docs/assets/trello-board.png" />
-</p>
-
 ## Tech Stack
 
 ### App

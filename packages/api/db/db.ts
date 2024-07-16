@@ -14,14 +14,33 @@ export const sequelize = new Sequelize(
     }
 )
 
-sequelize
-    .authenticate()
-    .then(() => {
-        console.log('Database connection successful.')
-    })
-    .catch(() => {
-        console.error('Error connecting to database.')
-    })
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+const MAX_RETRIES = 10
+let retries = 0
+
+function connectWithRetry(): Promise<void> {
+    return sequelize
+        .authenticate()
+        .then(() => {
+            console.log('Database connection successful.')
+        })
+        .catch(() => {
+            retries++
+            if (retries <= MAX_RETRIES) {
+                console.error(
+                    `Error connecting to database. Retrying in 3 seconds. Attempt ${retries}/${MAX_RETRIES}`
+                )
+                return wait(3000).then(connectWithRetry)
+            } else {
+                throw new Error(
+                    `Failed to connect to database after ${MAX_RETRIES} attempts.`
+                )
+            }
+        })
+}
+
+connectWithRetry()
 
 sequelize.addModels([__dirname + '/models'])
 

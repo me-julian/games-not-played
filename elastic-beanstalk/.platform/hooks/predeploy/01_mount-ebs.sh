@@ -12,7 +12,7 @@ DATA_VOLUME_ID=$(/opt/elasticbeanstalk/bin/get-config environment -k DATA_VOLUME
 echo "Checking if '$DATA_VOLUME_ID' already attached to Instance '$INSTANCE_ID'..."
 VOLUME_ATTACHED=$(aws ec2 describe-volumes --filters Name=attachment.instance-id,Values=$INSTANCE_ID | jq --arg DATA_VOLUME_ID $DATA_VOLUME_ID 'contains({"Volumes": [{"VolumeId": $DATA_VOLUME_ID}]})')
 
-if [ $VOLUME_ATTACHED = "true" ]
+if [[ $VOLUME_ATTACHED = "true" ]]
 then
     echo "Volume already attached."
 else
@@ -22,7 +22,7 @@ else
     echo "Checking if volume is being used by any other resources..."
     NOT_IN_USE=$(aws ec2 describe-volumes --region us-east-2 --filter Name=volume-id,Values=$DATA_VOLUME_ID --query 'Volumes[*].{VolumeID:VolumeId,Attachments:Attachments}' | jq 'contains([{Attachments:[]}])')
 
-    if [ $NOT_IN_USE = "true" ]
+    if [[ $NOT_IN_USE = "true" ]]
     then
         # Attach volume to this application instance on /dev/sdh
         echo "Attaching volume to self..."
@@ -32,35 +32,35 @@ else
         aws ec2 wait volume-in-use --region us-east-2 --volume-ids $DATA_VOLUME_ID
         echo "Sleeping 5 seconds to ensure volume is available"
         sleep 5
-
-        # Create filesystem on volume if it's empty
-        echo "Checking if volume contains filesystem..."
-        if [ $(blkid -o value -s TYPE /dev/sdh) != "ext4" ]
-        then
-            echo "Volume is empty, creating filesystem..."
-            mkfs -t ext4 /dev/sdh
-            echo "Syncing and sleeping to filesystem is available..."
-            sync
-            sleep 5
-        else
-            echo "Existing filesystem detected on volume."
-        fi
-
-        # Mount EBS to folder for MySQL docker image
-        echo "Checking if data is already mounted..."
-        if $(mountpoint -q /data)
-        then
-            echo "Already mounted."
-        else
-            echo "Syncing and sleeping to ensure mount is available..."
-            sync
-            sleep 5
-            echo "Mounting /dev/sdh to /data..."
-            mkdir -p /data
-            mount /dev/sdh /data
-        fi
     else
         echo "UNEXPECTED STATE OF VOLUME: Volume is likely in use by another instance!"
         exit
     fi
+fi
+
+# Create filesystem on volume if it's empty
+echo "Checking if volume contains filesystem..."
+if [[ $(blkid -o value -s TYPE /dev/sdh) != "ext4" ]]
+then
+    echo "Volume is empty, creating filesystem..."
+    mkfs -t ext4 /dev/sdh
+    echo "Syncing and sleeping to ensure filesystem is available..."
+    sync
+    sleep 5
+else
+    echo "Existing filesystem detected on volume."
+fi
+
+# Mount EBS to folder for MySQL docker image
+echo "Checking if data is already mounted..."
+if $(mountpoint -q /data)
+then
+    echo "Already mounted."
+else
+    echo "Syncing and sleeping to ensure mount is available..."
+    sync
+    sleep 5
+    echo "Mounting /dev/sdh to /data..."
+    mkdir -p /data
+    mount /dev/sdh /data
 fi

@@ -30,6 +30,8 @@ else
 
         # Wait until volume is finished attaching.
         aws ec2 wait volume-in-use --region us-east-2 --volume-ids $DATA_VOLUME_ID
+        echo "Sleeping 5 seconds to ensure volume is available"
+        sleep 5
 
         # Create filesystem on volume if it's empty
         echo "Checking if volume contains filesystem..."
@@ -37,8 +39,9 @@ else
         then
             echo "Volume is empty, creating filesystem..."
             mkfs -t ext4 /dev/sdh
+            echo "Syncing and sleeping to filesystem is available..."
             sync
-            sleep 1
+            sleep 5
         else
             echo "Existing filesystem detected on volume."
         fi
@@ -49,15 +52,15 @@ else
         then
             echo "Already mounted."
         else
-            echo "Syncing and sleeping to ensure device is available..."
+            echo "Syncing and sleeping to ensure mount is available..."
             sync
-            sleep 1
+            sleep 5
             echo "Mounting /dev/sdh to /data..."
             mkdir -p /data
             mount /dev/sdh /data
         fi
     else
-        echo "UNEXPECTED STATE OF VOLUME: Volume already in use by another instance!"
+        echo "UNEXPECTED STATE OF VOLUME: Volume is likely in use by another instance!"
         exit
     fi
 fi

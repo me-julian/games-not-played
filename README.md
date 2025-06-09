@@ -6,7 +6,9 @@ Log in to curate, order and sort a list of games you're considering playing next
 
 This is my final project for Inventive Academy's [Full Stack Immersive](https://learn.inventiveacademy.io/p/full-stack-immersive-bootcamp-with-node) web development course.
 
-### [Check out the wiki](https://github.com/me-julian/final-project-games-not-played/wiki) for detailed information
+### Documentation: [Check out the wiki!](https://github.com/me-julian/final-project-games-not-played/wiki)
+
+I like writing documentation. Here you can see detailed info on dev setup, the CI CD pipeline and how to setup the AWS cloud infrastructure to host the app.
 
 ## Tech Stack
 
